@@ -29,7 +29,10 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
-from lxml import etree as etree_
+try:
+    from lxml import etree as etree_
+except ImportError:
+    from xml.etree import ElementTree as etree_
 
 
 Validate_simpletypes_ = True
@@ -43,7 +46,11 @@ def parsexml_(infile, parser=None, **kwargs):
     if parser is None:
         # Use the lxml ElementTree compatible parser so that, e.g.,
         #   we ignore comments.
-        parser = etree_.ETCompatXMLParser()
+        try:
+            parser = etree_.ETCompatXMLParser()
+        except AttributeError:
+            # fallback to xml.etree
+            parser = etree_.XMLParser()
     doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
@@ -362,6 +369,15 @@ except ImportError as exp:
                 return instring.encode(ExternalEncoding)
             else:
                 return instring
+        @staticmethod
+        def convert_unicode(instring):
+            if isinstance(instring, str):
+                result = quote_xml(instring)
+            elif sys.version_info.major == 2 and isinstance(instring, unicode):
+                result = quote_xml(instring).encode('utf8')
+            else:
+                result = GeneratedsSuper.gds_encode(str(instring))
+            return result
 
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
@@ -539,7 +555,8 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace, name, pretty_print)
+            self.value.export(
+                outfile, level, namespace, name, pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (
@@ -1825,7 +1842,10 @@ class programmer(person):
             self.eldatetime = dval_
         elif nodeName_ == 'eltoken':
             eltoken_ = child_.text
-            eltoken_ = re_.sub(String_cleanup_pat_, " ", eltoken_).strip()
+            if eltoken_:
+                eltoken_ = re_.sub(String_cleanup_pat_, " ", eltoken_).strip()
+            else:
+                eltoken_ = ""
             eltoken_ = self.gds_validate_string(eltoken_, node, 'eltoken')
             self.eltoken = eltoken_
         elif nodeName_ == 'elshort':
@@ -1973,7 +1993,7 @@ class param(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespace_, name_='param')
         if self.hasContent_():
             outfile.write('>')
-            outfile.write((quote_xml(self.valueOf_) if type(self.valueOf_) is str else self.gds_encode(str(self.valueOf_))))
+            outfile.write(self.convert_unicode(self.valueOf_))
             self.exportChildren(outfile, level + 1, namespace_='', name_='param', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
@@ -3469,9 +3489,12 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    from StringIO import StringIO
+    if sys.version_info.major == 2:
+        from StringIO import StringIO as IOBuffer
+    else:
+        from io import BytesIO as IOBuffer
     parser = None
-    doc = parsexml_(StringIO(inString), parser)
+    doc = parsexml_(IOBuffer(inString), parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:

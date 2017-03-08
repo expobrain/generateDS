@@ -29,7 +29,10 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
-from lxml import etree as etree_
+try:
+    from lxml import etree as etree_
+except ImportError:
+    from xml.etree import ElementTree as etree_
 
 
 Validate_simpletypes_ = True
@@ -43,7 +46,11 @@ def parsexml_(infile, parser=None, **kwargs):
     if parser is None:
         # Use the lxml ElementTree compatible parser so that, e.g.,
         #   we ignore comments.
-        parser = etree_.ETCompatXMLParser()
+        try:
+            parser = etree_.ETCompatXMLParser()
+        except AttributeError:
+            # fallback to xml.etree
+            parser = etree_.XMLParser()
     doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
@@ -362,6 +369,15 @@ except ImportError as exp:
                 return instring.encode(ExternalEncoding)
             else:
                 return instring
+        @staticmethod
+        def convert_unicode(instring):
+            if isinstance(instring, str):
+                result = quote_xml(instring)
+            elif sys.version_info.major == 2 and isinstance(instring, unicode):
+                result = quote_xml(instring).encode('utf8')
+            else:
+                result = GeneratedsSuper.gds_encode(str(instring))
+            return result
 
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
@@ -539,7 +555,8 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace, name, pretty_print)
+            self.value.export(
+                outfile, level, namespace, name, pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (
@@ -653,11 +670,12 @@ class GetUserReq(GeneratedsSuper):
         MemberSpec_('value05', 'xsd:string', 0),
         MemberSpec_('value06', 'xsd:integer', 0),
         MemberSpec_('value07', 'xsd:integer', 0),
+        MemberSpec_('value08', 'xsd:string', 0),
         MemberSpec_('returnedTags', 'xsd:string', 0),
     ]
     subclass = None
     superclass = None
-    def __init__(self, sequence=None, value01=None, value02=None, value03=None, value04=None, value05=None, value06=None, value07=None, returnedTags=None):
+    def __init__(self, sequence=None, value01=None, value02=None, value03=None, value04=None, value05=None, value06=None, value07=None, value08=None, returnedTags=None):
         self.original_tagname_ = None
         self.sequence = _cast(int, sequence)
         self.value01 = _cast(None, value01)
@@ -667,6 +685,7 @@ class GetUserReq(GeneratedsSuper):
         self.value05 = _cast(None, value05)
         self.value06 = _cast(int, value06)
         self.value07 = _cast(int, value07)
+        self.value08 = _cast(None, value08)
         self.returnedTags = returnedTags
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -697,6 +716,8 @@ class GetUserReq(GeneratedsSuper):
     def set_value06(self, value06): self.value06 = value06
     def get_value07(self): return self.value07
     def set_value07(self, value07): self.value07 = value07
+    def get_value08(self): return self.value08
+    def set_value08(self, value08): self.value08 = value08
     def hasContent_(self):
         if (
             self.returnedTags is not None
@@ -747,6 +768,9 @@ class GetUserReq(GeneratedsSuper):
         if self.value07 is not None and 'value07' not in already_processed:
             already_processed.add('value07')
             outfile.write(' value07="%s"' % self.gds_format_integer(self.value07, input_name='value07'))
+        if self.value08 is not None and 'value08' not in already_processed:
+            already_processed.add('value08')
+            outfile.write(' value08=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.value08), input_name='value08')), ))
     def exportChildren(self, outfile, level, namespace_='', name_='GetUserReq', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
@@ -810,6 +834,10 @@ class GetUserReq(GeneratedsSuper):
                 self.value07 = int(value)
             except ValueError as exp:
                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+        value = find_attr_value_('value08', node)
+        if value is not None and 'value08' not in already_processed:
+            already_processed.add('value08')
+            self.value08 = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'returnedTags':
             returnedTags_ = child_.text
@@ -887,9 +915,12 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    from StringIO import StringIO
+    if sys.version_info.major == 2:
+        from StringIO import StringIO as IOBuffer
+    else:
+        from io import BytesIO as IOBuffer
     parser = None
-    doc = parsexml_(StringIO(inString), parser)
+    doc = parsexml_(IOBuffer(inString), parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:

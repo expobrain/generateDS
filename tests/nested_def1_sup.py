@@ -28,7 +28,10 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
-from lxml import etree as etree_
+try:
+    from lxml import etree as etree_
+except ImportError:
+    from xml.etree import ElementTree as etree_
 
 
 Validate_simpletypes_ = True
@@ -42,7 +45,11 @@ def parsexml_(infile, parser=None, **kwargs):
     if parser is None:
         # Use the lxml ElementTree compatible parser so that, e.g.,
         #   we ignore comments.
-        parser = etree_.ETCompatXMLParser()
+        try:
+            parser = etree_.ETCompatXMLParser()
+        except AttributeError:
+            # fallback to xml.etree
+            parser = etree_.XMLParser()
     doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
@@ -361,6 +368,15 @@ except ImportError as exp:
                 return instring.encode(ExternalEncoding)
             else:
                 return instring
+        @staticmethod
+        def convert_unicode(instring):
+            if isinstance(instring, str):
+                result = quote_xml(instring)
+            elif sys.version_info.major == 2 and isinstance(instring, unicode):
+                result = quote_xml(instring).encode('utf8')
+            else:
+                result = GeneratedsSuper.gds_encode(str(instring))
+            return result
 
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
@@ -538,7 +554,8 @@ class MixedContainer:
         elif self.category == MixedContainer.CategorySimple:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
-            self.value.export(outfile, level, namespace, name, pretty_print)
+            self.value.export(
+                outfile, level, namespace, name, pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
             outfile.write('<%s>%s</%s>' % (
@@ -730,7 +747,7 @@ class containerType(GeneratedsSuper):
 
 class classAType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('inner', 'inner_001', 0),
+        MemberSpec_('inner', 'innerType', 0),
     ]
     subclass = None
     superclass = None
@@ -795,7 +812,7 @@ class classAType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'inner':
-            obj_ = inner_001.factory()
+            obj_ = innerType.factory()
             obj_.build(child_)
             self.inner = obj_
             obj_.original_tagname_ = 'inner'
@@ -804,7 +821,7 @@ class classAType(GeneratedsSuper):
 
 class classBType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('inner', 'inner_002', 0),
+        MemberSpec_('inner', 'innerType1', 0),
     ]
     subclass = None
     superclass = None
@@ -869,14 +886,14 @@ class classBType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'inner':
-            obj_ = inner_002.factory()
+            obj_ = innerType1.factory()
             obj_.build(child_)
             self.inner = obj_
             obj_.original_tagname_ = 'inner'
 # end class classBType
 
 
-class inner_001(GeneratedsSuper):
+class innerType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('attrA1', 'xs:string', 0),
         MemberSpec_('attrA2', 'xs:string', 0),
@@ -890,13 +907,13 @@ class inner_001(GeneratedsSuper):
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, inner_001)
+                CurrentSubclassModule_, innerType)
             if subclass is not None:
                 return subclass(*args_, **kwargs_)
-        if inner_001.subclass:
-            return inner_001.subclass(*args_, **kwargs_)
+        if innerType.subclass:
+            return innerType.subclass(*args_, **kwargs_)
         else:
-            return inner_001(*args_, **kwargs_)
+            return innerType(*args_, **kwargs_)
     factory = staticmethod(factory)
     def get_attrA1(self): return self.attrA1
     def set_attrA1(self, attrA1): self.attrA1 = attrA1
@@ -909,7 +926,7 @@ class inner_001(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='inner_001', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespace_='', name_='innerType', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -919,21 +936,21 @@ class inner_001(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='inner_001')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='innerType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='inner_001', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespace_='', name_='innerType', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='inner_001'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='innerType'):
         if self.attrA1 is not None and 'attrA1' not in already_processed:
             already_processed.add('attrA1')
             outfile.write(' attrA1=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrA1), input_name='attrA1')), ))
         if self.attrA2 is not None and 'attrA2' not in already_processed:
             already_processed.add('attrA2')
             outfile.write(' attrA2=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrA2), input_name='attrA2')), ))
-    def exportChildren(self, outfile, level, namespace_='', name_='inner_001', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='', name_='innerType', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -953,10 +970,10 @@ class inner_001(GeneratedsSuper):
             self.attrA2 = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
-# end class inner_001
+# end class innerType
 
 
-class inner_002(GeneratedsSuper):
+class innerType1(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('attrB1', 'xs:string', 0),
         MemberSpec_('attrB2', 'xs:string', 0),
@@ -970,13 +987,13 @@ class inner_002(GeneratedsSuper):
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, inner_002)
+                CurrentSubclassModule_, innerType1)
             if subclass is not None:
                 return subclass(*args_, **kwargs_)
-        if inner_002.subclass:
-            return inner_002.subclass(*args_, **kwargs_)
+        if innerType1.subclass:
+            return innerType1.subclass(*args_, **kwargs_)
         else:
-            return inner_002(*args_, **kwargs_)
+            return innerType1(*args_, **kwargs_)
     factory = staticmethod(factory)
     def get_attrB1(self): return self.attrB1
     def set_attrB1(self, attrB1): self.attrB1 = attrB1
@@ -989,7 +1006,7 @@ class inner_002(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='inner_002', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespace_='', name_='innerType1', namespacedef_='', pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -999,21 +1016,21 @@ class inner_002(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='inner_002')
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='innerType1')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='inner_002', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespace_='', name_='innerType1', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='inner_002'):
+    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='innerType1'):
         if self.attrB1 is not None and 'attrB1' not in already_processed:
             already_processed.add('attrB1')
             outfile.write(' attrB1=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrB1), input_name='attrB1')), ))
         if self.attrB2 is not None and 'attrB2' not in already_processed:
             already_processed.add('attrB2')
             outfile.write(' attrB2=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrB2), input_name='attrB2')), ))
-    def exportChildren(self, outfile, level, namespace_='', name_='inner_002', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespace_='', name_='innerType1', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -1033,14 +1050,14 @@ class inner_002(GeneratedsSuper):
             self.attrB2 = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         pass
-# end class inner_002
+# end class innerType1
 
 
 GDSClassesMapping = {
     'classA': classAType,
     'classB': classBType,
     'container': containerType,
-    'inner': inner_002,
+    'inner': innerType1,
     'item1': classAType,
     'item2': classBType,
 }
@@ -1110,9 +1127,12 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    from StringIO import StringIO
+    if sys.version_info.major == 2:
+        from StringIO import StringIO as IOBuffer
+    else:
+        from io import BytesIO as IOBuffer
     parser = None
-    doc = parsexml_(StringIO(inString), parser)
+    doc = parsexml_(IOBuffer(inString), parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
@@ -1168,6 +1188,6 @@ __all__ = [
     "classAType",
     "classBType",
     "containerType",
-    "inner_001",
-    "inner_002"
+    "innerType",
+    "innerType1"
 ]

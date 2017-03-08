@@ -21,7 +21,7 @@ Options:
     --one-file-per-xsd       Create a python module for each XSD processed.
     --output-directory="XXX" Used in conjunction with --one-file-per-xsd.
                              The directory where the modules will be created.
-    --module-suffix="xxx"    To be used in conjunction with --one-file-per-xsd.
+    --module-suffix="XXX"    To be used in conjunction with --one-file-per-xsd.
                              Append XXX to the end of each file created.
     --subclass-suffix="XXX"  Append XXX to the generated subclass names.
                              Default="Sub".
@@ -31,7 +31,7 @@ Options:
                              top level class; if YY omitted XX is the default.
                              class. Also see section "Recognizing the top level
                              element" in the documentation.
-    --super="XXX"            Super module name in generated in subclass
+    --super="XXX"            Super module name in generated subclass
                              module. Default="???"
     --validator-bodies=path  Path to a directory containing files that provide
                              bodies (implementations) of validator methods.
@@ -102,6 +102,7 @@ Options:
                              Default: "[('[-:.]', '_')]"
     -q, --no-questions       Do not ask questions, for example,
                              force overwrite.
+    --no-warnings            Do not print warning messages.
     --session=mysession.session
                              Load and use options from session file. You can
                              create session file in generateds_gui.py.  Or,
@@ -155,6 +156,7 @@ import sys
 import os.path
 import time
 import getopt
+
 if sys.version_info.major == 2:
     import urllib2
     import StringIO
@@ -204,7 +206,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.21a'
+VERSION = '2.24b'
 ##VERSION##
 
 if sys.version_info.major == 2:
@@ -278,6 +280,7 @@ SingleFileOutput = True
 OutputDirectory = None
 ModuleSuffix = ""
 PreserveCdataTags = False
+NoWarnings = False
 
 SchemaToPythonTypeMap = {}
 
@@ -294,6 +297,7 @@ NonNegativeIntegerType = None
 BooleanType = None
 FloatType = None
 DoubleType = None
+NumericTypes = None
 ElementType = None
 ComplexTypeType = None
 GroupType = None
@@ -919,7 +923,11 @@ class XschemaElement(XschemaElementBase):
         self.expandGroupReferences_tree(visited)
         self.collect_element_dict()
         self.annotate_find_type()
-        self.annotate_tree()
+        element_dict = None
+        to_be_removed = None
+        self.annotate_tree(
+            element_dict=element_dict,
+            to_be_removed=to_be_removed)
         self.fix_dup_names()
         self.coerce_attr_types()
         self.checkMixedBases()
@@ -1154,7 +1162,26 @@ class XschemaElement(XschemaElementBase):
         for child in self.children:
             child.annotate_find_type()
 
-    def annotate_tree(self):
+    def annotate_tree(self, element_dict, to_be_removed):
+        name = self.getName()
+        if element_dict is not None:
+            dup_element = element_dict.get(name)
+            if (dup_element is not None and
+                    # The element_dict keys are the element name.
+                    # So, we do not need to compare names.
+                    #dup_element.getName() == name and
+                    not self.complexType and
+                    not dup_element.complexType):
+                # If we've already seen this element (name), and
+                # these are both xsd:complexType, then
+                # make it a list and throw the previous one away.
+                self.maxOccurs = 2
+                to_be_removed.append(element_dict[name])
+                err_msg(
+                    '*** warning.  Removing child with duplicate '
+                    'name: "{}"\n'.format(name))
+            else:
+                element_dict[name] = self
         # If there is a namespace, replace it with an underscore.
         if self.base:
             self.base = strip_namespace(self.base)
@@ -1194,7 +1221,6 @@ class XschemaElement(XschemaElementBase):
             sys.exit(1)
         self.minOccurs = minOccurs
         self.maxOccurs = maxOccurs
-
         # If it does not have a type, then make the type the same as the name.
         if self.type == 'NoneType' and self.name:
             self.type = self.name
@@ -1213,8 +1239,21 @@ class XschemaElement(XschemaElementBase):
                     parent.collapseWhiteSpace):
                 self.collapseWhiteSpace = 1
         # Do it recursively for all descendents.
+        element_dict = {}
+        to_be_removed = []
         for child in self.children:
-            child.annotate_tree()
+            child.annotate_tree(
+                element_dict=element_dict,
+                to_be_removed=to_be_removed)
+        self.remove_children(to_be_removed)
+
+    def remove_children(self, to_be_removed):
+        for element in to_be_removed:
+            if element in self.children:
+                self.children.remove(element)
+            else:
+                err_msg("*** warning.  child {} already removed\n".format(
+                    element.getName()))
 
     #
     # For each name in the attributeGroupNameList for this element,
@@ -1238,16 +1277,22 @@ class XschemaElement(XschemaElementBase):
         if key is not None:
             attrGroup = AttributeGroups[key]
             for name in attrGroup.getKeys():
-                if (name in AttributeGroups or
-                        strip_namespace(name) in AttributeGroups):
+                group = attrGroup.get(name)
+                # If group is none, then it's an attributeGroup,
+                # not an attribute.
+                # Therefore, we might need to follow it recursively.
+                if (group is None and
+                        (name in AttributeGroups or
+                            strip_namespace(name) in AttributeGroups)):
                     self.replace_attributeGroup_names_1(name)
                 else:
                     attr = attrGroup.get(name)
                     self.attributeDefs[name] = attr
                     self.attributeDefsList.append(name)
         else:
-            err_msg('*** Error. attributeGroup %s not defined.\n' % (
-                groupName, ))
+            err_msg('*** Error. Element %s attributeGroup %s '
+                    'not defined.\n' % (
+                        self.getName(), groupName, ))
 
     def __str__(self):
         s1 = '<XschemaElement name: "%s" type: "%s">' % \
@@ -2657,8 +2702,8 @@ def generateExportAttributes(wrt, element, hasAttributes):
                     attrDefType == TokenType or
                     attrDefType in DateTimeGroupType):
                 s1 = '''%s        outfile.write(' %s=%%s' %% ''' \
-                    '''(self.gds_encode(self.gds_format_string(quote_attrib(''' \
-                    '''self.%s), ''' \
+                    '''(self.gds_encode(self.gds_format_string(''' \
+                    '''quote_attrib(self.%s), ''' \
                     '''input_name='%s')), ))\n''' % \
                     (indent, orig_name, cleanName, name, )
             elif (attrDefType in IntegerType or
@@ -2827,10 +2872,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         if element.getSimpleContent():
             wrt("            outfile.write('>')\n")
             if not element.isMixed():
-                wrt("            outfile.write((quote_xml(self.valueOf_) "
-                    "if type(self.valueOf_) is str else "
-                    "self.gds_encode(str(self.valueOf_))))\n"
-                    )
+                wrt("            outfile.write(self.convert_unicode("
+                    "self.valueOf_))\n")
         else:
             wrt("            outfile.write('>%s' % (eol_, ))\n")
         wrt("            self.exportChildren(outfile, level + 1, "
@@ -2957,7 +3000,7 @@ def generateExportLiteralFn_1(wrt, child, name, fill):
                 wrt("%s                outfile.write('%s=%%s,\\n' %% "
                     "self.gds_encode(quote_python(' '.join(self.%s)))"
                     ") \n" %
-                    (fill, mappedName, mappedName, encoding, ))
+                    (fill, mappedName, mappedName, ))
                 wrt("%s            else:\n" % (fill, ))
                 wrt("%s                outfile.write('%s=None,\\n')\n" %
                     (fill, mappedName, ))
@@ -3586,8 +3629,11 @@ def generateBuildStandard_1(
         else:
             wrt("            %s_ = child_.text\n" % name)
         if childType == TokenType:
-            wrt('            %s_ = re_.sub('
+            wrt('            if %s_:\n' % (name, ))
+            wrt('                %s_ = re_.sub('
                 'String_cleanup_pat_, " ", %s_).strip()\n' % (name, name))
+            wrt('            else:\n')
+            wrt('                %s_ = ""\n' % (name, ))
         if child.isListType():
             if (childType in IntegerType or
                     childType == PositiveIntegerType or
@@ -3752,6 +3798,7 @@ def generateBuildStandard_1(
                 name = mapName(name)
             else:
                 name = mappedName
+            name = cleanupName(name)
             s1 = "            self.%s.append(obj_)\n" % (name, )
         else:
             substitutionGroup = child.getAttrs().get('substitutionGroup')
@@ -3760,6 +3807,7 @@ def generateBuildStandard_1(
                 name = mapName(name)
             else:
                 name = mapName(headName)
+            name = cleanupName(name)
             s1 = "            self.%s = obj_\n" % (name, )
         wrt(s1)
         wrt("            obj_.original_tagname_ = '%s'\n" % (origName, ))
@@ -4201,9 +4249,10 @@ def generateCtor(wrt, prefix, element):
                     wrt('        self.%s = %s\n' % (name, mbrname))
                     # validate if it is a simple type.  Validation shows
                     # a warning so no fear that an error would rise.
-                    if (child.getSimpleType()):
+                    typeName = child.getSimpleType()
+                    if typeName and typeName in SimpleTypeDict:
                         wrt('        self.validate_%s(self.%s)\n' % (
-                            child.getSimpleType(), name))
+                            cleanupName(typeName), mapName(name)))
     eltype = element.getType()
     if (element.getSimpleContent() or
             element.isMixed() or
@@ -4250,6 +4299,28 @@ def find_simple_type_def(tree, stName, element, child, ns, base):
     return st
 
 
+def get_target_value(default, stName):
+    stObj = SimpleTypeDict.get(stName)
+    targetValue = default
+    if stObj is not None:
+        if stObj.getBase() == DateType:
+            targetValue = "self.gds_parse_date('{}')".format(default)
+        elif stObj.getBase() == TimeType:
+            targetValue = "self.gds_parse_time('{}')".format(default)
+        elif stObj.getBase() == DateTimeType:
+            targetValue = "self.gds_parse_datetime('{}')".format(default)
+    return targetValue
+
+
+Vbar_repl_pat = re.compile('([^\\\])\|')
+
+
+# Replace vertical bars with "$|^", unless escaped with backslash.
+def replaceVbars(instr):
+    outstr, count = re.subn(Vbar_repl_pat, '\\1$|^', instr)
+    return outstr
+
+
 # Generate validation code for each restriction.
 # Recursivly call to process possible chain of base types.
 def processValidatorBodyRestrictions(
@@ -4261,7 +4332,7 @@ def processValidatorBodyRestrictions(
         pats1 = restriction.xpath(
             "./xs:pattern/@value", namespaces=ns)
         if pats1:
-            pats2 = ['^%s$' % (p1, ) for p1 in pats1]
+            pats2 = ['^{}$'.format(replaceVbars(p1)) for p1 in pats1]
             patterns1.append(pats2)
         #
         # Check for and generate code for each possible type of restriction.
@@ -4358,8 +4429,9 @@ def processValidatorBodyRestrictions(
             if 'string' in base:
                 valuestring = 'len(str(value))'
                 toencode = '% {"value" : value.encode("utf-8")}'
+            targetValue = get_target_value(minIncl, stName)
             s1 += "            if %(valuestring)s < %(minIncl)s:\n" % {
-                'minIncl': minIncl, "valuestring": valuestring}
+                'minIncl': targetValue, "valuestring": valuestring}
             s1 += ("                warnings_.warn('Value \"%(val)s\" "
                    "does not match xsd minInclusive restriction on "
                    "%(typename)s' %(express)s )\n" % {
@@ -4378,8 +4450,9 @@ def processValidatorBodyRestrictions(
             if 'string' in base:
                 valuestring = 'len(str(value))'
                 toencode = '% {"value" : value.encode("utf-8")}'
+            targetValue = get_target_value(maxIncl, stName)
             s1 += "            if %(valuestring)s > %(maxIncl)s:\n" % {
-                'maxIncl': maxIncl, "valuestring": valuestring}
+                'maxIncl': targetValue, "valuestring": valuestring}
             s1 += ("                warnings_.warn('Value \"%(val)s\" "
                    "does not match xsd maxInclusive restriction on "
                    "%(typename)s' %(express)s )\n" % {
@@ -4398,8 +4471,9 @@ def processValidatorBodyRestrictions(
             if 'string' in base:
                 valstr = 'len(str(value))'
                 toencode = '% {"value" : value.encode("utf-8")}'
+            targetValue = get_target_value(minExclusive, stName)
             s1 += "            if %(valstr)s <= %(minExclusive)s:\n" % {
-                'minExclusive': minExclusive, "valstr": valstr}
+                'minExclusive': targetValue, "valstr": valstr}
             s1 += ("                warnings_.warn('Value \"%(val)s\" "
                    "does not match xsd minExclusive restriction on "
                    "%(typename)s' %(express)s )\n" % {
@@ -4418,8 +4492,9 @@ def processValidatorBodyRestrictions(
             if 'string' in base:
                 valstr = 'len(str(value))'
                 toencode = '% {"value" : value.encode("utf-8")}'
+            targetValue = get_target_value(maxExclusive, stName)
             s1 += "            if %(valstr)s >= %(maxExclusive)s:\n" % {
-                'maxExclusive': maxExclusive, "valstr": valstr}
+                'maxExclusive': targetValue, "valstr": valstr}
             s1 += ("                warnings_.warn('Value \"%(val)s\" "
                    "does not match xsd maxExclusive restriction on "
                    "%(typename)s' %(express)s )\n" % {
@@ -4927,7 +5002,10 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
-#xmldisable#from lxml import etree as etree_
+#xmldisable#try:
+#xmldisable#    from lxml import etree as etree_
+#xmldisable#except ImportError:
+#xmldisable#    from xml.etree import ElementTree as etree_
 
 
 Validate_simpletypes_ = True
@@ -4941,7 +5019,11 @@ else:
 #xmldisable#    if parser is None:
 #xmldisable#        # Use the lxml ElementTree compatible parser so that, e.g.,
 #xmldisable#        #   we ignore comments.
-#xmldisable#        parser = etree_.ETCompatXMLParser()
+#xmldisable#        try:
+#xmldisable#            parser = etree_.ETCompatXMLParser()
+#xmldisable#        except AttributeError:
+#xmldisable#            # fallback to xml.etree
+#xmldisable#            parser = etree_.XMLParser()
 #xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
 #xmldisable#    return doc
 
@@ -5112,7 +5194,8 @@ class MixedContainer:
 #xmldisable#        elif self.category == MixedContainer.CategorySimple:
 #xmldisable#            self.exportSimple(outfile, level, name)
 #xmldisable#        else:    # category == MixedContainer.CategoryComplex
-#xmldisable#            self.value.export(outfile, level, namespace, name, pretty_print)
+#xmldisable#            self.value.export(
+#xmldisable#                outfile, level, namespace, name, pretty_print=pretty_print)
 #xmldisable#    def exportSimple(self, outfile, level, name):
 #xmldisable#        if self.content_type == MixedContainer.TypeString:
 #xmldisable#            outfile.write('<%s>%s</%s>' % (
@@ -5529,15 +5612,15 @@ class GeneratedsSuper(object):
             return instring.encode(ExternalEncoding)
         else:
             return instring
-    def __eq__(self, other):
-        if type(self) != type(other):
-            return False
-        for key, val in self.__dict__.items():
-            if other.__dict__[key] != val:
-                return False
-        return True
-    def __ne__(self, other):
-        return not self.__eq__(other)
+    @staticmethod
+    def convert_unicode(instring):
+        if isinstance(instring, str):
+            result = quote_xml(instring)
+        elif sys.version_info.major == 2 and isinstance(instring, unicode):
+            result = quote_xml(instring).encode('utf8')
+        else:
+            result = GeneratedsSuper.gds_encode(str(instring))
+        return result
 
 def getSubclassFromModule_(module, class_):
     '''Get the subclass of a class from a specific module.'''
@@ -5723,8 +5806,11 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    from StringIO import StringIO
-%(preserve_cdata_tags)s    doc = parsexml_(StringIO(inString), parser)
+    if sys.version_info.major == 2:
+        from StringIO import StringIO as IOBuffer
+    else:
+        from io import BytesIO as IOBuffer
+%(preserve_cdata_tags)s    doc = parsexml_(IOBuffer(inString), parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
@@ -6819,9 +6905,50 @@ def fixXmlDisable(txt, disabled):
         txt = txt.replace('#xmldisable#', '')
     return txt
 
+def capture_cleanup_name_list(option):
+    cleanupNameList = []
+    if not option:
+        return cleanupNameList
+    cleanup_str = option
+    from ast import literal_eval
+    try:
+        cleanup_list = literal_eval(cleanup_str)
+    except ValueError:
+        raise RuntimeError(
+            'Unable to parse option --cleanup-name-list.')
+    if type(cleanup_list) not in (list, tuple):
+        raise RuntimeError(
+            'Option --cleanup-name-list must be a list or a tuple.')
+    for cleanup_pair in cleanup_list:
+        if sys.version_info.major == 2:
+            if (type(cleanup_pair) not in (list, tuple) or
+                    len(cleanup_pair) != 2 or
+                    not isinstance(cleanup_pair[0], BaseStrType) or
+                    not isinstance(cleanup_pair[1], BaseStrType)):
+                raise RuntimeError(
+                    'Option --cleanup-name-list contains '
+                    'invalid element.')
+        else:
+            if (type(cleanup_pair) not in (list, tuple) or
+                    len(cleanup_pair) != 2 or
+                    not isinstance(cleanup_pair[0], str) or
+                    not isinstance(cleanup_pair[1], str)):
+                raise RuntimeError(
+                    'Option --cleanup-name-list contains '
+                    'invalid element.')
+        try:
+            cleanupNameList.append(
+                (re.compile(cleanup_pair[0]), cleanup_pair[1]))
+        except Exception:
+            raise RuntimeError(
+                'Option --cleanup-name-list contains invalid '
+                'pattern "%s".'
+                % cleanup_pair[0])
+    return cleanupNameList
 
 def err_msg(msg):
-    sys.stderr.write(msg)
+    if not NoWarnings:
+        sys.stderr.write(msg)
 
 
 USAGE_TEXT = __doc__
@@ -6842,7 +6969,9 @@ def main():
         ExportWrite, ExportEtree, ExportLiteral, XmlDisabled, \
         FixTypeNames, SingleFileOutput, OutputDirectory, \
         ModuleSuffix, UseOldSimpleTypeValidators, \
-        PreserveCdataTags, CleanupNameList, UseGeneratedssuperLookup
+        UseGeneratedssuperLookup, \
+        PreserveCdataTags, CleanupNameList, \
+        NoWarnings
     outputText = True
     args = sys.argv[1:]
     try:
@@ -6861,6 +6990,7 @@ def main():
                 'module-suffix=', 'use-old-simpletype-validators',
                 'preserve-cdata-tags', 'cleanup-name-list=',
                 'disable-generatedssuper-lookup',
+                'no-warnings',
             ])
     except getopt.GetoptError:
         usage()
@@ -6936,6 +7066,28 @@ def main():
                 ExternalEncoding = sessionObj.get_external_encoding()
             if sessionObj.get_member_specs() in ('list', 'dict'):
                 MemberSpecs = sessionObj.get_member_specs()
+            exports = sessionObj.get_export_spec()
+            if exports:
+                ExportWrite = False
+                ExportEtree = False
+                ExportLiteral = False
+                exports = exports.split()
+                if 'write' in exports:
+                    ExportWrite = True
+                if 'etree' in exports:
+                    ExportEtree = True
+                if 'literal' in exports:
+                    ExportLiteral = True
+            if sessionObj.get_one_file_per_xsd():
+                SingleFileOutput = False
+            if sessionObj.get_output_directory():
+                OutputDirectory = sessionObj.get_output_directory()
+            if sessionObj.get_module_suffix():
+                ModuleSuffix = sessionObj.get_module_suffix()
+            if sessionObj.get_preserve_cdata_tags():
+                PreserveCdataTags = True
+            CleanupNameList = capture_cleanup_name_list(
+                sessionObj.get_cleanup_name_list())
             break
     for option in options:
         if option[0] == '-h' or option[0] == '--help':
@@ -7026,42 +7178,9 @@ def main():
         elif option[0] == "--preserve-cdata-tags":
             PreserveCdataTags = True
         elif option[0] == '--cleanup-name-list':
-            cleanup_str = option[1]
-            from ast import literal_eval
-            try:
-                cleanup_list = literal_eval(cleanup_str)
-            except ValueError:
-                raise RuntimeError(
-                    'Unable to parse option --cleanup-name-list.')
-            if type(cleanup_list) not in (list, tuple):
-                raise RuntimeError(
-                    'Option --cleanup-name-list must be a list or a tuple.')
-            CleanupNameList = []
-            for cleanup_pair in cleanup_list:
-                if sys.version_info.major == 2:
-                    if (type(cleanup_pair) not in (list, tuple) or
-                            len(cleanup_pair) != 2 or
-                            not isinstance(cleanup_pair[0], BaseStrType) or
-                            not isinstance(cleanup_pair[1], BaseStrType)):
-                        raise RuntimeError(
-                            'Option --cleanup-name-list contains '
-                            'invalid element.')
-                else:
-                    if (type(cleanup_pair) not in (list, tuple) or
-                            len(cleanup_pair) != 2 or
-                            not isinstance(cleanup_pair[0], str) or
-                            not isinstance(cleanup_pair[1], str)):
-                        raise RuntimeError(
-                            'Option --cleanup-name-list contains '
-                            'invalid element.')
-                try:
-                    CleanupNameList.append(
-                        (re.compile(cleanup_pair[0]), cleanup_pair[1]))
-                except Exception:
-                    raise RuntimeError(
-                        'Option --cleanup-name-list contains invalid '
-                        'pattern "%s".'
-                        % cleanup_pair[0])
+            CleanupNameList = capture_cleanup_name_list(option[1])
+        elif option[0] == '--no-warnings':
+            NoWarnings = True
     if showVersion:
         print('generateDS.py version %s' % VERSION)
         sys.exit(0)
