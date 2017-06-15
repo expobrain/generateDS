@@ -16,6 +16,8 @@ Options:
     -p, --path-to-generateDS-script=/path/to/generateDS.py
                     Path to the generateDS.py script.
     -v, --verbose   Display additional information while running.
+    -s, --script    Write out (display) the command lines used.  Can
+                    be captured and used in a shell script, for example.
 Examples:
     python gends_run_gen_django.py my_schema.xsd
     python gends_run_gen_django.py -f -p ../generateDS.py my_other_schema.xsd
@@ -30,6 +32,7 @@ import sys
 import getopt
 import os
 from subprocess import Popen, PIPE
+from glob import glob
 
 
 #
@@ -59,7 +62,16 @@ def generate(options, schema_file_name):
     admin_file_name = 'admin.py'
     dbg_msg(options, 'schema_name_stem: %s\n' % (schema_name_stem, ))
     dbg_msg(options, 'bindings_file_name: %s\n' % (bindings_file_name, ))
-    if not options['force']:
+    if options['force']:
+        file_names = (
+            glob(bindings_file_name) +
+            glob('%s.pyc' % bindings_file_stem) +
+            glob('__pycache__/%s.*.pyc' % bindings_file_stem)
+        )
+        for file_name in file_names:
+            dbg_msg(options, 'removing: %s\n' % file_name)
+            os.remove(file_name)
+    else:
         flag1 = exists(bindings_file_name)
         flag2 = exists(model_file_name)
         flag3 = exists(form_file_name)
@@ -90,20 +102,21 @@ def generate(options, schema_file_name):
 
 
 def run_cmd(options, args):
-    dbg_msg(options, '*** running %s\n' % (' '.join(args), ))
+    msg = '%s\n' % (' '.join(args), )
+    dbg_msg(options, '*** running %s' % (msg, ))
+    if options['script']:
+        write_msg(options, msg)
     process = Popen(args, stderr=PIPE, stdout=PIPE)
     content1 = process.stderr.read()
     content2 = process.stdout.read()
     if content1:
         sys.stderr.write('*** error ***\n')
-        sys.stderr.write(content1)
+        sys.stderr.write(content1.decode('utf-8'))
         sys.stderr.write('*** error ***\n')
-        return False
     if content2:
         dbg_msg(options, '*** message ***\n')
-        dbg_msg(options, content2)
+        dbg_msg(options, content2.decode('utf-8'))
         dbg_msg(options, '*** message ***\n')
-        return True
     return True
 
 
@@ -117,7 +130,17 @@ def exists(file_name):
 
 def dbg_msg(options, msg):
     if options['verbose']:
+        if isinstance(msg, str):
+            sys.stdout.write(msg)
+        else:
+            sys.stdout.write(msg.decode('utf-8'))
+
+
+def write_msg(options, msg):
+    if isinstance(msg, str):
         sys.stdout.write(msg)
+    else:
+        sys.stdout.write(msg.decode('utf-8'))
 
 
 def usage():
@@ -127,8 +150,8 @@ def usage():
 def main():
     args = sys.argv[1:]
     try:
-        opts, args = getopt.getopt(args, 'hvfp:', [
-            'help', 'verbose',
+        opts, args = getopt.getopt(args, 'hvfp:s', [
+            'help', 'verbose', 'script',
             'force', 'path-to-generateDS-script=',
         ])
     except:
@@ -136,6 +159,7 @@ def main():
     options = {}
     options['force'] = False
     options['verbose'] = False
+    options['script'] = False
     options['path'] = './generateDS.py'
     for opt, val in opts:
         if opt in ('-h', '--help'):
@@ -144,6 +168,8 @@ def main():
             options['force'] = True
         elif opt in ('-v', '--verbose'):
             options['verbose'] = True
+        elif opt in ('-s', '--script'):
+            options['script'] = True
         elif opt in ('-p', '--path-to-generateDS-script'):
             options['path'] = val
     if not os.path.exists(options['path']):

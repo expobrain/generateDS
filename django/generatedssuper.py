@@ -1,11 +1,17 @@
 
+from __future__ import print_function
 import sys
 from generateds_definedsimpletypes import Defined_simple_type_table
+from generateDS import AnyTypeIdentifier, mapName, cleanupName
 
 
 #
 # Globals
 
+# This variable enables users (modules) that use this module to
+# check to make sure that they have imported the correct version
+# of generatedssuper.py.
+Generate_DS_Super_Marker_ = None
 
 #
 # Tables of builtin types
@@ -148,8 +154,8 @@ class GeneratedsSuper(object):
         return prefix, name
 
     @classmethod
-    def generate_model_(cls, wrtmodels, wrtforms):
-        class_name = cls.__name__
+    def generate_model_(cls, wrtmodels, wrtforms, unique_name_map):
+        class_name = unique_name_map.get(cls.__name__)
         wrtmodels('\nclass %s_model(models.Model):\n' % (class_name, ))
         wrtforms('\nclass %s_form(forms.Form):\n' % (class_name, ))
         if cls.superclass is not None:
@@ -159,18 +165,24 @@ class GeneratedsSuper(object):
             name = spec.get_name()
             prefix, name = cls.get_prefix_name(name)
             data_type = spec.get_data_type()
+            is_optional = spec.get_optional()
             prefix, data_type = cls.get_prefix_name(data_type)
             if data_type in Defined_simple_type_table:
                 data_type = Defined_simple_type_table[data_type]
                 prefix, data_type = cls.get_prefix_name(data_type.type_name)
-            name = cleanupName(name)
+            name = mapName(cleanupName(name))
             if name == 'id':
                 name += 'x'
-            elif name.endswith('_'):
+            elif name.endswith('_') and not name == AnyTypeIdentifier:
                 name += 'x'
-            data_type = cleanupName(data_type)
+            data_type = mapName(cleanupName(data_type))
+            if data_type == AnyTypeIdentifier:
+                data_type = 'string'
             if data_type in Simple_type_table:
-                options = 'blank=True'
+                if is_optional:
+                    options = 'blank=True, null=True'
+                else:
+                    options = ''
                 if data_type in Integer_type_table:
                     wrtmodels('    %s = models.IntegerField(%s)\n' % (
                         name, options, ))
@@ -212,22 +224,28 @@ class GeneratedsSuper(object):
                     sys.stderr.write('Unhandled simple type: %s %s\n' % (
                         name, data_type, ))
             else:
+                mapped_type = unique_name_map.get(data_type)
+                if mapped_type is not None:
+                    data_type = mapped_type
                 wrtmodels(
-                    '    %s = models.ForeignKey("%s_model")\n' % (
+                    '    %s = models.ForeignKey(\n        "%s_model",\n' % (
                         name, data_type, ))
+                wrtmodels(
+                    '        related_name="{}_{}_{}",\n'.format(
+                        class_name, name, data_type, ))
+                if is_optional:
+                    wrtmodels(
+                        '        blank=True, null=True,\n')
+                wrtmodels('    )\n')
                 wrtforms(
                     '    %s = forms.MultipleChoiceField(%s_model.objects'
                     '.all())\n' % (
                         name, data_type, ))
+        wrtmodels('\n')
         wrtmodels('    def __unicode__(self):\n')
         wrtmodels('        return "id: %s" % (self.id, )\n')
+        wrtmodels('\n')
 
 
 #
 # Local functions
-
-def cleanupName(oldName):
-    newName = oldName.replace(':', '_')
-    newName = newName.replace('-', '_')
-    newName = newName.replace('.', '_')
-    return newName

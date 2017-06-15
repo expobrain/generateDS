@@ -12,7 +12,7 @@ generateDS -- Generate Data Structures from XML Schema
 
 .. version
 
-:revision: 2.24b
+:revision: 2.27a
 
 .. version
 
@@ -278,10 +278,19 @@ Here is the usage message displayed by ``generateDS.py``::
                                  generated files. This is useful if you want
                                  to minimize the amount of (no-operation)
                                  changes to the generated python code.
-        --no-process-includes    Do not process included XML schema files.  By
-                                 default, generateDS.py will insert content
-                                 from files referenced by <include ... />
-                                 elements into the XML schema to be processed.
+        --no-process-includes    Do not use process_includes.py to pre-process
+                                 included XML schema files.  By default,
+                                 generateDS.py will insert content from files
+                                 referenced by xs:include and xs:import elements
+                                 into the XML schema to be processed and perform
+                                 several other pre-procesing tasks.  You likely do
+                                 not want to use this option; its use has been
+                                 reported to result in errors in generated modules.
+                                 Consider using --no-collect-includes and/or
+                                 --no-redefine-groups instead.
+        --no-collect-includes    Do not (recursively) collect and insert schemas
+                                 referenced by xs:include and xs:import elements.
+        --no-redefine-groups     Do not pre-process and redefine group definitions.
         --silence                Normally, the code generated with generateDS
                                  echoes the information being parsed. To prevent
                                  the echo from occurring, use the --silence switch.
@@ -293,6 +302,10 @@ Here is the usage message displayed by ``generateDS.py``::
                                  the export() method by the generated
                                  parse() and parseString() functions.
                                  Default=''.
+        --no-namespace-defs      Do not pass namespace definitions as the value
+                                 for the namespacedef_ parameter of the export
+                                 method, even if it can be extraced from the
+                                 schema.
         --external-encoding=<encoding>
                                  Encode output written by the generated export
                                  methods using this encoding.  Default, if omitted,
@@ -511,15 +524,32 @@ no-versions
     changes to the generated python code.
 
 no-process-includes
-    Do not process included XML Schema files.  By default,
-    generateDS.py will insert content from files referenced by
-    ``<include ... />`` elements into the XML Schema to be processed.
-    See section `Include file processing`_.  Note that include
-    processing, which is performed in ``process_includes.py`` is
-    required for generating validator bodies from the XML schema,
-    because the Lxml ElementTree produced in ``process_includes.py``
-    is needed to generate the validator code.  So, using this option
-    also turns off automatic generation of validator code.
+    Do not use ``process_includes.py`` to pre-process included XML
+    Schema files.  By default, generateDS.py will insert content
+    from files referenced by ``xs:include`` and ``xs:import``
+    elements into the XML Schema to be processed.  See section
+    `Include file processing`_.  Note that include processing, which
+    is performed in ``process_includes.py`` is required for
+    generating validator bodies from the XML schema, because the
+    Lxml ElementTree produced in ``process_includes.py`` is needed
+    to generate the validator code.  So, using this option also
+    turns off automatic generation of validator code.  Also note
+    that process_includes(.py) performs additional tasks; it also
+    (1) assigns names to each anonymous complexType, (2) processes
+    (replaces) group definitions, and (3) possibly fixes complexType
+    names (see command line option --fix-type-names).  You likely do
+    not want to use this option; its use has been reported to result
+    in errors in generated modules.  Consider using
+    --no-collect-includes and/or --no-redefine-groups instead.
+
+no-collect-includes
+    Do not (recursively) collect and insert schemas referenced by
+    ``xs:include`` and ``xs:import`` elements.  This task is
+    performed in ``process_includes.py``.
+
+no-redefine-groups
+    Do not pre-process and redefine group definitions.  This task is
+    performed in ``process_includes.py``.
 
 silence
     Normally, the code generated with generateDS echoes the
@@ -538,6 +568,15 @@ namespacedef="<http://...>"
     element.  (Actually, you can insert any attribute.) The default
     is an empty string.
 
+no-namespace-defs
+    Do not pass namespace definitions as the value for the
+    ``namespacedef_`` parameter of the export method, even if it can
+    be extraced from the schema.  The default is off.  You might
+    want to consider using this in combination with the ability to
+    attach namespace prefix definitions to specific element types
+    during export, as described here: `Adding custom exported
+    attributes and namespace prefix definitions`_.
+
 external-encoding=<encoding>
     If an XML instance document contains character data or
     attribute values that are not in the ASCII character set, then
@@ -551,10 +590,10 @@ external-encoding=<encoding>
     encodings here: http://docs.python.org/library/codecs.html#id3.
     Example use: --external-encoding='utf-8'.
 
-member-specs
-    Generate member (type) specifications in each class: a
-    dictionary of instances of class ``MemberSpec_`` containing
-    member name, type, and array or not.  See `User Methods`_
+member-specs Generate member (type) specifications in each class
+    A dictionary of instances of class ``MemberSpec_`` containing
+    member name, type, array or not, and whether the item is
+    optional (i.e. defined with minOccurs="0").  See `User Methods`_
     section for more information about ``MemberSpec_``.  Allowed
     values are "list" or "dict".  Default: do *not* generate member
     specifications (unless --user-methods specified).
@@ -579,7 +618,7 @@ export
       and use any of lxml's other capabilities.
 
     For example: ``--export="write etree"`` and ``--export="write"``.  The
-    default is: ``--export="write literal"``.
+    default is: ``--export="write"``.
 
 preserve-cdata-tags
     Preserve CDATA tags.  Normally, CDATA tags ("<![CDATA[ ... ]]>")
@@ -1134,8 +1173,8 @@ Here is a bit of explanation of what that generated code will do.
   generated validation code calls ``gds_validate_xxx``, where "xxx"
   is a base, simple type.  In some cases, you will be able to add
   additional code to that method to perform custom checking.  See
-  section `Overridable methods`_ for information on how to use and
-  override that class.
+  section `Overridable methods -- generatedssuper.py`_ for
+  information on how to use and override that class.
 
 - When validation finds data that fails to validate, it generates a
   warning (using the ``warnings`` module from the Python standard
@@ -1853,8 +1892,8 @@ in the ``GeneratedsSuper`` class.  This method has a default
 implementation in the generated code.  If your XML schema uses
 ``xs:any``, you may need to add some code to that default
 implementation of ``gds_build_any``.  See section `Overridable
-methods`_ for guidance on how to provide an implementation of that
-method.
+methods -- generatedssuper.py`_ for guidance on how to provide an
+implementation of that method.
 
 For more help with this, look at the code generated from an XML
 schema that uses ``xs:any``.  In particular, look at the code
@@ -2485,6 +2524,9 @@ information in each member specification:
   generated from maxOccurs > 0): 0 indicates a single item; 1
   indicates a list.
 
+- ``m.get_optional()`` -- (an integer) Returns 0 (zero) if the item
+  is optional (defined with minOccurs="0"), else returns 1.
+
 There are a number of things of interest in this sample file
 (`gends_user_methods.py`_):
 
@@ -2555,11 +2597,11 @@ Suggestion -- How to begin:
 6. Repeat as necessary.
 
 
-.. _`gends_user_methods.py`: gends_user_methods.py
+.. _`gends_user_methods.py`: https://bitbucket.org/dkuhlman/generateds/src
 
 
-Overridable methods
-----------------------------
+Overridable methods -- generatedssuper.py
+-------------------------------------------
 
 ``generateDS.py`` generates calls to several methods that each have
 a default implementation in a superclass.  The default superclass
@@ -2694,8 +2736,63 @@ that complexType definition.  This dictionary is named
 with the "-o" option.
 
 
+Adding custom exported attributes and namespace prefix definitions
+--------------------------------------------------------------------
+
+You can add additional attributes to exported XML content by (1)
+providing a module named ``generatedsnamespaces.py``; (2) placing
+that module somewhere so that it can be imported when you "run" your
+generated module; and (3) including in ``generatedsnamespaces.py`` a
+global variable named ``GenerateDSNamespaceDefs`` whose value is a
+Python dictionary.  The keys in this dictionary should be element
+type names in the generated module.  And the values should be text
+strings that are attributes to be added to exported elements of that
+type.
+
+Here is an example::
+
+    # file: generatedsnamespaces.py
+
+    GenerateDSNamespaceDefs = {
+        "A1ElementType": 'xmlns:abc="http://www.abc.com/namespace_a1"',
+        "A2ElementType": 'xmlns:abc="http://www.abc.com/namespace_a2"',
+    }
+
+Notes:
+
+- While the original intension of this facility was to enable the
+  user to add XML namespace prefix definitions to the XML content in
+  exported files, you can use it to add other attribute definitions
+  as well.
+
+- If you find that ``generateDS.py`` is adding a specific namespace
+  prefix definition to many exported XML elements and you want to
+  suppress this behavior, take a look at the ``--no-namespace-defs``
+  command line option.  In particular, this command line option may
+  be useful when used together with the capability described in this
+  section (``generatedsnamespaces.py``).
+
+
 "One Per" -- generating separate files from imported/included schemas
 =======================================================================
+
+The ``generateDS.py`` project provides support for two approaches to
+this task:
+
+- The first (`Approach 1 -- Command line option
+  --one-file-per-xsd`_, below) is likely to be easier to use, but if
+  it does not work for you as is, it is very difficult to customize.
+
+- The second method (`Approach 2 -- Extraction and generation
+  utilities`_, below) may require a little more work and
+  understanding, but offers more options and customization, and,
+  since the scripts that implement it are short and rather simple,
+  may be easier to customize or even re-write for your specific
+  needs.
+
+
+Approach 1 -- Command line option --one-file-per-xsd
+----------------------------------------------------------
 
 The ``--one-file-per-xsd`` command line option enables you to
 generate a separate Python module for each XML schema that is
@@ -2747,6 +2844,52 @@ Here are a few hints, guidelines, and suggestions:
   not in ``sys.path``, add a file named "__init__.py" to that
   directory.  The existence of the file ``__init__.py`` turns the
   directory into a Python package.
+
+
+Approach 2 -- Extraction and generation utilities
+---------------------------------------------------
+
+The ``generateds/utils`` subdirectory contains two utility scripts
+that may help with this task.  The procedure is as follows:
+
+1. First, use ``utils/collect_schema_locations.py`` to collect a set
+   of directives, one for each (included) schema and each module to
+   be generated.  This utility writes out a JSON file that contains
+   the directives to be used in the next step.
+
+2. Next, use ``utils/batch_generate.py`` to generate one module (or
+   perhaps two modules, see below) for each directive in that JSON
+   file.
+
+Each of these modules gives a reasonable amount of usage information
+in response to the ``--help`` command line option.
+
+A few hints and suggestions:
+
+- After generating the JSON directives file you can modify it with
+  your text editor.  For example, (1) you can add the name of
+  sub-class modules to be generated by ``generateDS.py``; (2) you
+  can specify command line options to be used by ``generateDS.py``
+  when generating specific modules; and (3) you can add new
+  directives to generate additional modules.
+
+- If you find yourself typing the same command line options to
+  ``utils/batch_generate.py`` over and over, there is a facility to
+  put command line options that have long names (i.e., not one
+  character names) into a configuration file.  The usage information
+  produced by ``utils/batch_generate.py --help`` shows an example.
+  Then use ``utils/batch_generate.py --config=myoptins.config ...``
+  to feed this configuration file to ``utils/batch_generate.py``.
+  The options in this configuration file can be overridden by those
+  entered on the command line.
+
+- The JSON directives file can contain comments, even though this is
+  not part of the JSON standard.  A comment is any line that begins
+  with "//" where the "//" is proceeded only by white space
+  characters.  ``utils/batch_generate.py`` strips these lines out
+  before parsing the JSON file.  However, if you plan to process
+  this JSON file with other processes, you will likely either not
+  want to add comments or plan to pre-process them in some way.
 
 
 How to modify the generated code
@@ -3054,45 +3197,25 @@ And, then, try it on your XML Schema, and let me know about what
 does not work.
 
 
-Large documents
----------------
-
-**Warning** -- This section describes an optional generated SAX
-parser which, I believe, is currently broken for all but the
-simplest schemas.  Generation of a SAX parser has not been updated
-for the latest changes to ``generateDS.py``.  In particular, when
-names of elements are reused (in different parent elements), the
-SAX parser becomes confused. Until I've been able to figure out
-how to fix this, you are advised not to use the SAX parser.
-
-``generateDS.py`` generates two kinds of parsers: one kind is
-based on SAX and the other is build on minidom. See the generated
-functions saxParse, parse(), and parseString(). Using the SAX
-parser instead of the minidom parser should reduce memory
-requirements for large documents, since the minidom parser, but
-not the SAX parser, constructs a DOM tree for the entire document
-in memory.
-
-However, both styles of parsers construct instances of the data
-structures generated by ``generateDS.py``. This means that, even
-when the SAX parser is used, ``generateDS.py`` may not be
-well-suited for applications that read large XML documents,
-although what "large" means depends on your hardware. Notice that
-the minidom parsing functions (parse() and parseString())
-over-write the variable doc so as to enable Python to reclaim the
-space occupied by the DOM tree, which may help alleviate the
-memory problem to some extent when the minidom parser is used.
-
-
-Includes -- The XML schema include element
-==========================================
+Includes -- The XML schema xs:include and xs:import elements
+==============================================================
 
 While ``generateDS.py`` itself does not process XML Schema
 ``include`` elements, the distribution provides a script
-``process_includes.py`` that can be used as a preprocessor.  This
-script scans your XML Schema document and, recursively, documents
-that are included looking for ``include`` elements; it inserts all
-content into a single document, which it writes out.
+``process_includes.py`` that can be used as a preprocessor.
+``process_includes.py`` is called automatically and by default by
+``generateDS.py``.  This behavior can be turned off with the
+``--no-process-includes`` command line option.  **However**, doing
+so is not advised, because unexpected and undesirable behavior has
+been detected this is done.  Instead consider using the 
+``--no-collect-includes`` and ``--no-redefine-groups`` command line
+options to selectively turn of specific processing done in
+``process_includes.py``.
+
+The ``process_includes.py`` script scans your XML Schema document
+and, recursively, documents that are included looking for
+``include`` elements; it inserts all content into a single document,
+which it writes out.
 
 Here are samples of how you might use ``process_includes.py``, if
 your schema contains ``include`` elements.
@@ -3110,6 +3233,47 @@ Example 2::
 For help and usage information, run the following::
 
     $ python process_includes.py --help
+
+
+Processing RelaxNG schemas
+============================
+
+RelaxNG is a schema definition language and is an alternative to XML
+Schema.  For more information on RelaxNG, see: http://relaxng.org/.
+
+``generateDS.py`` does not understand or process RelaxNG schemas.
+However, the ``trang`` application is able to convert RelaxNG into
+XML Schemas.  I've tried it, and was able to convert a relatively
+small RelaxNG schema into an XML Schema, and then use
+``generateDS.py`` to generate a bindings module from that.  I have
+not done any serious testing to determine how complete or accurate
+this conversion is.  ``trang`` is written in Java, so you will need
+Java and the JDK installed in order to compile and use it.  For what
+it's worth, here are the steps I followed in order to use ``trang``:
+
+1. Clone trang from https://github.com/relaxng/jing-trang.git,
+   and, then built it with::
+
+       $ git clone https://github.com/relaxng/jing-trang.git
+       $ cd jing-trang
+       # set JAVA_HOME to location of JDK
+       $ export JAVA_HOME=/usr/lib/jvm/jdk-8-oracle-arm32-vfp-hflt
+       $ ./ant
+
+2. Run ``trang`` with the following::
+
+       $ cd jing-trang/build
+       $ java -jar trang.jar -I rng -O xsd test01.rng test01.xsd
+
+   The above command produced test01.xsd.
+
+3. Run the resulting XML Schema (``test01.xsd``, in the above case)
+   through ``generateDS.py``:
+
+       $ generateDS.py -o test01sup.py -s test01sub.py test01.xsd
+
+You can learn more about ``trang`` at the RelaxNG web site and here:
+https://github.com/relaxng/jing-trang
 
 
 Acknowledgments

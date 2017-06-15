@@ -56,10 +56,19 @@ Options:
                              generated files. This is useful if you want
                              to minimize the amount of (no-operation)
                              changes to the generated python code.
-    --no-process-includes    Do not process included XML schema files.  By
-                             default, generateDS.py will insert content
-                             from files referenced by <include ... />
-                             elements into the XML schema to be processed.
+    --no-process-includes    Do not use process_includes.py to pre-process
+                             included XML schema files.  By default,
+                             generateDS.py will insert content from files
+                             referenced by xs:include and xs:import elements
+                             into the XML schema to be processed and perform
+                             several other pre-procesing tasks.  You likely do
+                             not want to use this option; its use has been
+                             reported to result in errors in generated modules.
+                             Consider using --no-collect-includes and/or
+                             --no-redefine-groups instead.
+    --no-collect-includes    Do not (recursively) collect and insert schemas
+                             referenced by xs:include and xs:import elements.
+    --no-redefine-groups     Do not pre-process and redefine group definitions.
     --silence                Normally, the code generated with generateDS
                              echoes the information being parsed. To prevent
                              the echo from occurring, use the --silence switch.
@@ -71,6 +80,10 @@ Options:
                              the export() method by the generated
                              parse() and parseString() functions.
                              Default=''.
+    --no-namespace-defs      Do not pass namespace definitions as the value
+                             for the namespacedef_ parameter of the export
+                             method, even if it can be extraced from the
+                             schema.
     --external-encoding=<encoding>
                              Encode output written by the generated export
                              methods using this encoding.  Default, if omitted,
@@ -206,7 +219,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.24b'
+VERSION = '2.27a'
 ##VERSION##
 
 if sys.version_info.major == 2:
@@ -238,6 +251,7 @@ NoVersion = False
 Dirpath = []
 ExternalEncoding = sys.getdefaultencoding()
 Namespacedef = ''
+NoNameSpaceDefs = False
 CleanupNameList = [(re.compile('[-:.]'), '_')]
 
 NamespacesDict = {}
@@ -511,6 +525,7 @@ def set_type_constants(nameSpace):
 #
 # For debugging.
 #
+
 
 # Print only if DEBUG is true.
 DEBUG = 0
@@ -2841,6 +2856,10 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     wrt("    def export(self, outfile, level, namespace_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
         (namespace, name, nameSpacesDef))
+    wrt("        imported_ns_def_ = GenerateDSNamespaceDefs_.get"
+        "('%s')\n" % (name, ))
+    wrt("        if imported_ns_def_ is not None:\n")
+    wrt("            namespacedef_ = imported_ns_def_\n")
     wrt('        if pretty_print:\n')
     wrt("            eol_ = '\\n'\n")
     wrt('        else:\n')
@@ -4755,18 +4774,24 @@ def generateMemberSpec(wrt, element):
         item1 = mapName(attrName)
         item2 = attrDef.getType()
         item3 = 0
+        item4 = 1 if attrDef.getUse() == 'optional' else 0
         if generateDict:
-            item = "        '%s': MemberSpec_('%s', '%s', %d, %s)," % (
-                item1, item1, item2, item3, str({'use':attrDef.getUse()}))
+            item = "        '%s': MemberSpec_('%s', '%s', %d, %d, %s)," % (
+                item1, item1, item2, item3, item4, repr({'use':attrDef.getUse()}))
         else:
-            item = "        MemberSpec_('%s', '%s', %d, %s)," % (
-                item1, item2, item3, str({'use':attrDef.getUse()}))
+            item = "        MemberSpec_('%s', '%s', %d, %d, %s)," % (
+                item1, item2, item3, item4, repr({'use':attrDef.getUse()}))
         add(item)
     for child in element.getChildren():
         name = cleanupName(child.getCleanName())
-        item1 = name
+        if not name and child.type == AnyTypeIdentifier:
+            item1 = AnyTypeIdentifier
+        else:
+            item1 = name
         simplebase = child.getSimpleBase()
-        if simplebase:
+        if item1 == AnyTypeIdentifier:
+            item2 = "'%s'" % AnyTypeIdentifier
+        elif simplebase:
             if len(simplebase) == 1:
                 item2 = "'%s'" % (simplebase[0], )
             else:
@@ -4781,14 +4806,15 @@ def generateMemberSpec(wrt, element):
             item3 = 1
         else:
             item3 = 0
+        item4 = 1 if child.getOptional() else 0
         if generateDict:
-            item = "        '%s': MemberSpec_('%s', %s, %d, %s, %s)," % (
-                item1, item1, item2, item3, str(child.getAttrs()),
+            item = "        '%s': MemberSpec_('%s', %s, %d, %d, %s, %s)," % (
+                item1, item1, item2, item3, item4, repr(child.getAttrs()),
                 id(child.choice) if child.choice else None)
         else:
             #item = "        ('%s', '%s', %d)," % (item1, item2, item3, )
-            item = "        MemberSpec_('%s', %s, %d, %s, %s)," % (
-                item1, item2, item3, str(child.getAttrs()),
+            item = "        MemberSpec_('%s', %s, %d, %d, %s, %s)," % (
+                item1, item2, item3, item4, repr(child.getAttrs()),
                 id(child.choice) if child.choice else None)
         add(item)
     simplebase = element.getSimpleBase()
@@ -5028,7 +5054,34 @@ else:
 #xmldisable#    return doc
 
 #
-# User methods
+# Namespace prefix definition table (and other attributes, too)
+#
+# The module generatedsnamespaces, if it is importable, must contain
+# a dictionary named GeneratedsNamespaceDefs.  This Python dictionary
+# should map element type names (strings) to XML schema namespace prefix
+# definitions.  The export method for any class for which there is
+# a namespace prefix definition, will export that definition in the
+# XML representation of that element.  See the export method of
+# any generated element type class for a example of the use of this
+# table.
+# A sample table is:
+#
+#     # File: generatedsnamespaces.py
+#
+#     GenerateDSNamespaceDefs = {{
+#         "ElementtypeA": "http://www.xxx.com/namespaceA",
+#         "ElementtypeB": "http://www.xxx.com/namespaceB",
+#     }}
+#
+
+try:
+    from generatedsnamespaces import GenerateDSNamespaceDefs \
+as GenerateDSNamespaceDefs_
+except ImportError:
+    GenerateDSNamespaceDefs_ = {{}}
+
+#
+# The root super-class for element type classes
 #
 # Calls to the methods in these classes are generated by generateDS.py.
 # You can replace these methods by re-implementing the following class
@@ -5269,12 +5322,13 @@ class MixedContainer:
 
 
 class MemberSpec_(object):
-    def __init__(self, name='', data_type='', container=0, child_attrs=None, choice=None):
+    def __init__(self, name='', data_type='', container=0, optional=0, child_attrs=None, choice=None):
         self.name = name
         self.data_type = data_type
         self.container = container
         self.child_attrs = child_attrs
         self.choice = choice
+        self.optional = optional
     def set_name(self, name): self.name = name
     def get_name(self): return self.name
     def set_data_type(self, data_type): self.data_type = data_type
@@ -5293,6 +5347,8 @@ class MemberSpec_(object):
     def get_child_attrs(self): return self.child_attrs
     def set_choice(self, choice): self.choice = choice
     def get_choice(self): return self.choice
+    def set_optional(self, optional): self.optional = optional
+    def get_optional(self): return self.optional
 
 
 def _cast(typ, value):
@@ -6502,7 +6558,10 @@ def getUsedNamespacesDefs(element):
 
 def generateFromTree(wrt, prefix, elements, processed):
     for element in elements:
-        nameSpacesDef = getUsedNamespacesDefs(element)
+        if NoNameSpaceDefs:
+            nameSpacesDef = ""
+        else:
+            nameSpacesDef = getUsedNamespacesDefs(element)
         name = element.getCleanName()
         if 1:     # if name not in processed:
             processed.append(name)
@@ -6582,8 +6641,7 @@ def generate(outfileName, subclassFilename, behaviorFilename,
     MappingTypes.clear()
     #AlreadyGenerated = set()
     outfile = None
-    if outfileName:
-        outfile = makeFile(outfileName)
+    outfile = makeFile(outfileName)
     if not outfile:
         outfile = os.tmpfile()
     wrt = outfile.write
@@ -6610,6 +6668,9 @@ def generate(outfileName, subclassFilename, behaviorFilename,
         if not isNewState():
             sys.stderr.write('\n*** maxLoops exceeded.  Something is '
                              'wrong with --one-file-per-xsd.\n\n')
+            sys.stderr.write(
+                '*** Failed to process the following element '
+                'definitions:\n    %s\n' % (PostponedExtensions))
             sys.exit(1)
         element = PostponedExtensions.pop()
         parentName, parent = getParentName(element)
@@ -6717,9 +6778,18 @@ def is_builtin_simple_type(type_val):
 
 
 def parseAndGenerate(
-        outfileName, subclassFilename, prefix,
-        xschemaFileName, behaviorFilename, catalogFilename,
-        processIncludes, options, args, superModule='???'):
+        outfileName,
+        subclassFilename,
+        prefix,
+        xschemaFileName,
+        behaviorFilename,
+        catalogFilename,
+        processIncludes,
+        options,
+        noCollectIncludes,
+        noRedefineGroups,
+        args,
+        superModule='???'):
     global DelayedElements, DelayedElements_subclass, \
         AlreadyGenerated, SaxDelayedElements, \
         AlreadyGenerated_subclass, UserMethodsPath, UserMethodsModule, \
@@ -6754,7 +6824,10 @@ def parseAndGenerate(
                 infile, outfile,
                 inpath=xschemaFileName,
                 catalogpath=catalogFilename,
-                fixtypenames=FixTypeNames)
+                fixtypenames=FixTypeNames,
+                no_collect_includes=noCollectIncludes,
+                no_redefine_groups=noRedefineGroups,
+            )
             outfile.seek(0)
             infile = outfile
             SchemaLxmlTree = doc.getroot()
@@ -6982,7 +7055,7 @@ def main():
     global Force, GenerateProperties, SubclassSuffix, RootElement, \
         ValidatorBodiesBasePath, UseGetterSetter, \
         UserMethodsPath, XsdNameSpace, \
-        Namespacedef, NoDates, NoVersion, TEMPLATE_HEADER, \
+        Namespacedef, NoNameSpaceDefs, NoDates, NoVersion, TEMPLATE_HEADER, \
         TEMPLATE_MAIN, TEMPLATE_SUBCLASS_FOOTER, TEMPLATE_SUBCLASS_HEADER,\
         Dirpath, ExternalEncoding, MemberSpecs, NoQuestions, \
         ExportWrite, ExportEtree, ExportLiteral, XmlDisabled, \
@@ -7001,7 +7074,7 @@ def main():
                 'root-element=', 'super=',
                 'validator-bodies=', 'use-getter-setter=',
                 'user-methods=', 'no-process-includes', 'silence',
-                'namespacedef=', 'external-encoding=',
+                'namespacedef=', 'no-namespace-defs', 'external-encoding=',
                 'member-specs=', 'no-dates', 'no-versions',
                 'no-questions', 'session=', 'fix-type-names=',
                 'version', 'export=', 'disable-xml',
@@ -7010,6 +7083,7 @@ def main():
                 'preserve-cdata-tags', 'cleanup-name-list=',
                 'disable-generatedssuper-lookup',
                 'no-warnings',
+                'no-collect-includes', 'no-redefine-groups',
             ])
     except getopt.GetoptError:
         usage()
@@ -7021,6 +7095,7 @@ def main():
     superModule = '???'
     processIncludes = 1
     namespacedef = ''
+    NoNameSpaceDefs = False
     ExternalEncoding = sys.getdefaultencoding()
     NoDates = False
     NoVersion = False
@@ -7028,6 +7103,8 @@ def main():
     showVersion = False
     xschemaFileName = None
     catalogFilename = None
+    noCollectIncludes = False
+    noRedefineGroups = False
     for option in options:
         if option[0] == '--session':
             sessionFilename = option[1]
@@ -7160,6 +7237,8 @@ def main():
             outputText = False
         elif option[0] == "--namespacedef":
             namespacedef = option[1]
+        elif option[0] == "--no-namespace-defs":
+            NoNameSpaceDefs = True
         elif option[0] == '--external-encoding':
             ExternalEncoding = option[1]
         elif option[0] in ('-q', '--no-questions'):
@@ -7200,6 +7279,10 @@ def main():
             CleanupNameList = capture_cleanup_name_list(option[1])
         elif option[0] == '--no-warnings':
             NoWarnings = True
+        elif option[0] == '--no-collect-includes':
+            noCollectIncludes = True
+        elif option[0] == '--no-redefine-groups':
+            noRedefineGroups = True
     if showVersion:
         print('generateDS.py version %s' % VERSION)
         sys.exit(0)
@@ -7223,10 +7306,21 @@ def main():
     TEMPLATE_SUBCLASS_FOOTER = fixSilence(TEMPLATE_SUBCLASS_FOOTER, silent)
 
     load_config()
+    if outFilename is None and SingleFileOutput:
+        sys.exit('\nMissing required option "-o" (output module name)\n')
     parseAndGenerate(
-        outFilename, subclassFilename, prefix,
-        xschemaFileName, behaviorFilename, catalogFilename,
-        processIncludes, options, args, superModule=superModule)
+        outFilename,
+        subclassFilename,
+        prefix,
+        xschemaFileName,
+        behaviorFilename,
+        catalogFilename,
+        processIncludes,
+        options,
+        noCollectIncludes,
+        noRedefineGroups,
+        args,
+        superModule=superModule)
 
 
 if __name__ == '__main__':

@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.24b'
+VERSION = '2.27a'
 ##VERSION##
 
 CatalogDict = {}
@@ -73,27 +73,35 @@ def load_catalog(catalogpath):
 
 
 def process_include_files(
-        infile, outfile, inpath='', catalogpath=None,
-        fixtypenames=None):
+        infile, outfile, inpath='',
+        catalogpath=None,
+        fixtypenames=None,
+        no_collect_includes=False,
+        no_redefine_groups=False):
     load_catalog(catalogpath)
     options = Values({
         'force': False,
         'fixtypenames': fixtypenames,
+        'no_collect_includes': no_collect_includes,
+        'no_redefine_groups': no_redefine_groups,
     })
     doc = prep_schema_doc(infile, outfile, inpath, options)
     return doc
 
 
-def get_all_root_file_paths(infile, inpath='', catalogpath=None):
+def get_all_root_file_paths(
+        infile,
+        inpath='',
+        catalogpath=None,
+        shallow=False):
     load_catalog(catalogpath)
-
     doc1 = etree.parse(infile)
     root1 = doc1.getroot()
     rootPaths = []
     params = Params()
     params.parent_url = infile
     params.base_url = os.path.split(inpath)[0]
-    get_root_file_paths(root1, params, rootPaths)
+    get_root_file_paths(root1, params, rootPaths, shallow)
     rootPaths.append(inpath)
     return rootPaths
 
@@ -208,7 +216,11 @@ def resolve_ref(node, params, options):
             else:
                 if os.path.exists(locn):
                     infile = open(locn)
-                    content = infile.read().encode()
+                    unencoded_content = infile.read()
+                    if sys.version_info.major == 2:
+                        content = unencoded_content
+                    else:
+                        content = unencoded_content.encode()
                     infile.close()
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
@@ -257,26 +269,24 @@ def collect_inserts_aux(child, params, inserts, options):
     return roots
 
 
-def get_root_file_paths(node, params, rootPaths):
-
+def get_root_file_paths(node, params, rootPaths, shallow):
     namespace = node.nsmap[node.prefix]
     child_iter1 = node.iterfind('{%s}include' % (namespace, ))
     child_iter2 = node.iterfind('{%s}import' % (namespace, ))
     for child in itertools.chain(child_iter1, child_iter2):
-        get_root_file_paths_aux(child, params, rootPaths)
+        get_root_file_paths_aux(child, params, rootPaths, shallow)
 
 
-def get_root_file_paths_aux(child, params, rootPaths):
+def get_root_file_paths_aux(child, params, rootPaths, shallow):
     save_base_url = params.base_url
     path, _ = get_ref_info(child, params)
     string_content = resolve_ref(child, params, None)
     if string_content is not None:
-        root = etree.fromstring(string_content, base_url=params.base_url)
-        get_root_file_paths(root, params, rootPaths)
-
+        if not shallow:
+            root = etree.fromstring(string_content, base_url=params.base_url)
+            get_root_file_paths(root, params, rootPaths, shallow)
     if path is not None and path not in rootPaths:
         rootPaths.append(path)
-
     params.base_url = save_base_url
 
 
@@ -301,12 +311,16 @@ def prep_schema_doc(infile, outfile, inpath, options):
     params.parent_url = infile
     params.base_url = os.path.split(inpath)[0]
     inserts = []
-    collect_inserts(root1, params, inserts, options)
-    root2 = copy.copy(root1)
-    clear_includes_and_imports(root2)
-    for insert_node in inserts:
-        root2.append(insert_node)
-    process_groups(root2)
+    if not options.no_collect_includes:
+        collect_inserts(root1, params, inserts, options)
+        root2 = copy.copy(root1)
+        clear_includes_and_imports(root2)
+        for insert_node in inserts:
+            root2.append(insert_node)
+    else:
+        root2 = root1
+    if not options.no_redefine_groups:
+        process_groups(root2)
     raise_anon_complextypes(root2)
     fix_type_names(root2, options)
     doc2 = etree.ElementTree(root2)
@@ -600,6 +614,15 @@ def main():
         "--fix-type-names", action="store",
         dest="fixtypenames", default=None,
         help="Fix up (replace) complex type names.")
+    parser.add_option(
+        "--no-collect-includes", action="store_true",
+        dest="no_collect_includes", default=False,
+        help="do not process and insert schemas referenced by "
+             "xs:include and xs:import elements")
+    parser.add_option(
+        "--no-redefine-groups", action="store_true",
+        dest="no_redefine_groups", default=False,
+        help="do not pre-process and redefine xs:group elements")
     (options, args) = parser.parse_args()
     if len(args) == 2:
         inpath = args[0]
