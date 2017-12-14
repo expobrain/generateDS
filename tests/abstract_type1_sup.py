@@ -55,6 +55,18 @@ def parsexml_(infile, parser=None, **kwargs):
     doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
+def parsexmlstring_(instring, parser=None, **kwargs):
+    if parser is None:
+        # Use the lxml ElementTree compatible parser so that, e.g.,
+        #   we ignore comments.
+        try:
+            parser = etree_.ETCompatXMLParser()
+        except AttributeError:
+            # fallback to xml.etree
+            parser = etree_.XMLParser()
+    element = etree_.fromstring(instring, parser=parser, **kwargs)
+    return element
+
 #
 # Namespace prefix definition table (and other attributes, too)
 #
@@ -774,7 +786,7 @@ class carrierType(GeneratedsSuper):
         else:
             eol_ = ''
         for fleet_ in self.fleet:
-            fleet_.export(outfile, level, namespace_, name_='fleet', pretty_print=pretty_print)
+            fleet_.export(outfile, level, namespace_, pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1081,13 +1093,16 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    if sys.version_info.major == 2:
-        from StringIO import StringIO as IOBuffer
-    else:
-        from io import BytesIO as IOBuffer
+    '''Parse a string, create the object tree, and export it.
+
+    Arguments:
+    - inString -- A string.  This XML fragment should not start
+      with an XML declaration containing an encoding.
+    - silence -- A boolean.  If False, export the object.
+    Returns -- The root object in the tree.
+    '''
     parser = None
-    doc = parsexml_(IOBuffer(inString), parser)
-    rootNode = doc.getroot()
+    rootNode= parsexmlstring_(inString, parser)
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
         rootTag = 'carrierType'
@@ -1095,7 +1110,6 @@ def parseString(inString, silence=False):
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
-    doc = None
 ##     if not silence:
 ##         sys.stdout.write('<?xml version="1.0" ?>\n')
 ##         rootObj.export(

@@ -141,6 +141,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.4 (12/14/2017)
+
+- Fix for exporting the child of an element, when that child is
+  declared as an instance of an abstract type (abstract="true" in
+  the schema).  When exporting, the type of the child needs to be
+  determine at runtime through polymorphism.  This fix prevents the
+  containing (parent) object from passing the name of the abstract
+  class to the instance of the concrete class when calling its
+  export function.  Thanks to Rob Calvert for reporting this and for
+  his analysis that helped me understand the problem.
+
 Version 2.29.3 (12/11/2017)
 
 - Resolved an issue with a type casting problem that occurs when a

@@ -58,6 +58,18 @@ else:
 ##     doc = etree_.parse(infile, parser=parser, **kwargs)
 ##     return doc
 
+## def parsexmlstring_(instring, parser=None, **kwargs):
+##     if parser is None:
+##         # Use the lxml ElementTree compatible parser so that, e.g.,
+##         #   we ignore comments.
+##         try:
+##             parser = etree_.ETCompatXMLParser()
+##         except AttributeError:
+##             # fallback to xml.etree
+##             parser = etree_.XMLParser()
+##     element = etree_.fromstring(instring, parser=parser, **kwargs)
+##     return element
+
 #
 # Namespace prefix definition table (and other attributes, too)
 #

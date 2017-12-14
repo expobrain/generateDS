@@ -229,7 +229,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.3'
+VERSION = '2.29.4'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2751,14 +2751,14 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
                     wrt("%sfor %s_ in self.%s:\n" % (
                         fill, name, name,))
                     wrt("%s    %s_.export(outfile, level, namespace_, "
-                        "name_='%s', pretty_print=pretty_print)\n" % (
-                            fill, name, unmappedName, ))
+                        "pretty_print=pretty_print)\n" % (
+                            fill, name, ))
                 elif abstract_child:
                     wrt("%sif self.%s is not None:\n" % (fill, name, ))
                     wrt("%s    self.%s.export(outfile, level, "
-                        "namespace_, name_='%s', "
+                        "namespace_, "
                         "pretty_print=pretty_print)\n" % (
-                            fill, name, unmappedName, ))
+                            fill, name, ))
                 elif child.getMaxOccurs() > 1:
                     generateExportFn_2(
                         wrt, child, unmappedName, namespace, '    ')
@@ -5051,6 +5051,18 @@ else:
 #xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
 #xmldisable#    return doc
 
+#xmldisable#def parsexmlstring_(instring, parser=None, **kwargs):
+#xmldisable#    if parser is None:
+#xmldisable#        # Use the lxml ElementTree compatible parser so that, e.g.,
+#xmldisable#        #   we ignore comments.
+#xmldisable#        try:
+#xmldisable#            parser = etree_.ETCompatXMLParser()
+#xmldisable#        except AttributeError:
+#xmldisable#            # fallback to xml.etree
+#xmldisable#            parser = etree_.XMLParser()
+#xmldisable#    element = etree_.fromstring(instring, parser=parser, **kwargs)
+#xmldisable#    return element
+
 #
 # Namespace prefix definition table (and other attributes, too)
 #
@@ -5879,12 +5891,15 @@ def parseEtree(inFileName, silence=False):
 
 
 def parseString(inString, silence=False):
-    if sys.version_info.major == 2:
-        from StringIO import StringIO as IOBuffer
-    else:
-        from io import BytesIO as IOBuffer
-%(preserve_cdata_tags)s    doc = parsexml_(IOBuffer(inString), parser)
-    rootNode = doc.getroot()
+    '''Parse a string, create the object tree, and export it.
+
+    Arguments:
+    - inString -- A string.  This XML fragment should not start
+      with an XML declaration containing an encoding.
+    - silence -- A boolean.  If False, export the object.
+    Returns -- The root object in the tree.
+    '''
+%(preserve_cdata_tags)s    rootNode= parsexmlstring_(inString, parser)
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
         rootTag = '%(rootElement)s'
@@ -5892,7 +5907,6 @@ def parseString(inString, silence=False):
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
-    doc = None
 #silence#    if not silence:
 #silence#        sys.stdout.write('<?xml version="1.0" ?>\\n')
 #silence#        rootObj.export(
