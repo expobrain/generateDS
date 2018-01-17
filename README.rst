@@ -141,6 +141,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.5 (01/17/2017)
+
+- Fix to prevent infinite recursion that happens when a simple type
+  is defined whose name is the same as it's restriction base type
+  except for the namespace prefix.  Thanks to Nicolas de Saint Jorre
+  for reporting this problem and for providing a schema that
+  reproduces it.
+
 Version 2.29.4 (12/14/2017)
 
 - Fix for exporting the child of an element, when that child is

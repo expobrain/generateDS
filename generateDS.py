@@ -229,7 +229,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.4'
+VERSION = '2.29.5'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -4541,16 +4541,17 @@ def processValidatorBodyRestrictions(
         if base1 is not None:
             if ":" in base1:
                 base1 = base1.split(":")[1]
-            st1 = find_simple_type_def(tree, base1, None, None, ns, base)
-            if st1 is not None:
-                restrictions1 = st1.xpath(
-                    "./xs:restriction",
-                    namespaces=ns, n=stName, b=base)
-                if restrictions1:
-                    s2 = processValidatorBodyRestrictions(
-                        tree, '', restrictions1, st1, ns, stName,
-                        base1, patterns1)
-                    s1 += s2
+            if st.get('name') != base1:
+                st1 = find_simple_type_def(tree, base1, None, None, ns, base)
+                if st1 is not None:
+                    restrictions1 = st1.xpath(
+                        "./xs:restriction",
+                        namespaces=ns, n=stName, b=base)
+                    if restrictions1:
+                        s2 = processValidatorBodyRestrictions(
+                            tree, '', restrictions1, st1, ns, stName,
+                            base1, patterns1)
+                        s1 += s2
     return s1
 # end processValidatorBodyRestrictions
 
