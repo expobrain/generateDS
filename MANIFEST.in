@@ -1,4 +1,4 @@
-include README LICENSE MANIFEST.in
+include README.rst LICENSE MANIFEST.in
 include setup.py
 include generateDS.py
 include generateds_config.py

@@ -229,7 +229,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.4'
+VERSION = '2.29.6'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -261,6 +261,7 @@ NoNameSpaceDefs = False
 CleanupNameList = [(re.compile('[-:.]'), '_')]
 
 NamespacesDict = {}
+SchemaNamespaceDict = {}
 prefixToNamespaceMap = {}
 MappingTypes = {}
 Targetnamespace = ""
@@ -2810,6 +2811,9 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     childCount = countChildren(element, 0)
     name = element.getName()
     base = element.getBase()
+    ns_prefix = SchemaNamespaceDict.get(name)
+    if ns_prefix is not None:
+        namespace = ns_prefix + ':'
     wrt("    def export(self, outfile, level, namespace_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
         (namespace, name, nameSpacesDef))
@@ -4541,16 +4545,19 @@ def processValidatorBodyRestrictions(
         if base1 is not None:
             if ":" in base1:
                 base1 = base1.split(":")[1]
-            st1 = find_simple_type_def(tree, base1, None, None, ns, base)
-            if st1 is not None:
-                restrictions1 = st1.xpath(
-                    "./xs:restriction",
-                    namespaces=ns, n=stName, b=base)
-                if restrictions1:
-                    s2 = processValidatorBodyRestrictions(
-                        tree, '', restrictions1, st1, ns, stName,
-                        base1, patterns1)
-                    s1 += s2
+            # Check special case: simpletype that restricts xs:simpletype.
+            # Prevent infinite recursion.
+            if st.get('name') != base1:
+                st1 = find_simple_type_def(tree, base1, None, None, ns, base)
+                if st1 is not None:
+                    restrictions1 = st1.xpath(
+                        "./xs:restriction",
+                        namespaces=ns, n=stName, b=base)
+                    if restrictions1:
+                        s2 = processValidatorBodyRestrictions(
+                            tree, '', restrictions1, st1, ns, stName,
+                            base1, patterns1)
+                        s1 += s2
     return s1
 # end processValidatorBodyRestrictions
 
@@ -6847,7 +6854,8 @@ def parseAndGenerate(
     global DelayedElements, DelayedElements_subclass, \
         AlreadyGenerated, SaxDelayedElements, \
         AlreadyGenerated_subclass, UserMethodsPath, UserMethodsModule, \
-        SchemaLxmlTree, ModuleSuffix, UseSourceFileAsModuleName
+        SchemaLxmlTree, ModuleSuffix, UseSourceFileAsModuleName, \
+        SchemaNamespaceDict
     DelayedElements = set()
     DelayedElements_subclass = set()
     AlreadyGenerated = set()
@@ -6874,7 +6882,7 @@ def parseAndGenerate(
                 outfile = StringIO.StringIO()
             else:
                 outfile = io.StringIO()
-            doc = process_includes.process_include_files(
+            doc, SchemaNamespaceDict = process_includes.process_include_files(
                 infile, outfile,
                 inpath=xschemaFileName,
                 catalogpath=catalogFilename,
@@ -6911,7 +6919,7 @@ def parseAndGenerate(
                 outfile = StringIO.StringIO()
             else:
                 outfile = io.StringIO()
-            doc = process_includes.process_include_files(
+            doc, SchemaNamespaceDict = process_includes.process_include_files(
                 infile, outfile,
                 inpath=xschemaFileName,
                 catalogpath=catalogFilename,
