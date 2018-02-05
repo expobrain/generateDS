@@ -617,6 +617,7 @@ class GenTest(unittest.TestCase):
             '--member-specs=list -f '
             '-o tests/%s2_sup.py -s tests/%s2_sub.py '
             '--super=%s2_sup '
+            '--external-encoding="utf-8" '
             'tests/%s.xsd'
         )
         t_ = 'validate_simpletypes'

@@ -229,7 +229,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.6'
+VERSION = '2.29.7'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2812,8 +2812,11 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     name = element.getName()
     base = element.getBase()
     ns_prefix = SchemaNamespaceDict.get(name)
-    if ns_prefix is not None:
-        namespace = ns_prefix + ':'
+    if ns_prefix is not None and ns_prefix[0] is not None:
+        namespace = ns_prefix[0] + ':'
+        ns_def = 'xmlns:{}'.format(ns_prefix[0])
+        if ns_def not in nameSpacesDef:
+            nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
     wrt("    def export(self, outfile, level, namespace_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
         (namespace, name, nameSpacesDef))
@@ -4349,7 +4352,7 @@ def processValidatorBodyRestrictions(
         pats1 = restriction.xpath(
             "./xs:pattern/@value", namespaces=ns)
         if pats1:
-            pats2 = ['^{}$'.format(replaceVbars(p1)) for p1 in pats1]
+            pats2 = [u'^{}$'.format(replaceVbars(p1)) for p1 in pats1]
             patterns1.append(pats2)
         #
         # Check for and generate code for each possible type of restriction.

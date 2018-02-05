@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.6'
+VERSION = '2.29.7'
 ##VERSION##
 
 CatalogDict = {}
@@ -280,7 +280,7 @@ def update_ns_dict(root, ns_dict, options):
             names = ([item.get('name') for item in items1] +
                 [item.get('name') for item in items2])
             for name in names:
-                ns_dict[name] = prefix
+                ns_dict[name] = (prefix, namespace)
 
 
 def get_root_file_paths(node, params, rootPaths, shallow):

@@ -12,12 +12,13 @@
 #   ('-o', 'tests/validate_simpletypes2_sup.py')
 #   ('-s', 'tests/validate_simpletypes2_sub.py')
 #   ('--super', 'validate_simpletypes2_sup')
+#   ('--external-encoding', 'utf-8')
 #
 # Command line arguments:
 #   tests/validate_simpletypes.xsd
 #
 # Command line:
-#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/validate_simpletypes2_sup.py" -s "tests/validate_simpletypes2_sub.py" --super="validate_simpletypes2_sup" tests/validate_simpletypes.xsd
+#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/validate_simpletypes2_sup.py" -s "tests/validate_simpletypes2_sub.py" --super="validate_simpletypes2_sup" --external-encoding="utf-8" tests/validate_simpletypes.xsd
 #
 # Current working directory (os.getcwd()):
 #   generateds
@@ -40,7 +41,7 @@ def parsexml_(infile, parser=None, **kwargs):
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = 'utf-8'
 
 #
 # Data representation classes
@@ -55,8 +56,8 @@ supermod.containerType.subclass = containerTypeSub
 
 
 class simpleOneTypeSub(supermod.simpleOneType):
-    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
-        super(simpleOneTypeSub, self).__init__(integer_range_1_value_with_default, integer_range_1_value, pattern_value, token_enum_value, integer_range_incl_value, integer_range_excl_value, min_max_length_value, length_value, totalDigits_value, date_minincl_value, date_maxincl_value, date_minexcl_value, date_maxexcl_value, time_minincl_value, time_maxincl_value, time_minexcl_value, time_maxexcl_value, datetime_minincl_value, datetime_maxincl_value, datetime_minexcl_value, datetime_maxexcl_value, vbar_pattern_value, anonymous_float_value, primative_integer, primative_float, )
+    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
+        super(simpleOneTypeSub, self).__init__(integer_range_1_value_with_default, integer_range_1_value, pattern_value, token_enum_value, integer_range_incl_value, integer_range_excl_value, min_max_length_value, length_value, totalDigits_value, date_minincl_value, date_maxincl_value, date_minexcl_value, date_maxexcl_value, time_minincl_value, time_maxincl_value, time_minexcl_value, time_maxexcl_value, datetime_minincl_value, datetime_maxincl_value, datetime_minexcl_value, datetime_maxexcl_value, vbar_pattern_value, unicode_pattern_value, anonymous_float_value, primative_integer, primative_float, )
 supermod.simpleOneType.subclass = simpleOneTypeSub
 # end class simpleOneTypeSub
 

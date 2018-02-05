@@ -13,12 +13,13 @@
 #   ('-o', 'tests/validate_simpletypes2_sup.py')
 #   ('-s', 'tests/validate_simpletypes2_sub.py')
 #   ('--super', 'validate_simpletypes2_sup')
+#   ('--external-encoding', 'utf-8')
 #
 # Command line arguments:
 #   tests/validate_simpletypes.xsd
 #
 # Command line:
-#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/validate_simpletypes2_sup.py" -s "tests/validate_simpletypes2_sub.py" --super="validate_simpletypes2_sup" tests/validate_simpletypes.xsd
+#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/validate_simpletypes2_sup.py" -s "tests/validate_simpletypes2_sub.py" --super="validate_simpletypes2_sup" --external-encoding="utf-8" tests/validate_simpletypes.xsd
 #
 # Current working directory (os.getcwd()):
 #   generateds
@@ -451,7 +452,7 @@ except ImportError as exp:
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = 'utf-8'
 Tag_pattern_ = re_.compile(r'({.*})?(.*)')
 String_cleanup_pat_ = re_.compile(r"[\n\r\s]+")
 Namespace_extract_pat_ = re_.compile(r'{(.*)}(.*)')
@@ -900,13 +901,14 @@ class simpleOneType(GeneratedsSuper):
         MemberSpec_('datetime_minexcl_value', ['datetime_minexcl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_minexcl_value'}, None),
         MemberSpec_('datetime_maxexcl_value', ['datetime_maxexcl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_maxexcl_value'}, None),
         MemberSpec_('vbar_pattern_value', ['vbar_pattern_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'vbar_pattern_value'}, None),
+        MemberSpec_('unicode_pattern_value', ['unicode_pattern_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'unicode_pattern_value'}, None),
         MemberSpec_('anonymous_float_value', ['anonymous_float_valueType', 'xs:float'], 0, 0, {u'type': u'xs:float', u'name': u'anonymous_float_value'}, None),
         MemberSpec_('primative_integer', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'primative_integer'}, None),
         MemberSpec_('primative_float', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'primative_float'}, None),
     ]
     subclass = None
     superclass = None
-    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
+    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
         self.original_tagname_ = None
         self.integer_range_1_value_with_default = _cast(int, integer_range_1_value_with_default)
         self.integer_range_1_value = integer_range_1_value
@@ -987,6 +989,8 @@ class simpleOneType(GeneratedsSuper):
         self.datetime_maxexcl_value = initvalue_
         self.vbar_pattern_value = vbar_pattern_value
         self.validate_vbar_pattern_st(self.vbar_pattern_value)
+        self.unicode_pattern_value = unicode_pattern_value
+        self.validate_unicode_pattern_st(self.unicode_pattern_value)
         self.anonymous_float_value = anonymous_float_value
         self.validate_anonymous_float_valueType(self.anonymous_float_value)
         self.primative_integer = primative_integer
@@ -1044,6 +1048,8 @@ class simpleOneType(GeneratedsSuper):
     def set_datetime_maxexcl_value(self, datetime_maxexcl_value): self.datetime_maxexcl_value = datetime_maxexcl_value
     def get_vbar_pattern_value(self): return self.vbar_pattern_value
     def set_vbar_pattern_value(self, vbar_pattern_value): self.vbar_pattern_value = vbar_pattern_value
+    def get_unicode_pattern_value(self): return self.unicode_pattern_value
+    def set_unicode_pattern_value(self, unicode_pattern_value): self.unicode_pattern_value = unicode_pattern_value
     def get_anonymous_float_value(self): return self.anonymous_float_value
     def set_anonymous_float_value(self, anonymous_float_value): self.anonymous_float_value = anonymous_float_value
     def get_primative_integer(self): return self.primative_integer
@@ -1067,7 +1073,7 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_pattern_st_patterns_, ))
-    validate_pattern_st_patterns_ = [['^aaa.*zzz$', '^bbb.*xxx$'], ['^.*123.*$', '^.*456.*$']]
+    validate_pattern_st_patterns_ = [[u'^aaa.*zzz$', u'^bbb.*xxx$'], [u'^.*123.*$', u'^.*456.*$']]
     def validate_token_enum_st(self, value):
         # Validate type token_enum_st, a restriction on xs:NMTOKEN.
         if value is not None and Validate_simpletypes_:
@@ -1177,7 +1183,14 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_vbar_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_vbar_pattern_st_patterns_, ))
-    validate_vbar_pattern_st_patterns_ = [['^abcd$|^ef\\|gh$']]
+    validate_vbar_pattern_st_patterns_ = [[u'^abcd$|^ef\\|gh$']]
+    def validate_unicode_pattern_st(self, value):
+        # Validate type unicode_pattern_st, a restriction on xs:string.
+        if value is not None and Validate_simpletypes_:
+            if not self.gds_validate_simple_patterns(
+                    self.validate_unicode_pattern_st_patterns_, value):
+                warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_unicode_pattern_st_patterns_, ))
+    validate_unicode_pattern_st_patterns_ = [[u'^ab\xe7d$|^ef\\|gh$']]
     def validate_anonymous_float_valueType(self, value):
         # Validate type anonymous_float_valueType, a restriction on xs:float.
         if value is not None and Validate_simpletypes_:
@@ -1208,6 +1221,7 @@ class simpleOneType(GeneratedsSuper):
             self.datetime_minexcl_value is not None or
             self.datetime_maxexcl_value is not None or
             self.vbar_pattern_value is not None or
+            self.unicode_pattern_value is not None or
             self.anonymous_float_value is not None or
             self.primative_integer is not None or
             self.primative_float is not None
@@ -1308,6 +1322,9 @@ class simpleOneType(GeneratedsSuper):
         if self.vbar_pattern_value is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<vbar_pattern_value>%s</vbar_pattern_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.vbar_pattern_value), input_name='vbar_pattern_value')), eol_))
+        if self.unicode_pattern_value is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<unicode_pattern_value>%s</unicode_pattern_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.unicode_pattern_value), input_name='unicode_pattern_value')), eol_))
         if self.anonymous_float_value is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<anonymous_float_value>%s</anonymous_float_value>%s' % (self.gds_format_float(self.anonymous_float_value, input_name='anonymous_float_value'), eol_))
@@ -1473,6 +1490,12 @@ class simpleOneType(GeneratedsSuper):
             self.vbar_pattern_value = vbar_pattern_value_
             # validate type vbar_pattern_st
             self.validate_vbar_pattern_st(self.vbar_pattern_value)
+        elif nodeName_ == 'unicode_pattern_value':
+            unicode_pattern_value_ = child_.text
+            unicode_pattern_value_ = self.gds_validate_string(unicode_pattern_value_, node, 'unicode_pattern_value')
+            self.unicode_pattern_value = unicode_pattern_value_
+            # validate type unicode_pattern_st
+            self.validate_unicode_pattern_st(self.unicode_pattern_value)
         elif nodeName_ == 'anonymous_float_value':
             sval_ = child_.text
             try:

@@ -141,7 +141,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
-Version 2.29.6 (01/22/2017)
+Version 2.29.7 (02/05/2018)
+
+- Fix for unicode error that occurs during simpleType validation
+  under Python 2.7.  Thanks to Juha Tuomala for reporting this issue.
+- Added a test for xs:simpleType validation that uses a pattern
+  containing a multi-byte character.
+
+Version 2.29.6 (01/22/2018)
 
 - Fix to generation of namespace prefix in export methods.  With
   this fix, process_includes.py collects information about which
@@ -151,7 +158,7 @@ Version 2.29.6 (01/22/2017)
   Calvert for identifying this problem and for helping me to
   understand it.
 
-Version 2.29.5 (01/17/2017)
+Version 2.29.5 (01/17/2018)
 
 - Fix to prevent infinite recursion that happens when a simple type
   is defined whose name is the same as it's restriction base type
