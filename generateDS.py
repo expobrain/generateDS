@@ -108,6 +108,9 @@ Options:
                                      to XML)
                              Example: "write etree"
                              Default: "write"
+    --always-export-default  Always export elements and attributes that
+                             a default value even when the current value
+                             is equal to the default.  Default: False.
     --disable-generatedssuper-lookup
                              Disables the generatetion of the lookup logic for
                              presence of an external module from which to load
@@ -254,6 +257,7 @@ Force = False
 NoQuestions = False
 NoDates = False
 NoVersion = False
+AlwaysExportDefault = False
 Dirpath = []
 ExternalEncoding = sys.getdefaultencoding()
 Namespacedef = ''
@@ -2255,7 +2259,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
     # fix_simpletype
     default = child.getDefault()
     if child_type == DateTimeType:
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != "%s":\n' % (
@@ -2267,7 +2271,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
             (fill, child_ns, name, child_ns, name, mappedName, name, )
         wrt(s1)
     elif child_type == DateType:
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != "%s":\n' % (
@@ -2279,7 +2283,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
             (fill, child_ns, name, child_ns, name, mappedName, name, )
         wrt(s1)
     elif child_type == TimeType:
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != "%s":\n' % (
@@ -2293,7 +2297,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
     elif (child_type in StringType or
             child_type == TokenType or
             child_type in DateTimeGroupType):
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != "%s":\n' % (
@@ -2319,7 +2323,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
             child_type == NonPositiveIntegerType or
             child_type == NegativeIntegerType or
             child_type == NonNegativeIntegerType):
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != %s:\n' % (
@@ -2337,7 +2341,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
                 (fill, child_ns, name, child_ns, name, mappedName, name, )
         wrt(s1)
     elif child_type == BooleanType:
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             if default == 'true':
@@ -2363,7 +2367,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
         wrt(s1)
     elif (child_type == FloatType or
             child_type == DecimalType):
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != %s:\n' % (
@@ -2381,7 +2385,7 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
                 (fill, child_ns, name, child_ns, name, mappedName, name, )
         wrt(s1)
     elif child_type == DoubleType:
-        if default is None:
+        if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
             wrt('%s        if self.%s != %s:\n' % (
@@ -2627,7 +2631,7 @@ def generateExportAttributes(wrt, element, hasAttributes):
             cleanName = mapName(cleanupName(name))
             if True:            # attrDef.getUse() == 'optional':
                 default = attrDef.getDefault()
-                if default is None:
+                if default is None or AlwaysExportDefault:
                     s1 = '        if self.%s is not None and ' % (cleanName, )
                 else:
                     attr_type = attrDef.getBaseType()
@@ -7153,7 +7157,7 @@ def main():
         ModuleSuffix, UseOldSimpleTypeValidators, \
         UseGeneratedssuperLookup, UseSourceFileAsModuleName, \
         PreserveCdataTags, CleanupNameList, \
-        NoWarnings
+        NoWarnings, AlwaysExportDefault
     outputText = True
     args = sys.argv[1:]
     try:
@@ -7175,6 +7179,7 @@ def main():
                 'use-source-file-as-module-name',
                 'no-warnings',
                 'no-collect-includes', 'no-redefine-groups',
+                'always-export-default',
             ])
     except getopt.GetoptError:
         usage()
@@ -7191,6 +7196,7 @@ def main():
     NoDates = False
     NoVersion = False
     NoQuestions = False
+    AlwaysExportDefault = False
     showVersion = False
     xschemaFileName = None
     catalogFilename = None
@@ -7376,6 +7382,8 @@ def main():
             noCollectIncludes = True
         elif option[0] == '--no-redefine-groups':
             noRedefineGroups = True
+        elif option[0] == '--always-export-default':
+            AlwaysExportDefault = True
     if showVersion:
         print('generateDS.py version %s' % VERSION)
         sys.exit(0)

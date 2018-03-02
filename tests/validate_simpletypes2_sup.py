@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/validate_simpletypes2_sup.py" -s "tests/validate_simpletypes2_sub.py" --super="validate_simpletypes2_sup" --external-encoding="utf-8" tests/validate_simpletypes.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   generateds-nodefault
 #
 
 import sys

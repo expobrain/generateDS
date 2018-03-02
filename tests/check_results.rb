@@ -61,6 +61,8 @@ $commands = [
   "diff -u defaults_coverage1_sup.py defaults_coverage2_sup.py",
   "diff -u defaults_cases1_sub.py defaults_cases2_sub.py",
   "diff -u defaults_cases1_sup.py defaults_cases2_sup.py",
+  "diff -u defaults_cases_always1_sub.py defaults_cases_always2_sub.py",
+  "diff -u defaults_cases_always1_sup.py defaults_cases_always2_sup.py",
   "diff -u cleanupname1_sub.py cleanupname2_sub.py",
   "diff -u cleanupname1_sup.py cleanupname2_sup.py",
   "diff -u rem_dup_elems1_sub.py rem_dup_elems2_sub.py",

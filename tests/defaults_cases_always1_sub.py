@@ -9,15 +9,15 @@
 #   ('--no-versions', '')
 #   ('--member-specs', 'list')
 #   ('-f', '')
-#   ('-o', 'tests/mixedcontent2_sup.py')
-#   ('-s', 'tests/mixedcontent2_sub.py')
-#   ('--super', 'mixedcontent2_sup')
+#   ('-o', 'tests/defaults_cases_always2_sup.py')
+#   ('-s', 'tests/defaults_cases_always2_sub.py')
+#   ('--super', 'defaults_cases_always2_sup')
 #
 # Command line arguments:
-#   tests/mixedcontent.xsd
+#   tests/defaults_cases_always.xsd
 #
 # Command line:
-#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/mixedcontent2_sup.py" -s "tests/mixedcontent2_sub.py" --super="mixedcontent2_sup" tests/mixedcontent.xsd
+#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/defaults_cases_always2_sup.py" -s "tests/defaults_cases_always2_sub.py" --super="defaults_cases_always2_sup" tests/defaults_cases_always.xsd
 #
 # Current working directory (os.getcwd()):
 #   generateds-nodefault
@@ -26,7 +26,7 @@
 import sys
 from lxml import etree as etree_
 
-import mixedcontent2_sup as supermod
+import defaults_cases_always2_sup as supermod
 
 def parsexml_(infile, parser=None, **kwargs):
     if parser is None:
@@ -47,39 +47,25 @@ ExternalEncoding = 'ascii'
 #
 
 
-class rootTypeSub(supermod.rootType):
-    def __init__(self, markup=None):
-        super(rootTypeSub, self).__init__(markup, )
-supermod.rootType.subclass = rootTypeSub
-# end class rootTypeSub
+class DefaultTypesSub(supermod.DefaultTypes):
+    def __init__(self, default1=None, default2=None):
+        super(DefaultTypesSub, self).__init__(default1, default2, )
+supermod.DefaultTypes.subclass = DefaultTypesSub
+# end class DefaultTypesSub
 
 
-class markupTypeSub(supermod.markupType):
-    def __init__(self, embedded=None, nested=None, valueOf_=None, mixedclass_=None, content_=None):
-        super(markupTypeSub, self).__init__(embedded, nested, valueOf_, mixedclass_, content_, )
-supermod.markupType.subclass = markupTypeSub
-# end class markupTypeSub
+class DefaultType1Sub(supermod.DefaultType1):
+    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32):
+        super(DefaultType1Sub, self).__init__(normal01, normal02, default01, default02, normal03, normal04, default03, default04, )
+supermod.DefaultType1.subclass = DefaultType1Sub
+# end class DefaultType1Sub
 
 
-class nestedTypeSub(supermod.nestedType):
-    def __init__(self, nested1=None, nested2=None, nested3=None):
-        super(nestedTypeSub, self).__init__(nested1, nested2, nested3, )
-supermod.nestedType.subclass = nestedTypeSub
-# end class nestedTypeSub
-
-
-class nested1TypeSub(supermod.nested1Type):
-    def __init__(self, nestedA1=None, nestedA2=None):
-        super(nested1TypeSub, self).__init__(nestedA1, nestedA2, )
-supermod.nested1Type.subclass = nested1TypeSub
-# end class nested1TypeSub
-
-
-class nested1ATypeSub(supermod.nested1AType):
-    def __init__(self, nestedB1=None, nestedB2=None):
-        super(nested1ATypeSub, self).__init__(nestedB1, nestedB2, )
-supermod.nested1AType.subclass = nested1ATypeSub
-# end class nested1ATypeSub
+class DefaultType2Sub(supermod.DefaultType2):
+    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None):
+        super(DefaultType2Sub, self).__init__(attrdefault01, attrdefault02, attrnormal01, attrnormal02, )
+supermod.DefaultType2.subclass = DefaultType2Sub
+# end class DefaultType2Sub
 
 
 def get_root_tag(node):
@@ -97,8 +83,8 @@ def parse(inFilename, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'rootType'
-        rootClass = supermod.rootType
+        rootTag = 'DefaultTypes'
+        rootClass = supermod.DefaultTypes
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -118,8 +104,8 @@ def parseEtree(inFilename, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'rootType'
-        rootClass = supermod.rootType
+        rootTag = 'DefaultTypes'
+        rootClass = supermod.DefaultTypes
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -146,8 +132,8 @@ def parseString(inString, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'rootType'
-        rootClass = supermod.rootType
+        rootTag = 'DefaultTypes'
+        rootClass = supermod.DefaultTypes
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -166,15 +152,15 @@ def parseLiteral(inFilename, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'rootType'
-        rootClass = supermod.rootType
+        rootTag = 'DefaultTypes'
+        rootClass = supermod.DefaultTypes
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     if not silence:
-        sys.stdout.write('#from mixedcontent2_sup import *\n\n')
-        sys.stdout.write('import mixedcontent2_sup as model_\n\n')
+        sys.stdout.write('#from defaults_cases_always2_sup import *\n\n')
+        sys.stdout.write('import defaults_cases_always2_sup as model_\n\n')
         sys.stdout.write('rootObj = model_.rootClass(\n')
         rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
         sys.stdout.write(')\n')
