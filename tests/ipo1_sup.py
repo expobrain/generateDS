@@ -1379,7 +1379,7 @@ class UKAddress(Address):
     ]
     subclass = None
     superclass = Address
-    def __init__(self, name=None, street=None, city=None, exportCode=None, postcode=None):
+    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None):
         self.original_tagname_ = None
         super(UKAddress, self).__init__(name, street, city, )
         self.exportCode = _cast(int, exportCode)
@@ -1430,7 +1430,7 @@ class UKAddress(Address):
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='UKAddress'):
         super(UKAddress, self).exportAttributes(outfile, level, already_processed, namespace_, name_='UKAddress')
-        if self.exportCode is not None and 'exportCode' not in already_processed:
+        if self.exportCode != 1 and 'exportCode' not in already_processed:
             already_processed.add('exportCode')
             outfile.write(' exportCode="%s"' % self.gds_format_integer(self.exportCode, input_name='exportCode'))
     def exportChildren(self, outfile, level, namespace_='ipo:', name_='UKAddress', fromsubclass_=False, pretty_print=True):

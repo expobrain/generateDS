@@ -141,6 +141,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.8 (03/02/2018)
+
+- Added a change so that an attribute specified as `fixed` will be
+  handled in the same way as one specified as `default`.  This
+  leaves it to the user to validate and enforce the `fixed`
+  restriction in some other way, e.g. through use of an XML
+  validating parser such as `xmllint`.  Thanks to Sanja Abbott for
+  suggesting this enhancement.
+- Various fixes for string/unicode differences across Python 2 and
+  Python 3.
+
 Version 2.29.7 (02/05/2018)
 
 - Fix for unicode error that occurs during simpleType validation

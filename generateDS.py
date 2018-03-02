@@ -229,7 +229,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.7'
+VERSION = '2.29.8'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -1431,11 +1431,15 @@ class XschemaAttribute:
             name,
             data_type='xs:string',
             use='optional',
-            default=None):
+            default=None,
+            fixed=None):
         self.name = name
         self.data_type = data_type
         self.use = use
         self.default = default
+        # treat `fixed` the same as `default`.
+        if fixed is not None:
+            self.default = fixed
         # Enumeration values for the attribute.
         self.values = list()
         # If we change the name, e.g. because an attribute and child have
@@ -1695,13 +1699,19 @@ class XschemaHandler(handler.ContentHandler):
                 default = attrs['default']
             else:
                 default = None
+            if 'fixed' in attrs:
+                fixed = attrs['fixed']
+            else:
+                fixed = None
             if self.stack[-1].attributeGroup:
                 # Add this attribute to a current attributeGroup.
-                attribute = XschemaAttribute(name, data_type, use, default)
+                attribute = XschemaAttribute(
+                    name, data_type, use, default, fixed)
                 self.stack[-1].attributeGroup.add(name, attribute)
             else:
                 # Add this attribute to the element/complexType.
-                attribute = XschemaAttribute(name, data_type, use, default)
+                attribute = XschemaAttribute(
+                    name, data_type, use, default, fixed)
                 self.stack[-1].attributeDefs[name] = attribute
                 self.stack[-1].attributeDefsList.append(name)
             self.lastAttribute = attribute
@@ -2651,6 +2661,8 @@ def generateExportAttributes(wrt, element, hasAttributes):
                         s1 = '        if self.%s != "%s" and ' % (
                             cleanName, default, )
                 s1 += "'%s' not in already_processed:\n" % (cleanName, )
+                if sys.version_info.major == 2:
+                    s1 = s1.encode('utf-8')
                 wrt(s1)
                 wrt("            already_processed.add('%s')\n" % (
                     cleanName, ))
@@ -2707,6 +2719,8 @@ def generateExportAttributes(wrt, element, hasAttributes):
                 s1 = '''%s        outfile.write(' %s=%%s' %% ''' \
                     '''(quote_attrib(self.%s), ))\n''' % (
                         indent, orig_name, cleanName, )
+            if sys.version_info.major == 2:
+                s1 = s1.encode('utf-8')
             wrt(s1)
     if element.getExtended():
         wrt("        if self.extensiontype_ is not None and 'xsi:type' "
@@ -2810,6 +2824,10 @@ def getParentName(element):
 def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     childCount = countChildren(element, 0)
     name = element.getName()
+    if sys.version_info.major == 2:
+        encodedname = name.encode('utf-8')
+    else:
+        encodedname = name
     base = element.getBase()
     ns_prefix = SchemaNamespaceDict.get(name)
     if ns_prefix is not None and ns_prefix[0] is not None:
@@ -2819,9 +2837,9 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
             nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
     wrt("    def export(self, outfile, level, namespace_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
-        (namespace, name, nameSpacesDef))
+        (namespace, encodedname, nameSpacesDef))
     wrt("        imported_ns_def_ = GenerateDSNamespaceDefs_.get"
-        "('%s')\n" % (name, ))
+        "('%s')\n" % (encodedname, ))
     wrt("        if imported_ns_def_ is not None:\n")
     wrt("            namespacedef_ = imported_ns_def_\n")
     wrt('        if pretty_print:\n')
@@ -2837,7 +2855,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     wrt("        already_processed = set()\n")
     wrt("        self.exportAttributes(outfile, level, "
         "already_processed, namespace_, name_='%s')\n" %
-        (name, ))
+        (encodedname, ))
     # fix_abstract
     if base and base in ElementDict:
         base_element = ElementDict[base]
@@ -2863,7 +2881,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
             wrt("            outfile.write('>%s' % (eol_, ))\n")
         wrt("            self.exportChildren(outfile, level + 1, "
             "namespace_='%s', name_='%s', pretty_print=pretty_print)\n" %
-            (namespace, name))
+            (namespace, encodedname))
         # Put a condition on the indent to require children.
         if childCount != 0:
             wrt('            showIndent(outfile, level, pretty_print)\n')
@@ -2873,7 +2891,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         wrt("            outfile.write('/>%s' % (eol_, ))\n")
     wrt("    def exportAttributes(self, outfile, level, "
         "already_processed, namespace_='%s', name_='%s'):\n" %
-        (namespace, name, ))
+        (namespace, encodedname, ))
     hasAttributes = 0
     if element.getAnyAttribute():
         wrt("""\
@@ -2914,13 +2932,13 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         elName = element.getCleanName()
         wrt("        super(%s%s, self).exportAttributes("
             "outfile, level, already_processed, namespace_, name_='%s')\n" %
-            (prefix, elName, name, ))
+            (prefix, elName, encodedname, ))
     hasAttributes += generateExportAttributes(wrt, element, hasAttributes)
     if hasAttributes == 0:
         wrt("        pass\n")
     wrt("    def exportChildren(self, outfile, level, namespace_='%s', "
         "name_='%s', fromsubclass_=False, pretty_print=True):\n" %
-        (namespace, name, ))
+        (namespace, encodedname, ))
     hasChildren = 0
     # Generate call to exportChildren in the superclass only if it is
     #  an extension, but *not* if it is a restriction.
@@ -4120,6 +4138,8 @@ def generateCtor(wrt, prefix, element):
     elName = element.getCleanName()
     childCount = countChildren(element, 0)
     s2 = buildCtorArgs_multilevel(element, childCount)
+    if sys.version_info.major == 2:
+        s2 = s2.encode('utf-8')
     wrt('    def __init__(self%s):\n' % s2)
     # Save the original tag name.  This is needed when there is a
     # xs:substitutionGroup and we later (e.g. during export) do not know
@@ -7118,8 +7138,12 @@ def capture_cleanup_name_list(option):
                     'Option --cleanup-name-list contains '
                     'invalid element.')
         try:
+            if sys.version_info.major == 2:
+                target = cleanup_pair[0].decode('utf-8')
+            else:
+                target = cleanup_pair[0]
             cleanupNameList.append(
-                (re.compile(cleanup_pair[0]), cleanup_pair[1]))
+                (re.compile(target), cleanup_pair[1]))
         except Exception:
             raise RuntimeError(
                 'Option --cleanup-name-list contains invalid '

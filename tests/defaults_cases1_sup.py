@@ -725,10 +725,12 @@ class DefaultTypes(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('default1', 'DefaultType1', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'DefaultType1', u'name': u'default1'}, None),
         MemberSpec_('default2', 'DefaultType2', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'DefaultType2', u'name': u'default2'}, None),
+        MemberSpec_('fixed1', 'FixedType1', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'FixedType1', u'name': u'fixed1'}, None),
+        MemberSpec_('fixed2', 'FixedType2', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'FixedType2', u'name': u'fixed2'}, None),
     ]
     subclass = None
     superclass = None
-    def __init__(self, default1=None, default2=None):
+    def __init__(self, default1=None, default2=None, fixed1=None, fixed2=None):
         self.original_tagname_ = None
         if default1 is None:
             self.default1 = []
@@ -738,6 +740,14 @@ class DefaultTypes(GeneratedsSuper):
             self.default2 = []
         else:
             self.default2 = default2
+        if fixed1 is None:
+            self.fixed1 = []
+        else:
+            self.fixed1 = fixed1
+        if fixed2 is None:
+            self.fixed2 = []
+        else:
+            self.fixed2 = fixed2
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
@@ -759,10 +769,22 @@ class DefaultTypes(GeneratedsSuper):
     def add_default2(self, value): self.default2.append(value)
     def insert_default2_at(self, index, value): self.default2.insert(index, value)
     def replace_default2_at(self, index, value): self.default2[index] = value
+    def get_fixed1(self): return self.fixed1
+    def set_fixed1(self, fixed1): self.fixed1 = fixed1
+    def add_fixed1(self, value): self.fixed1.append(value)
+    def insert_fixed1_at(self, index, value): self.fixed1.insert(index, value)
+    def replace_fixed1_at(self, index, value): self.fixed1[index] = value
+    def get_fixed2(self): return self.fixed2
+    def set_fixed2(self, fixed2): self.fixed2 = fixed2
+    def add_fixed2(self, value): self.fixed2.append(value)
+    def insert_fixed2_at(self, index, value): self.fixed2.insert(index, value)
+    def replace_fixed2_at(self, index, value): self.fixed2[index] = value
     def hasContent_(self):
         if (
             self.default1 or
-            self.default2
+            self.default2 or
+            self.fixed1 or
+            self.fixed2
         ):
             return True
         else:
@@ -799,6 +821,10 @@ class DefaultTypes(GeneratedsSuper):
             default1_.export(outfile, level, namespace_, name_='default1', pretty_print=pretty_print)
         for default2_ in self.default2:
             default2_.export(outfile, level, namespace_, name_='default2', pretty_print=pretty_print)
+        for fixed1_ in self.fixed1:
+            fixed1_.export(outfile, level, namespace_, name_='fixed1', pretty_print=pretty_print)
+        for fixed2_ in self.fixed2:
+            fixed2_.export(outfile, level, namespace_, name_='fixed2', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -819,6 +845,16 @@ class DefaultTypes(GeneratedsSuper):
             obj_.build(child_)
             self.default2.append(obj_)
             obj_.original_tagname_ = 'default2'
+        elif nodeName_ == 'fixed1':
+            obj_ = FixedType1.factory()
+            obj_.build(child_)
+            self.fixed1.append(obj_)
+            obj_.original_tagname_ = 'fixed1'
+        elif nodeName_ == 'fixed2':
+            obj_ = FixedType2.factory()
+            obj_.build(child_)
+            self.fixed2.append(obj_)
+            obj_.original_tagname_ = 'fixed2'
 # end class DefaultTypes
 
 
@@ -1118,6 +1154,302 @@ class DefaultType2(GeneratedsSuper):
 # end class DefaultType2
 
 
+class FixedType1(GeneratedsSuper):
+    member_data_items_ = [
+        MemberSpec_('normal01', 'xs:integer', 0, 1, {u'type': u'xs:integer', u'name': u'normal01', u'minOccurs': u'0'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 1, {u'type': u'xs:string', u'name': u'normal02', u'minOccurs': u'0'}, None),
+        MemberSpec_('fixed01', 'xs:integer', 0, 1, {u'fixed': u'23', u'type': u'xs:integer', u'name': u'fixed01', u'minOccurs': u'0'}, None),
+        MemberSpec_('fixed02', 'xs:string', 0, 1, {u'fixed': u'Peach', u'type': u'xs:string', u'name': u'fixed02', u'minOccurs': u'0'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'normal03', u'minOccurs': u'1'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 0, {u'type': u'xs:double', u'name': u'normal04', u'minOccurs': u'1'}, None),
+        MemberSpec_('fixed03', 'xs:float', 0, 0, {u'fixed': u'23.45', u'type': u'xs:float', u'name': u'fixed03', u'minOccurs': u'1'}, None),
+        MemberSpec_('fixed04', 'xs:double', 0, 0, {u'fixed': u'54.32', u'type': u'xs:double', u'name': u'fixed04', u'minOccurs': u'1'}, None),
+    ]
+    subclass = None
+    superclass = None
+    def __init__(self, normal01=None, normal02=None, fixed01=None, fixed02=None, normal03=None, normal04=None, fixed03=None, fixed04=None):
+        self.original_tagname_ = None
+        self.normal01 = normal01
+        self.normal02 = normal02
+        self.fixed01 = fixed01
+        self.fixed02 = fixed02
+        self.normal03 = normal03
+        self.normal04 = normal04
+        self.fixed03 = fixed03
+        self.fixed04 = fixed04
+    def factory(*args_, **kwargs_):
+        if CurrentSubclassModule_ is not None:
+            subclass = getSubclassFromModule_(
+                CurrentSubclassModule_, FixedType1)
+            if subclass is not None:
+                return subclass(*args_, **kwargs_)
+        if FixedType1.subclass:
+            return FixedType1.subclass(*args_, **kwargs_)
+        else:
+            return FixedType1(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_normal01(self): return self.normal01
+    def set_normal01(self, normal01): self.normal01 = normal01
+    def get_normal02(self): return self.normal02
+    def set_normal02(self, normal02): self.normal02 = normal02
+    def get_fixed01(self): return self.fixed01
+    def set_fixed01(self, fixed01): self.fixed01 = fixed01
+    def get_fixed02(self): return self.fixed02
+    def set_fixed02(self, fixed02): self.fixed02 = fixed02
+    def get_normal03(self): return self.normal03
+    def set_normal03(self, normal03): self.normal03 = normal03
+    def get_normal04(self): return self.normal04
+    def set_normal04(self, normal04): self.normal04 = normal04
+    def get_fixed03(self): return self.fixed03
+    def set_fixed03(self, fixed03): self.fixed03 = fixed03
+    def get_fixed04(self): return self.fixed04
+    def set_fixed04(self, fixed04): self.fixed04 = fixed04
+    def hasContent_(self):
+        if (
+            self.normal01 is not None or
+            self.normal02 is not None or
+            self.fixed01 is not None or
+            self.fixed02 is not None or
+            self.normal03 is not None or
+            self.normal04 is not None or
+            self.fixed03 is not None or
+            self.fixed04 is not None
+        ):
+            return True
+        else:
+            return False
+    def export(self, outfile, level, namespace_='', name_='FixedType1', namespacedef_='', pretty_print=True):
+        imported_ns_def_ = GenerateDSNamespaceDefs_.get('FixedType1')
+        if imported_ns_def_ is not None:
+            namespacedef_ = imported_ns_def_
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.original_tagname_ is not None:
+            name_ = self.original_tagname_
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = set()
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='FixedType1')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_='', name_='FixedType1', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='FixedType1'):
+        pass
+    def exportChildren(self, outfile, level, namespace_='', name_='FixedType1', fromsubclass_=False, pretty_print=True):
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.normal01 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<normal01>%s</normal01>%s' % (self.gds_format_integer(self.normal01, input_name='normal01'), eol_))
+        if self.normal02 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<normal02>%s</normal02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.normal02), input_name='normal02')), eol_))
+        if self.fixed01 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<fixed01>%s</fixed01>%s' % (self.gds_format_integer(self.fixed01, input_name='fixed01'), eol_))
+        if self.fixed02 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<fixed02>%s</fixed02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.fixed02), input_name='fixed02')), eol_))
+        if self.normal03 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<normal03>%s</normal03>%s' % (self.gds_format_float(self.normal03, input_name='normal03'), eol_))
+        if self.normal04 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<normal04>%s</normal04>%s' % (self.gds_format_double(self.normal04, input_name='normal04'), eol_))
+        if self.fixed03 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<fixed03>%s</fixed03>%s' % (self.gds_format_float(self.fixed03, input_name='fixed03'), eol_))
+        if self.fixed04 is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<fixed04>%s</fixed04>%s' % (self.gds_format_double(self.fixed04, input_name='fixed04'), eol_))
+    def build(self, node):
+        already_processed = set()
+        self.buildAttributes(node, node.attrib, already_processed)
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+        return self
+    def buildAttributes(self, node, attrs, already_processed):
+        pass
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        if nodeName_ == 'normal01':
+            sval_ = child_.text
+            try:
+                ival_ = int(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_validate_integer(ival_, node, 'normal01')
+            self.normal01 = ival_
+        elif nodeName_ == 'normal02':
+            normal02_ = child_.text
+            normal02_ = self.gds_validate_string(normal02_, node, 'normal02')
+            self.normal02 = normal02_
+        elif nodeName_ == 'fixed01':
+            sval_ = child_.text
+            try:
+                ival_ = int(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_validate_integer(ival_, node, 'fixed01')
+            self.fixed01 = ival_
+        elif nodeName_ == 'fixed02':
+            fixed02_ = child_.text
+            fixed02_ = self.gds_validate_string(fixed02_, node, 'fixed02')
+            self.fixed02 = fixed02_
+        elif nodeName_ == 'normal03':
+            sval_ = child_.text
+            try:
+                fval_ = float(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_validate_float(fval_, node, 'normal03')
+            self.normal03 = fval_
+        elif nodeName_ == 'normal04':
+            sval_ = child_.text
+            try:
+                fval_ = float(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_validate_float(fval_, node, 'normal04')
+            self.normal04 = fval_
+        elif nodeName_ == 'fixed03':
+            sval_ = child_.text
+            try:
+                fval_ = float(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_validate_float(fval_, node, 'fixed03')
+            self.fixed03 = fval_
+        elif nodeName_ == 'fixed04':
+            sval_ = child_.text
+            try:
+                fval_ = float(sval_)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_validate_float(fval_, node, 'fixed04')
+            self.fixed04 = fval_
+# end class FixedType1
+
+
+class FixedType2(GeneratedsSuper):
+    member_data_items_ = [
+        MemberSpec_('attrfixed01', 'xs:string', 0, 1, {'use': 'optional'}),
+        MemberSpec_('attrfixed02', 'xs:integer', 0, 1, {'use': 'optional'}),
+        MemberSpec_('attrnormal01', 'xs:string', 0, 1, {'use': 'optional'}),
+        MemberSpec_('attrnormal02', 'xs:integer', 0, 1, {'use': 'optional'}),
+    ]
+    subclass = None
+    superclass = None
+    def __init__(self, attrfixed01='abcd', attrfixed02=14, attrnormal01=None, attrnormal02=None):
+        self.original_tagname_ = None
+        self.attrfixed01 = _cast(None, attrfixed01)
+        self.attrfixed02 = _cast(int, attrfixed02)
+        self.attrnormal01 = _cast(None, attrnormal01)
+        self.attrnormal02 = _cast(int, attrnormal02)
+    def factory(*args_, **kwargs_):
+        if CurrentSubclassModule_ is not None:
+            subclass = getSubclassFromModule_(
+                CurrentSubclassModule_, FixedType2)
+            if subclass is not None:
+                return subclass(*args_, **kwargs_)
+        if FixedType2.subclass:
+            return FixedType2.subclass(*args_, **kwargs_)
+        else:
+            return FixedType2(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_attrfixed01(self): return self.attrfixed01
+    def set_attrfixed01(self, attrfixed01): self.attrfixed01 = attrfixed01
+    def get_attrfixed02(self): return self.attrfixed02
+    def set_attrfixed02(self, attrfixed02): self.attrfixed02 = attrfixed02
+    def get_attrnormal01(self): return self.attrnormal01
+    def set_attrnormal01(self, attrnormal01): self.attrnormal01 = attrnormal01
+    def get_attrnormal02(self): return self.attrnormal02
+    def set_attrnormal02(self, attrnormal02): self.attrnormal02 = attrnormal02
+    def hasContent_(self):
+        if (
+
+        ):
+            return True
+        else:
+            return False
+    def export(self, outfile, level, namespace_='', name_='FixedType2', namespacedef_='', pretty_print=True):
+        imported_ns_def_ = GenerateDSNamespaceDefs_.get('FixedType2')
+        if imported_ns_def_ is not None:
+            namespacedef_ = imported_ns_def_
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.original_tagname_ is not None:
+            name_ = self.original_tagname_
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = set()
+        self.exportAttributes(outfile, level, already_processed, namespace_, name_='FixedType2')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespace_='', name_='FixedType2', pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='FixedType2'):
+        if self.attrfixed01 != "abcd" and 'attrfixed01' not in already_processed:
+            already_processed.add('attrfixed01')
+            outfile.write(' attrfixed01=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrfixed01), input_name='attrfixed01')), ))
+        if self.attrfixed02 != 14 and 'attrfixed02' not in already_processed:
+            already_processed.add('attrfixed02')
+            outfile.write(' attrfixed02="%s"' % self.gds_format_integer(self.attrfixed02, input_name='attrfixed02'))
+        if self.attrnormal01 is not None and 'attrnormal01' not in already_processed:
+            already_processed.add('attrnormal01')
+            outfile.write(' attrnormal01=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.attrnormal01), input_name='attrnormal01')), ))
+        if self.attrnormal02 is not None and 'attrnormal02' not in already_processed:
+            already_processed.add('attrnormal02')
+            outfile.write(' attrnormal02="%s"' % self.gds_format_integer(self.attrnormal02, input_name='attrnormal02'))
+    def exportChildren(self, outfile, level, namespace_='', name_='FixedType2', fromsubclass_=False, pretty_print=True):
+        pass
+    def build(self, node):
+        already_processed = set()
+        self.buildAttributes(node, node.attrib, already_processed)
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+        return self
+    def buildAttributes(self, node, attrs, already_processed):
+        value = find_attr_value_('attrfixed01', node)
+        if value is not None and 'attrfixed01' not in already_processed:
+            already_processed.add('attrfixed01')
+            self.attrfixed01 = value
+        value = find_attr_value_('attrfixed02', node)
+        if value is not None and 'attrfixed02' not in already_processed:
+            already_processed.add('attrfixed02')
+            try:
+                self.attrfixed02 = int(value)
+            except ValueError as exp:
+                raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+        value = find_attr_value_('attrnormal01', node)
+        if value is not None and 'attrnormal01' not in already_processed:
+            already_processed.add('attrnormal01')
+            self.attrnormal01 = value
+        value = find_attr_value_('attrnormal02', node)
+        if value is not None and 'attrnormal02' not in already_processed:
+            already_processed.add('attrnormal02')
+            try:
+                self.attrnormal02 = int(value)
+            except ValueError as exp:
+                raise_parse_error(node, 'Bad integer attribute: %s' % exp)
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        pass
+# end class FixedType2
+
+
 GDSClassesMapping = {
     'defaults': DefaultTypes,
 }
@@ -1249,5 +1581,7 @@ if __name__ == '__main__':
 __all__ = [
     "DefaultType1",
     "DefaultType2",
-    "DefaultTypes"
+    "DefaultTypes",
+    "FixedType1",
+    "FixedType2"
 ]

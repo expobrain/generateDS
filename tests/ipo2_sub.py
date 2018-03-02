@@ -83,7 +83,7 @@ supermod.USAddress.subclass = USAddressSub
 
 
 class UKAddressSub(supermod.UKAddress):
-    def __init__(self, name=None, street=None, city=None, exportCode=None, postcode=None):
+    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None):
         super(UKAddressSub, self).__init__(name, street, city, exportCode, postcode, )
 supermod.UKAddress.subclass = UKAddressSub
 # end class UKAddressSub
