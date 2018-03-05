@@ -141,6 +141,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.9 (03/02/2018)
+
+- Added command line flag --always-export-default
+  (AlwaysExportDefault).  When used, the generated module will
+  always export attributes with a default value even when the
+  current value is equal to the default value.  Thanks to Marc
+  Capavanni for suggesting this.
+
 Version 2.29.8 (03/02/2018)
 
 - Added a change so that an attribute specified as `fixed` will be

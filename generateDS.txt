@@ -12,7 +12,7 @@ generateDS -- Generate Data Structures from XML Schema
 
 .. version
 
-:revision: 2.29.8
+:revision: 2.29.9
 
 .. version
 
@@ -330,6 +330,9 @@ Here is the usage message displayed by ``generateDS.py``::
                                          to XML)
                                  Example: "write etree"
                                  Default: "write"
+        --always-export-default  Always export elements and attributes that
+                                 a default value even when the current value
+                                 is equal to the default.  Default: False.
         --disable-generatedssuper-lookup
                                  Disables the generatetion of the lookup logic for
                                  presence of an external module from which to load
@@ -636,6 +639,10 @@ export
 
     For example: ``--export="write etree"`` and ``--export="write"``.  The
     default is: ``--export="write"``.
+
+always-export-default
+    Always export elements and attributes that a default value even
+    when the current value is equal to the default.  Default: False.
 
 disable-generatedssuper-lookup
     Disables the generation of code implementing the lookup for
