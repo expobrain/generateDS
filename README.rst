@@ -141,6 +141,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.10 (03/14/2018)
+
+- Fix to resolution of child types -- Formerly, we were adding some
+  unnecessary and unwanted entries to `fqnToElementDict`, which
+  caused the look-up to get the wrong type.  Thanks to Olof Kindgren
+  for guiding me through this.
+
 Version 2.29.9 (03/02/2018)
 
 - Added command line flag --always-export-default

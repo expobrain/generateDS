@@ -232,7 +232,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.9'
+VERSION = '2.29.10'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -1623,7 +1623,7 @@ class XschemaHandler(handler.ContentHandler):
             self.inNonanonymousComplexType = 1
             element = XschemaElement(attrs, Targetnamespace)
             fqn = element.getFullyQualifiedName()
-            if fqn:
+            if fqn and name == ComplexTypeType:
                 fqnToElementDict[fqn] = element
             if element.prefix in prefixToNamespaceMap:
                 element.namespace = prefixToNamespaceMap[element.prefix]
