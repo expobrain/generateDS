@@ -232,7 +232,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.10'
+VERSION = '2.29.11'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2836,9 +2836,13 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     ns_prefix = SchemaNamespaceDict.get(name)
     if ns_prefix is not None and ns_prefix[0] is not None:
         namespace = ns_prefix[0] + ':'
-        ns_def = 'xmlns:{}'.format(ns_prefix[0])
-        if ns_def not in nameSpacesDef:
-            nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
+    # Was the --no-namespace-defs command line option used?
+    if nameSpacesDef:
+        if ns_prefix is not None and ns_prefix[0] is not None:
+            namespace = ns_prefix[0] + ':'
+            ns_def = 'xmlns:{}'.format(ns_prefix[0])
+            if ns_def not in nameSpacesDef:
+                nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
     wrt("    def export(self, outfile, level, namespace_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
         (namespace, encodedname, nameSpacesDef))

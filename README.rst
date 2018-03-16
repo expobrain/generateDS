@@ -141,6 +141,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.11 (03/16/2018)
+
+- Fix for the --no-namespace-defs command line option.  The work on
+  namespaces in v. 2.29.6 appears to have conflicted with and
+  deactivated this.  Thanks to Olof Kindgren for reporting this.
+- Added unit test for --no-namespace-defs.
+
 Version 2.29.10 (03/14/2018)
 
 - Fix to resolution of child types -- Formerly, we were adding some
