@@ -1462,6 +1462,15 @@ class XschemaAttribute:
     def getData_type(self):
         return self.data_type
 
+    def getFullyQualifiedTypeName(self):
+        returnType = self.getType()
+        if is_builtin_simple_type(returnType):
+            return returnType
+        prefix, value = get_prefix_and_value(self.data_type)
+        if prefix is not None:
+            return prefixToNamespaceMap[prefix] + ":" + value
+        return returnType
+
     def getType(self):
         returnType = self.data_type
         if self.data_type in SimpleElementDict:
@@ -4195,8 +4204,9 @@ def generateCtor(wrt, prefix, element):
             wrt("        self.%s = initvalue_\n" % (name, ))
         else:
             attrType = attrDef.getType()
-            if attrType in SimpleTypeDict:
-                attrType = resolveBaseTypeForSimpleType(attrType)
+            fullyQualifiedType = attrDef.getFullyQualifiedTypeName()
+            if fullyQualifiedType in SimpleTypeDict:
+                attrType = resolveBaseTypeForSimpleType(fullyQualifiedType)
             pythonType = SchemaToPythonTypeMap.get(attrType)
             attrVal = "_cast(%s, %s)" % (pythonType, mbrname, )
             wrt('        self.%s = %s\n' % (name, attrVal, ))
