@@ -201,15 +201,6 @@ else:
     import io
     from functools import reduce
 
-# Default logger configuration
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='%(asctime)s %(levelname)s %(message)s',
-    #filemode='w',      # Can uncomment this line or change to append ('a')
-    #filename='generateDS.log'  # uncomment to send messages to file
-)
-# Disable logging messages level INFO and below (includes DEBUG).
-logging.disable(logging.INFO)
 
 ## import warnings
 ## warnings.warn('importing IPShellEmbed', UserWarning)
@@ -7463,7 +7454,13 @@ def main():
 
 
 if __name__ == '__main__':
-    #logging.basicConfig(level=logging.DEBUG,)
+    # Default logger configuration
+    logging.basicConfig(
+        level=logging.WARNING,
+        format='%(asctime)s %(levelname)s %(message)s',
+        #filemode='w',      # Can uncomment this line or change to append ('a')
+        #filename='generateDS.log'  # uncomment to send messages to file
+    )
     #import pdb; pdb.set_trace()
     #import ipdb; ipdb.set_trace()
     # use the following to debug after an exception (post mortem debbing).
