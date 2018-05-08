@@ -232,7 +232,7 @@ logging.disable(logging.INFO)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.11'
+VERSION = '2.29.13'
 ##VERSION##
 
 BaseStrTypes = six.string_types

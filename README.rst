@@ -141,6 +141,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.13 (05/08/2018)
+
+- Merged PR from Andrei Fokau.  Fix tests by striping varying lines.
+  Also add config for Travis CI.  Thanks to Andrei for this
+  enhancement.
+
 Version 2.29.12 (04/23/2018)
 
 - Patch to compute the fully qualified name of the simple types
