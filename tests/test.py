@@ -927,8 +927,9 @@ class GenTest(unittest.TestCase):
     def compareFiles(self, left, right, ignore=None):
         with open(left) as left_file:
             with open(right) as right_file:
-                diffs = difflib.unified_diff(
-                    left_file.readlines(), right_file.readlines())
+                lf = strip_build_comments(left_file.readlines())
+                rf = strip_build_comments(right_file.readlines())
+                diffs = difflib.unified_diff(lf, rf)
         diffs = list(diffs)
         if diffs:
             diffs = ''.join(diffs[2:12])
@@ -937,6 +938,29 @@ class GenTest(unittest.TestCase):
     def remove(self, filename):
         if False:
             os.remove(filename)
+
+
+def strip_build_comments(lines):
+    """
+    Remove lines in Python file which may vary on different systems.
+    """
+    assert isinstance(lines, list), type(lines)
+    if '#!/usr/bin/env python' in lines[0]:
+
+        # This line contains sometimes package version
+        n = 3 + int('coding: utf-8' in lines[1])
+        assert lines[n].startswith('# Generated '), repr(lines[n])
+        del lines[n]
+
+        # Next line contains Python version and build information
+        assert lines[n].startswith('# Python '), repr(lines[n])
+        del lines[n]
+
+        # Another line assumes we have certain name for directory
+        n = lines.index('# Current working directory (os.getcwd()):\n')
+        del lines[n + 1]
+
+    return lines
 
 
 # Make the test suite.
