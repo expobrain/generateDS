@@ -141,6 +141,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.14 (05/08/2018)
+
+- Fixes to logging in generateDS.py -- (1) Setup logging only when
+  running as script.  (2) Use named logger instead of root one.
+  Thanks to Andrei Fokau for this fix.
+
 Version 2.29.13 (05/08/2018)
 
 - Merged PR from Andrei Fokau.  Fix tests by striping varying lines.
