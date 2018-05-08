@@ -141,6 +141,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.12 (04/23/2018)
+
+- Patch to compute the fully qualified name of the simple types
+  before resolving the built-in base type.  Thanks to Alim Gokkaya
+  for this fix.
+
 Version 2.29.11 (03/16/2018)
 
 - Fix for the --no-namespace-defs command line option.  The work on
