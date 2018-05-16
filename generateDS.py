@@ -225,7 +225,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.14'
+VERSION = '2.29.15'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -3640,8 +3640,11 @@ def generateBuildStandard_1(
         wrt("        %s nodeName_ == '%s':\n" % (keyword, origName, ))
         if PreserveCdataTags:
             wrt("            mo_ = PRESERVE_CDATA_TAGS_PAT.search("
-                "etree_.tostring(child_).strip())\n")
-            wrt("            %s_ = mo_.group(1)\n" % name)
+                "etree_.tostring(child_).strip().decode())\n")
+            wrt("            if mo_ is None:\n")
+            wrt("                %s_ = ''\n" % name)
+            wrt("            else:\n")
+            wrt("                %s_ = mo_.group(1)\n" % name)
         else:
             wrt("            %s_ = child_.text\n" % name)
         if childType == TokenType:

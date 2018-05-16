@@ -141,6 +141,15 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.15 (05/16/2018)
+
+- Fixed issue related to use of command line flag
+  --preserve-cdata-tags: when the generated regex pattern was not
+  matched (returned None), created an exception.  Added a test for
+  None.  Also, required conversion of bytes to str before the
+  pattern match for Python 3.  Thanks to Lavanya Poondru for
+  reporting this and helping with a fix.
+
 Version 2.29.14 (05/08/2018)
 
 - Fixes to logging in generateDS.py -- (1) Setup logging only when
