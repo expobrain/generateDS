@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.15'
+VERSION = '2.29.16'
 ##VERSION##
 
 CatalogDict = {}
@@ -63,7 +63,7 @@ def load_catalog(catalogpath):
     global CatalogBaseUrl
     if catalogpath:
         CatalogBaseUrl = os.path.split(catalogpath)[0]
-        catalog = etree.parse(open(catalogpath))
+        catalog = etree.parse(open(catalogpath, "rb"))
         for elements in catalog.getroot().findall(
                 "{urn:oasis:names:tc:entity:xmlns:xml:catalog}public"):
             CatalogDict[elements.get("publicId")] = elements.get("uri")
@@ -95,6 +95,7 @@ def get_all_root_file_paths(
         catalogpath=None,
         shallow=False):
     load_catalog(catalogpath)
+    # Note: infile has been opened in binary mode.
     doc1 = etree.parse(infile)
     root1 = doc1.getroot()
     rootPaths = []
@@ -209,12 +210,13 @@ def resolve_ref(node, params, options):
                     raise SchemaIOError(msg)
             else:
                 if os.path.exists(locn):
-                    infile = open(locn)
-                    unencoded_content = infile.read()
                     if sys.version_info.major == 2:
+                        infile = open(locn)
+                        unencoded_content = infile.read()
                         content = unencoded_content
                     else:
-                        content = unencoded_content.encode()
+                        infile = open(locn, 'rb')
+                        content = infile.read()
                     infile.close()
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
@@ -319,6 +321,7 @@ def make_file(outFileName, options):
 
 
 def prep_schema_doc(infile, outfile, inpath, options):
+    # Note: infile has been opened in binary mode.
     doc1 = etree.parse(infile)
     root1 = doc1.getroot()
     params = Params()
