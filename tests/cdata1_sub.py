@@ -42,7 +42,7 @@ def parsexml_(infile, parser=None, **kwargs):
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = ''
 
 #
 # Data representation classes

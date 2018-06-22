@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.15'
+VERSION = '2.29.16'
 ##VERSION##
 
 CatalogDict = {}
@@ -63,7 +63,7 @@ def load_catalog(catalogpath):
     global CatalogBaseUrl
     if catalogpath:
         CatalogBaseUrl = os.path.split(catalogpath)[0]
-        catalog = etree.parse(open(catalogpath))
+        catalog = etree.parse(open(catalogpath, "rb"))
         for elements in catalog.getroot().findall(
                 "{urn:oasis:names:tc:entity:xmlns:xml:catalog}public"):
             CatalogDict[elements.get("publicId")] = elements.get("uri")
@@ -95,6 +95,7 @@ def get_all_root_file_paths(
         catalogpath=None,
         shallow=False):
     load_catalog(catalogpath)
+    # Note: infile has been opened in binary mode.
     doc1 = etree.parse(infile)
     root1 = doc1.getroot()
     rootPaths = []
@@ -319,6 +320,7 @@ def make_file(outFileName, options):
 
 
 def prep_schema_doc(infile, outfile, inpath, options):
+    # Note: infile has been opened in binary mode.
     doc1 = etree.parse(infile)
     root1 = doc1.getroot()
     params = Params()
@@ -348,7 +350,7 @@ def prep_schema_doc(infile, outfile, inpath, options):
 
 def prep_schema(inpath, outpath, options):
     if inpath:
-        infile = open(inpath, 'r')
+        infile = open(inpath, 'rb')
     else:
         infile = sys.stdin
     if outpath:

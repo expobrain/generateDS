@@ -405,7 +405,11 @@ except ImportError as exp:
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
-                return instring.encode(ExternalEncoding)
+                if ExternalEncoding:
+                    encoding = ExternalEncoding
+                else:
+                    encoding = 'utf-8'
+                return instring.encode(encoding)
             else:
                 return instring
         @staticmethod

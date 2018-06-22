@@ -44,7 +44,7 @@ import no_namespace_defs2_sup as supermod
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = ''
 
 #
 # Data representation classes

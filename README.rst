@@ -141,6 +141,18 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.16 (06/21/2018)
+
+- Added dependencies to ``setup.py``.  Thanks to Laszlo for this
+  suggestion.
+- Fixes to specifying character encodings.  We now read XML schema
+  files in binary mode.  (2) We now use the value of
+  --external-encoding only when a generated module is run under
+  Python 2 (not Python 3); we use it to encode the XML instance
+  document; if --external-encoding was not used, then we use
+  "utf-8" to encode exported XML.  Thanks to Laszlo for his
+  guidance on this.
+
 Version 2.29.15 (05/16/2018)
 
 - Fixed issue related to use of command line flag

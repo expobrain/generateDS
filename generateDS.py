@@ -225,7 +225,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.15'
+VERSION = '2.29.16'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -252,7 +252,7 @@ NoDates = False
 NoVersion = False
 AlwaysExportDefault = False
 Dirpath = []
-ExternalEncoding = sys.getdefaultencoding()
+ExternalEncoding = ''
 Namespacedef = ''
 NoNameSpaceDefs = False
 CleanupNameList = [(re.compile('[-:.]'), '_')]
@@ -5727,7 +5727,11 @@ class GeneratedsSuper(object):
     @staticmethod
     def gds_encode(instring):
         if sys.version_info.major == 2:
-            return instring.encode(ExternalEncoding)
+            if ExternalEncoding:
+                encoding = ExternalEncoding
+            else:
+                encoding = 'utf-8'
+            return instring.encode(encoding)
         else:
             return instring
     @staticmethod
@@ -6908,7 +6912,7 @@ def parseAndGenerate(
     if xschemaFileName == '-':
         infile = sys.stdin
     else:
-        infile = open(xschemaFileName, 'r')
+        infile = open(xschemaFileName, 'rb')
     if SingleFileOutput:
         parser = make_parser()
         dh = XschemaHandler()
@@ -7226,7 +7230,7 @@ def main():
     processIncludes = 1
     namespacedef = ''
     NoNameSpaceDefs = False
-    ExternalEncoding = sys.getdefaultencoding()
+    ExternalEncoding = ''
     NoDates = False
     NoVersion = False
     NoQuestions = False

@@ -2,12 +2,13 @@
 #from distutils.core import setup
 from setuptools import setup
 
-setup(name="generateDS",
+setup(
+    name="generateDS",
 #
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-    version="2.29.15",
+    version="2.29.16",
 ##VERSION##
     author="Dave Kuhlman",
     author_email="dkuhlman@davekuhlman.org",
@@ -26,20 +27,14 @@ methods to the subclasses in order to process the contents of an
 XML document.""",
     platforms="platform-independent",
     license="http://www.opensource.org/licenses/mit-license.php",
-##     py_modules=[
-##         "generateDS",
-##         "process_includes", 
-##         "gui.generateds_gui",
-##         "gui.generateds_gui_session",
-##         ],
     py_modules=[
         "process_includes",
-        ],
+    ],
     # include_package_data=True,
-    packages = [
+    packages=[
         "libgenerateDS",
         "libgenerateDS.gui",
-        ],
+    ],
     scripts=[
         "generateDS.py",
         "process_includes.py",
@@ -47,8 +42,8 @@ XML document.""",
         "django/gends_run_gen_django.py",
         "django/gends_extract_simple_types.py",
         "django/gends_generate_django.py",
-        ],
-    entry_points = {
+    ],
+    entry_points={
         "console_scripts": [
             "generateDS = generateDS:main",
             "process_includes = process_includes:main",
@@ -57,6 +52,9 @@ XML document.""",
             "gends_extract_simple_types = gends_extract_simple_types:main",
             "gends_generate_django = gends_generate_django:main",
         ],
-      }
-    )
-
+    },
+    install_requires=[
+        "six",
+        "lxml",
+    ],
+)

@@ -44,7 +44,7 @@ import disable_xml_super2_sup as supermod
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = ''
 
 #
 # Data representation classes
