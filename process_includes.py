@@ -210,12 +210,13 @@ def resolve_ref(node, params, options):
                     raise SchemaIOError(msg)
             else:
                 if os.path.exists(locn):
-                    infile = open(locn)
-                    unencoded_content = infile.read()
                     if sys.version_info.major == 2:
+                        infile = open(locn)
+                        unencoded_content = infile.read()
                         content = unencoded_content
                     else:
-                        content = unencoded_content.encode()
+                        infile = open(locn, 'rb')
+                        content = infile.read()
                     infile.close()
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
