@@ -726,6 +726,13 @@ def _cast(typ, value):
 #
 
 
+class ArrayTypes(object):
+    float_='float'
+    int='int'
+    Name='Name'
+    token='token'
+
+
 class people(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('comments', 'comments', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'comments', u'name': u'comments'}, None),

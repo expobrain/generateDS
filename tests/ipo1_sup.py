@@ -725,6 +725,13 @@ def _cast(typ, value):
 #
 
 
+class USState(object):
+    AK='AK'
+    AL='AL'
+    AR='AR'
+    PA='PA'
+
+
 class PurchaseOrderType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('orderDate', 'date', 0, 1, {'use': 'optional'}),

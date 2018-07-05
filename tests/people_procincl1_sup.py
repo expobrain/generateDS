@@ -726,6 +726,13 @@ def _cast(typ, value):
 #
 
 
+class ArrayTypes(object):
+    float_='float'
+    int='int'
+    Name='Name'
+    token='token'
+
+
 class people(GeneratedsSuper):
     """A list of people."""
     member_data_items_ = [

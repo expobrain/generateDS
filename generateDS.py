@@ -256,6 +256,7 @@ ExternalEncoding = ''
 Namespacedef = ''
 NoNameSpaceDefs = False
 CleanupNameList = [(re.compile('[-:.]'), '_')]
+PythonIdentifierRegex = re.compile('^[_A-Za-z][_A-Za-z0-9]*$')
 
 NamespacesDict = {}
 SchemaNamespaceDict = {}
@@ -606,6 +607,9 @@ class SimpleTypeElement(XschemaElementBase):
 
     def getAttributeGroup(self):
         return self.attributeGroup
+    
+    def getEnumValues(self):
+        return self.values
 
     def setListType(self, listType):
         self.listType = listType
@@ -6671,10 +6675,44 @@ def generateFromTree(wrt, prefix, elements, processed):
 
 
 def generateSimpleTypes(wrt, prefix, simpleTypeDict):
-    for simpletype in simpleTypeDict.keys():
-        wrt('class %s(object):\n' % simpletype)
-        wrt('    pass\n')
-        wrt('\n\n')
+    def validateIdentifier(name):
+        validPythonIdentifier = True
+        if not PythonIdentifierRegex.match(name):
+            # it may start with a digit
+            escapedName = '_%s' % name
+            if PythonIdentifierRegex.match(escapedName):
+                return NameTable.get(escapedName, escapedName)
+            else:
+                raise ValueError
+        return NameTable.get(name, name)
+    
+    def writeEnumClass(simpleType):
+        enumValues = simpleType.getEnumValues()
+        if enumValues:
+            try:
+                className = validateIdentifier(simpleType.getName())
+            except ValueError:
+                err_msg(
+                    '*** The Simple Type name "%s" is not a valid '
+                    'Python identifier\n' % simpleType.getName())
+                sys.exit(1)
+            wrt('class %s(object):\n' % simpleType.getName())
+            for enumValue in enumValues:
+                try:
+                    validatedEnumValue = validateIdentifier(enumValue)
+                except ValueError:
+                    err_msg(
+                        '*** The enumeration value "%s" is not a valid Python '
+                        'identifier\n' % enumValue)
+                    sys.exit(1)
+                wrt('    %s=\'%s\'\n' % (validatedEnumValue, enumValue))
+            wrt('\n\n')
+        
+    for simpletypeName in sorted(simpleTypeDict.keys()):
+        if ':' not in simpletypeName:
+            continue
+        simpleType = simpleTypeDict[simpletypeName]
+        writeEnumClass(simpleType)
 
 
 def getImportsForExternalXsds(root):
@@ -6745,7 +6783,7 @@ def generate(outfileName, subclassFilename, behaviorFilename,
     processed = []
     externalImports = getImportsForExternalXsds(root)
     generateHeader(wrt, prefix, options, args, externalImports)
-    #generateSimpleTypes(outfile, prefix, SimpleTypeDict)
+    generateSimpleTypes(wrt, prefix, SimpleTypeDict)
     DelayedElements = set()
     DelayedElements_subclass = set()
     elements = root.getChildren()

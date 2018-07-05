@@ -726,6 +726,13 @@ def _cast(typ, value):
 #
 
 
+class token_enum_st(object):
+    float_='float'
+    int='int'
+    Name='Name'
+    token='token'
+
+
 class containerType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('sample1', 'simpleOneType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleOneType', u'name': u'sample1'}, None),

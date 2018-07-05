@@ -726,6 +726,21 @@ def _cast(typ, value):
 #
 
 
+class RelationType(object):
+    down='down'
+    add='add'
+
+
+class RelationType2(object):
+    down='down'
+    add='add'
+
+
+class RelationType3(object):
+    down='down'
+    add='add'
+
+
 class SpecialDate(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('SpecialProperty', 'xs:string', 0, 1, {'use': 'optional'}),
