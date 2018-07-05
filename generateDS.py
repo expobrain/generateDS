@@ -225,7 +225,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.16'
+VERSION = '2.29.17'
 ##VERSION##
 
 BaseStrTypes = six.string_types

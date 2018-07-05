@@ -125,7 +125,7 @@ def generate_model(options, module_name):
         else:
             sys.stderr.write('class %s not defined\n' % (class_name, ))
     wrtadmin('from django.contrib import admin\n')
-    wrtadmin('from models import \\\n')
+    wrtadmin('from .models import \\\n')
     first_time = True
     for class_name in supermod.__all__:
         class_name = unique_name_map.get(class_name)

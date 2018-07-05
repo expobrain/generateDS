@@ -168,8 +168,17 @@ class GeneratedsSuper(object):
         wrtforms('\nclass %s%s(forms.Form):\n' % (
             class_name, form_suffix, ))
         if cls.superclass is not None:
-            wrtmodels('    %s = models.ForeignKey("%s%s")\n' % (
-                cls.superclass.__name__, cls.superclass.__name__, model_suffix, ))
+            wrtmodels(
+                '    %s = models.ForeignKey(\n' % (
+                    cls.superclass.__name__,))
+            wrtmodels(
+                '        "%s%s",\n' % (
+                    cls.superclass.__name__,
+                    model_suffix, ))
+            wrtmodels(
+                '        on_delete=models.CASCADE,\n')
+            wrtmodels(
+                '    )\n')
         for spec in cls.member_data_items_:
             name = spec.get_name()
             prefix, name = cls.get_prefix_name(name)
@@ -239,6 +248,8 @@ class GeneratedsSuper(object):
                 wrtmodels(
                     '    %s = models.ForeignKey(\n        "%s%s",\n' % (
                         name, clean_data_type, model_suffix, ))
+                wrtmodels(
+                    '        on_delete=models.CASCADE,\n')
                 wrtmodels(
                     '        related_name="{}_{}_{}",\n'.format(
                         class_name, name, clean_data_type, ))
