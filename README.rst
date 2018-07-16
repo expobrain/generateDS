@@ -141,7 +141,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
-Version 2.29.17 (07/05/2018)
+Version 2.29.17 (07/11/2018)
 
 - Merged pull request that generates enum classes for each simpleType.
   Thanks to Mustafa Şenol Coşar for this enhancement.
