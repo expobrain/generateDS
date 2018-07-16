@@ -6689,14 +6689,15 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
     def writeEnumClass(simpleType):
         enumValues = simpleType.getEnumValues()
         if enumValues:
+            output = ""
             try:
                 className = validateIdentifier(simpleType.getName())
             except ValueError:
                 err_msg(
                     '*** The Simple Type name "%s" is not a valid '
                     'Python identifier\n' % simpleType.getName())
-                sys.exit(1)
-            wrt('class %s(object):\n' % simpleType.getName())
+                return
+            output += 'class %s(object):\n' % simpleType.getName()
             for enumValue in enumValues:
                 try:
                     validatedEnumValue = validateIdentifier(enumValue)
@@ -6704,8 +6705,9 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
                     err_msg(
                         '*** The enumeration value "%s" is not a valid Python '
                         'identifier\n' % enumValue)
-                    sys.exit(1)
-                wrt('    %s=\'%s\'\n' % (validatedEnumValue, enumValue))
+                    return
+                output += '    %s=\'%s\'\n' % (validatedEnumValue, enumValue)
+            wrt(output)
             wrt('\n\n')
         
     for simpletypeName in sorted(simpleTypeDict.keys()):
