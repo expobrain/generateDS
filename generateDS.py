@@ -6685,9 +6685,9 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
     global UppercaseEnums
     def value2Uppercase(value):
         if UppercaseEnums:
+            # This will turn a string 'fooBar123' to 'foo_bar_123'
             for regex in NameSeparationRegexList:
                 value = regex.sub(r"\1_\2", value)
-        # print(value)
         return value.upper()
     def validateIdentifier(name):
         name = value2Uppercase(name)
