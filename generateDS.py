@@ -6688,7 +6688,8 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             # This will turn a string 'fooBar123' to 'foo_Bar_123'
             for regex in NameSeparationRegexList:
                 value = regex.sub(r"\1_\2", value)
-        return value.upper()
+            value = value.upper()
+        return value
     def validateIdentifier(name):
         name = value2Uppercase(name)
         validPythonIdentifier = True
