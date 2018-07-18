@@ -933,7 +933,7 @@ class GenTest(unittest.TestCase):
         diffs = list(diffs)
         if diffs:
             diffs = ''.join(diffs[2:12])
-            self.fail("Files differed:\n{}".format(diffs))
+            self.fail("Files '{}' and '{}' differed:\n{}".format(left, right, diffs))
 
     def remove(self, filename):
         if False:

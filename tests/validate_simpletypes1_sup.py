@@ -727,10 +727,10 @@ def _cast(typ, value):
 
 
 class token_enum_st(object):
-    float_='float'
-    int='int'
-    Name='Name'
-    token='token'
+    FLOAT='float'
+    INT='int'
+    NAME='Name'
+    TOKEN='token'
 
 
 class containerType(GeneratedsSuper):

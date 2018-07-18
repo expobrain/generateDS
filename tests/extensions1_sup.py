@@ -727,18 +727,18 @@ def _cast(typ, value):
 
 
 class RelationType(object):
-    down='down'
-    add='add'
+    DOWN='down'
+    ADD='add'
 
 
 class RelationType2(object):
-    up='up'
-    subtract='subtract'
+    UP='up'
+    SUBTRACT='subtract'
 
 
 class RelationType3(object):
-    right='right'
-    divide='divide'
+    RIGHT='right'
+    DIVIDE='divide'
 
 
 class SpecialDate(GeneratedsSuper):
