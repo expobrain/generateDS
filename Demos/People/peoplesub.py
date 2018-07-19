@@ -1,171 +1,151 @@
 #!/usr/bin/env python
 
 #
-# Generated Tue Feb  1 14:34:02 2011 by generateDS.py version 2.5a.
+# Generated Thu Jul 19 14:09:57 2018 by generateDS.py version 2.29.17.
+# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+#
+# Command line options:
+#   ('-f', '')
+#   ('-m', '')
+#   ('--namespacedef', 'xmlns:pl="http://kuhlman.com/people.xsd"')
+#   ('--super', 'peoplesup')
+#   ('-o', 'peoplesup.py')
+#   ('-s', 'peoplesub.py')
+#   ('--member-specs', 'dict')
+#   ('-m', '')
+#   ('--export', 'write etree literal')
+#   ('-c', 'people_catalog.xml')
+#
+# Command line arguments:
+#   people.xsd
+#
+# Command line:
+#   ../../generateDS.py -f -m --namespacedef="xmlns:pl="http://kuhlman.com/people.xsd"" --super="peoplesup" -o "peoplesup.py" -s "peoplesub.py" --member-specs="dict" -m --export="write etree literal" -c "people_catalog.xml" people.xsd
+#
+# Current working directory (os.getcwd()):
+#   People
 #
 
 import sys
+from lxml import etree as etree_
 
 import peoplesup as supermod
 
-etree_ = None
-Verbose_import_ = False
-(   XMLParser_import_none, XMLParser_import_lxml,
-    XMLParser_import_elementtree
-    ) = range(3)
-XMLParser_import_library = None
-try:
-    # lxml
-    from lxml import etree as etree_
-    XMLParser_import_library = XMLParser_import_lxml
-    if Verbose_import_:
-        print("running with lxml.etree")
-except ImportError:
-    try:
-        # cElementTree from Python 2.5+
-        import xml.etree.cElementTree as etree_
-        XMLParser_import_library = XMLParser_import_elementtree
-        if Verbose_import_:
-            print("running with cElementTree on Python 2.5+")
-    except ImportError:
-        try:
-            # ElementTree from Python 2.5+
-            import xml.etree.ElementTree as etree_
-            XMLParser_import_library = XMLParser_import_elementtree
-            if Verbose_import_:
-                print("running with ElementTree on Python 2.5+")
-        except ImportError:
-            try:
-                # normal cElementTree install
-                import cElementTree as etree_
-                XMLParser_import_library = XMLParser_import_elementtree
-                if Verbose_import_:
-                    print("running with cElementTree")
-            except ImportError:
-                try:
-                    # normal ElementTree install
-                    import elementtree.ElementTree as etree_
-                    XMLParser_import_library = XMLParser_import_elementtree
-                    if Verbose_import_:
-                        print("running with ElementTree")
-                except ImportError:
-                    raise ImportError("Failed to import ElementTree from any known place")
-
-def parsexml_(*args, **kwargs):
-    if (XMLParser_import_library == XMLParser_import_lxml and
-        'parser' not in kwargs):
+def parsexml_(infile, parser=None, **kwargs):
+    if parser is None:
         # Use the lxml ElementTree compatible parser so that, e.g.,
         #   we ignore comments.
-        kwargs['parser'] = etree_.ETCompatXMLParser()
-    doc = etree_.parse(*args, **kwargs)
+        parser = etree_.ETCompatXMLParser()
+    doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
 #
 # Globals
 #
 
-ExternalEncoding = 'ascii'
+ExternalEncoding = ''
 
 #
 # Data representation classes
 #
 
-class peopleSub(supermod.people):
+
+class peopleTypeSub(supermod.peopleType):
     def __init__(self, comments=None, person=None, specialperson=None, programmer=None, python_programmer=None, java_programmer=None):
-        super(peopleSub, self).__init__(comments, person, specialperson, programmer, python_programmer, java_programmer, )
-supermod.people.subclass = peopleSub
-# end class peopleSub
+        super(peopleTypeSub, self).__init__(comments, person, specialperson, programmer, python_programmer, java_programmer, )
+supermod.peopleType.subclass = peopleTypeSub
+# end class peopleTypeSub
 
 
-class commentsSub(supermod.comments):
+class commentsTypeSub(supermod.commentsType):
     def __init__(self, emp=None, bold=None, valueOf_=None, mixedclass_=None, content_=None):
-        super(commentsSub, self).__init__(emp, bold, valueOf_, mixedclass_, content_, )
-supermod.comments.subclass = commentsSub
-# end class commentsSub
+        super(commentsTypeSub, self).__init__(emp, bold, valueOf_, mixedclass_, content_, )
+supermod.commentsType.subclass = commentsTypeSub
+# end class commentsTypeSub
 
 
-class personSub(supermod.person):
-    def __init__(self, vegetable=None, fruit=None, ratio=None, id=None, value=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None):
-        super(personSub, self).__init__(vegetable, fruit, ratio, id, value, name, interest, category, agent, promoter, description, )
-supermod.person.subclass = personSub
-# end class personSub
+class personTypeSub(supermod.personType):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, with_=None, extensiontype_=None):
+        super(personTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, with_, extensiontype_, )
+supermod.personType.subclass = personTypeSub
+# end class personTypeSub
 
 
 class specialpersonSub(supermod.specialperson):
-    def __init__(self, vegetable=None, fruit=None, ratio=None, id=None, value=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None):
-        super(specialpersonSub, self).__init__(vegetable, fruit, ratio, id, value, name, interest, category, agent, promoter, description, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, with_=None):
+        super(specialpersonSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, with_, )
 supermod.specialperson.subclass = specialpersonSub
 # end class specialpersonSub
 
 
-class programmerSub(supermod.programmer):
-    def __init__(self, vegetable=None, fruit=None, ratio=None, id=None, value=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrnegint=None, attrposint=None, attrnonnegint=None, attrnonposint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None):
-        super(programmerSub, self).__init__(vegetable, fruit, ratio, id, value, name, interest, category, agent, promoter, description, language, area, attrnegint, attrposint, attrnonnegint, attrnonposint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eltoken, elshort, ellong, elparam, elarraytypes, )
-supermod.programmer.subclass = programmerSub
-# end class programmerSub
+class programmerTypeSub(supermod.programmerType):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, with_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None):
+        super(programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, with_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, extensiontype_, )
+supermod.programmerType.subclass = programmerTypeSub
+# end class programmerTypeSub
 
 
-class paramSub(supermod.param):
-    def __init__(self, semantic=None, name=None, flow=None, sid=None, type_=None, id=None, valueOf_=None):
-        super(paramSub, self).__init__(semantic, name, flow, sid, type_, id, valueOf_, )
-supermod.param.subclass = paramSub
-# end class paramSub
+class paramTypeSub(supermod.paramType):
+    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None):
+        super(paramTypeSub, self).__init__(id, name, sid, flow, semantic, type_, valueOf_, )
+supermod.paramType.subclass = paramTypeSub
+# end class paramTypeSub
 
 
-class python_programmerSub(supermod.python_programmer):
-    def __init__(self, vegetable=None, fruit=None, ratio=None, id=None, value=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrnegint=None, attrposint=None, attrnonnegint=None, attrnonposint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, favorite_editor=None):
-        super(python_programmerSub, self).__init__(vegetable, fruit, ratio, id, value, name, interest, category, agent, promoter, description, language, area, attrnegint, attrposint, attrnonnegint, attrnonposint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, favorite_editor, )
-supermod.python_programmer.subclass = python_programmerSub
-# end class python_programmerSub
+class python_programmerTypeSub(supermod.python_programmerType):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, with_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, drcs_attr=None, gui_developer=None, favorite_editor=None, flowvalue=None, drcs=None):
+        super(python_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, with_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, drcs_attr, gui_developer, favorite_editor, flowvalue, drcs, )
+supermod.python_programmerType.subclass = python_programmerTypeSub
+# end class python_programmerTypeSub
 
 
-class java_programmerSub(supermod.java_programmer):
-    def __init__(self, vegetable=None, fruit=None, ratio=None, id=None, value=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrnegint=None, attrposint=None, attrnonnegint=None, attrnonposint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, status=None, nick_name=None, favorite_editor=None):
-        super(java_programmerSub, self).__init__(vegetable, fruit, ratio, id, value, name, interest, category, agent, promoter, description, language, area, attrnegint, attrposint, attrnonnegint, attrnonposint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eltoken, elshort, ellong, elparam, elarraytypes, status, nick_name, favorite_editor, )
-supermod.java_programmer.subclass = java_programmerSub
-# end class java_programmerSub
+class java_programmerTypeSub(supermod.java_programmerType):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, with_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None):
+        super(java_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, with_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, status, favorite_editor, datetime1, datetime2, datetime3, datetime4, datetime5, )
+supermod.java_programmerType.subclass = java_programmerTypeSub
+# end class java_programmerTypeSub
 
 
-class agentSub(supermod.agent):
+class agentTypeSub(supermod.agentType):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, extensiontype_=None):
+        super(agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, extensiontype_, )
+supermod.agentType.subclass = agentTypeSub
+# end class agentTypeSub
+
+
+class special_agentTypeSub(supermod.special_agentType):
     def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
-        super(agentSub, self).__init__(firstname, lastname, priority, info, vehicle, )
-supermod.agent.subclass = agentSub
-# end class agentSub
+        super(special_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, )
+supermod.special_agentType.subclass = special_agentTypeSub
+# end class special_agentTypeSub
 
 
-class special_agentSub(supermod.special_agent):
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None):
-        super(special_agentSub, self).__init__(firstname, lastname, priority, info, )
-supermod.special_agent.subclass = special_agentSub
-# end class special_agentSub
+class weird_agentTypeSub(supermod.weird_agentType):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
+        super(weird_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, )
+supermod.weird_agentType.subclass = weird_agentTypeSub
+# end class weird_agentTypeSub
 
 
-class boosterSub(supermod.booster):
-    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, classxx=None, other_value=None, type_=None, client_handler=None):
-        super(boosterSub, self).__init__(member_id, firstname, lastname, other_name, classxx, other_value, type_, client_handler, )
-supermod.booster.subclass = boosterSub
-# end class boosterSub
+class boosterTypeSub(supermod.boosterType):
+    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None):
+        super(boosterTypeSub, self).__init__(member_id, firstname, lastname, other_name, class_, other_value, type_, client_handler, )
+supermod.boosterType.subclass = boosterTypeSub
+# end class boosterTypeSub
 
 
-class client_handlerSub(supermod.client_handler):
-    def __init__(self, fullname=None, refid=None):
-        super(client_handlerSub, self).__init__(fullname, refid, )
-supermod.client_handler.subclass = client_handlerSub
-# end class client_handlerSub
+class infoTypeSub(supermod.infoType):
+    def __init__(self, name=None, type_=None, rating=None):
+        super(infoTypeSub, self).__init__(name, type_, rating, )
+supermod.infoType.subclass = infoTypeSub
+# end class infoTypeSub
 
 
-class infoSub(supermod.info):
-    def __init__(self, rating=None, type_=None, name=None, valueOf_=None):
-        super(infoSub, self).__init__(rating, type_, name, valueOf_, )
-supermod.info.subclass = infoSub
-# end class infoSub
-
-
-class vehicleSub(supermod.vehicle):
-    def __init__(self, wheelcount=None):
-        super(vehicleSub, self).__init__(wheelcount, )
-supermod.vehicle.subclass = vehicleSub
-# end class vehicleSub
+class vehicleTypeSub(supermod.vehicleType):
+    def __init__(self, wheelcount=None, extensiontype_=None):
+        super(vehicleTypeSub, self).__init__(wheelcount, extensiontype_, )
+supermod.vehicleType.subclass = vehicleTypeSub
+# end class vehicleTypeSub
 
 
 class automobileSub(supermod.automobile):
@@ -175,6 +155,13 @@ supermod.automobile.subclass = automobileSub
 # end class automobileSub
 
 
+class hot_agentSub(supermod.hot_agent):
+    def __init__(self, firstname='empty\\name', lastname='no \'last\' name', priority=None, startDate=None):
+        super(hot_agentSub, self).__init__(firstname, lastname, priority, startDate, )
+supermod.hot_agent.subclass = hot_agentSub
+# end class hot_agentSub
+
+
 class airplaneSub(supermod.airplane):
     def __init__(self, wheelcount=None, pilotname=None):
         super(airplaneSub, self).__init__(wheelcount, pilotname, )
@@ -182,67 +169,109 @@ supermod.airplane.subclass = airplaneSub
 # end class airplaneSub
 
 
+class client_handlerTypeSub(supermod.client_handlerType):
+    def __init__(self, fullname=None, refid=None):
+        super(client_handlerTypeSub, self).__init__(fullname, refid, )
+supermod.client_handlerType.subclass = client_handlerTypeSub
+# end class client_handlerTypeSub
+
 
 def get_root_tag(node):
     tag = supermod.Tag_pattern_.match(node.tag).groups()[-1]
     rootClass = None
-    if hasattr(supermod, tag):
+    rootClass = supermod.GDSClassesMapping.get(tag)
+    if rootClass is None and hasattr(supermod, tag):
         rootClass = getattr(supermod, tag)
     return tag, rootClass
 
 
-def parse(inFilename):
-    doc = parsexml_(inFilename)
+def parse(inFilename, silence=False):
+    parser = None
+    doc = parsexml_(inFilename, parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'people'
-        rootClass = supermod.people
+        rootTag = 'peopleType'
+        rootClass = supermod.peopleType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag,
-        namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"')
-    doc = None
+    if not silence:
+        sys.stdout.write('<?xml version="1.0" ?>\n')
+        rootObj.export(
+            sys.stdout, 0, name_=rootTag,
+            namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"',
+            pretty_print=True)
     return rootObj
 
 
-def parseString(inString):
-    from StringIO import StringIO
-    doc = parsexml_(StringIO(inString))
+def parseEtree(inFilename, silence=False):
+    parser = None
+    doc = parsexml_(inFilename, parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'people'
-        rootClass = supermod.people
+        rootTag = 'peopleType'
+        rootClass = supermod.peopleType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('<?xml version="1.0" ?>\n')
-    rootObj.export(sys.stdout, 0, name_=rootTag,
-        namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"')
+    mapping = {}
+    rootElement = rootObj.to_etree(None, name_=rootTag, mapping_=mapping)
+    reverse_mapping = rootObj.gds_reverse_node_mapping(mapping)
+    if not silence:
+        content = etree_.tostring(
+            rootElement, pretty_print=True,
+            xml_declaration=True, encoding="utf-8")
+        sys.stdout.write(content)
+        sys.stdout.write('\n')
+    return rootObj, rootElement, mapping, reverse_mapping
+
+
+def parseString(inString, silence=False):
+    if sys.version_info.major == 2:
+        from StringIO import StringIO
+    else:
+        from io import BytesIO as StringIO
+    parser = None
+    doc = parsexml_(StringIO(inString), parser)
+    rootNode = doc.getroot()
+    rootTag, rootClass = get_root_tag(rootNode)
+    if rootClass is None:
+        rootTag = 'peopleType'
+        rootClass = supermod.peopleType
+    rootObj = rootClass.factory()
+    rootObj.build(rootNode)
+    # Enable Python to collect the space used by the DOM.
+    doc = None
+    if not silence:
+        sys.stdout.write('<?xml version="1.0" ?>\n')
+        rootObj.export(
+            sys.stdout, 0, name_=rootTag,
+            namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"')
     return rootObj
 
 
-def parseLiteral(inFilename):
-    doc = parsexml_(inFilename)
+def parseLiteral(inFilename, silence=False):
+    parser = None
+    doc = parsexml_(inFilename, parser)
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'people'
-        rootClass = supermod.people
+        rootTag = 'peopleType'
+        rootClass = supermod.peopleType
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
-    sys.stdout.write('#from peoplesup import *\n\n')
-    sys.stdout.write('import peoplesup as model_\n\n')
-    sys.stdout.write('rootObj = model_.people(\n')
-    rootObj.exportLiteral(sys.stdout, 0, name_="people")
-    sys.stdout.write(')\n')
+    if not silence:
+        sys.stdout.write('#from peoplesup import *\n\n')
+        sys.stdout.write('import peoplesup as model_\n\n')
+        sys.stdout.write('rootObj = model_.rootClass(\n')
+        rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
+        sys.stdout.write(')\n')
     return rootObj
 
 
@@ -250,8 +279,9 @@ USAGE_TEXT = """
 Usage: python ???.py <infilename>
 """
 
+
 def usage():
-    print USAGE_TEXT
+    print(USAGE_TEXT)
     sys.exit(1)
 
 
@@ -260,11 +290,9 @@ def main():
     if len(args) != 1:
         usage()
     infilename = args[0]
-    root = parse(infilename)
+    parse(infilename)
 
 
 if __name__ == '__main__':
     #import pdb; pdb.set_trace()
     main()
-
-

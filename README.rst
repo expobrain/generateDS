@@ -141,6 +141,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.18 (07/19/2018)
+
+- Fixes to the example code underneath `Demos/`.  Thanks to Witold
+  Jarzynka for reporting this.
+
 Version 2.29.17 (07/11/2018)
 
 - Merged pull request that generates enum classes for each simpleType.
@@ -148,7 +153,6 @@ Version 2.29.17 (07/11/2018)
 - Fix to generatedssuper.py -- (1) Added `on_delete` to Django
   ForeignKey declarations.  (2) Added relative import (dot) to
   generated admin.py.
-
 
 Version 2.29.16 (06/21/2018)
 

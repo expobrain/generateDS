@@ -1,5 +1,10 @@
+============
 XMLBehaviors
 ============
+
+*Under repair*
+
+*Notice:* The example in this directory is currently not working.
 
 This sub-directory contains a simple example of the use of
 the XMLBehavior capability of generateDS.py.
@@ -41,3 +46,4 @@ Files of interest in the directory/example are:
   instance documents.  It was used by generateDS.py to generate
   xmlbehavior.py and xmlbehavior_sub.py.
 
+.. vim:ft=rst:
