@@ -141,6 +141,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.19 (07/20/2018)
+
+- Merged pull request that makes generated enums for each simpleType
+  uppercase.  Thanks to Mustafa Şenol Coşar for this enhancement.
+- Added new command line option "--mixed-case-enums" to control
+  whether simpleType enums are changed to upper case.  The default
+  is True.
+
 Version 2.29.18 (07/19/2018)
 
 - Fixes to the example code underneath `Demos/`.  Thanks to Witold

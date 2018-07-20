@@ -12,7 +12,7 @@ generateDS -- Generate Data Structures from XML Schema
 
 .. version
 
-:revision: 2.29.18
+:revision: 2.29.19
 
 .. version
 
@@ -346,6 +346,8 @@ Here is the usage message displayed by ``generateDS.py``::
                                  search pattern and second is a replacement.
                                  Example: "[('[-:.]', '_'), ('^__', 'Special')]"
                                  Default: "[('[-:.]', '_')]"
+        --mixed-case-enums       If used, do not uppercase simpleType enums names.
+                                 Default is to make enum names uppercase.
         -q, --no-questions       Do not ask questions, for example,
                                  force overwrite.
         --no-warnings            Do not print warning messages.
@@ -693,6 +695,11 @@ cleanup-name-list=<replacement-map>
     ``[(':', 'colon'), ('-', 'dash'), ('.', 'dot')]``.
     
     The default when omitted is ``[('[-:.]', '_')]``.
+
+mixed-case-enums
+    Do not uppercase the names of simpleType enums.  The default (if
+    this option is omitted) is to make generated enum names
+    uppercase.
 
 q, no-questions
     Do not ask questions.  For example, if the "-f" command line

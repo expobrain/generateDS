@@ -124,6 +124,8 @@ Options:
                              search pattern and second is a replacement.
                              Example: "[('[-:.]', '_'), ('^__', 'Special')]"
                              Default: "[('[-:.]', '_')]"
+    --mixed-case-enums       If used, do not uppercase simpleType enums names.
+                             Default is to make enum names uppercase.
     -q, --no-questions       Do not ask questions, for example,
                              force overwrite.
     --no-warnings            Do not print warning messages.
@@ -225,7 +227,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.18'
+VERSION = '2.29.19'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -7253,7 +7255,8 @@ def main():
         ModuleSuffix, UseOldSimpleTypeValidators, \
         UseGeneratedssuperLookup, UseSourceFileAsModuleName, \
         PreserveCdataTags, CleanupNameList, \
-        NoWarnings, AlwaysExportDefault
+        NoWarnings, AlwaysExportDefault, \
+        UppercaseEnums
     outputText = True
     args = sys.argv[1:]
     try:
@@ -7275,7 +7278,7 @@ def main():
                 'use-source-file-as-module-name',
                 'no-warnings',
                 'no-collect-includes', 'no-redefine-groups',
-                'always-export-default',
+                'always-export-default', 'mixed-case-enums',
             ])
     except getopt.GetoptError:
         usage()
@@ -7298,6 +7301,7 @@ def main():
     catalogFilename = None
     noCollectIncludes = False
     noRedefineGroups = False
+    UppercaseEnums = True
     for option in options:
         if option[0] == '--session':
             sessionFilename = option[1]
@@ -7480,6 +7484,8 @@ def main():
             noRedefineGroups = True
         elif option[0] == '--always-export-default':
             AlwaysExportDefault = True
+        elif option[0] == '--mixed-case-enums':
+            UppercaseEnums = False
     if showVersion:
         print('generateDS.py version %s' % VERSION)
         sys.exit(0)
