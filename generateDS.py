@@ -257,6 +257,14 @@ Namespacedef = ''
 NoNameSpaceDefs = False
 CleanupNameList = [(re.compile('[-:.]'), '_')]
 PythonIdentifierRegex = re.compile('^[_A-Za-z][_A-Za-z0-9]*$')
+UppercaseEnums = True
+NameSeparationRegexList = [
+    re.compile("(.)([A-Z][a-z]+)"),
+    re.compile("(.)([0-9]+)"),
+    re.compile("([0-9])([a-zA-Z])"),
+    re.compile("([a-z])([A-Z])")
+    ]
+NonAlphaNumRegex = re.compile(r"\W+")
 
 NamespacesDict = {}
 SchemaNamespaceDict = {}
@@ -6675,7 +6683,17 @@ def generateFromTree(wrt, prefix, elements, processed):
 
 
 def generateSimpleTypes(wrt, prefix, simpleTypeDict):
+    global UppercaseEnums
+    def value2Uppercase(value):
+        if UppercaseEnums:
+            # This will turn a string 'fooBar123' to 'foo_Bar_123'
+            for regex in NameSeparationRegexList:
+                value = regex.sub(r"\1_\2", value)
+            value = value.upper()
+            value = NonAlphaNumRegex.sub("", value)
+        return value
     def validateIdentifier(name):
+        name = value2Uppercase(name)
         validPythonIdentifier = True
         if not PythonIdentifierRegex.match(name):
             # it may start with a digit

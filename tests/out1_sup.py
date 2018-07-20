@@ -727,10 +727,10 @@ def _cast(typ, value):
 
 
 class ArrayTypes(object):
-    float_='float'
-    int='int'
-    Name='Name'
-    token='token'
+    FLOAT='float'
+    INT='int'
+    NAME='Name'
+    TOKEN='token'
 
 
 class people(GeneratedsSuper):
