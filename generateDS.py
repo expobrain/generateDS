@@ -264,6 +264,7 @@ NameSeparationRegexList = [
     re.compile("([0-9])([a-zA-Z])"),
     re.compile("([a-z])([A-Z])")
     ]
+NonAlphaNumRegex = re.compile(r"\W+")
 
 NamespacesDict = {}
 SchemaNamespaceDict = {}
@@ -6689,6 +6690,7 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             for regex in NameSeparationRegexList:
                 value = regex.sub(r"\1_\2", value)
             value = value.upper()
+            value = NonAplhaNumRegex.sub("", value)
         return value
     def validateIdentifier(name):
         name = value2Uppercase(name)
