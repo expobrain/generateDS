@@ -6690,7 +6690,7 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             for regex in NameSeparationRegexList:
                 value = regex.sub(r"\1_\2", value)
             value = value.upper()
-            value = NonAplhaNumRegex.sub("", value)
+            value = NonAlphaNumRegex.sub("", value)
         return value
     def validateIdentifier(name):
         name = value2Uppercase(name)
