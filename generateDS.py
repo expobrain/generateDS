@@ -227,7 +227,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.19'
+VERSION = '2.29.20'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -265,7 +265,7 @@ NameSeparationRegexList = [
     re.compile("(.)([0-9]+)"),
     re.compile("([0-9])([a-zA-Z])"),
     re.compile("([a-z])([A-Z])")
-    ]
+]
 NonAlphaNumRegex = re.compile(r"\W+")
 
 NamespacesDict = {}
@@ -617,7 +617,7 @@ class SimpleTypeElement(XschemaElementBase):
 
     def getAttributeGroup(self):
         return self.attributeGroup
-    
+
     def getEnumValues(self):
         return self.values
 
@@ -4400,7 +4400,8 @@ def processValidatorBodyRestrictions(
         pats1 = restriction.xpath(
             "./xs:pattern/@value", namespaces=ns)
         if pats1:
-            pats2 = [u'^{}$'.format(replaceVbars(p1)) for p1 in pats1]
+            #pats2 = [u'^{}$'.format(replaceVbars(p1)) for p1 in pats1]
+            pats2 = [u'^{}$'.format(p1) for p1 in pats1]
             patterns1.append(pats2)
         #
         # Check for and generate code for each possible type of restriction.
@@ -5581,7 +5582,8 @@ class GeneratedsSuper(object):
         time_parts = input_data.split('.')
         if len(time_parts) > 1:
             micro_seconds = int(float('0.' + time_parts[1]) * 1000000)
-            input_data = '%s.%s' % (time_parts[0], micro_seconds, )
+            input_data = '%s.%s' % (
+                time_parts[0], "{{}}".format(micro_seconds).rjust(6, "0"), )
             dt = datetime_.datetime.strptime(
                 input_data, '%Y-%m-%dT%H:%M:%S.%f')
         else:
@@ -5669,14 +5671,15 @@ class GeneratedsSuper(object):
                     _svalue += '{{0:02d}}:{{1:02d}}'.format(hours, minutes)
         return _svalue
     def gds_validate_simple_patterns(self, patterns, target):
-        # pat is a list of lists of strings/patterns.  We should:
-        # - AND the outer elements
-        # - OR the inner elements
+        # pat is a list of lists of strings/patterns.
+        # The target value must match at least one of the patterns
+        # in order for the test to succeed.
         found1 = True
         for patterns1 in patterns:
             found2 = False
             for patterns2 in patterns1:
-                if re_.search(patterns2, target) is not None:
+                mo = re_.fullmatch(patterns2, target)
+                if mo is not None:
                     found2 = True
                     break
             if not found2:
@@ -6686,6 +6689,7 @@ def generateFromTree(wrt, prefix, elements, processed):
 
 def generateSimpleTypes(wrt, prefix, simpleTypeDict):
     global UppercaseEnums
+
     def value2Uppercase(value):
         if UppercaseEnums:
             # This will turn a string 'fooBar123' to 'foo_Bar_123'
@@ -6694,9 +6698,9 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             value = value.upper()
             value = NonAlphaNumRegex.sub("", value)
         return value
+
     def validateIdentifier(name):
         name = value2Uppercase(name)
-        validPythonIdentifier = True
         if not PythonIdentifierRegex.match(name):
             # it may start with a digit
             escapedName = '_%s' % name
@@ -6705,13 +6709,13 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             else:
                 raise ValueError
         return NameTable.get(name, name)
-    
+
     def writeEnumClass(simpleType):
         enumValues = simpleType.getEnumValues()
         if enumValues:
             output = ""
             try:
-                className = validateIdentifier(simpleType.getName())
+                validateIdentifier(simpleType.getName())
             except ValueError:
                 err_msg(
                     '*** The Simple Type name "%s" is not a valid '
@@ -6729,7 +6733,7 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
                 output += '    %s=\'%s\'\n' % (validatedEnumValue, enumValue)
             wrt(output)
             wrt('\n\n')
-        
+
     for simpletypeName in sorted(simpleTypeDict.keys()):
         if ':' not in simpletypeName:
             continue

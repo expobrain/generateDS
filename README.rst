@@ -141,6 +141,17 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.20 (07/30/2018)
+
+- Fix to generation of regular expression used to validate a
+  simpleType.  Before this fix, we were replacing "|" with "$|^" to
+  implement alternatives in a test.  By removing that replacement,
+  we leave it up to the author of the schema to encode that test of
+  alternatives into the regular expression.  Thanks to Bernd
+  Zimmermann for reporting this issue.
+- Fixes to formatting of xs:dateTime.  Thanks to Tim Hulst for this
+  fix.
+
 Version 2.29.19 (07/20/2018)
 
 - Merged pull request that makes generated enums for each simpleType
