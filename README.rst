@@ -141,6 +141,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.21 (08/02/2018)
+
+- Fix to use of simpleType name.  Needed to do cleanupName() on the
+  class name.  Thanks to Daniel Ramirez for reporting this and for
+  suggesting a fix.
+
 Version 2.29.20 (07/30/2018)
 
 - Fix to generation of regular expression used to validate a

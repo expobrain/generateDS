@@ -341,8 +341,8 @@ class GeneratedsSuper(object):
         for patterns1 in patterns:
             found2 = False
             for patterns2 in patterns1:
-                mo = re_.fullmatch(patterns2, target)
-                if mo is not None:
+                mo = re_.search(patterns2, target)
+                if mo is not None and len(mo.group(0)) == len(target):
                     found2 = True
                     break
             if not found2:

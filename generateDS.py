@@ -227,7 +227,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.20'
+VERSION = '2.29.21'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -5678,8 +5678,8 @@ class GeneratedsSuper(object):
         for patterns1 in patterns:
             found2 = False
             for patterns2 in patterns1:
-                mo = re_.fullmatch(patterns2, target)
-                if mo is not None:
+                mo = re_.search(patterns2, target)
+                if mo is not None and len(mo.group(0)) == len(target):
                     found2 = True
                     break
             if not found2:
@@ -6712,16 +6712,17 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
 
     def writeEnumClass(simpleType):
         enumValues = simpleType.getEnumValues()
+        simpleTypeName = cleanupName(simpleType.getName())
         if enumValues:
             output = ""
             try:
-                validateIdentifier(simpleType.getName())
+                validateIdentifier(simpleTypeName)
             except ValueError:
                 err_msg(
                     '*** The Simple Type name "%s" is not a valid '
-                    'Python identifier\n' % simpleType.getName())
+                    'Python identifier\n' % simpleTypeName)
                 return
-            output += 'class %s(object):\n' % simpleType.getName()
+            output += 'class %s(object):\n' % simpleTypeName
             for enumValue in enumValues:
                 try:
                     validatedEnumValue = validateIdentifier(enumValue)
