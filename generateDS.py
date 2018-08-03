@@ -227,7 +227,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.21'
+VERSION = '2.29.22'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -442,6 +442,8 @@ def set_type_constants(nameSpace):
     IDTypes = (IDREFSType, IDREFType, IDType, )
     SchemaType = nameSpace + 'schema'
     SequenceType = nameSpace + 'sequence'
+    # The firist item in this tuple is special.
+    # It's the primary string type and must stay in the first position.
     StringType = (
         nameSpace + 'string',
         nameSpace + 'duration',
@@ -1440,12 +1442,15 @@ class XschemaAttribute:
     def __init__(
             self,
             name,
-            data_type='xs:string',
+            data_type=None,
             use='optional',
             default=None,
             fixed=None):
         self.name = name
-        self.data_type = data_type
+        if data_type is None:
+            self.data_type = StringType[0]
+        else:
+            self.data_type = data_type
         self.use = use
         self.default = default
         # treat `fixed` the same as `default`.

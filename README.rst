@@ -141,6 +141,15 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.22 (08/03/2018)
+
+- Fixed exception that occurs when (1) an xs:complexType is defined
+  with an attribute and a child that have the same name and (2) the
+  "-a" command line flag is used to specify a schema namespace
+  prefix other than the default (e.g. generateDS.py -a "xsd:" ...).
+  Thanks to Daniel Ramirez for tracking down and analyzing this
+  issue.
+
 Version 2.29.21 (08/02/2018)
 
 - Fix to use of simpleType name.  Needed to do cleanupName() on the
