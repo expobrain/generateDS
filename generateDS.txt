@@ -12,7 +12,7 @@ generateDS -- Generate Data Structures from XML Schema
 
 .. version
 
-:revision: 2.29.22
+:revision: 2.29.23
 
 .. version
 
@@ -348,6 +348,14 @@ Here is the usage message displayed by ``generateDS.py``::
                                  Default: "[('[-:.]', '_')]"
         --mixed-case-enums       If used, do not uppercase simpleType enums names.
                                  Default is to make enum names uppercase.
+        --create-mandatory-children
+                                 If a child is defined with minOccurs="1" and
+                                 maxOccurs="1" and the child is xs:complexType
+                                 and the child is not defined with
+                                 xs:simpleContent, then in the element's
+                                 constructor generate code that automatically
+                                 creates an instance of the child.  The default
+                                 is False, i.e. do not automatically create child.
         -q, --no-questions       Do not ask questions, for example,
                                  force overwrite.
         --no-warnings            Do not print warning messages.
@@ -700,6 +708,16 @@ mixed-case-enums
     Do not uppercase the names of simpleType enums.  The default (if
     this option is omitted) is to make generated enum names
     uppercase.
+
+create-mandatory-children
+    If a child is defined with minOccurs="1" and maxOccurs="1" and
+    the child is xs:complexType and the child is not defined with
+    xs:simpleContent, then in the element's constructor generate
+    code that automatically creates an instance of the child.  The
+    default is False, i.e. do not automatically create the child.
+    Note that if a value for the child's parameter is passed to the
+    constructor (which overrides the default value of None), then
+    the constructor will not create an instance.
 
 q, no-questions
     Do not ask questions.  For example, if the "-f" command line

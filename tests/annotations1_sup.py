@@ -912,7 +912,7 @@ class document2Type(GeneratedsSuper):
             comments_ = child_.text
             comments_ = self.gds_validate_string(comments_, node, 'comments')
             self.comments = comments_
-        elif nodeName_ == 'rating':
+        elif nodeName_ == 'rating' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1011,7 +1011,7 @@ class document3Type(GeneratedsSuper):
             comments_ = child_.text
             comments_ = self.gds_validate_string(comments_, node, 'comments')
             self.comments = comments_
-        elif nodeName_ == 'rating':
+        elif nodeName_ == 'rating' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

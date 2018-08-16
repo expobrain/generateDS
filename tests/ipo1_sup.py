@@ -1067,7 +1067,7 @@ class item(GeneratedsSuper):
             productName_ = child_.text
             productName_ = self.gds_validate_string(productName_, node, 'productName')
             self.productName = productName_
-        elif nodeName_ == 'quantity':
+        elif nodeName_ == 'quantity' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1077,7 +1077,7 @@ class item(GeneratedsSuper):
                 raise_parse_error(child_, 'requires positiveInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'quantity')
             self.quantity = ival_
-        elif nodeName_ == 'USPrice':
+        elif nodeName_ == 'USPrice' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1371,7 +1371,7 @@ class USAddress(Address):
             self.state = state_
             # validate type USState
             self.validate_USState(self.state)
-        elif nodeName_ == 'zip':
+        elif nodeName_ == 'zip' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

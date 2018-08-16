@@ -833,7 +833,7 @@ class dummy(GeneratedsSuper):
             except ValueError as exp:
                 raise_parse_error(node, 'Bad integer attribute: %s' % exp)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'test_ref_element':
+        if nodeName_ == 'test_ref_element' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -841,7 +841,7 @@ class dummy(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'test_ref_element')
             self.test_ref_element = ival_
-        elif nodeName_ == 'test_normal_element':
+        elif nodeName_ == 'test_normal_element' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

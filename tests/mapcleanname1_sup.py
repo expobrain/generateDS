@@ -831,7 +831,7 @@ class complex_type01(GeneratedsSuper):
             string_value01_ = child_.text
             string_value01_ = self.gds_validate_string(string_value01_, node, 'string_value01')
             self.string_value01 = string_value01_
-        elif nodeName_ == 'integer_value01':
+        elif nodeName_ == 'integer_value01' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -839,7 +839,7 @@ class complex_type01(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value01')
             self.integer_value01.append(ival_)
-        elif nodeName_ == 'float_value01':
+        elif nodeName_ == 'float_value01' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -961,7 +961,7 @@ class complex_type02(GeneratedsSuper):
             string_value02_ = child_.text
             string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
             self.string_value02 = string_value02_
-        elif nodeName_ == 'integer_value02':
+        elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -969,7 +969,7 @@ class complex_type02(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
-        elif nodeName_ == 'float_value02':
+        elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1079,7 +1079,7 @@ class complex_type03(complex_type02):
             string_value03_ = child_.text
             string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
             self.string_value03 = string_value03_
-        elif nodeName_ == 'integer_value03':
+        elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1087,7 +1087,7 @@ class complex_type03(complex_type02):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
-        elif nodeName_ == 'float_value03':
+        elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1205,7 +1205,7 @@ class type_(GeneratedsSuper):
             string_value02_ = child_.text
             string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
             self.string_value02 = string_value02_
-        elif nodeName_ == 'integer_value02':
+        elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1213,7 +1213,7 @@ class type_(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
-        elif nodeName_ == 'float_value02':
+        elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1323,7 +1323,7 @@ class complex_type04(type_):
             string_value03_ = child_.text
             string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
             self.string_value03 = string_value03_
-        elif nodeName_ == 'integer_value03':
+        elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1331,7 +1331,7 @@ class complex_type04(type_):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
-        elif nodeName_ == 'float_value03':
+        elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1449,7 +1449,7 @@ class build_(GeneratedsSuper):
             string_value02_ = child_.text
             string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
             self.string_value02 = string_value02_
-        elif nodeName_ == 'integer_value02':
+        elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1457,7 +1457,7 @@ class build_(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
-        elif nodeName_ == 'float_value02':
+        elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1567,7 +1567,7 @@ class complex_type05(build_):
             string_value03_ = child_.text
             string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
             self.string_value03 = string_value03_
-        elif nodeName_ == 'integer_value03':
+        elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1575,7 +1575,7 @@ class complex_type05(build_):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
-        elif nodeName_ == 'float_value03':
+        elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)

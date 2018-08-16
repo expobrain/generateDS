@@ -1361,7 +1361,7 @@ class simpleOneType(GeneratedsSuper):
             self.integer_range_1_value_with_default = value
             self.validate_integer_range_1_st(self.integer_range_1_value_with_default)    # validate type integer_range_1_st
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'integer_range_1_value':
+        if nodeName_ == 'integer_range_1_value' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1383,7 +1383,7 @@ class simpleOneType(GeneratedsSuper):
             self.token_enum_value = token_enum_value_
             # validate type token_enum_st
             self.validate_token_enum_st(self.token_enum_value)
-        elif nodeName_ == 'integer_range_incl_value':
+        elif nodeName_ == 'integer_range_incl_value' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1393,7 +1393,7 @@ class simpleOneType(GeneratedsSuper):
             self.integer_range_incl_value = ival_
             # validate type integer_range_incl_st
             self.validate_integer_range_incl_st(self.integer_range_incl_value)
-        elif nodeName_ == 'integer_range_excl_value':
+        elif nodeName_ == 'integer_range_excl_value' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1415,7 +1415,7 @@ class simpleOneType(GeneratedsSuper):
             self.length_value = length_value_
             # validate type length_st
             self.validate_length_st(self.length_value)
-        elif nodeName_ == 'totalDigits_value':
+        elif nodeName_ == 'totalDigits_value' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1509,7 +1509,7 @@ class simpleOneType(GeneratedsSuper):
             self.unicode_pattern_value = unicode_pattern_value_
             # validate type unicode_pattern_st
             self.validate_unicode_pattern_st(self.unicode_pattern_value)
-        elif nodeName_ == 'anonymous_float_value':
+        elif nodeName_ == 'anonymous_float_value' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1519,7 +1519,7 @@ class simpleOneType(GeneratedsSuper):
             self.anonymous_float_value = fval_
             # validate type anonymous_float_valueType
             self.validate_anonymous_float_valueType(self.anonymous_float_value)
-        elif nodeName_ == 'primative_integer':
+        elif nodeName_ == 'primative_integer' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1527,7 +1527,7 @@ class simpleOneType(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'primative_integer')
             self.primative_integer = ival_
-        elif nodeName_ == 'primative_float':
+        elif nodeName_ == 'primative_float' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)

@@ -1055,7 +1055,7 @@ class nestedType(GeneratedsSuper):
             nested2_ = child_.text
             nested2_ = self.gds_validate_string(nested2_, node, 'nested2')
             self.nested2.append(nested2_)
-        elif nodeName_ == 'nested3':
+        elif nodeName_ == 'nested3' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

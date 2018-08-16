@@ -141,6 +141,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.23 (08/16/2018)
+
+- Added new command line option "--create-mandatory-children".  If a
+  child is defined with minOccurs="1" and maxOccurs="1" and the
+  child is xs:complexType and the child is not defined with
+  xs:simpleContent, then in the element's constructor generate code
+  that automatically creates an instance of the child.  Thanks to
+  Vincent Helfre for analyzing this issue and providing guidance
+  toward a solution.
+
 Version 2.29.22 (08/03/2018)
 
 - Fixed exception that occurs when (1) an xs:complexType is defined

@@ -126,6 +126,14 @@ Options:
                              Default: "[('[-:.]', '_')]"
     --mixed-case-enums       If used, do not uppercase simpleType enums names.
                              Default is to make enum names uppercase.
+    --create-mandatory-children
+                             If a child is defined with minOccurs="1" and
+                             maxOccurs="1" and the child is xs:complexType
+                             and the child is not defined with
+                             xs:simpleContent, then in the element's
+                             constructor generate code that automatically
+                             creates an instance of the child.  The default
+                             is False, i.e. do not automatically create child.
     -q, --no-questions       Do not ask questions, for example,
                              force overwrite.
     --no-warnings            Do not print warning messages.
@@ -227,7 +235,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.22'
+VERSION = '2.29.23'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -253,6 +261,7 @@ NoQuestions = False
 NoDates = False
 NoVersion = False
 AlwaysExportDefault = False
+CreateMandatoryChildren = False
 Dirpath = []
 ExternalEncoding = ''
 Namespacedef = ''
@@ -3707,7 +3716,8 @@ def generateBuildStandard_1(
             childType == NonPositiveIntegerType or
             childType == NegativeIntegerType or
             childType == NonNegativeIntegerType):
-        wrt("        %s nodeName_ == '%s':\n" % (keyword, origName, ))
+        wrt("        %s nodeName_ == '%s' and child_.text:\n" % (
+            keyword, origName, ))
         wrt("            sval_ = child_.text\n")
         wrt("            try:\n")
         wrt("                ival_ = int(sval_)\n")
@@ -3756,7 +3766,8 @@ def generateBuildStandard_1(
     elif (childType == FloatType or
             childType == DoubleType or
             childType == DecimalType):
-        wrt("        %s nodeName_ == '%s':\n" % (keyword, origName, ))
+        wrt("        %s nodeName_ == '%s' and child_.text:\n" % (
+            keyword, origName, ))
         wrt("            sval_ = child_.text\n")
         wrt("            try:\n")
         wrt("                fval_ = float(sval_)\n")
@@ -4239,6 +4250,11 @@ def generateCtor(wrt, prefix, element):
         _log.debug("Constructor child: %s" % name)
         _log.debug("Dump: %s" % child.__dict__)
         childType = child.getType()
+        childTypeDef = ElementDict.get(childType)
+        if childTypeDef is not None:
+            childSimpleContent = childTypeDef.getSimpleContent()
+        else:
+            childSimpleContent = False
         if childType == AnyTypeIdentifier:
             if child.getMaxOccurs() > 1:
                 wrt('        if anytypeobjs_ is None:\n')
@@ -4281,6 +4297,18 @@ def generateCtor(wrt, prefix, element):
             if child.getMaxOccurs() > 1:
                 wrt('        if %s is None:\n' % (mbrname, ))
                 wrt('            self.%s = []\n' % (name, ))
+                wrt('        else:\n')
+                wrt('            self.%s = %s\n' % (name, mbrname))
+            elif (CreateMandatoryChildren and
+                  child.getMinOccurs() == 1 and
+                  child.getMaxOccurs() == 1 and
+                  child.isComplex() and
+                  not childSimpleContent):
+                wrt('        if %s is None:\n' % (mbrname, ))
+                className = child.getType()
+                className = cleanupName(className)
+                wrt('            self.%s = globals()["%s"]()\n' % (
+                    name, className, ))
                 wrt('        else:\n')
                 wrt('            self.%s = %s\n' % (name, mbrname))
             else:
@@ -7266,7 +7294,7 @@ def main():
         UseGeneratedssuperLookup, UseSourceFileAsModuleName, \
         PreserveCdataTags, CleanupNameList, \
         NoWarnings, AlwaysExportDefault, \
-        UppercaseEnums
+        UppercaseEnums, CreateMandatoryChildren
     outputText = True
     args = sys.argv[1:]
     try:
@@ -7289,6 +7317,7 @@ def main():
                 'no-warnings',
                 'no-collect-includes', 'no-redefine-groups',
                 'always-export-default', 'mixed-case-enums',
+                'create-mandatory-children',
             ])
     except getopt.GetoptError:
         usage()
@@ -7312,6 +7341,7 @@ def main():
     noCollectIncludes = False
     noRedefineGroups = False
     UppercaseEnums = True
+    CreateMandatoryChildren = False
     for option in options:
         if option[0] == '--session':
             sessionFilename = option[1]
@@ -7496,6 +7526,8 @@ def main():
             AlwaysExportDefault = True
         elif option[0] == '--mixed-case-enums':
             UppercaseEnums = False
+        elif option[0] == '--create-mandatory-children':
+            CreateMandatoryChildren = True
     if showVersion:
         print('generateDS.py version %s' % VERSION)
         sys.exit(0)

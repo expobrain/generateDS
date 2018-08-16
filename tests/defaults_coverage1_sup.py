@@ -1039,7 +1039,7 @@ class DefaultType1(GeneratedsSuper):
     def buildAttributes(self, node, attrs, already_processed):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'default01':
+        if nodeName_ == 'default01' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1047,7 +1047,7 @@ class DefaultType1(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'default01')
             self.default01 = ival_
-        elif nodeName_ == 'normal01':
+        elif nodeName_ == 'normal01' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1063,7 +1063,7 @@ class DefaultType1(GeneratedsSuper):
             normal02_ = child_.text
             normal02_ = self.gds_validate_string(normal02_, node, 'normal02')
             self.normal02 = normal02_
-        elif nodeName_ == 'default03':
+        elif nodeName_ == 'default03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1071,7 +1071,7 @@ class DefaultType1(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'default03')
             self.default03 = fval_
-        elif nodeName_ == 'normal03':
+        elif nodeName_ == 'normal03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1079,7 +1079,7 @@ class DefaultType1(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'normal03')
             self.normal03 = fval_
-        elif nodeName_ == 'default04':
+        elif nodeName_ == 'default04' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1087,7 +1087,7 @@ class DefaultType1(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'default04')
             self.default04 = fval_
-        elif nodeName_ == 'normal04':
+        elif nodeName_ == 'normal04' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1374,7 +1374,7 @@ class DefaultType2(GeneratedsSuper):
     def buildAttributes(self, node, attrs, already_processed):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'default01':
+        if nodeName_ == 'default01' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1382,7 +1382,7 @@ class DefaultType2(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'default01')
             self.default01 = ival_
-        elif nodeName_ == 'normal01':
+        elif nodeName_ == 'normal01' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1398,7 +1398,7 @@ class DefaultType2(GeneratedsSuper):
             normal02_ = child_.text
             normal02_ = self.gds_validate_string(normal02_, node, 'normal02')
             self.normal02 = normal02_
-        elif nodeName_ == 'default03':
+        elif nodeName_ == 'default03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1406,7 +1406,7 @@ class DefaultType2(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'default03')
             self.default03 = fval_
-        elif nodeName_ == 'normal03':
+        elif nodeName_ == 'normal03' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1414,7 +1414,7 @@ class DefaultType2(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'normal03')
             self.normal03 = fval_
-        elif nodeName_ == 'default04':
+        elif nodeName_ == 'default04' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1422,7 +1422,7 @@ class DefaultType2(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'default04')
             self.default04 = fval_
-        elif nodeName_ == 'normal04':
+        elif nodeName_ == 'normal04' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)

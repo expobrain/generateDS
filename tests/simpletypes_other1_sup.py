@@ -1117,7 +1117,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
             datetime5_ = child_.text
             datetime5_ = self.gds_validate_string(datetime5_, node, 'datetime5')
             self.datetime5 = datetime5_
-        elif nodeName_ == 'integerVal1':
+        elif nodeName_ == 'integerVal1' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1125,7 +1125,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'integerVal1')
             self.integerVal1 = ival_
-        elif nodeName_ == 'integerVal2':
+        elif nodeName_ == 'integerVal2' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1161,7 +1161,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires boolean')
             ival_ = self.gds_validate_boolean(ival_, node, 'booleanVal2')
             self.booleanVal2.append(ival_)
-        elif nodeName_ == 'decimalVal1':
+        elif nodeName_ == 'decimalVal1' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1169,7 +1169,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'decimalVal1')
             self.decimalVal1 = fval_
-        elif nodeName_ == 'decimalVal2':
+        elif nodeName_ == 'decimalVal2' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1177,7 +1177,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'decimalVal2')
             self.decimalVal2.append(fval_)
-        elif nodeName_ == 'doubleVal1':
+        elif nodeName_ == 'doubleVal1' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1185,7 +1185,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'doubleVal1')
             self.doubleVal1 = fval_
-        elif nodeName_ == 'doubleVal2':
+        elif nodeName_ == 'doubleVal2' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1193,7 +1193,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'doubleVal2')
             self.doubleVal2.append(fval_)
-        elif nodeName_ == 'floatVal1':
+        elif nodeName_ == 'floatVal1' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -1201,7 +1201,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'floatVal1')
             self.floatVal1 = fval_
-        elif nodeName_ == 'floatVal2':
+        elif nodeName_ == 'floatVal2' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)

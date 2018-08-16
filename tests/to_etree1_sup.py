@@ -1192,7 +1192,7 @@ class personType(GeneratedsSuper):
             interest_ = child_.text
             interest_ = self.gds_validate_string(interest_, node, 'interest')
             self.interest.append(interest_)
-        elif nodeName_ == 'category':
+        elif nodeName_ == 'category' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1220,7 +1220,7 @@ class personType(GeneratedsSuper):
             description_ = child_.text
             description_ = self.gds_validate_string(description_, node, 'description')
             self.description = description_
-        elif nodeName_ == 'range':
+        elif nodeName_ == 'range' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1542,7 +1542,7 @@ class programmerType(personType):
             email_ = child_.text
             email_ = self.gds_validate_string(email_, node, 'email')
             self.email = email_
-        elif nodeName_ == 'elposint':
+        elif nodeName_ == 'elposint' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1552,7 +1552,7 @@ class programmerType(personType):
                 raise_parse_error(child_, 'requires positiveInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elposint')
             self.elposint = ival_
-        elif nodeName_ == 'elnonposint':
+        elif nodeName_ == 'elnonposint' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1562,7 +1562,7 @@ class programmerType(personType):
                 raise_parse_error(child_, 'requires nonPositiveInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elnonposint')
             self.elnonposint = ival_
-        elif nodeName_ == 'elnegint':
+        elif nodeName_ == 'elnegint' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1572,7 +1572,7 @@ class programmerType(personType):
                 raise_parse_error(child_, 'requires negativeInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elnegint')
             self.elnegint = ival_
-        elif nodeName_ == 'elnonnegint':
+        elif nodeName_ == 'elnonnegint' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1602,7 +1602,7 @@ class programmerType(personType):
                 eltoken_ = ""
             eltoken_ = self.gds_validate_string(eltoken_, node, 'eltoken')
             self.eltoken = eltoken_
-        elif nodeName_ == 'elshort':
+        elif nodeName_ == 'elshort' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1610,7 +1610,7 @@ class programmerType(personType):
                 raise_parse_error(child_, 'requires integer: %s' % exp)
             ival_ = self.gds_validate_integer(ival_, node, 'elshort')
             self.elshort = ival_
-        elif nodeName_ == 'ellong':
+        elif nodeName_ == 'ellong' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -1864,7 +1864,7 @@ class python_programmerType(programmerType):
             favorite_editor_ = child_.text
             favorite_editor_ = self.gds_validate_string(favorite_editor_, node, 'favorite_editor')
             self.favorite_editor = favorite_editor_
-        elif nodeName_ == 'flowvalue':
+        elif nodeName_ == 'flowvalue' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -2122,7 +2122,7 @@ class agentType(GeneratedsSuper):
             lastname_ = child_.text
             lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
             self.lastname = lastname_
-        elif nodeName_ == 'priority':
+        elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2240,7 +2240,7 @@ class special_agentType(agentType):
             lastname_ = child_.text
             lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
             self.lastname = lastname_
-        elif nodeName_ == 'priority':
+        elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2340,7 +2340,7 @@ class weird_agentType(agentType):
             lastname_ = child_.text
             lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
             self.lastname = lastname_
-        elif nodeName_ == 'priority':
+        elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2487,7 +2487,7 @@ class boosterType(GeneratedsSuper):
             lastname_ = child_.text
             lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
             self.lastname = lastname_
-        elif nodeName_ == 'other-name':
+        elif nodeName_ == 'other-name' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2495,7 +2495,7 @@ class boosterType(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'other_name')
             self.other_name = fval_
-        elif nodeName_ == 'class':
+        elif nodeName_ == 'class' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2503,7 +2503,7 @@ class boosterType(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'class')
             self.class_ = fval_
-        elif nodeName_ == 'other-value':
+        elif nodeName_ == 'other-value' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2511,7 +2511,7 @@ class boosterType(GeneratedsSuper):
                 raise_parse_error(child_, 'requires float or double: %s' % exp)
             fval_ = self.gds_validate_float(fval_, node, 'other_value')
             self.other_value.append(fval_)
-        elif nodeName_ == 'type':
+        elif nodeName_ == 'type' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2667,7 +2667,7 @@ class vehicleType(GeneratedsSuper):
             already_processed.add('xsi:type')
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'wheelcount':
+        if nodeName_ == 'wheelcount' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
@@ -2884,7 +2884,7 @@ class hot_agent(GeneratedsSuper):
             lastname_ = child_.text
             lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
             self.lastname = lastname_
-        elif nodeName_ == 'priority':
+        elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
             try:
                 fval_ = float(sval_)
@@ -2961,7 +2961,7 @@ class client_handlerType(GeneratedsSuper):
             fullname_ = child_.text
             fullname_ = self.gds_validate_string(fullname_, node, 'fullname')
             self.fullname = fullname_
-        elif nodeName_ == 'refid':
+        elif nodeName_ == 'refid' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

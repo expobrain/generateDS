@@ -814,7 +814,7 @@ class PersonType(GeneratedsSuper):
     def buildAttributes(self, node, attrs, already_processed):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'personId':
+        if nodeName_ == 'personId' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)

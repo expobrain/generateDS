@@ -1106,7 +1106,7 @@ class CatalogType(GeneratedsSuper):
             name_ = child_.text
             name_ = self.gds_validate_string(name_, node, 'name')
             self.name = name_
-        elif nodeName_ == 'catagory':
+        elif nodeName_ == 'catagory' and child_.text:
             sval_ = child_.text
             try:
                 ival_ = int(sval_)
