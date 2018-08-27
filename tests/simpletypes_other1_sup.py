@@ -763,7 +763,7 @@ class simpleTypeTestsType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='simpleTypeTestsType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='simpleTypeTestsType', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('simpleTypeTestsType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -774,25 +774,25 @@ class simpleTypeTestsType(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='simpleTypeTestsType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTypeTestsType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='simpleTypeTestsType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='simpleTypeTestsType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='simpleTypeTestsType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='simpleTypeTestsType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='simpleTypeTestsType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='simpleTypeTestsType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         for simpleTypeTest_ in self.simpleTypeTest:
-            simpleTypeTest_.export(outfile, level, namespace_, name_='simpleTypeTest', pretty_print=pretty_print)
+            simpleTypeTest_.export(outfile, level, namespaceprefix_, name_='simpleTypeTest', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -996,7 +996,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='simpleTypeTestDefs', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='simpleTypeTestDefs', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('simpleTypeTestDefs')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1007,19 +1007,19 @@ class simpleTypeTestDefs(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='simpleTypeTestDefs')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTypeTestDefs')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='simpleTypeTestDefs', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='simpleTypeTestDefs', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='simpleTypeTestDefs'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='simpleTypeTestDefs'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='simpleTypeTestDefs', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='simpleTypeTestDefs', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

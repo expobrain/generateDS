@@ -763,7 +763,7 @@ class oneperType00_1(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='oneperType00_1', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='oneperType00_1', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('oneperType00_1')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -774,27 +774,27 @@ class oneperType00_1(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='oneperType00_1')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='oneperType00_1')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='oneperType00_1', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='oneperType00_1', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='oneperType00_1'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='oneperType00_1'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='oneperType00_1', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='oneperType00_1', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.inner01 is not None:
-            self.inner01.export(outfile, level, namespace_, name_='inner01', pretty_print=pretty_print)
+            self.inner01.export(outfile, level, namespaceprefix_, name_='inner01', pretty_print=pretty_print)
         if self.inner02 is not None:
-            self.inner02.export(outfile, level, namespace_, name_='inner02', pretty_print=pretty_print)
+            self.inner02.export(outfile, level, namespaceprefix_, name_='inner02', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

@@ -235,7 +235,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.23'
+VERSION = '2.29.24'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2067,9 +2067,6 @@ def generateExportFn_1(wrt, child, name, namespace, fill):
                 "input_name='%s')), eol_))\n" % \
                 (fill, child_ns, name, child_ns, name, mappedName, name, )
         else:
-            namespace = 'namespace_'
-            if child.prefix and 'ref' in child.attrs:
-                namespace = "'%s:'" % child.prefix
             s1 = "%s            outfile.write('<%s%s>%%s</%s%s>%%s' %% " \
                 "(self.gds_encode(self.gds_format_string(" \
                 "quote_xml(self.%s), " \
@@ -2153,27 +2150,27 @@ def generateExportFn_1(wrt, child, name, namespace, fill):
         # name_type_problem
         if False:        # name == child.getType():
             s1 = "%s            self.%s.export(outfile, level, " \
-                "namespace_, pretty_print=pretty_print)\n" % \
+                "namespaceprefix_, pretty_print=pretty_print)\n" % \
                 (fill, mappedName)
         else:
-            namespace = 'namespace_'
+            namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
-                namespace += "='%s:'" % child.prefix
+                namespaceprefix += "='%s:'" % child.prefix
             s1 = "%s            self.%s.export(outfile, level, %s, " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
-                (fill, mappedName, namespace, name)
+                (fill, mappedName, namespaceprefix, name)
         wrt(s1)
 # end generateExportFn_1
 
 
-def generateExportFn_2(wrt, child, name, namespace, fill):
+def generateExportFn_2(wrt, child, name, namespaceprefix, fill):
     cleanName = cleanupName(name)
     mappedName = mapName(cleanName)
     child_type = child.getType()
     if child.prefix and 'ref' in child.attrs:
         child_ns = "%s:" % child.prefix
     else:
-        child_ns = namespace
+        child_ns = namespaceprefix
     # fix_simpletype
     wrt("%s    for %s_ in self.%s:\n" % (fill, cleanName, mappedName, ))
     if child_type == DateTimeType:
@@ -2275,27 +2272,27 @@ def generateExportFn_2(wrt, child, name, namespace, fill):
     else:
         # name_type_problem
         if False:        # name == child.getType():
-            s1 = "%s        %s_.export(outfile, level, namespace_, " \
+            s1 = "%s        %s_.export(outfile, level, namespaceprefix_, " \
                 "pretty_print=pretty_print)\n" % (fill, cleanName)
         else:
-            namespace = 'namespace_'
+            namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
-                namespace += "='%s:'" % child.prefix
+                namespaceprefix += "='%s:'" % child.prefix
             s1 = "%s        %s_.export(outfile, level, %s, " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
-                (fill, cleanName, namespace, name)
+                (fill, cleanName, namespaceprefix, name)
         wrt(s1)
 # end generateExportFn_2
 
 
-def generateExportFn_3(wrt, child, name, namespace, fill):
+def generateExportFn_3(wrt, child, name, namespaceprefix, fill):
     cleanName = cleanupName(name)
     mappedName = mapName(cleanName)
     child_type = child.getType()
     if child.prefix and 'ref' in child.attrs:
         child_ns = "%s:" % child.prefix
     else:
-        child_ns = namespace
+        child_ns = namespaceprefix
     # fix_simpletype
     default = child.getDefault()
     if child_type == DateTimeType:
@@ -2454,16 +2451,17 @@ def generateExportFn_3(wrt, child, name, namespace, fill):
         wrt("%s        if self.%s is not None:\n" % (fill, mappedName))
         # name_type_problem
         if False:        # name == child.getType():
-            s1 = "%s            self.%s.export(" \
-                "outfile, level, namespace_, pretty_print=pretty_print)\n" % \
-                (fill, mappedName)
+            s1 = ("%s            self.%s.export("
+                  "outfile, level, namespaceprefix_, "
+                  "pretty_print=pretty_print)\n" % (
+                      fill, mappedName))
         else:
-            namespace = 'namespace_'
+            namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
-                namespace += "='%s:'" % child.prefix
+                namespaceprefix += "='%s:'" % child.prefix
             s1 = "%s            self.%s.export(outfile, level, %s, " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
-                (fill, mappedName, namespace, name)
+                (fill, mappedName, namespaceprefix, name)
         wrt(s1)
 # end generateExportFn_3
 
@@ -2776,7 +2774,7 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
             wrt('%sif not fromsubclass_:\n' % (fill, ))
             wrt("%s    for item_ in self.content_:\n" % (fill, ))
             wrt("%s        item_.export(outfile, level, item_.name, "
-                "namespace_, pretty_print=pretty_print)\n" % (fill, ))
+                "namespaceprefix_, pretty_print=pretty_print)\n" % (fill, ))
         wrt('%sif pretty_print:\n' % (fill, ))
         wrt("%s    eol_ = '\\n'\n" % (fill, ))
         wrt('%selse:\n' % (fill, ))
@@ -2799,13 +2797,13 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
                 if abstract_child and child.getMaxOccurs() > 1:
                     wrt("%sfor %s_ in self.%s:\n" % (
                         fill, name, name,))
-                    wrt("%s    %s_.export(outfile, level, namespace_, "
+                    wrt("%s    %s_.export(outfile, level, namespaceprefix_, "
                         "pretty_print=pretty_print)\n" % (
                             fill, name, ))
                 elif abstract_child:
                     wrt("%sif self.%s is not None:\n" % (fill, name, ))
                     wrt("%s    self.%s.export(outfile, level, "
-                        "namespace_, "
+                        "namespaceprefix_, "
                         "pretty_print=pretty_print)\n" % (
                             fill, name, ))
                 elif child.getMaxOccurs() > 1:
@@ -2822,11 +2820,11 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
             if any_type_child.getMaxOccurs() > 1:
                 wrt('        for obj_ in self.anytypeobjs_:\n')
                 wrt("            obj_.export(outfile, level, "
-                    "namespace_, pretty_print=pretty_print)\n")
+                    "namespaceprefix_, pretty_print=pretty_print)\n")
             else:
                 wrt('        if self.anytypeobjs_ is not None:\n')
                 wrt("            self.anytypeobjs_.export(outfile, "
-                    "level, namespace_, pretty_print=pretty_print)\n")
+                    "level, namespaceprefix_, pretty_print=pretty_print)\n")
     return hasChildren
 # end generateExportChildren
 
@@ -2873,7 +2871,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
             ns_def = 'xmlns:{}'.format(ns_prefix[0])
             if ns_def not in nameSpacesDef:
                 nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
-    wrt("    def export(self, outfile, level, namespace_='%s', "
+    wrt("    def export(self, outfile, level, namespaceprefix_='%s', "
         "name_='%s', namespacedef_='%s', pretty_print=True):\n" %
         (namespace, encodedname, nameSpacesDef))
     wrt("        imported_ns_def_ = GenerateDSNamespaceDefs_.get"
@@ -2888,11 +2886,11 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     wrt("        if self.original_tagname_ is not None:\n")
     wrt("            name_ = self.original_tagname_\n")
     wrt('        showIndent(outfile, level, pretty_print)\n')
-    wrt("        outfile.write('<%s%s%s' % (namespace_, name_, "
+    wrt("        outfile.write('<%s%s%s' % (namespaceprefix_, name_, "
         "namespacedef_ and ' ' + namespacedef_ or '', ))\n")
     wrt("        already_processed = set()\n")
     wrt("        self.exportAttributes(outfile, level, "
-        "already_processed, namespace_, name_='%s')\n" %
+        "already_processed, namespaceprefix_, name_='%s')\n" %
         (encodedname, ))
     # fix_abstract
     if base and base in ElementDict:
@@ -2903,10 +2901,11 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     if childCount == 0 and element.isMixed():
         wrt("        outfile.write('>')\n")
         wrt("        self.exportChildren(outfile, level + 1, "
-            "namespace_, name_, pretty_print=pretty_print)\n")
+            "namespaceprefix_, name_, pretty_print=pretty_print)\n")
         wrt("        outfile.write(self.convert_unicode("
             "self.valueOf_))\n")
-        wrt("        outfile.write('</%s%s>%s' % (namespace_, name_, eol_))\n")
+        wrt("        outfile.write('</%s%s>%s' % ("
+            "namespaceprefix_, name_, eol_))\n")
     else:
         wrt("        if self.hasContent_():\n")
         # Added to keep value on the same line as the tag no children.
@@ -2918,17 +2917,17 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         else:
             wrt("            outfile.write('>%s' % (eol_, ))\n")
         wrt("            self.exportChildren(outfile, level + 1, "
-            "namespace_='%s', name_='%s', pretty_print=pretty_print)\n" %
+            "namespaceprefix_='%s', name_='%s', pretty_print=pretty_print)\n" %
             (namespace, encodedname))
         # Put a condition on the indent to require children.
         if childCount != 0:
             wrt('            showIndent(outfile, level, pretty_print)\n')
-        wrt("            outfile.write('</%s%s>%s' % (namespace_, "
+        wrt("            outfile.write('</%s%s>%s' % (namespaceprefix_, "
             "name_, eol_))\n")
         wrt("        else:\n")
         wrt("            outfile.write('/>%s' % (eol_, ))\n")
     wrt("    def exportAttributes(self, outfile, level, "
-        "already_processed, namespace_='%s', name_='%s'):\n" %
+        "already_processed, namespaceprefix_='%s', name_='%s'):\n" %
         (namespace, encodedname, ))
     hasAttributes = 0
     if element.getAnyAttribute():
@@ -2969,12 +2968,13 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         hasAttributes += 1
         elName = element.getCleanName()
         wrt("        super(%s%s, self).exportAttributes("
-            "outfile, level, already_processed, namespace_, name_='%s')\n" %
-            (prefix, elName, encodedname, ))
+            "outfile, level, already_processed, "
+            "namespaceprefix_, name_='%s')\n" % (
+                prefix, elName, encodedname, ))
     hasAttributes += generateExportAttributes(wrt, element, hasAttributes)
     if hasAttributes == 0:
         wrt("        pass\n")
-    wrt("    def exportChildren(self, outfile, level, namespace_='%s', "
+    wrt("    def exportChildren(self, outfile, level, namespaceprefix_='%s', "
         "name_='%s', fromsubclass_=False, pretty_print=True):\n" %
         (namespace, encodedname, ))
     hasChildren = 0
@@ -2985,7 +2985,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         hasChildren += 1
         elName = element.getCleanName()
         wrt("        super(%s%s, self).exportChildren(outfile, level, "
-            "namespace_, name_, True, pretty_print=pretty_print)\n" %
+            "namespaceprefix_, name_, True, pretty_print=pretty_print)\n" %
             (prefix, elName, ))
     hasChildren += generateExportChildren(wrt, element, hasChildren, namespace)
     if childCount == 0:   # and not element.isMixed():

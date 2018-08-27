@@ -778,7 +778,7 @@ class dataKind(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='dataType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='dataType', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('dataType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -789,33 +789,33 @@ class dataKind(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='dataType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dataType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='dataType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dataType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='dataType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dataType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='dataType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dataType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.data1 is not None:
-            self.data1.export(outfile, level, namespace_, name_='data1', pretty_print=pretty_print)
+            self.data1.export(outfile, level, namespaceprefix_, name_='data1', pretty_print=pretty_print)
         if self.data2 is not None:
-            self.data2.export(outfile, level, namespace_, name_='data2', pretty_print=pretty_print)
+            self.data2.export(outfile, level, namespaceprefix_, name_='data2', pretty_print=pretty_print)
         if self.data3 is not None:
-            self.data3.export(outfile, level, namespace_, name_='data3', pretty_print=pretty_print)
+            self.data3.export(outfile, level, namespaceprefix_, name_='data3', pretty_print=pretty_print)
         if self.data4 is not None:
-            self.data4.export(outfile, level, namespace_, name_='data4', pretty_print=pretty_print)
+            self.data4.export(outfile, level, namespaceprefix_, name_='data4', pretty_print=pretty_print)
         if self.data5 is not None:
-            self.data5.export(outfile, level, namespace_, name_='data5', pretty_print=pretty_print)
+            self.data5.export(outfile, level, namespaceprefix_, name_='data5', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -883,7 +883,7 @@ class data1Kind(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='data1Type', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='data1Type', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('data1Type')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -894,19 +894,19 @@ class data1Kind(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='data1Type')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='data1Type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='data1Type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='data1Type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='data1Type'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='data1Type'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='data1Type', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='data1Type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -960,7 +960,7 @@ class MlassData2(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='TypeData2', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='TypeData2', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('TypeData2')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -971,19 +971,19 @@ class MlassData2(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='TypeData2')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='TypeData2')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='TypeData2', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='TypeData2', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='TypeData2'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='TypeData2'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='TypeData2', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='TypeData2', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1037,7 +1037,7 @@ class RealTypeData3(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='RealTypeData3', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='RealTypeData3', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('RealTypeData3')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1048,19 +1048,19 @@ class RealTypeData3(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='RealTypeData3')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='RealTypeData3')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='RealTypeData3', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='RealTypeData3', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='RealTypeData3'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='RealTypeData3'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='RealTypeData3', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='RealTypeData3', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1114,7 +1114,7 @@ class MMMMMMdataKind(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='AABBCCdataType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='AABBCCdataType', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('AABBCCdataType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1125,19 +1125,19 @@ class MMMMMMdataKind(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='AABBCCdataType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='AABBCCdataType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='AABBCCdataType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='AABBCCdataType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='AABBCCdataType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='AABBCCdataType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='AABBCCdataType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='AABBCCdataType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1191,7 +1191,7 @@ class dataTypeNNNMNNN(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='dataTypeXYZAXYZ', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='dataTypeXYZAXYZ', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('dataTypeXYZAXYZ')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1202,19 +1202,19 @@ class dataTypeNNNMNNN(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='dataTypeXYZAXYZ')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dataTypeXYZAXYZ')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='dataTypeXYZAXYZ', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dataTypeXYZAXYZ', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='dataTypeXYZAXYZ'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dataTypeXYZAXYZ'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='dataTypeXYZAXYZ', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dataTypeXYZAXYZ', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

@@ -778,7 +778,7 @@ class complex_type01(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='complex-type01', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='complex-type01', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('complex-type01')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -789,19 +789,19 @@ class complex_type01(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type01')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type01')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='complex-type01', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='complex-type01', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='complex-type01'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type01'):
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='complex-type01', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='complex-type01', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -816,7 +816,7 @@ class complex_type01(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<float_value01>%s</float_value01>%s' % (self.gds_format_float(self.float_value01, input_name='float_value01'), eol_))
         if self.field01 is not None:
-            self.field01.export(outfile, level, namespace_, name_='field01', pretty_print=pretty_print)
+            self.field01.export(outfile, level, namespaceprefix_, name_='field01', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -903,7 +903,7 @@ class complex_type02(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='complex-type02', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='complex-type02', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('complex-type02')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -914,23 +914,23 @@ class complex_type02(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type02')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type02')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='complex-type02', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='complex-type02', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='complex-type02'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type02'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='complex-type02', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='complex-type02', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1027,7 +1027,7 @@ class complex_type03(complex_type02):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='complex-type03', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='complex-type03', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('complex-type03')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1038,20 +1038,20 @@ class complex_type03(complex_type02):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type03')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type03')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='complex-type03', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='complex-type03', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='complex-type03'):
-        super(complex_type03, self).exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type03')
-    def exportChildren(self, outfile, level, namespace_='', name_='complex-type03', fromsubclass_=False, pretty_print=True):
-        super(complex_type03, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type03'):
+        super(complex_type03, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type03')
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='complex-type03', fromsubclass_=False, pretty_print=True):
+        super(complex_type03, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1147,7 +1147,7 @@ class type_(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='type', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='type', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('type')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1158,23 +1158,23 @@ class type_(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='type')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='type'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='type'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='type', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1271,7 +1271,7 @@ class complex_type04(type_):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='complex-type04', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='complex-type04', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('complex-type04')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1282,20 +1282,20 @@ class complex_type04(type_):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type04')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type04')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='complex-type04', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='complex-type04', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='complex-type04'):
-        super(complex_type04, self).exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type04')
-    def exportChildren(self, outfile, level, namespace_='', name_='complex-type04', fromsubclass_=False, pretty_print=True):
-        super(complex_type04, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type04'):
+        super(complex_type04, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type04')
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='complex-type04', fromsubclass_=False, pretty_print=True):
+        super(complex_type04, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1391,7 +1391,7 @@ class build_(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='build', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='build', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('build')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1402,23 +1402,23 @@ class build_(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='build')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='build')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='build', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='build', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='build'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='build'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespace_='', name_='build', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='build', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1515,7 +1515,7 @@ class complex_type05(build_):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='complex-type05', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='complex-type05', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('complex-type05')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1526,20 +1526,20 @@ class complex_type05(build_):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type05')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type05')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='complex-type05', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='complex-type05', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='complex-type05'):
-        super(complex_type05, self).exportAttributes(outfile, level, already_processed, namespace_, name_='complex-type05')
-    def exportChildren(self, outfile, level, namespace_='', name_='complex-type05', fromsubclass_=False, pretty_print=True):
-        super(complex_type05, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type05'):
+        super(complex_type05, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type05')
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='complex-type05', fromsubclass_=False, pretty_print=True):
+        super(complex_type05, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:

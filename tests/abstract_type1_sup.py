@@ -763,7 +763,7 @@ class carrierType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='target:', name_='carrierType', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='target:', name_='carrierType', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('carrierType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -774,25 +774,25 @@ class carrierType(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='carrierType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='carrierType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='target:', name_='carrierType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='target:', name_='carrierType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='target:', name_='carrierType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='carrierType'):
         pass
-    def exportChildren(self, outfile, level, namespace_='target:', name_='carrierType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='target:', name_='carrierType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         for fleet_ in self.fleet:
-            fleet_.export(outfile, level, namespace_, pretty_print=pretty_print)
+            fleet_.export(outfile, level, namespaceprefix_, pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -853,7 +853,7 @@ class Vehicle(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='target:', name_='Vehicle', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='target:', name_='Vehicle', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Vehicle')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -864,22 +864,22 @@ class Vehicle(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Vehicle')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Vehicle')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='target:', name_='Vehicle', pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            self.exportChildren(outfile, level + 1, namespaceprefix_='target:', name_='Vehicle', pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='target:', name_='Vehicle'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='Vehicle'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespace_='target:', name_='Vehicle', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='target:', name_='Vehicle', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -924,7 +924,7 @@ class Car(Vehicle):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='target:', name_='Car', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='target:', name_='Car', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Car')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -935,19 +935,19 @@ class Car(Vehicle):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Car')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Car')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='target:', name_='Car', pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            self.exportChildren(outfile, level + 1, namespaceprefix_='target:', name_='Car', pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='target:', name_='Car'):
-        super(Car, self).exportAttributes(outfile, level, already_processed, namespace_, name_='Car')
-    def exportChildren(self, outfile, level, namespace_='target:', name_='Car', fromsubclass_=False, pretty_print=True):
-        super(Car, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='Car'):
+        super(Car, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Car')
+    def exportChildren(self, outfile, level, namespaceprefix_='target:', name_='Car', fromsubclass_=False, pretty_print=True):
+        super(Car, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()
@@ -990,7 +990,7 @@ class Plane(Vehicle):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='target:', name_='Plane', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='target:', name_='Plane', namespacedef_='xmlns:target="http://cars.example.com/schema"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Plane')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1001,19 +1001,19 @@ class Plane(Vehicle):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Plane')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Plane')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='target:', name_='Plane', pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            self.exportChildren(outfile, level + 1, namespaceprefix_='target:', name_='Plane', pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='target:', name_='Plane'):
-        super(Plane, self).exportAttributes(outfile, level, already_processed, namespace_, name_='Plane')
-    def exportChildren(self, outfile, level, namespace_='target:', name_='Plane', fromsubclass_=False, pretty_print=True):
-        super(Plane, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='Plane'):
+        super(Plane, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Plane')
+    def exportChildren(self, outfile, level, namespaceprefix_='target:', name_='Plane', fromsubclass_=False, pretty_print=True):
+        super(Plane, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()

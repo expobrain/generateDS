@@ -141,6 +141,14 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.24 (08/27/2018)
+
+- Changed name of parameter in the export method from "namespace_"
+  to "namespaceprefix_" in an attempt to reduce confusion about its
+  use.  It's value, if it has one, should be something like "abc:".
+  Thanks to Bernd Zimmermann for his advice and encouragement on
+  this.
+
 Version 2.29.23 (08/16/2018)
 
 - Added new command line option "--create-mandatory-children".  If a
@@ -2264,3 +2272,8 @@ The following enhancements and fixes remain to be done:
 Dave Kuhlman
 dkuhlman@davekuhlman.org
 http://www.davekuhlman.org
+
+.. A few dummy targets to eliminate docutils processing errors:
+
+.. _namespace:
+.. _namespaceprefix:

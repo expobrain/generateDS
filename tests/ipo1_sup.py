@@ -786,7 +786,7 @@ class PurchaseOrderType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='PurchaseOrderType', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='PurchaseOrderType', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('PurchaseOrderType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -797,34 +797,34 @@ class PurchaseOrderType(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='PurchaseOrderType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='PurchaseOrderType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='PurchaseOrderType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='PurchaseOrderType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='PurchaseOrderType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='PurchaseOrderType'):
         if self.orderDate is not None and 'orderDate' not in already_processed:
             already_processed.add('orderDate')
             outfile.write(' orderDate="%s"' % self.gds_format_date(self.orderDate, input_name='orderDate'))
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='PurchaseOrderType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='PurchaseOrderType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.shipTo is not None:
-            self.shipTo.export(outfile, level, namespace_, name_='shipTo', pretty_print=pretty_print)
+            self.shipTo.export(outfile, level, namespaceprefix_, name_='shipTo', pretty_print=pretty_print)
         if self.billTo is not None:
-            self.billTo.export(outfile, level, namespace_, name_='billTo', pretty_print=pretty_print)
+            self.billTo.export(outfile, level, namespaceprefix_, name_='billTo', pretty_print=pretty_print)
         if self.comment is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<ipo:comment>%s</ipo:comment>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), eol_))
         if self.items is not None:
-            self.items.export(outfile, level, namespace_, name_='items', pretty_print=pretty_print)
+            self.items.export(outfile, level, namespaceprefix_, name_='items', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -900,7 +900,7 @@ class Items(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='Items', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='Items', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Items')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -911,25 +911,25 @@ class Items(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Items')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Items')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='Items', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Items', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='Items'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='Items'):
         pass
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='Items', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='Items', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         for item_ in self.item:
-            item_.export(outfile, level, namespace_, name_='item', pretty_print=pretty_print)
+            item_.export(outfile, level, namespaceprefix_, name_='item', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1005,7 +1005,7 @@ class item(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='item', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='item', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('item')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1016,21 +1016,21 @@ class item(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='item')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='item')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='item', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='item', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='item'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='item'):
         if self.partNum is not None and 'partNum' not in already_processed:
             already_processed.add('partNum')
             outfile.write(' partNum=%s' % (quote_attrib(self.partNum), ))
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='item', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='item', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1122,7 +1122,7 @@ class quantity(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='quantity', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='quantity', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('quantity')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1133,18 +1133,18 @@ class quantity(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='quantity')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='quantity')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='quantity', pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='quantity', pretty_print=pretty_print)
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='quantity'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='quantity'):
         pass
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='quantity', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='quantity', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -1202,7 +1202,7 @@ class Address(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='Address', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='Address', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Address')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1213,23 +1213,23 @@ class Address(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='Address')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Address')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='Address', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Address', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='Address'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='Address'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='Address', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='Address', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1320,7 +1320,7 @@ class USAddress(Address):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='USAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='USAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('USAddress')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1331,20 +1331,20 @@ class USAddress(Address):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='USAddress')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='USAddress', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='USAddress', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='USAddress'):
-        super(USAddress, self).exportAttributes(outfile, level, already_processed, namespace_, name_='USAddress')
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='USAddress', fromsubclass_=False, pretty_print=True):
-        super(USAddress, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='USAddress'):
+        super(USAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='USAddress', fromsubclass_=False, pretty_print=True):
+        super(USAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1420,7 +1420,7 @@ class UKAddress(Address):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='ipo:', name_='UKAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', name_='UKAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('UKAddress')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1431,23 +1431,23 @@ class UKAddress(Address):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='UKAddress')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='UKAddress')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='ipo:', name_='UKAddress', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='UKAddress', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='ipo:', name_='UKAddress'):
-        super(UKAddress, self).exportAttributes(outfile, level, already_processed, namespace_, name_='UKAddress')
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='UKAddress'):
+        super(UKAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='UKAddress')
         if self.exportCode != 1 and 'exportCode' not in already_processed:
             already_processed.add('exportCode')
             outfile.write(' exportCode="%s"' % self.gds_format_integer(self.exportCode, input_name='exportCode'))
-    def exportChildren(self, outfile, level, namespace_='ipo:', name_='UKAddress', fromsubclass_=False, pretty_print=True):
-        super(UKAddress, self).exportChildren(outfile, level, namespace_, name_, True, pretty_print=pretty_print)
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='UKAddress', fromsubclass_=False, pretty_print=True):
+        super(UKAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:

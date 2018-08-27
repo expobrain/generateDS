@@ -771,7 +771,7 @@ class dummy(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='dummy', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='dummy', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('dummy')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -782,24 +782,24 @@ class dummy(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='dummy')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dummy')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='dummy', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dummy', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='dummy'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dummy'):
         if self.test_ref_attr is not None and 'test_ref_attr' not in already_processed:
             already_processed.add('test_ref_attr')
             outfile.write(' test_ref_attr="%s"' % self.gds_format_integer(self.test_ref_attr, input_name='test_ref_attr'))
         if self.test_normal_attr is not None and 'test_normal_attr' not in already_processed:
             already_processed.add('test_normal_attr')
             outfile.write(' test_normal_attr="%s"' % self.gds_format_integer(self.test_normal_attr, input_name='test_normal_attr'))
-    def exportChildren(self, outfile, level, namespace_='', name_='dummy', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dummy', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

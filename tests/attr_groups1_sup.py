@@ -793,7 +793,7 @@ class GetUserReq(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespace_='', name_='GetUserReq', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', name_='GetUserReq', namespacedef_='', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('GetUserReq')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -804,17 +804,17 @@ class GetUserReq(GeneratedsSuper):
         if self.original_tagname_ is not None:
             name_ = self.original_tagname_
         showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespace_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespace_, name_='GetUserReq')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='GetUserReq')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespace_='', name_='GetUserReq', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='GetUserReq', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespace_, name_, eol_))
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespace_='', name_='GetUserReq'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='GetUserReq'):
         if self.sequence is not None and 'sequence' not in already_processed:
             already_processed.add('sequence')
             outfile.write(' sequence="%s"' % self.gds_format_integer(self.sequence, input_name='sequence'))
@@ -842,7 +842,7 @@ class GetUserReq(GeneratedsSuper):
         if self.value08 is not None and 'value08' not in already_processed:
             already_processed.add('value08')
             outfile.write(' value08=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.value08), input_name='value08')), ))
-    def exportChildren(self, outfile, level, namespace_='', name_='GetUserReq', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='GetUserReq', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
