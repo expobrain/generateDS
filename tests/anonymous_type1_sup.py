@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -730,9 +730,9 @@ def _cast(typ, value):
 
 class FooList(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('Foo', 'FooType1', 0, 0, {u'type': u'FooType1', u'name': u'Foo'}, None),
-        MemberSpec_('Bar', 'BarType2', 0, 0, {u'type': u'BarType2', u'name': u'Bar'}, None),
-        MemberSpec_('Baz', 'BazType3', 0, 0, {u'type': u'BazType3', u'name': u'Baz'}, None),
+        MemberSpec_('Foo', 'FooType1', 0, 0, {'name': 'Foo', 'type': 'FooType1'}, None),
+        MemberSpec_('Bar', 'BarType2', 0, 0, {'name': 'Bar', 'type': 'BarType2'}, None),
+        MemberSpec_('Baz', 'BazType3', 0, 0, {'name': 'Baz', 'type': 'BazType3'}, None),
     ]
     subclass = None
     superclass = None
@@ -831,7 +831,7 @@ class FooList(GeneratedsSuper):
 
 class FooType1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('FooType', ['FooTypeType', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'FooType'}, None),
+        MemberSpec_('FooType', ['FooTypeType', 'xs:string'], 0, 0, {'name': 'FooType', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -918,7 +918,7 @@ class FooType1(GeneratedsSuper):
 
 class BarType2(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('BarType', ['BarTypeType', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'BarType'}, None),
+        MemberSpec_('BarType', ['BarTypeType', 'xs:string'], 0, 0, {'name': 'BarType', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1005,7 +1005,7 @@ class BarType2(GeneratedsSuper):
 
 class BazType3(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('BazType', ['BazTypeType', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'BazType'}, None),
+        MemberSpec_('BazType', ['BazTypeType', 'xs:string'], 0, 0, {'name': 'BazType', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

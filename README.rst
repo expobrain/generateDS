@@ -141,6 +141,19 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.29.25 (10/05/2018)
+
+- Added a section to the documentation (generateDS.txt) for types
+  derived by extension, i.e. types that use the xsi:type attribute
+  in the XML instance document.  Thanks to Justin McManus for
+  motivating me to learn about this and for providing guidance and
+  pointers along the way.
+- Added a unit test for types derived by extension.
+- Converted unit tests so that we can use Python 3 not Python 2.
+- Changes in ``generateDS.py`` so that it uses the ``six``
+  compatibility library to handle the ``urllib`` name changes
+  between Python 2 and 3.
+
 Version 2.29.24 (08/27/2018)
 
 - Changed name of parameter in the export method from "namespace_"

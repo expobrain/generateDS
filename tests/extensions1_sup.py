@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -979,8 +979,8 @@ class singleExtremeDate(GeneratedsSuper):
 
 class containerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('simplefactoid', 'simpleFactoidType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleFactoidType', u'name': u'simplefactoid'}, None),
-        MemberSpec_('mixedfactoid', 'mixedFactoidType', 0, 0, {u'type': u'mixedFactoidType', u'name': u'mixedfactoid'}, None),
+        MemberSpec_('simplefactoid', 'simpleFactoidType', 1, 0, {'name': 'simplefactoid', 'type': 'simpleFactoidType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('mixedfactoid', 'mixedFactoidType', 0, 0, {'name': 'mixedfactoid', 'type': 'mixedFactoidType'}, None),
     ]
     subclass = None
     superclass = None
@@ -1074,7 +1074,7 @@ class containerType(GeneratedsSuper):
 
 class simpleFactoidType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('relation', ['RelationType', 'RelationType2', 'RelationType3', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'relation'}, None),
+        MemberSpec_('relation', ['RelationType', 'RelationType2', 'RelationType3', 'xs:string'], 0, 0, {'name': 'relation', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1184,7 +1184,7 @@ class simpleFactoidType(GeneratedsSuper):
 
 class mixedFactoidType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('relation', ['RelationType', 'RelationType2', 'RelationType3', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'relation'}, None),
+        MemberSpec_('relation', ['RelationType', 'RelationType2', 'RelationType3', 'xs:string'], 0, 0, {'name': 'relation', 'type': 'xs:string'}, None),
         MemberSpec_('valueOf_', [], 0),
     ]
     subclass = None

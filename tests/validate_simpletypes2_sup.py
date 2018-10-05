@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -737,11 +737,11 @@ class token_enum_st(object):
 
 class containerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('sample1', 'simpleOneType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleOneType', u'name': u'sample1'}, None),
-        MemberSpec_('sample2_bad', 'simpleOneType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleOneType', u'name': u'sample2_bad'}, None),
-        MemberSpec_('sample3_bad', 'simpleOneType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleOneType', u'name': u'sample3_bad'}, None),
-        MemberSpec_('sample4_bad', 'simpleOneType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleOneType', u'name': u'sample4_bad'}, None),
-        MemberSpec_('sample2', 'simpleTwoType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleTwoType', u'name': u'sample2'}, None),
+        MemberSpec_('sample1', 'simpleOneType', 1, 0, {'name': 'sample1', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('sample2_bad', 'simpleOneType', 1, 0, {'name': 'sample2_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('sample3_bad', 'simpleOneType', 1, 0, {'name': 'sample3_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('sample4_bad', 'simpleOneType', 1, 0, {'name': 'sample4_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('sample2', 'simpleTwoType', 1, 0, {'name': 'sample2', 'type': 'simpleTwoType', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
@@ -893,31 +893,31 @@ class containerType(GeneratedsSuper):
 class simpleOneType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('integer_range_1_value_with_default', 'integer_range_1_st', 0, 1, {'use': 'optional'}),
-        MemberSpec_('integer_range_1_value', ['integer_range_1_st', 'integer_range_2_st', 'xs:integer'], 0, 0, {u'default': u'5', u'type': u'xs:integer', u'name': u'integer_range_1_value'}, None),
-        MemberSpec_('pattern_value', ['pattern_st', 'pattern_1_st', 'min_length_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'pattern_value'}, None),
-        MemberSpec_('token_enum_value', ['token_enum_st', 'xs:NMTOKEN'], 0, 0, {u'type': u'xs:NMTOKEN', u'name': u'token_enum_value'}, None),
-        MemberSpec_('integer_range_incl_value', ['integer_range_incl_st', 'xs:integer'], 0, 0, {u'type': u'xs:integer', u'name': u'integer_range_incl_value'}, None),
-        MemberSpec_('integer_range_excl_value', ['integer_range_excl_st', 'xs:integer'], 0, 0, {u'type': u'xs:integer', u'name': u'integer_range_excl_value'}, None),
-        MemberSpec_('min_max_length_value', ['min_max_length_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'min_max_length_value'}, None),
-        MemberSpec_('length_value', ['length_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'length_value'}, None),
-        MemberSpec_('totalDigits_value', ['totalDigits_st', 'xs:decimal'], 0, 0, {u'type': u'xs:decimal', u'name': u'totalDigits_value'}, None),
-        MemberSpec_('date_minincl_value', ['date_minincl_st', 'xs:date'], 0, 0, {u'type': u'xs:date', u'name': u'date_minincl_value'}, None),
-        MemberSpec_('date_maxincl_value', ['date_maxincl_st', 'xs:date'], 0, 0, {u'type': u'xs:date', u'name': u'date_maxincl_value'}, None),
-        MemberSpec_('date_minexcl_value', ['date_minexcl_st', 'xs:date'], 0, 0, {u'type': u'xs:date', u'name': u'date_minexcl_value'}, None),
-        MemberSpec_('date_maxexcl_value', ['date_maxexcl_st', 'xs:date'], 0, 0, {u'type': u'xs:date', u'name': u'date_maxexcl_value'}, None),
-        MemberSpec_('time_minincl_value', ['time_minincl_st', 'xs:time'], 0, 0, {u'type': u'xs:time', u'name': u'time_minincl_value'}, None),
-        MemberSpec_('time_maxincl_value', ['time_maxincl_st', 'xs:time'], 0, 0, {u'type': u'xs:time', u'name': u'time_maxincl_value'}, None),
-        MemberSpec_('time_minexcl_value', ['time_minexcl_st', 'xs:time'], 0, 0, {u'type': u'xs:time', u'name': u'time_minexcl_value'}, None),
-        MemberSpec_('time_maxexcl_value', ['time_maxexcl_st', 'xs:time'], 0, 0, {u'type': u'xs:time', u'name': u'time_maxexcl_value'}, None),
-        MemberSpec_('datetime_minincl_value', ['datetime_minincl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_minincl_value'}, None),
-        MemberSpec_('datetime_maxincl_value', ['datetime_maxincl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_maxincl_value'}, None),
-        MemberSpec_('datetime_minexcl_value', ['datetime_minexcl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_minexcl_value'}, None),
-        MemberSpec_('datetime_maxexcl_value', ['datetime_maxexcl_st', 'xs:dateTime'], 0, 0, {u'type': u'xs:dateTime', u'name': u'datetime_maxexcl_value'}, None),
-        MemberSpec_('vbar_pattern_value', ['vbar_pattern_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'vbar_pattern_value'}, None),
-        MemberSpec_('unicode_pattern_value', ['unicode_pattern_st', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'unicode_pattern_value'}, None),
-        MemberSpec_('anonymous_float_value', ['anonymous_float_valueType', 'xs:float'], 0, 0, {u'type': u'xs:float', u'name': u'anonymous_float_value'}, None),
-        MemberSpec_('primative_integer', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'primative_integer'}, None),
-        MemberSpec_('primative_float', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'primative_float'}, None),
+        MemberSpec_('integer_range_1_value', ['integer_range_1_st', 'integer_range_2_st', 'xs:integer'], 0, 0, {'name': 'integer_range_1_value', 'type': 'xs:integer', 'default': '5'}, None),
+        MemberSpec_('pattern_value', ['pattern_st', 'pattern_1_st', 'min_length_st', 'xs:string'], 0, 0, {'name': 'pattern_value', 'type': 'xs:string'}, None),
+        MemberSpec_('token_enum_value', ['token_enum_st', 'xs:NMTOKEN'], 0, 0, {'name': 'token_enum_value', 'type': 'xs:NMTOKEN'}, None),
+        MemberSpec_('integer_range_incl_value', ['integer_range_incl_st', 'xs:integer'], 0, 0, {'name': 'integer_range_incl_value', 'type': 'xs:integer'}, None),
+        MemberSpec_('integer_range_excl_value', ['integer_range_excl_st', 'xs:integer'], 0, 0, {'name': 'integer_range_excl_value', 'type': 'xs:integer'}, None),
+        MemberSpec_('min_max_length_value', ['min_max_length_st', 'xs:string'], 0, 0, {'name': 'min_max_length_value', 'type': 'xs:string'}, None),
+        MemberSpec_('length_value', ['length_st', 'xs:string'], 0, 0, {'name': 'length_value', 'type': 'xs:string'}, None),
+        MemberSpec_('totalDigits_value', ['totalDigits_st', 'xs:decimal'], 0, 0, {'name': 'totalDigits_value', 'type': 'xs:decimal'}, None),
+        MemberSpec_('date_minincl_value', ['date_minincl_st', 'xs:date'], 0, 0, {'name': 'date_minincl_value', 'type': 'xs:date'}, None),
+        MemberSpec_('date_maxincl_value', ['date_maxincl_st', 'xs:date'], 0, 0, {'name': 'date_maxincl_value', 'type': 'xs:date'}, None),
+        MemberSpec_('date_minexcl_value', ['date_minexcl_st', 'xs:date'], 0, 0, {'name': 'date_minexcl_value', 'type': 'xs:date'}, None),
+        MemberSpec_('date_maxexcl_value', ['date_maxexcl_st', 'xs:date'], 0, 0, {'name': 'date_maxexcl_value', 'type': 'xs:date'}, None),
+        MemberSpec_('time_minincl_value', ['time_minincl_st', 'xs:time'], 0, 0, {'name': 'time_minincl_value', 'type': 'xs:time'}, None),
+        MemberSpec_('time_maxincl_value', ['time_maxincl_st', 'xs:time'], 0, 0, {'name': 'time_maxincl_value', 'type': 'xs:time'}, None),
+        MemberSpec_('time_minexcl_value', ['time_minexcl_st', 'xs:time'], 0, 0, {'name': 'time_minexcl_value', 'type': 'xs:time'}, None),
+        MemberSpec_('time_maxexcl_value', ['time_maxexcl_st', 'xs:time'], 0, 0, {'name': 'time_maxexcl_value', 'type': 'xs:time'}, None),
+        MemberSpec_('datetime_minincl_value', ['datetime_minincl_st', 'xs:dateTime'], 0, 0, {'name': 'datetime_minincl_value', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('datetime_maxincl_value', ['datetime_maxincl_st', 'xs:dateTime'], 0, 0, {'name': 'datetime_maxincl_value', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('datetime_minexcl_value', ['datetime_minexcl_st', 'xs:dateTime'], 0, 0, {'name': 'datetime_minexcl_value', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('datetime_maxexcl_value', ['datetime_maxexcl_st', 'xs:dateTime'], 0, 0, {'name': 'datetime_maxexcl_value', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('vbar_pattern_value', ['vbar_pattern_st', 'xs:string'], 0, 0, {'name': 'vbar_pattern_value', 'type': 'xs:string'}, None),
+        MemberSpec_('unicode_pattern_value', ['unicode_pattern_st', 'xs:string'], 0, 0, {'name': 'unicode_pattern_value', 'type': 'xs:string'}, None),
+        MemberSpec_('anonymous_float_value', ['anonymous_float_valueType', 'xs:float'], 0, 0, {'name': 'anonymous_float_value', 'type': 'xs:float'}, None),
+        MemberSpec_('primative_integer', 'xs:integer', 0, 0, {'name': 'primative_integer', 'type': 'xs:integer'}, None),
+        MemberSpec_('primative_float', 'xs:float', 0, 0, {'name': 'primative_float', 'type': 'xs:float'}, None),
     ]
     subclass = None
     superclass = None
@@ -1086,7 +1086,7 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_pattern_st_patterns_, ))
-    validate_pattern_st_patterns_ = [[u'^aaa.*zzz$', u'^bbb.*xxx$'], [u'^.*123.*$', u'^.*456.*$']]
+    validate_pattern_st_patterns_ = [['^aaa.*zzz$', '^bbb.*xxx$'], ['^.*123.*$', '^.*456.*$']]
     def validate_token_enum_st(self, value):
         # Validate type token_enum_st, a restriction on xs:NMTOKEN.
         if value is not None and Validate_simpletypes_:
@@ -1196,14 +1196,14 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_vbar_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_vbar_pattern_st_patterns_, ))
-    validate_vbar_pattern_st_patterns_ = [[u'^abcd|ef\\|gh$']]
+    validate_vbar_pattern_st_patterns_ = [['^abcd|ef\\|gh$']]
     def validate_unicode_pattern_st(self, value):
         # Validate type unicode_pattern_st, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:
             if not self.gds_validate_simple_patterns(
                     self.validate_unicode_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_unicode_pattern_st_patterns_, ))
-    validate_unicode_pattern_st_patterns_ = [[u'^ab\xe7d|ef\\|gh$']]
+    validate_unicode_pattern_st_patterns_ = [['^abçd|ef\\|gh$']]
     def validate_anonymous_float_valueType(self, value):
         # Validate type anonymous_float_valueType, a restriction on xs:float.
         if value is not None and Validate_simpletypes_:
@@ -1540,7 +1540,7 @@ class simpleOneType(GeneratedsSuper):
 
 class simpleTwoType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('simpleTwoElementOne', 'simpleTwoElementOneType', 0, 0, {u'type': u'simpleTwoElementOneType', u'name': u'simpleTwoElementOne'}, None),
+        MemberSpec_('simpleTwoElementOne', 'simpleTwoElementOneType', 0, 0, {'name': 'simpleTwoElementOne', 'type': 'simpleTwoElementOneType'}, None),
     ]
     subclass = None
     superclass = None
@@ -1617,7 +1617,7 @@ class simpleTwoType(GeneratedsSuper):
 
 class simpleTwoElementOneType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('simpleTwoElementTwo', ['simpleTwoElementTwoType', 'xs:string'], 0, 0, {u'type': u'xs:string', u'name': u'simpleTwoElementTwo'}, None),
+        MemberSpec_('simpleTwoElementTwo', ['simpleTwoElementTwoType', 'xs:string'], 0, 0, {'name': 'simpleTwoElementTwo', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

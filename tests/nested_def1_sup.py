@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -402,7 +402,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -729,8 +729,8 @@ def _cast(typ, value):
 
 class containerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('item1', 'classAType', 0, 0, {u'type': u'classAType', u'name': u'item1'}, None),
-        MemberSpec_('item2', 'classBType', 0, 0, {u'type': u'classBType', u'name': u'item2'}, None),
+        MemberSpec_('item1', 'classAType', 0, 0, {'name': 'item1', 'type': 'classAType'}, None),
+        MemberSpec_('item2', 'classBType', 0, 0, {'name': 'item2', 'type': 'classBType'}, None),
     ]
     subclass = None
     superclass = None
@@ -818,7 +818,7 @@ class containerType(GeneratedsSuper):
 
 class classAType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('inner', 'innerType', 0, 0, {u'type': u'innerType', u'name': u'inner'}, None),
+        MemberSpec_('inner', 'innerType', 0, 0, {'name': 'inner', 'type': 'innerType'}, None),
     ]
     subclass = None
     superclass = None
@@ -895,7 +895,7 @@ class classAType(GeneratedsSuper):
 
 class classBType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('inner', 'innerType1', 0, 0, {u'type': u'innerType1', u'name': u'inner'}, None),
+        MemberSpec_('inner', 'innerType1', 0, 0, {'name': 'inner', 'type': 'innerType1'}, None),
     ]
     subclass = None
     superclass = None

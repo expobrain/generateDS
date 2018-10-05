@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -404,7 +404,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -731,8 +731,8 @@ def _cast(typ, value):
 
 class oneperType00_1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('inner01', 'oneperType01_1', 0, 0, {u'type': u'oneperType01_1', u'name': u'inner01'}, None),
-        MemberSpec_('inner02', 'oneperType01_2', 0, 0, {u'type': u'oneperType01_2', u'name': u'inner02'}, None),
+        MemberSpec_('inner01', 'oneperType01_1', 0, 0, {'name': 'inner01', 'type': 'oneperType01_1'}, None),
+        MemberSpec_('inner02', 'oneperType01_2', 0, 0, {'name': 'inner02', 'type': 'oneperType01_2'}, None),
     ]
     subclass = None
     superclass = None

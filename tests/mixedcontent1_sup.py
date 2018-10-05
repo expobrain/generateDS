@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -402,7 +402,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -729,7 +729,7 @@ def _cast(typ, value):
 
 class rootType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('markup', 'markupType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'markupType', u'name': u'markup'}, None),
+        MemberSpec_('markup', 'markupType', 1, 0, {'name': 'markup', 'type': 'markupType', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
@@ -812,8 +812,8 @@ class rootType(GeneratedsSuper):
 
 class markupType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('embedded', 'xs:string', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'embedded', u'minOccurs': u'0'}, None),
-        MemberSpec_('nested', 'nestedType', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'nestedType', u'name': u'nested', u'minOccurs': u'0'}, None),
+        MemberSpec_('embedded', 'xs:string', 1, 1, {'name': 'embedded', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nested', 'nestedType', 1, 1, {'name': 'nested', 'type': 'nestedType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
         MemberSpec_('valueOf_', [], 0),
     ]
     subclass = None
@@ -945,9 +945,9 @@ class markupType(GeneratedsSuper):
 
 class nestedType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nested1', 'nested1Type', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'nested1Type', u'name': u'nested1', u'minOccurs': u'0'}, None),
-        MemberSpec_('nested2', 'xs:string', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'nested2', u'minOccurs': u'0'}, None),
-        MemberSpec_('nested3', 'xs:integer', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:integer', u'name': u'nested3', u'minOccurs': u'0'}, None),
+        MemberSpec_('nested1', 'nested1Type', 1, 1, {'name': 'nested1', 'type': 'nested1Type', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nested2', 'xs:string', 1, 1, {'name': 'nested2', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nested3', 'xs:integer', 1, 1, {'name': 'nested3', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
@@ -1068,8 +1068,8 @@ class nestedType(GeneratedsSuper):
 
 class nested1Type(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nestedA1', 'nested1AType', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'nested1AType', u'name': u'nestedA1', u'minOccurs': u'0'}, None),
-        MemberSpec_('nestedA2', 'nested1AType', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'nested1AType', u'name': u'nestedA2', u'minOccurs': u'0'}, None),
+        MemberSpec_('nestedA1', 'nested1AType', 1, 1, {'name': 'nestedA1', 'type': 'nested1AType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nestedA2', 'nested1AType', 1, 1, {'name': 'nestedA2', 'type': 'nested1AType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
@@ -1169,8 +1169,8 @@ class nested1Type(GeneratedsSuper):
 
 class nested1AType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nestedB1', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'nestedB1'}, None),
-        MemberSpec_('nestedB2', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'nestedB2'}, None),
+        MemberSpec_('nestedB1', 'xs:string', 1, 0, {'name': 'nestedB1', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nestedB2', 'xs:string', 1, 0, {'name': 'nestedB2', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None

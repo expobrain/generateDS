@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ class GeneratedsSuper(object):
         return None
     @classmethod
     def gds_reverse_node_mapping(cls, mapping):
-        return dict(((v, k) for k, v in mapping.iteritems()))
+        return dict(((v, k) for k, v in mapping.items()))
     @staticmethod
     def gds_encode(instring):
         if sys.version_info.major == 2:
@@ -730,8 +730,8 @@ def _cast(typ, value):
 
 class peopleType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('person', 'personType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'personType', u'name': u'person'}, None),
-        MemberSpec_('specialperson', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'specialperson'}, None),
+        MemberSpec_('person', 'personType', 1, 0, {'name': 'person', 'maxOccurs': 'unbounded', 'type': 'personType'}, None),
+        MemberSpec_('specialperson', 'xs:string', 1, 0, {'name': 'specialperson', 'maxOccurs': 'unbounded', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -782,10 +782,10 @@ class personType(GeneratedsSuper):
         MemberSpec_('value', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('id', 'xs:integer', 0, 1, {'use': 'optional'}),
         MemberSpec_('ratio', 'xs:float', 0, 1, {'use': 'optional'}),
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('interest', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'interest'}, None),
-        MemberSpec_('category', 'xs:integer', 0, 1, {u'type': u'xs:integer', u'name': u'category', u'minOccurs': u'0'}, None),
-        MemberSpec_('description', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'description'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('interest', 'xs:string', 1, 0, {'name': 'interest', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('category', 'xs:integer', 0, 1, {'name': 'category', 'type': 'xs:integer', 'minOccurs': '0'}, None),
+        MemberSpec_('description', 'xs:string', 0, 0, {'name': 'description', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

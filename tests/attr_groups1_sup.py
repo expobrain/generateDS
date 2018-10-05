@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -739,7 +739,7 @@ class GetUserReq(GeneratedsSuper):
         MemberSpec_('value06', 'xsd:integer', 0, 1, {'use': 'optional'}),
         MemberSpec_('value07', 'xsd:integer', 0, 1, {'use': 'optional'}),
         MemberSpec_('value08', 'xsd:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('returnedTags', 'xsd:string', 0, 1, {u'type': u'xsd:string', u'name': u'returnedTags', u'minOccurs': u'0'}, None),
+        MemberSpec_('returnedTags', 'xsd:string', 0, 1, {'name': 'returnedTags', 'type': 'xsd:string', 'minOccurs': '0'}, None),
     ]
     subclass = None
     superclass = None

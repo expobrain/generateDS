@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -730,9 +730,9 @@ def _cast(typ, value):
 
 class PersonType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('personId', 'xs:integer', 0, 0, {u'maxOccurs': u'1', 'type': u'personId', u'ref': u'personId', 'name': u'personId', u'minOccurs': u'1'}, None),
-        MemberSpec_('fname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'fname'}, None),
-        MemberSpec_('lname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lname'}, None),
+        MemberSpec_('personId', 'xs:integer', 0, 0, {'ref': 'personId', 'minOccurs': '1', 'maxOccurs': '1', 'name': 'personId', 'type': 'personId'}, None),
+        MemberSpec_('fname', 'xs:string', 0, 0, {'name': 'fname', 'type': 'xs:string'}, None),
+        MemberSpec_('lname', 'xs:string', 0, 0, {'name': 'lname', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

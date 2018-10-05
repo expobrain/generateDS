@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -730,7 +730,7 @@ def _cast(typ, value):
 
 class simpleTypeTestsType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('simpleTypeTest', 'simpleTypeTestDefs', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'simpleTypeTestDefs', u'name': u'simpleTypeTest'}, None),
+        MemberSpec_('simpleTypeTest', 'simpleTypeTestDefs', 1, 0, {'name': 'simpleTypeTest', 'maxOccurs': 'unbounded', 'type': 'simpleTypeTestDefs'}, None),
     ]
     subclass = None
     superclass = None
@@ -813,27 +813,27 @@ class simpleTypeTestsType(GeneratedsSuper):
 
 class simpleTypeTestDefs(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('datetime1', 'xs:gYear', 0, 0, {u'type': u'xs:gYear', u'name': u'datetime1'}, None),
-        MemberSpec_('datetime2', 'xs:gYearMonth', 0, 0, {u'type': u'xs:gYearMonth', u'name': u'datetime2'}, None),
-        MemberSpec_('datetime3', 'xs:gMonth', 0, 0, {u'type': u'xs:gMonth', u'name': u'datetime3'}, None),
-        MemberSpec_('datetime4', 'xs:gMonthDay', 0, 0, {u'type': u'xs:gMonthDay', u'name': u'datetime4'}, None),
-        MemberSpec_('datetime5', 'xs:gDay', 0, 0, {u'type': u'xs:gDay', u'name': u'datetime5'}, None),
-        MemberSpec_('integerVal1', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'integerVal1'}, None),
-        MemberSpec_('integerVal2', 'xs:integer', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:integer', u'name': u'integerVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('stringVal1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'stringVal1'}, None),
-        MemberSpec_('stringVal2', 'xs:string', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'stringVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('booleanVal1', 'xs:boolean', 0, 0, {u'type': u'xs:boolean', u'name': u'booleanVal1'}, None),
-        MemberSpec_('booleanVal2', 'xs:boolean', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:boolean', u'name': u'booleanVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('decimalVal1', 'xs:decimal', 0, 0, {u'type': u'xs:decimal', u'name': u'decimalVal1'}, None),
-        MemberSpec_('decimalVal2', 'xs:decimal', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:decimal', u'name': u'decimalVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('doubleVal1', 'xs:double', 0, 0, {u'type': u'xs:double', u'name': u'doubleVal1'}, None),
-        MemberSpec_('doubleVal2', 'xs:double', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:double', u'name': u'doubleVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('floatVal1', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'floatVal1'}, None),
-        MemberSpec_('floatVal2', 'xs:float', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:float', u'name': u'floatVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('dateVal1', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'dateVal1'}, None),
-        MemberSpec_('dateVal2', 'xs:date', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:date', u'name': u'dateVal2', u'minOccurs': u'0'}, None),
-        MemberSpec_('dateTimeVal1', 'xs:dateTime', 0, 0, {u'type': u'xs:dateTime', u'name': u'dateTimeVal1'}, None),
-        MemberSpec_('dateTimeVal2', 'xs:dateTime', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'xs:dateTime', u'name': u'dateTimeVal2', u'minOccurs': u'0'}, None),
+        MemberSpec_('datetime1', 'xs:gYear', 0, 0, {'name': 'datetime1', 'type': 'xs:gYear'}, None),
+        MemberSpec_('datetime2', 'xs:gYearMonth', 0, 0, {'name': 'datetime2', 'type': 'xs:gYearMonth'}, None),
+        MemberSpec_('datetime3', 'xs:gMonth', 0, 0, {'name': 'datetime3', 'type': 'xs:gMonth'}, None),
+        MemberSpec_('datetime4', 'xs:gMonthDay', 0, 0, {'name': 'datetime4', 'type': 'xs:gMonthDay'}, None),
+        MemberSpec_('datetime5', 'xs:gDay', 0, 0, {'name': 'datetime5', 'type': 'xs:gDay'}, None),
+        MemberSpec_('integerVal1', 'xs:integer', 0, 0, {'name': 'integerVal1', 'type': 'xs:integer'}, None),
+        MemberSpec_('integerVal2', 'xs:integer', 1, 1, {'name': 'integerVal2', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('stringVal1', 'xs:string', 0, 0, {'name': 'stringVal1', 'type': 'xs:string'}, None),
+        MemberSpec_('stringVal2', 'xs:string', 1, 1, {'name': 'stringVal2', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('booleanVal1', 'xs:boolean', 0, 0, {'name': 'booleanVal1', 'type': 'xs:boolean'}, None),
+        MemberSpec_('booleanVal2', 'xs:boolean', 1, 1, {'name': 'booleanVal2', 'type': 'xs:boolean', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('decimalVal1', 'xs:decimal', 0, 0, {'name': 'decimalVal1', 'type': 'xs:decimal'}, None),
+        MemberSpec_('decimalVal2', 'xs:decimal', 1, 1, {'name': 'decimalVal2', 'type': 'xs:decimal', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('doubleVal1', 'xs:double', 0, 0, {'name': 'doubleVal1', 'type': 'xs:double'}, None),
+        MemberSpec_('doubleVal2', 'xs:double', 1, 1, {'name': 'doubleVal2', 'type': 'xs:double', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('floatVal1', 'xs:float', 0, 0, {'name': 'floatVal1', 'type': 'xs:float'}, None),
+        MemberSpec_('floatVal2', 'xs:float', 1, 1, {'name': 'floatVal2', 'type': 'xs:float', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('dateVal1', 'xs:date', 0, 0, {'name': 'dateVal1', 'type': 'xs:date'}, None),
+        MemberSpec_('dateVal2', 'xs:date', 1, 1, {'name': 'dateVal2', 'type': 'xs:date', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('dateTimeVal1', 'xs:dateTime', 0, 0, {'name': 'dateTimeVal1', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('dateTimeVal2', 'xs:dateTime', 1, 1, {'name': 'dateTimeVal2', 'type': 'xs:dateTime', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None

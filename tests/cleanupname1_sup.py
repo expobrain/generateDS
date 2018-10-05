@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -404,7 +404,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -731,11 +731,11 @@ def _cast(typ, value):
 
 class dataKind(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('data1', 'data1Type', 0, 0, {u'type': u'data1Type', u'name': u'data1'}, None),
-        MemberSpec_('data2', 'TypeData2', 0, 0, {u'type': u'TypeData2', u'name': u'data2'}, None),
-        MemberSpec_('data3', 'RealTypeData3', 0, 0, {u'type': u'RealTypeData3', u'name': u'data3'}, None),
-        MemberSpec_('data4', 'AABBCCdataType', 0, 0, {u'type': u'AABBCCdataType', u'name': u'data4'}, None),
-        MemberSpec_('data5', 'dataTypeXYZAXYZ', 0, 0, {u'type': u'dataTypeXYZAXYZ', u'name': u'data5'}, None),
+        MemberSpec_('data1', 'data1Type', 0, 0, {'name': 'data1', 'type': 'data1Type'}, None),
+        MemberSpec_('data2', 'TypeData2', 0, 0, {'name': 'data2', 'type': 'TypeData2'}, None),
+        MemberSpec_('data3', 'RealTypeData3', 0, 0, {'name': 'data3', 'type': 'RealTypeData3'}, None),
+        MemberSpec_('data4', 'AABBCCdataType', 0, 0, {'name': 'data4', 'type': 'AABBCCdataType'}, None),
+        MemberSpec_('data5', 'dataTypeXYZAXYZ', 0, 0, {'name': 'data5', 'type': 'dataTypeXYZAXYZ'}, None),
     ]
     subclass = None
     superclass = None
@@ -856,7 +856,7 @@ class dataKind(GeneratedsSuper):
 
 class data1Kind(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('content1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'content1'}, None),
+        MemberSpec_('content1', 'xs:string', 0, 0, {'name': 'content1', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -933,7 +933,7 @@ class data1Kind(GeneratedsSuper):
 
 class MlassData2(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('content1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'content1'}, None),
+        MemberSpec_('content1', 'xs:string', 0, 0, {'name': 'content1', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1010,7 +1010,7 @@ class MlassData2(GeneratedsSuper):
 
 class RealTypeData3(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('content1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'content1'}, None),
+        MemberSpec_('content1', 'xs:string', 0, 0, {'name': 'content1', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1087,7 +1087,7 @@ class RealTypeData3(GeneratedsSuper):
 
 class MMMMMMdataKind(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('content1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'content1'}, None),
+        MemberSpec_('content1', 'xs:string', 0, 0, {'name': 'content1', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1164,7 +1164,7 @@ class MMMMMMdataKind(GeneratedsSuper):
 
 class dataTypeNNNMNNN(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('content1', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'content1'}, None),
+        MemberSpec_('content1', 'xs:string', 0, 0, {'name': 'content1', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

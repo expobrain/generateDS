@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -738,12 +738,12 @@ class ArrayTypes(object):
 class people(GeneratedsSuper):
     """A list of people."""
     member_data_items_ = [
-        MemberSpec_('comments', 'comments', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'comments', u'name': u'comments'}, None),
-        MemberSpec_('person', 'person', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'person', u'name': u'person'}, None),
-        MemberSpec_('specialperson', 'specialperson', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'specialperson', u'name': u'specialperson'}, None),
-        MemberSpec_('programmer', 'programmer', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'programmer', u'name': u'programmer'}, None),
-        MemberSpec_('python_programmer', 'python-programmer', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'python-programmer', u'name': u'python-programmer'}, None),
-        MemberSpec_('java_programmer', 'java-programmer', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'java-programmer', u'name': u'java-programmer'}, None),
+        MemberSpec_('comments', 'comments', 1, 0, {'name': 'comments', 'type': 'comments', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('person', 'person', 1, 0, {'name': 'person', 'maxOccurs': 'unbounded', 'type': 'person'}, None),
+        MemberSpec_('specialperson', 'specialperson', 1, 0, {'name': 'specialperson', 'maxOccurs': 'unbounded', 'type': 'specialperson'}, None),
+        MemberSpec_('programmer', 'programmer', 1, 0, {'name': 'programmer', 'maxOccurs': 'unbounded', 'type': 'programmer'}, None),
+        MemberSpec_('python_programmer', 'python-programmer', 1, 0, {'name': 'python-programmer', 'maxOccurs': 'unbounded', 'type': 'python-programmer'}, None),
+        MemberSpec_('java_programmer', 'java-programmer', 1, 0, {'name': 'java-programmer', 'maxOccurs': 'unbounded', 'type': 'java-programmer'}, None),
     ]
     subclass = None
     superclass = None
@@ -913,8 +913,8 @@ class people(GeneratedsSuper):
 
 class comments(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('emp', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'emp'}, None),
-        MemberSpec_('bold', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'bold'}, None),
+        MemberSpec_('emp', 'xs:string', 1, 0, {'name': 'emp', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('bold', 'xs:string', 1, 0, {'name': 'bold', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
         MemberSpec_('valueOf_', [], 0),
     ]
     subclass = None
@@ -1050,12 +1050,12 @@ class person(GeneratedsSuper):
         MemberSpec_('ratio', 'xs:float', 0, 1, {'use': 'optional'}),
         MemberSpec_('fruit', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('vegetable', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('interest', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'interest'}, None),
-        MemberSpec_('category', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'category'}, None),
-        MemberSpec_('agent', 'agent', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'agent', u'name': u'agent'}, None),
-        MemberSpec_('promoter', 'booster', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'booster', u'name': u'promoter'}, None),
-        MemberSpec_('description', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'description'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('interest', 'xs:string', 1, 0, {'name': 'interest', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('category', 'xs:integer', 0, 0, {'name': 'category', 'type': 'xs:integer'}, None),
+        MemberSpec_('agent', 'agent', 1, 0, {'name': 'agent', 'type': 'agent', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('promoter', 'booster', 1, 0, {'name': 'promoter', 'type': 'booster', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('description', 'xs:string', 0, 0, {'name': 'description', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1347,7 +1347,7 @@ class param(GeneratedsSuper):
         MemberSpec_('sid', 'xs:NCName', 0, 1, {'use': 'optional'}),
         MemberSpec_('flow', 'FlowType', 0, 1, {'use': 'optional'}),
         MemberSpec_('semantic', 'xs:token', 0, 1, {'use': 'optional'}),
-        MemberSpec_('type_', 'xs:NMTOKEN', 0, 0, {'use': u'required'}),
+        MemberSpec_('type_', 'xs:NMTOKEN', 0, 0, {'use': 'required'}),
         MemberSpec_('valueOf_', 'xs:string', 0),
     ]
     subclass = None
@@ -1476,11 +1476,11 @@ class param(GeneratedsSuper):
 
 class agent(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('info', 'info', 0, 0, {u'type': u'info', u'name': u'info'}, None),
-        MemberSpec_('vehicle', 'vehicle', 1, 1, {u'maxOccurs': u'unbounded', 'type': u'vehicle', u'ref': u'vehicle', 'name': u'vehicle', u'minOccurs': u'0'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('info', 'info', 0, 0, {'name': 'info', 'type': 'info'}, None),
+        MemberSpec_('vehicle', 'vehicle', 1, 1, {'ref': 'vehicle', 'minOccurs': '0', 'maxOccurs': 'unbounded', 'name': 'vehicle', 'type': 'vehicle'}, None),
     ]
     subclass = None
     superclass = None
@@ -1627,10 +1627,10 @@ class special_agent(GeneratedsSuper):
     """This is a good kind of agent for testing the generation of Python
     bindings for an XML schema."""
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('info', 'info', 0, 0, {u'type': u'info', u'name': u'info'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('info', 'info', 0, 0, {'name': 'info', 'type': 'info'}, None),
     ]
     subclass = None
     superclass = None
@@ -1745,13 +1745,13 @@ class special_agent(GeneratedsSuper):
 class booster(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('member-id', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('other_name', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'other-name'}, None),
-        MemberSpec_('class_', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'class'}, None),
-        MemberSpec_('other_value', 'xs:float', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:float', u'name': u'other-value'}, None),
-        MemberSpec_('type_', 'xs:float', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:float', u'name': u'type'}, None),
-        MemberSpec_('client_handler', 'client-handlerType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'client-handlerType', u'name': u'client-handler'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('other_name', 'xs:float', 0, 0, {'name': 'other-name', 'type': 'xs:float'}, None),
+        MemberSpec_('class_', 'xs:float', 0, 0, {'name': 'class', 'type': 'xs:float'}, None),
+        MemberSpec_('other_value', 'xs:float', 1, 0, {'name': 'other-value', 'type': 'xs:float', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('type_', 'xs:float', 1, 0, {'name': 'type', 'type': 'xs:float', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('client_handler', 'client-handlerType', 1, 0, {'name': 'client-handler', 'maxOccurs': 'unbounded', 'type': 'client-handlerType'}, None),
     ]
     subclass = None
     superclass = None
@@ -2036,7 +2036,7 @@ class info(GeneratedsSuper):
 
 class vehicle(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('wheelcount', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'wheelcount'}, None),
+        MemberSpec_('wheelcount', 'xs:integer', 0, 0, {'name': 'wheelcount', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -2127,7 +2127,7 @@ class vehicle(GeneratedsSuper):
 
 class automobile(vehicle):
     member_data_items_ = [
-        MemberSpec_('drivername', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'drivername'}, None),
+        MemberSpec_('drivername', 'xs:string', 0, 0, {'name': 'drivername', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = vehicle
@@ -2208,7 +2208,7 @@ class automobile(vehicle):
 
 class airplane(vehicle):
     member_data_items_ = [
-        MemberSpec_('pilotname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'pilotname'}, None),
+        MemberSpec_('pilotname', 'xs:string', 0, 0, {'name': 'pilotname', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = vehicle
@@ -2297,17 +2297,17 @@ class programmer(person):
         MemberSpec_('attrnonposint', 'xs:nonPositiveInteger', 0, 1, {'use': 'optional'}),
         MemberSpec_('attrnegint', 'xs:negativeInteger', 0, 1, {'use': 'optional'}),
         MemberSpec_('attrnonnegint', 'xs:nonNegativeInteger', 0, 1, {'use': 'optional'}),
-        MemberSpec_('email', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'email'}, None),
-        MemberSpec_('elposint', 'xs:positiveInteger', 0, 0, {u'type': u'xs:positiveInteger', u'name': u'elposint'}, None),
-        MemberSpec_('elnonposint', 'xs:nonPositiveInteger', 0, 0, {u'type': u'xs:nonPositiveInteger', u'name': u'elnonposint'}, None),
-        MemberSpec_('elnegint', 'xs:negativeInteger', 0, 0, {u'type': u'xs:negativeInteger', u'name': u'elnegint'}, None),
-        MemberSpec_('elnonnegint', 'xs:nonNegativeInteger', 0, 0, {u'type': u'xs:nonNegativeInteger', u'name': u'elnonnegint'}, None),
-        MemberSpec_('eldate', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'eldate'}, None),
-        MemberSpec_('eltoken', 'xs:token', 0, 0, {u'type': u'xs:token', u'name': u'eltoken'}, None),
-        MemberSpec_('elshort', 'xs:short', 0, 0, {u'type': u'xs:short', u'name': u'elshort'}, None),
-        MemberSpec_('ellong', 'xs:long', 0, 0, {u'type': u'xs:long', u'name': u'ellong'}, None),
-        MemberSpec_('elparam', 'param', 0, 0, {u'type': u'param', u'name': u'elparam'}, None),
-        MemberSpec_('elarraytypes', ['ArrayTypes', 'xs:NMTOKEN'], 0, 0, {u'type': u'xs:NMTOKEN', u'name': u'elarraytypes'}, None),
+        MemberSpec_('email', 'xs:string', 0, 0, {'name': 'email', 'type': 'xs:string'}, None),
+        MemberSpec_('elposint', 'xs:positiveInteger', 0, 0, {'name': 'elposint', 'type': 'xs:positiveInteger'}, None),
+        MemberSpec_('elnonposint', 'xs:nonPositiveInteger', 0, 0, {'name': 'elnonposint', 'type': 'xs:nonPositiveInteger'}, None),
+        MemberSpec_('elnegint', 'xs:negativeInteger', 0, 0, {'name': 'elnegint', 'type': 'xs:negativeInteger'}, None),
+        MemberSpec_('elnonnegint', 'xs:nonNegativeInteger', 0, 0, {'name': 'elnonnegint', 'type': 'xs:nonNegativeInteger'}, None),
+        MemberSpec_('eldate', 'xs:date', 0, 0, {'name': 'eldate', 'type': 'xs:date'}, None),
+        MemberSpec_('eltoken', 'xs:token', 0, 0, {'name': 'eltoken', 'type': 'xs:token'}, None),
+        MemberSpec_('elshort', 'xs:short', 0, 0, {'name': 'elshort', 'type': 'xs:short'}, None),
+        MemberSpec_('ellong', 'xs:long', 0, 0, {'name': 'ellong', 'type': 'xs:long'}, None),
+        MemberSpec_('elparam', 'param', 0, 0, {'name': 'elparam', 'type': 'param'}, None),
+        MemberSpec_('elarraytypes', ['ArrayTypes', 'xs:NMTOKEN'], 0, 0, {'name': 'elarraytypes', 'type': 'xs:NMTOKEN'}, None),
     ]
     subclass = None
     superclass = person
@@ -2644,8 +2644,8 @@ class programmer(person):
 
 class client_handlerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('fullname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'fullname'}, None),
-        MemberSpec_('refid', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'refid'}, None),
+        MemberSpec_('fullname', 'xs:string', 0, 0, {'name': 'fullname', 'type': 'xs:string'}, None),
+        MemberSpec_('refid', 'xs:integer', 0, 0, {'name': 'refid', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -2742,7 +2742,7 @@ class java_programmer(programmer):
     member_data_items_ = [
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('status', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'favorite-editor'}, None),
+        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {'name': 'favorite-editor', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = programmer
@@ -2846,7 +2846,7 @@ class python_programmer(programmer):
     Python programmers are especially wonderful kinds of people."""
     member_data_items_ = [
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'favorite-editor'}, None),
+        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {'name': 'favorite-editor', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = programmer

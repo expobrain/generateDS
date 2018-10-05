@@ -187,6 +187,7 @@ also generates member specifications in each class (in a dictionary).
 
 from __future__ import print_function
 from six.moves import input
+from six.moves import urllib
 import six
 import sys
 import os.path
@@ -202,12 +203,8 @@ import operator
 import re
 
 if sys.version_info.major == 2:
-    import urllib2
     import StringIO
 else:
-    import urllib.request
-    import urllib.error
-    import urllib.parse
     import io
     from functools import reduce
 
@@ -235,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.24'
+VERSION = '2.29.25'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2491,7 +2488,7 @@ def generateToEtree(wrt, element, Targetnamespace):
     generateToEtreeAttributes(wrt, element)
     generateToEtreeChildren(wrt, element, Targetnamespace)
     wrt("        if mapping_ is not None:\n")
-    wrt("            mapping_[self] = element\n")
+    wrt("            mapping_[id(self)] = element\n")
     wrt("        return element\n")
 # end generateToEtree
 
@@ -5883,7 +5880,7 @@ def generateHeader(wrt, prefix, options, args, externalImports):
         preserve_cdata_tags_pat = ""
         preserve_cdata_get_text = Preserve_cdata_get_all_text2
     gds_reverse_node_mapping_text = \
-        "return dict(((v, k) for k, v in mapping.iteritems()))"
+        "return dict(((v, k) for k, v in mapping.items()))"
     quote_xml_text = \
         "s1 = (isinstance(inStr, BaseStrType_) and inStr or '%s' % inStr)"
     quote_attrib_text = \
@@ -6206,21 +6203,13 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
     if implUrl:
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
-        if sys.version_info.major == 2:
-            urllib_urlopen = urllib2.urlopen
-            urllib_httperror = urllib2.HTTPError
-            urllib_urlerror = urllib2.URLError
-        else:
-            urllib_urlopen = urllib.request.urlopen
-            urllib_httperror = urllib.error.HTTPError
-            urllib_urlerror = urllib.error.URLError
         try:
-            implFile = urllib_urlopen(implUrl)
+            implFile = urllib.request.urlopen(implUrl)
             impl = implFile.read()
             implFile.close()
-        except urllib_httperror:
+        except urllib.error.HTTPError:
             err_msg('*** Implementation at %s not found.\n' % implUrl)
-        except urllib_urlerror:
+        except urllib.error.URLError:
             err_msg('*** Connection refused for URL: %s\n' % implUrl)
     return impl
 
@@ -7075,16 +7064,17 @@ def parseAndGenerate(
         for path in rootPaths:
             if path.startswith('http:') or path.startswith('ftp:'):
                 try:
-                    urlfile = urllib2.urlopen(path)
+                    urlfile = urllib.request.urlopen(path)
                     content = urlfile.read()
                     urlfile.close()
                     if sys.version_info.major == 2:
                         rootFile = StringIO.StringIO()
                     else:
                         rootFile = io.StringIO()
+                        content = content.decode()
                     rootFile.write(content)
                     rootFile.seek(0)
-                except urllib2.HTTPError:
+                except urllib.error.HTTPError:
                     msg = "Can't find file %s." % (path, )
                     raise IOError(msg)
             else:

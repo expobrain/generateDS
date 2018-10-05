@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -730,9 +730,9 @@ def _cast(typ, value):
 
 class PlantType_single(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('__ANY__', '__ANY__', 0, 0, {u'maxOccurs': u'1', u'minOccurs': u'1'}, None),
-        MemberSpec_('description', 'DescriptionType', 0, 0, {u'type': u'DescriptionType', u'name': u'description'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'minOccurs': '1', 'maxOccurs': '1'}, None),
+        MemberSpec_('description', 'DescriptionType', 0, 0, {'name': 'description', 'type': 'DescriptionType'}, None),
     ]
     subclass = None
     superclass = None
@@ -830,9 +830,9 @@ class PlantType_single(GeneratedsSuper):
 
 class PlantType_multiple(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('__ANY__', '__ANY__', 1, 0, {u'maxOccurs': u'unbounded', u'minOccurs': u'1'}, None),
-        MemberSpec_('description', 'DescriptionType', 0, 0, {u'type': u'DescriptionType', u'name': u'description'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'minOccurs': '1', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('description', 'DescriptionType', 0, 0, {'name': 'description', 'type': 'DescriptionType'}, None),
     ]
     subclass = None
     superclass = None
@@ -936,8 +936,8 @@ class PlantType_multiple(GeneratedsSuper):
 class DescriptionType(GeneratedsSuper):
     """A standard complexType."""
     member_data_items_ = [
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('size', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'size'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('size', 'xs:string', 0, 0, {'name': 'size', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -1026,8 +1026,8 @@ class DescriptionType(GeneratedsSuper):
 class CatalogType(GeneratedsSuper):
     """A standard complexType."""
     member_data_items_ = [
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('catagory', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'catagory'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('catagory', 'xs:integer', 0, 0, {'name': 'catagory', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -1119,7 +1119,7 @@ class CatalogType(GeneratedsSuper):
 
 class PlantType_single_nochild(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('__ANY__', '__ANY__', 0, 0, {u'maxOccurs': u'1', u'minOccurs': u'1'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'minOccurs': '1', 'maxOccurs': '1'}, None),
     ]
     subclass = None
     superclass = None
@@ -1194,7 +1194,7 @@ class PlantType_single_nochild(GeneratedsSuper):
 
 class PlantType_multiple_nochild(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('__ANY__', '__ANY__', 1, 0, {u'maxOccurs': u'unbounded', u'minOccurs': u'1'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'minOccurs': '1', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None

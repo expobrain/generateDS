@@ -77,12 +77,15 @@ class GenTest(unittest.TestCase):
         self.executeClean(cmd, cwd='..')
         # Verify the structure
         cmdTempl = (
-            'python -c "import %s_sub; print '
-            '[ x.name for x in %s_sub.node1TypeSub.member_data_items_ ]; '
-            'print [ x.name for x in %s_sub.node2TypeSub.member_data_items_ ]"'
+            'python -c "import %s_sub; print('
+            '[ x.name for x in %s_sub.node1TypeSub.member_data_items_ ]); '
+            'print([ x.name for x in '
+            '%s_sub.node2TypeSub.member_data_items_ ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
         result, err = self.execute(cmd)
+        if sys.version_info.major != 2:
+            result = result.decode()
         self.failUnlessEqual(result, """\
 ['node1node1', 'group1', 'group2', 'node1node2']
 ['node2node1', 'group1', 'group2', 'node2node2']
@@ -92,12 +95,14 @@ class GenTest(unittest.TestCase):
             'python -c "import %s_sub; obj = '
             '%s_sub.parse(\'%s.xml\'); fields = '
             '[ x.name for x in obj.node1.member_data_items_ ]; '
-            'print [ getattr(obj.node1, x) for x in fields ]; '
+            'print([ getattr(obj.node1, x) for x in fields ]); '
             'fields = [ x.name for x in obj.node2.member_data_items_ ]; '
-            'print [ getattr(obj.node2, x) for x in fields ]"'
+            'print([ getattr(obj.node2, x) for x in fields ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
         result, err = self.execute(cmd)
+        if sys.version_info.major != 2:
+            result = result.decode()
         self.failUnlessEqual(result, """\
 ['value 1 1', 'group1 1', 'group2 1', 'value 1 2']
 ['value 2 1', 'group1 2', 'group2 2', 'value 2 2']
@@ -126,10 +131,12 @@ class GenTest(unittest.TestCase):
         cmdTempl = (
             'python -c "import %s_sub; obj = '
             '%s_sub.parse(\'%s.xml\'); children = obj.get_child(); '
-            'print [ (x.get_name(), x.get_valueOf_()) for x in children ]"'
+            'print([ (x.get_name(), x.get_valueOf_()) for x in children ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
         result, err = self.execute(cmd)
+        if sys.version_info.major != 2:
+            result = result.decode()
         self.failUnlessEqual(result, """\
 [('child1', 'value1'), ('child1', 'value2')]
 """)
@@ -145,12 +152,14 @@ class GenTest(unittest.TestCase):
             'python -c "import %s_sub; '
             'node = %s_sub.childTypeSub.factory(name=\'child1\', '
             'valueOf_ = \'value1\'); '
-            'print (node.get_name(), node.get_valueOf_())"'
+            'print((node.get_name(), node.get_valueOf_()))"'
         )
         cmd = cmdTempl % (t_, t_)
-        #print 'cmd:', cmd
+        #print('cmd:', cmd)
         result, err = self.execute(cmd)
-        #print 'result: %s' % result
+        #print('result: %s' % result)
+        if sys.version_info.major != 2:
+            result = result.decode()
         self.failUnlessEqual(result, """\
 ('child1', 'value1')
 """)
@@ -194,6 +203,8 @@ class GenTest(unittest.TestCase):
             root1.append(child.__copy__())
         #print etree.tostring(root1, pretty_print = True)
         result = etree.tostring(root1, pretty_print=True)
+        if sys.version_info.major != 2:
+            result = result.decode()
         self.failUnlessEqual(GenTest.ns_for_import_xml_result, result)
 
     def test_006_anysimpletype(self):
@@ -482,6 +493,8 @@ class GenTest(unittest.TestCase):
             rootElement, pretty_print=True,
             xml_declaration=True, encoding="utf-8")
         outfile = open('to_etree2.xml', 'w')
+        if sys.version_info.major != 2:
+            content = content.decode()
         outfile.write(content)
         outfile.close()
         self.compareFiles('{}1.xml'.format(t_), '{}2.xml'.format(t_))
@@ -924,6 +937,35 @@ class GenTest(unittest.TestCase):
         #self.remove('{}2_sub.py'.format(t_))
         #self.remove('{}2_out.xml'.format(t_))
 
+    #
+    # Test for types derived by extension.  See:
+    # https://www.w3.org/TR/2004/REC-xmlschema-0-20041028/#DerivExt
+    def test_037_derived_types(self):
+        cmdTempl = (
+            'python generateDS.py --no-dates --no-versions '
+            '--member-specs=list -f '
+            '-o tests/%s2_sup.py -s tests/%s2_sub.py '
+            '--super=%s2_sup '
+            '--always-export-default '
+            'tests/%s.xsd'
+        )
+        t_ = 'derived_types'
+        cmd = cmdTempl % (t_, t_, t_, t_, )
+        self.executeClean(cmd, cwd='..')
+        self.compareFiles(
+            '{}1_sup.py'.format(t_),
+            '{}2_sup.py'.format(t_),
+            ('sys.stdout.write',))
+        self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
+        cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
+        cmd = cmdTempl % (t_, t_, t_, )
+        self.executeClean(cmd, cwd='..')
+        self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
+        # cleanup generated files
+        self.remove('{}2_sup.py'.format(t_))
+        self.remove('{}2_sub.py'.format(t_))
+        self.remove('{}2_out.xml'.format(t_))
+
     def compareFiles(self, left, right, ignore=None):
         with open(left) as left_file:
             with open(right) as right_file:
@@ -933,7 +975,8 @@ class GenTest(unittest.TestCase):
         diffs = list(diffs)
         if diffs:
             diffs = ''.join(diffs[2:12])
-            self.fail("Files '{}' and '{}' differed:\n{}".format(left, right, diffs))
+            self.fail("Files '{}' and '{}' differed:\n{}".format(
+                left, right, diffs))
 
     def remove(self, filename):
         if False:

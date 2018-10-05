@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -404,7 +404,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -731,7 +731,7 @@ def _cast(typ, value):
 
 class cdataListType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('cdatalist', 'cdataType', 1, 1, {u'maxOccurs': u'unbounded', u'type': u'cdataType', u'name': u'cdatalist', u'minOccurs': u'0'}, None),
+        MemberSpec_('cdatalist', 'cdataType', 1, 1, {'name': 'cdatalist', 'type': 'cdataType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
@@ -814,7 +814,7 @@ class cdataListType(GeneratedsSuper):
 
 class cdataType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('script', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'script'}, None),
+        MemberSpec_('script', 'xs:string', 0, 0, {'name': 'script', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

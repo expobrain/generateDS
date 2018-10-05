@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -733,8 +733,8 @@ class document1Type(GeneratedsSuper):
     test purposes. It should make a somewhat uninteresting
     docstring."""
     member_data_items_ = [
-        MemberSpec_('comments', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'comments'}, None),
-        MemberSpec_('otherdoc', 'document2Type', 0, 0, {u'type': u'document2Type', u'name': u'otherdoc'}, None),
+        MemberSpec_('comments', 'xs:string', 0, 0, {'name': 'comments', 'type': 'xs:string'}, None),
+        MemberSpec_('otherdoc', 'document2Type', 0, 0, {'name': 'otherdoc', 'type': 'document2Type'}, None),
     ]
     subclass = None
     superclass = None
@@ -825,9 +825,9 @@ class document2Type(GeneratedsSuper):
     test purposes. It should make a somewhat uninteresting
     docstring."""
     member_data_items_ = [
-        MemberSpec_('comments', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'comments'}, None),
-        MemberSpec_('rating', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'rating'}, None),
-        MemberSpec_('anotherdoc', 'document3Type', 0, 0, {u'type': u'document3Type', u'name': u'anotherdoc'}, None),
+        MemberSpec_('comments', 'xs:string', 0, 0, {'name': 'comments', 'type': 'xs:string'}, None),
+        MemberSpec_('rating', 'xs:integer', 0, 0, {'name': 'rating', 'type': 'xs:integer'}, None),
+        MemberSpec_('anotherdoc', 'document3Type', 0, 0, {'name': 'anotherdoc', 'type': 'document3Type'}, None),
     ]
     subclass = None
     superclass = None
@@ -931,8 +931,8 @@ class document2Type(GeneratedsSuper):
 class document3Type(GeneratedsSuper):
     """This is a element of Type 3. It is short."""
     member_data_items_ = [
-        MemberSpec_('comments', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'comments'}, None),
-        MemberSpec_('rating', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'rating'}, None),
+        MemberSpec_('comments', 'xs:string', 0, 0, {'name': 'comments', 'type': 'xs:string'}, None),
+        MemberSpec_('rating', 'xs:integer', 0, 0, {'name': 'rating', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None

@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -403,7 +403,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -730,8 +730,8 @@ def _cast(typ, value):
 
 class DefaultTypes(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('default1', 'DefaultType1', 0, 0, {u'type': u'DefaultType1', u'name': u'default1'}, None),
-        MemberSpec_('default2', 'DefaultType2', 0, 0, {u'type': u'DefaultType2', u'name': u'default2'}, None),
+        MemberSpec_('default1', 'DefaultType1', 0, 0, {'name': 'default1', 'type': 'DefaultType1'}, None),
+        MemberSpec_('default2', 'DefaultType2', 0, 0, {'name': 'default2', 'type': 'DefaultType2'}, None),
     ]
     subclass = None
     superclass = None
@@ -819,23 +819,23 @@ class DefaultTypes(GeneratedsSuper):
 
 class DefaultType1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('default01', 'xs:integer', 0, 1, {u'default': u'23', u'type': u'xs:integer', u'name': u'default01', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal01', 'xs:integer', 0, 1, {u'type': u'xs:integer', u'name': u'normal01', u'minOccurs': u'0'}, None),
-        MemberSpec_('default02', 'xs:string', 0, 1, {u'default': u'Peach', u'type': u'xs:string', u'name': u'default02', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal02', 'xs:string', 0, 1, {u'type': u'xs:string', u'name': u'normal02', u'minOccurs': u'0'}, None),
-        MemberSpec_('default03', 'xs:float', 0, 1, {u'default': u'23.45', u'type': u'xs:float', u'name': u'default03', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal03', 'xs:float', 0, 1, {u'type': u'xs:float', u'name': u'normal03', u'minOccurs': u'0'}, None),
-        MemberSpec_('default04', 'xs:double', 0, 1, {u'default': u'54.32', u'type': u'xs:double', u'name': u'default04', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal04', 'xs:double', 0, 1, {u'type': u'xs:double', u'name': u'normal04', u'minOccurs': u'0'}, None),
-        MemberSpec_('default05a', 'xs:boolean', 0, 1, {u'default': u'true', u'type': u'xs:boolean', u'name': u'default05a', u'minOccurs': u'0'}, None),
-        MemberSpec_('default05b', 'xs:boolean', 0, 1, {u'default': u'false', u'type': u'xs:boolean', u'name': u'default05b', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal05', 'xs:boolean', 0, 1, {u'type': u'xs:boolean', u'name': u'normal05', u'minOccurs': u'0'}, None),
-        MemberSpec_('default06', 'xs:date', 0, 1, {u'default': u'2015-06-21', u'type': u'xs:date', u'name': u'default06', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal06', 'xs:date', 0, 1, {u'type': u'xs:date', u'name': u'normal06', u'minOccurs': u'0'}, None),
-        MemberSpec_('default07', 'xs:time', 0, 1, {u'default': u'11:10:09', u'type': u'xs:time', u'name': u'default07', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal07', 'xs:date', 0, 1, {u'type': u'xs:date', u'name': u'normal07', u'minOccurs': u'0'}, None),
-        MemberSpec_('default08', 'xs:dateTime', 0, 1, {u'default': u'2015-06-21T14:13:12', u'type': u'xs:dateTime', u'name': u'default08', u'minOccurs': u'0'}, None),
-        MemberSpec_('normal08', 'xs:dateTime', 0, 1, {u'type': u'xs:dateTime', u'name': u'normal08', u'minOccurs': u'0'}, None),
+        MemberSpec_('default01', 'xs:integer', 0, 1, {'name': 'default01', 'type': 'xs:integer', 'default': '23', 'minOccurs': '0'}, None),
+        MemberSpec_('normal01', 'xs:integer', 0, 1, {'name': 'normal01', 'type': 'xs:integer', 'minOccurs': '0'}, None),
+        MemberSpec_('default02', 'xs:string', 0, 1, {'name': 'default02', 'type': 'xs:string', 'default': 'Peach', 'minOccurs': '0'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 1, {'name': 'normal02', 'type': 'xs:string', 'minOccurs': '0'}, None),
+        MemberSpec_('default03', 'xs:float', 0, 1, {'name': 'default03', 'type': 'xs:float', 'default': '23.45', 'minOccurs': '0'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 1, {'name': 'normal03', 'type': 'xs:float', 'minOccurs': '0'}, None),
+        MemberSpec_('default04', 'xs:double', 0, 1, {'name': 'default04', 'type': 'xs:double', 'default': '54.32', 'minOccurs': '0'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 1, {'name': 'normal04', 'type': 'xs:double', 'minOccurs': '0'}, None),
+        MemberSpec_('default05a', 'xs:boolean', 0, 1, {'name': 'default05a', 'type': 'xs:boolean', 'default': 'true', 'minOccurs': '0'}, None),
+        MemberSpec_('default05b', 'xs:boolean', 0, 1, {'name': 'default05b', 'type': 'xs:boolean', 'default': 'false', 'minOccurs': '0'}, None),
+        MemberSpec_('normal05', 'xs:boolean', 0, 1, {'name': 'normal05', 'type': 'xs:boolean', 'minOccurs': '0'}, None),
+        MemberSpec_('default06', 'xs:date', 0, 1, {'name': 'default06', 'type': 'xs:date', 'default': '2015-06-21', 'minOccurs': '0'}, None),
+        MemberSpec_('normal06', 'xs:date', 0, 1, {'name': 'normal06', 'type': 'xs:date', 'minOccurs': '0'}, None),
+        MemberSpec_('default07', 'xs:time', 0, 1, {'name': 'default07', 'type': 'xs:time', 'default': '11:10:09', 'minOccurs': '0'}, None),
+        MemberSpec_('normal07', 'xs:date', 0, 1, {'name': 'normal07', 'type': 'xs:date', 'minOccurs': '0'}, None),
+        MemberSpec_('default08', 'xs:dateTime', 0, 1, {'name': 'default08', 'type': 'xs:dateTime', 'default': '2015-06-21T14:13:12', 'minOccurs': '0'}, None),
+        MemberSpec_('normal08', 'xs:dateTime', 0, 1, {'name': 'normal08', 'type': 'xs:dateTime', 'minOccurs': '0'}, None),
     ]
     subclass = None
     superclass = None
@@ -1154,23 +1154,23 @@ class DefaultType1(GeneratedsSuper):
 
 class DefaultType2(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('default01', 'xs:integer', 0, 0, {u'default': u'23', u'type': u'xs:integer', u'name': u'default01'}, None),
-        MemberSpec_('normal01', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'normal01'}, None),
-        MemberSpec_('default02', 'xs:string', 0, 0, {u'default': u'Peach', u'type': u'xs:string', u'name': u'default02'}, None),
-        MemberSpec_('normal02', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'normal02'}, None),
-        MemberSpec_('default03', 'xs:float', 0, 0, {u'default': u'23.45', u'type': u'xs:float', u'name': u'default03'}, None),
-        MemberSpec_('normal03', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'normal03'}, None),
-        MemberSpec_('default04', 'xs:double', 0, 0, {u'default': u'54.32', u'type': u'xs:double', u'name': u'default04'}, None),
-        MemberSpec_('normal04', 'xs:double', 0, 0, {u'type': u'xs:double', u'name': u'normal04'}, None),
-        MemberSpec_('default05a', 'xs:boolean', 0, 0, {u'default': u'true', u'type': u'xs:boolean', u'name': u'default05a'}, None),
-        MemberSpec_('default05b', 'xs:boolean', 0, 0, {u'default': u'false', u'type': u'xs:boolean', u'name': u'default05b'}, None),
-        MemberSpec_('normal05', 'xs:boolean', 0, 0, {u'type': u'xs:boolean', u'name': u'normal05'}, None),
-        MemberSpec_('default06', 'xs:date', 0, 0, {u'default': u'2015-06-21', u'type': u'xs:date', u'name': u'default06'}, None),
-        MemberSpec_('normal06', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'normal06'}, None),
-        MemberSpec_('default07', 'xs:time', 0, 0, {u'default': u'11:10:09', u'type': u'xs:time', u'name': u'default07'}, None),
-        MemberSpec_('normal07', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'normal07'}, None),
-        MemberSpec_('default08', 'xs:dateTime', 0, 0, {u'default': u'2015-06-21T14:13:12', u'type': u'xs:dateTime', u'name': u'default08'}, None),
-        MemberSpec_('normal08', 'xs:dateTime', 0, 0, {u'type': u'xs:dateTime', u'name': u'normal08'}, None),
+        MemberSpec_('default01', 'xs:integer', 0, 0, {'name': 'default01', 'type': 'xs:integer', 'default': '23'}, None),
+        MemberSpec_('normal01', 'xs:integer', 0, 0, {'name': 'normal01', 'type': 'xs:integer'}, None),
+        MemberSpec_('default02', 'xs:string', 0, 0, {'name': 'default02', 'type': 'xs:string', 'default': 'Peach'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 0, {'name': 'normal02', 'type': 'xs:string'}, None),
+        MemberSpec_('default03', 'xs:float', 0, 0, {'name': 'default03', 'type': 'xs:float', 'default': '23.45'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 0, {'name': 'normal03', 'type': 'xs:float'}, None),
+        MemberSpec_('default04', 'xs:double', 0, 0, {'name': 'default04', 'type': 'xs:double', 'default': '54.32'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 0, {'name': 'normal04', 'type': 'xs:double'}, None),
+        MemberSpec_('default05a', 'xs:boolean', 0, 0, {'name': 'default05a', 'type': 'xs:boolean', 'default': 'true'}, None),
+        MemberSpec_('default05b', 'xs:boolean', 0, 0, {'name': 'default05b', 'type': 'xs:boolean', 'default': 'false'}, None),
+        MemberSpec_('normal05', 'xs:boolean', 0, 0, {'name': 'normal05', 'type': 'xs:boolean'}, None),
+        MemberSpec_('default06', 'xs:date', 0, 0, {'name': 'default06', 'type': 'xs:date', 'default': '2015-06-21'}, None),
+        MemberSpec_('normal06', 'xs:date', 0, 0, {'name': 'normal06', 'type': 'xs:date'}, None),
+        MemberSpec_('default07', 'xs:time', 0, 0, {'name': 'default07', 'type': 'xs:time', 'default': '11:10:09'}, None),
+        MemberSpec_('normal07', 'xs:date', 0, 0, {'name': 'normal07', 'type': 'xs:date'}, None),
+        MemberSpec_('default08', 'xs:dateTime', 0, 0, {'name': 'default08', 'type': 'xs:dateTime', 'default': '2015-06-21T14:13:12'}, None),
+        MemberSpec_('normal08', 'xs:dateTime', 0, 0, {'name': 'normal08', 'type': 'xs:dateTime'}, None),
     ]
     subclass = None
     superclass = None

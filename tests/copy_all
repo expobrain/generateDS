@@ -67,3 +67,5 @@ cp mixedcontent2_sub.py mixedcontent1_sub.py
 cp mixedcontent2_sup.py mixedcontent1_sup.py
 cp no_namespace_defs2_sub.py no_namespace_defs1_sub.py
 cp no_namespace_defs2_sup.py no_namespace_defs1_sup.py
+cp derived_types2_sub.py derived_types1_sub.py
+cp derived_types2_sup.py derived_types1_sup.py

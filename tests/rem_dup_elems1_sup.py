@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -404,7 +404,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -731,8 +731,8 @@ def _cast(typ, value):
 
 class authorsType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('author', 'author', 1, 1, {'type': u'author', u'ref': u'author', 'name': u'author'}, 1),
-        MemberSpec_('cooperation', 'xsd:string', 1, 1, {u'type': u'xsd:string', u'name': u'cooperation'}, 1),
+        MemberSpec_('author', 'author', 1, 1, {'ref': 'author', 'name': 'author', 'type': 'author'}, 1),
+        MemberSpec_('cooperation', 'xsd:string', 1, 1, {'name': 'cooperation', 'type': 'xsd:string'}, 1),
     ]
     subclass = None
     superclass = None
@@ -832,7 +832,7 @@ class authorsType(GeneratedsSuper):
 
 class author(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('description', 'xsd:string', 0, 0, {u'type': u'xsd:string', u'name': u'description'}, None),
+        MemberSpec_('description', 'xsd:string', 0, 0, {'name': 'description', 'type': 'xsd:string'}, None),
     ]
     subclass = None
     superclass = None

@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15 |Anaconda custom (64-bit)| (default, May  1 2018, 23:32:55)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -405,7 +405,7 @@ except ImportError as exp:
             return None
         @classmethod
         def gds_reverse_node_mapping(cls, mapping):
-            return dict(((v, k) for k, v in mapping.iteritems()))
+            return dict(((v, k) for k, v in mapping.items()))
         @staticmethod
         def gds_encode(instring):
             if sys.version_info.major == 2:
@@ -739,12 +739,12 @@ class ArrayTypes(object):
 
 class peopleType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('comments', 'commentsType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'commentsType', u'name': u'comments'}, None),
-        MemberSpec_('person', 'personType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'personType', u'name': u'person'}, None),
-        MemberSpec_('specialperson', 'specialperson', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'specialperson', u'name': u'specialperson'}, None),
-        MemberSpec_('programmer', 'programmerType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'programmerType', u'name': u'programmer'}, None),
-        MemberSpec_('python_programmer', 'python-programmerType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'python-programmerType', u'name': u'python-programmer'}, None),
-        MemberSpec_('java_programmer', 'java-programmerType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'java-programmerType', u'name': u'java-programmer'}, None),
+        MemberSpec_('comments', 'commentsType', 1, 0, {'name': 'comments', 'type': 'commentsType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('person', 'personType', 1, 0, {'name': 'person', 'maxOccurs': 'unbounded', 'type': 'personType'}, None),
+        MemberSpec_('specialperson', 'specialperson', 1, 0, {'name': 'specialperson', 'maxOccurs': 'unbounded', 'type': 'specialperson'}, None),
+        MemberSpec_('programmer', 'programmerType', 1, 0, {'name': 'programmer', 'maxOccurs': 'unbounded', 'type': 'programmerType'}, None),
+        MemberSpec_('python_programmer', 'python-programmerType', 1, 0, {'name': 'python-programmer', 'maxOccurs': 'unbounded', 'type': 'python-programmerType'}, None),
+        MemberSpec_('java_programmer', 'java-programmerType', 1, 0, {'name': 'java-programmer', 'maxOccurs': 'unbounded', 'type': 'java-programmerType'}, None),
     ]
     subclass = None
     superclass = None
@@ -845,7 +845,7 @@ class peopleType(GeneratedsSuper):
         for java_programmer_ in self.java_programmer:
             java_programmer_.to_etree(element, name_='java-programmer', mapping_=mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -894,8 +894,8 @@ class peopleType(GeneratedsSuper):
 
 class commentsType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('emp', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'emp'}, None),
-        MemberSpec_('bold', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'bold'}, None),
+        MemberSpec_('emp', 'xs:string', 1, 0, {'name': 'emp', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('bold', 'xs:string', 1, 0, {'name': 'bold', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
         MemberSpec_('valueOf_', [], 0),
     ]
     subclass = None
@@ -960,7 +960,7 @@ class commentsType(GeneratedsSuper):
         for item_ in self.content_:
             item_.to_etree(element)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1001,14 +1001,14 @@ class personType(GeneratedsSuper):
         MemberSpec_('ratio', 'xs:float', 0, 1, {'use': 'optional'}),
         MemberSpec_('fruit', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('vegetable', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('name', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'name'}, None),
-        MemberSpec_('interest', 'xs:string', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:string', u'name': u'interest'}, None),
-        MemberSpec_('category', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'category'}, None),
-        MemberSpec_('hot_agent', 'hot.agent', 0, 0, {u'type': u'hot.agent', u'name': u'hot.agent'}, None),
-        MemberSpec_('agent', 'agentType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'agentType', u'name': u'agent'}, None),
-        MemberSpec_('promoter', 'boosterType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'boosterType', u'name': u'promoter'}, None),
-        MemberSpec_('description', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'description'}, None),
-        MemberSpec_('range_', ['RangeType', 'xs:integer'], 0, 0, {u'type': u'xs:integer', u'name': u'range'}, None),
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+        MemberSpec_('interest', 'xs:string', 1, 0, {'name': 'interest', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('category', 'xs:integer', 0, 0, {'name': 'category', 'type': 'xs:integer'}, None),
+        MemberSpec_('hot_agent', 'hot.agent', 0, 0, {'name': 'hot.agent', 'type': 'hot.agent'}, None),
+        MemberSpec_('agent', 'agentType', 1, 0, {'name': 'agent', 'type': 'agentType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('promoter', 'boosterType', 1, 0, {'name': 'promoter', 'type': 'boosterType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('description', 'xs:string', 0, 0, {'name': 'description', 'type': 'xs:string'}, None),
+        MemberSpec_('range_', ['RangeType', 'xs:integer'], 0, 0, {'name': 'range', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -1143,7 +1143,7 @@ class personType(GeneratedsSuper):
             range__ = self.range_
             etree_.SubElement(element, '{}range').text = self.gds_format_integer(range__)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1262,7 +1262,7 @@ class specialperson(personType):
     def to_etree(self, parent_element=None, name_='specialperson', mapping_=None):
         element = super(specialperson, self).to_etree(parent_element, name_, mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1287,19 +1287,19 @@ class programmerType(personType):
         MemberSpec_('attrnonposint', 'xs:nonPositiveInteger', 0, 1, {'use': 'optional'}),
         MemberSpec_('attrnegint', 'xs:negativeInteger', 0, 1, {'use': 'optional'}),
         MemberSpec_('attrnonnegint', 'xs:nonNegativeInteger', 0, 1, {'use': 'optional'}),
-        MemberSpec_('email', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'email'}, None),
-        MemberSpec_('elposint', 'xs:positiveInteger', 0, 0, {u'type': u'xs:positiveInteger', u'name': u'elposint'}, None),
-        MemberSpec_('elnonposint', 'xs:nonPositiveInteger', 0, 0, {u'type': u'xs:nonPositiveInteger', u'name': u'elnonposint'}, None),
-        MemberSpec_('elnegint', 'xs:negativeInteger', 0, 0, {u'type': u'xs:negativeInteger', u'name': u'elnegint'}, None),
-        MemberSpec_('elnonnegint', 'xs:nonNegativeInteger', 0, 0, {u'type': u'xs:nonNegativeInteger', u'name': u'elnonnegint'}, None),
-        MemberSpec_('eldate', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'eldate'}, None),
-        MemberSpec_('eldatetime', 'xs:dateTime', 0, 0, {u'type': u'xs:dateTime', u'name': u'eldatetime'}, None),
-        MemberSpec_('eldatetime1', 'xs:dateTime', 0, 0, {u'type': u'xs:dateTime', u'name': u'eldatetime1'}, None),
-        MemberSpec_('eltoken', 'xs:token', 0, 0, {u'type': u'xs:token', u'name': u'eltoken'}, None),
-        MemberSpec_('elshort', 'xs:short', 0, 0, {u'type': u'xs:short', u'name': u'elshort'}, None),
-        MemberSpec_('ellong', 'xs:long', 0, 0, {u'type': u'xs:long', u'name': u'ellong'}, None),
-        MemberSpec_('elparam', 'paramType', 0, 0, {u'type': u'paramType', u'name': u'elparam'}, None),
-        MemberSpec_('elarraytypes', ['ArrayTypes', 'xs:NMTOKEN'], 0, 0, {u'type': u'xs:NMTOKEN', u'name': u'elarraytypes'}, None),
+        MemberSpec_('email', 'xs:string', 0, 0, {'name': 'email', 'type': 'xs:string'}, None),
+        MemberSpec_('elposint', 'xs:positiveInteger', 0, 0, {'name': 'elposint', 'type': 'xs:positiveInteger'}, None),
+        MemberSpec_('elnonposint', 'xs:nonPositiveInteger', 0, 0, {'name': 'elnonposint', 'type': 'xs:nonPositiveInteger'}, None),
+        MemberSpec_('elnegint', 'xs:negativeInteger', 0, 0, {'name': 'elnegint', 'type': 'xs:negativeInteger'}, None),
+        MemberSpec_('elnonnegint', 'xs:nonNegativeInteger', 0, 0, {'name': 'elnonnegint', 'type': 'xs:nonNegativeInteger'}, None),
+        MemberSpec_('eldate', 'xs:date', 0, 0, {'name': 'eldate', 'type': 'xs:date'}, None),
+        MemberSpec_('eldatetime', 'xs:dateTime', 0, 0, {'name': 'eldatetime', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('eldatetime1', 'xs:dateTime', 0, 0, {'name': 'eldatetime1', 'type': 'xs:dateTime'}, None),
+        MemberSpec_('eltoken', 'xs:token', 0, 0, {'name': 'eltoken', 'type': 'xs:token'}, None),
+        MemberSpec_('elshort', 'xs:short', 0, 0, {'name': 'elshort', 'type': 'xs:short'}, None),
+        MemberSpec_('ellong', 'xs:long', 0, 0, {'name': 'ellong', 'type': 'xs:long'}, None),
+        MemberSpec_('elparam', 'paramType', 0, 0, {'name': 'elparam', 'type': 'paramType'}, None),
+        MemberSpec_('elarraytypes', ['ArrayTypes', 'xs:NMTOKEN'], 0, 0, {'name': 'elarraytypes', 'type': 'xs:NMTOKEN'}, None),
     ]
     subclass = None
     superclass = personType
@@ -1478,7 +1478,7 @@ class programmerType(personType):
             elarraytypes_ = self.elarraytypes
             etree_.SubElement(element, '{}elarraytypes').text = self.gds_format_string(elarraytypes_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1640,7 +1640,7 @@ class paramType(GeneratedsSuper):
         MemberSpec_('sid', 'xs:NCName', 0, 1, {'use': 'optional'}),
         MemberSpec_('flow', 'FlowType', 0, 1, {'use': 'optional'}),
         MemberSpec_('semantic', 'xs:token', 0, 1, {'use': 'optional'}),
-        MemberSpec_('type_', 'xs:NMTOKEN', 0, 0, {'use': u'required'}),
+        MemberSpec_('type_', 'xs:NMTOKEN', 0, 0, {'use': 'required'}),
         MemberSpec_('valueOf_', 'xs:string', 0),
     ]
     subclass = None
@@ -1710,7 +1710,7 @@ class paramType(GeneratedsSuper):
         if self.hasContent_():
             element.text = self.gds_format_string(self.get_valueOf_())
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1760,9 +1760,9 @@ class python_programmerType(programmerType):
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('drcs_attr', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('gui_developer', 'xs:boolean', 0, 1, {'use': 'optional'}),
-        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'favorite-editor'}, None),
-        MemberSpec_('flowvalue', ['FlowType', 'xs:integer'], 0, 0, {u'type': u'xs:integer', u'name': u'flowvalue'}, None),
-        MemberSpec_('drcs', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'drcs'}, None),
+        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {'name': 'favorite-editor', 'type': 'xs:string'}, None),
+        MemberSpec_('flowvalue', ['FlowType', 'xs:integer'], 0, 0, {'name': 'flowvalue', 'type': 'xs:integer'}, None),
+        MemberSpec_('drcs', 'xs:string', 0, 0, {'name': 'drcs', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = programmerType
@@ -1831,7 +1831,7 @@ class python_programmerType(programmerType):
             drcs_ = self.drcs
             etree_.SubElement(element, '{}drcs').text = self.gds_format_string(drcs_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -1886,12 +1886,12 @@ class java_programmerType(programmerType):
     member_data_items_ = [
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('status', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'favorite-editor'}, None),
-        MemberSpec_('datetime1', 'xs:gYear', 0, 0, {u'type': u'xs:gYear', u'name': u'datetime1'}, None),
-        MemberSpec_('datetime2', 'xs:gYearMonth', 0, 0, {u'type': u'xs:gYearMonth', u'name': u'datetime2'}, None),
-        MemberSpec_('datetime3', 'xs:gMonth', 0, 0, {u'type': u'xs:gMonth', u'name': u'datetime3'}, None),
-        MemberSpec_('datetime4', 'xs:gMonthDay', 0, 0, {u'type': u'xs:gMonthDay', u'name': u'datetime4'}, None),
-        MemberSpec_('datetime5', 'xs:gDay', 0, 0, {u'type': u'xs:gDay', u'name': u'datetime5'}, None),
+        MemberSpec_('favorite_editor', 'xs:string', 0, 0, {'name': 'favorite-editor', 'type': 'xs:string'}, None),
+        MemberSpec_('datetime1', 'xs:gYear', 0, 0, {'name': 'datetime1', 'type': 'xs:gYear'}, None),
+        MemberSpec_('datetime2', 'xs:gYearMonth', 0, 0, {'name': 'datetime2', 'type': 'xs:gYearMonth'}, None),
+        MemberSpec_('datetime3', 'xs:gMonth', 0, 0, {'name': 'datetime3', 'type': 'xs:gMonth'}, None),
+        MemberSpec_('datetime4', 'xs:gMonthDay', 0, 0, {'name': 'datetime4', 'type': 'xs:gMonthDay'}, None),
+        MemberSpec_('datetime5', 'xs:gDay', 0, 0, {'name': 'datetime5', 'type': 'xs:gDay'}, None),
     ]
     subclass = None
     superclass = programmerType
@@ -1971,7 +1971,7 @@ class java_programmerType(programmerType):
             datetime5_ = self.datetime5
             etree_.SubElement(element, '{}datetime5').text = self.gds_format_string(datetime5_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2021,11 +2021,11 @@ class java_programmerType(programmerType):
 
 class agentType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('info', 'infoType', 0, 0, {u'type': u'infoType', u'name': u'info'}, None),
-        MemberSpec_('vehicle', 'vehicleType', 1, 1, {u'maxOccurs': u'unbounded', 'type': u'vehicle', u'ref': u'vehicle', 'name': u'vehicle', u'minOccurs': u'0'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('info', 'infoType', 0, 0, {'name': 'info', 'type': 'infoType'}, None),
+        MemberSpec_('vehicle', 'vehicleType', 1, 1, {'ref': 'vehicle', 'minOccurs': '0', 'maxOccurs': 'unbounded', 'name': 'vehicle', 'type': 'vehicle'}, None),
     ]
     subclass = None
     superclass = None
@@ -2099,7 +2099,7 @@ class agentType(GeneratedsSuper):
         for vehicle_ in self.vehicle:
             vehicle_.to_etree(element, name_='vehicle', mapping_=mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2161,10 +2161,10 @@ class special_agentType(agentType):
     """This is a good kind of agent for testing the generation of Python
     bindings for an XML schema."""
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('info', 'infoType', 0, 0, {u'type': u'infoType', u'name': u'info'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('info', 'infoType', 0, 0, {'name': 'info', 'type': 'infoType'}, None),
     ]
     subclass = None
     superclass = agentType
@@ -2220,7 +2220,7 @@ class special_agentType(agentType):
             info_ = self.info
             info_.to_etree(element, name_='info', mapping_=mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2261,10 +2261,10 @@ class weird_agentType(agentType):
     """This is a good kind of agent for testing the generation of Python
     bindings for an XML schema."""
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('info', 'infoType', 0, 0, {u'type': u'infoType', u'name': u'info'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('info', 'infoType', 0, 0, {'name': 'info', 'type': 'infoType'}, None),
     ]
     subclass = None
     superclass = agentType
@@ -2320,7 +2320,7 @@ class weird_agentType(agentType):
             info_ = self.info
             info_.to_etree(element, name_='info', mapping_=mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2360,13 +2360,13 @@ class weird_agentType(agentType):
 class boosterType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('member-id', 'xs:string', 0, 1, {'use': 'optional'}),
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('other_name', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'other-name'}, None),
-        MemberSpec_('class_', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'class'}, None),
-        MemberSpec_('other_value', 'xs:float', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:float', u'name': u'other-value'}, None),
-        MemberSpec_('type_', 'xs:float', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'xs:float', u'name': u'type'}, None),
-        MemberSpec_('client_handler', 'client-handlerType', 1, 0, {u'maxOccurs': u'unbounded', u'type': u'client-handlerType', u'name': u'client-handler'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
+        MemberSpec_('other_name', 'xs:float', 0, 0, {'name': 'other-name', 'type': 'xs:float'}, None),
+        MemberSpec_('class_', 'xs:float', 0, 0, {'name': 'class', 'type': 'xs:float'}, None),
+        MemberSpec_('other_value', 'xs:float', 1, 0, {'name': 'other-value', 'type': 'xs:float', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('type_', 'xs:float', 1, 0, {'name': 'type', 'type': 'xs:float', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('client_handler', 'client-handlerType', 1, 0, {'name': 'client-handler', 'maxOccurs': 'unbounded', 'type': 'client-handlerType'}, None),
     ]
     subclass = None
     superclass = None
@@ -2464,7 +2464,7 @@ class boosterType(GeneratedsSuper):
         for client_handler_ in self.client_handler:
             client_handler_.to_etree(element, name_='client-handler', mapping_=mapping_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2576,7 +2576,7 @@ class infoType(GeneratedsSuper):
         if self.rating is not None:
             element.set('rating', self.gds_format_float(self.rating))
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2611,7 +2611,7 @@ class infoType(GeneratedsSuper):
 
 class vehicleType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('wheelcount', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'wheelcount'}, None),
+        MemberSpec_('wheelcount', 'xs:integer', 0, 0, {'name': 'wheelcount', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -2652,7 +2652,7 @@ class vehicleType(GeneratedsSuper):
             wheelcount_ = self.wheelcount
             etree_.SubElement(element, '{}wheelcount').text = self.gds_format_integer(wheelcount_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2680,7 +2680,7 @@ class vehicleType(GeneratedsSuper):
 
 class automobile(vehicleType):
     member_data_items_ = [
-        MemberSpec_('drivername', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'drivername'}, None),
+        MemberSpec_('drivername', 'xs:string', 0, 0, {'name': 'drivername', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = vehicleType
@@ -2715,7 +2715,7 @@ class automobile(vehicleType):
             drivername_ = self.drivername
             etree_.SubElement(element, '{}drivername').text = self.gds_format_string(drivername_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2737,7 +2737,7 @@ class automobile(vehicleType):
 
 class airplane(vehicleType):
     member_data_items_ = [
-        MemberSpec_('pilotname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'pilotname'}, None),
+        MemberSpec_('pilotname', 'xs:string', 0, 0, {'name': 'pilotname', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = vehicleType
@@ -2772,7 +2772,7 @@ class airplane(vehicleType):
             pilotname_ = self.pilotname
             etree_.SubElement(element, '{}pilotname').text = self.gds_format_string(pilotname_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2794,10 +2794,10 @@ class airplane(vehicleType):
 
 class hot_agent(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('firstname', 'xs:string', 0, 0, {u'default': u'empty\\name', u'type': u'xs:string', u'name': u'firstname'}, None),
-        MemberSpec_('lastname', 'xs:string', 0, 0, {u'default': u"no 'last' name", u'type': u'xs:string', u'name': u'lastname'}, None),
-        MemberSpec_('priority', 'xs:float', 0, 0, {u'type': u'xs:float', u'name': u'priority'}, None),
-        MemberSpec_('startDate', 'xs:date', 0, 0, {u'type': u'xs:date', u'name': u'startDate'}, None),
+        MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string', 'default': 'empty\\name'}, None),
+        MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string', 'default': "no 'last' name"}, None),
+        MemberSpec_('priority', 'xs:float', 0, 0, {'name': 'priority', 'type': 'xs:float'}, None),
+        MemberSpec_('startDate', 'xs:date', 0, 0, {'name': 'startDate', 'type': 'xs:date'}, None),
     ]
     subclass = None
     superclass = None
@@ -2861,7 +2861,7 @@ class hot_agent(GeneratedsSuper):
             startDate_ = self.startDate
             etree_.SubElement(element, '{}startDate').text = self.gds_format_date(startDate_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
@@ -2901,8 +2901,8 @@ class hot_agent(GeneratedsSuper):
 
 class client_handlerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('fullname', 'xs:string', 0, 0, {u'type': u'xs:string', u'name': u'fullname'}, None),
-        MemberSpec_('refid', 'xs:integer', 0, 0, {u'type': u'xs:integer', u'name': u'refid'}, None),
+        MemberSpec_('fullname', 'xs:string', 0, 0, {'name': 'fullname', 'type': 'xs:string'}, None),
+        MemberSpec_('refid', 'xs:integer', 0, 0, {'name': 'refid', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -2945,7 +2945,7 @@ class client_handlerType(GeneratedsSuper):
             refid_ = self.refid
             etree_.SubElement(element, '{}refid').text = self.gds_format_integer(refid_)
         if mapping_ is not None:
-            mapping_[self] = element
+            mapping_[id(self)] = element
         return element
     def build(self, node):
         already_processed = set()
