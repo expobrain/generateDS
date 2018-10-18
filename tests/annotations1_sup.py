@@ -738,8 +738,9 @@ class document1Type(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, comments=None, otherdoc=None):
+    def __init__(self, comments=None, otherdoc=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.comments = comments
         self.otherdoc = otherdoc
     def factory(*args_, **kwargs_):
@@ -753,10 +754,14 @@ class document1Type(GeneratedsSuper):
         else:
             return document1Type(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_comments(self): return self.comments
-    def set_comments(self, comments): self.comments = comments
-    def get_otherdoc(self): return self.otherdoc
-    def set_otherdoc(self, otherdoc): self.otherdoc = otherdoc
+    def get_comments(self):
+        return self.comments
+    def set_comments(self, comments):
+        self.comments = comments
+    def get_otherdoc(self):
+        return self.otherdoc
+    def set_otherdoc(self, otherdoc):
+        self.otherdoc = otherdoc
     def hasContent_(self):
         if (
             self.comments is not None or
@@ -813,7 +818,7 @@ class document1Type(GeneratedsSuper):
             comments_ = self.gds_validate_string(comments_, node, 'comments')
             self.comments = comments_
         elif nodeName_ == 'otherdoc':
-            obj_ = document2Type.factory()
+            obj_ = document2Type.factory(parent_object_=self)
             obj_.build(child_)
             self.otherdoc = obj_
             obj_.original_tagname_ = 'otherdoc'
@@ -831,8 +836,9 @@ class document2Type(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, comments=None, rating=None, anotherdoc=None):
+    def __init__(self, comments=None, rating=None, anotherdoc=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.comments = comments
         self.rating = rating
         self.anotherdoc = anotherdoc
@@ -847,12 +853,18 @@ class document2Type(GeneratedsSuper):
         else:
             return document2Type(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_comments(self): return self.comments
-    def set_comments(self, comments): self.comments = comments
-    def get_rating(self): return self.rating
-    def set_rating(self, rating): self.rating = rating
-    def get_anotherdoc(self): return self.anotherdoc
-    def set_anotherdoc(self, anotherdoc): self.anotherdoc = anotherdoc
+    def get_comments(self):
+        return self.comments
+    def set_comments(self, comments):
+        self.comments = comments
+    def get_rating(self):
+        return self.rating
+    def set_rating(self, rating):
+        self.rating = rating
+    def get_anotherdoc(self):
+        return self.anotherdoc
+    def set_anotherdoc(self, anotherdoc):
+        self.anotherdoc = anotherdoc
     def hasContent_(self):
         if (
             self.comments is not None or
@@ -921,7 +933,7 @@ class document2Type(GeneratedsSuper):
             ival_ = self.gds_validate_integer(ival_, node, 'rating')
             self.rating = ival_
         elif nodeName_ == 'anotherdoc':
-            obj_ = document3Type.factory()
+            obj_ = document3Type.factory(parent_object_=self)
             obj_.build(child_)
             self.anotherdoc = obj_
             obj_.original_tagname_ = 'anotherdoc'
@@ -936,8 +948,9 @@ class document3Type(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, comments=None, rating=None):
+    def __init__(self, comments=None, rating=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.comments = comments
         self.rating = rating
     def factory(*args_, **kwargs_):
@@ -951,10 +964,14 @@ class document3Type(GeneratedsSuper):
         else:
             return document3Type(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_comments(self): return self.comments
-    def set_comments(self, comments): self.comments = comments
-    def get_rating(self): return self.rating
-    def set_rating(self, rating): self.rating = rating
+    def get_comments(self):
+        return self.comments
+    def set_comments(self, comments):
+        self.comments = comments
+    def get_rating(self):
+        return self.rating
+    def set_rating(self, rating):
+        self.rating = rating
     def hasContent_(self):
         if (
             self.comments is not None or

@@ -748,8 +748,9 @@ class peopleType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, comments=None, person=None, specialperson=None, programmer=None, python_programmer=None, java_programmer=None):
+    def __init__(self, comments=None, person=None, specialperson=None, programmer=None, python_programmer=None, java_programmer=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if comments is None:
             self.comments = []
         else:
@@ -785,33 +786,45 @@ class peopleType(GeneratedsSuper):
         else:
             return peopleType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_comments(self): return self.comments
-    def set_comments(self, comments): self.comments = comments
+    def get_comments(self):
+        return self.comments
+    def set_comments(self, comments):
+        self.comments = comments
     def add_comments(self, value): self.comments.append(value)
     def insert_comments_at(self, index, value): self.comments.insert(index, value)
     def replace_comments_at(self, index, value): self.comments[index] = value
-    def get_person(self): return self.person
-    def set_person(self, person): self.person = person
+    def get_person(self):
+        return self.person
+    def set_person(self, person):
+        self.person = person
     def add_person(self, value): self.person.append(value)
     def insert_person_at(self, index, value): self.person.insert(index, value)
     def replace_person_at(self, index, value): self.person[index] = value
-    def get_specialperson(self): return self.specialperson
-    def set_specialperson(self, specialperson): self.specialperson = specialperson
+    def get_specialperson(self):
+        return self.specialperson
+    def set_specialperson(self, specialperson):
+        self.specialperson = specialperson
     def add_specialperson(self, value): self.specialperson.append(value)
     def insert_specialperson_at(self, index, value): self.specialperson.insert(index, value)
     def replace_specialperson_at(self, index, value): self.specialperson[index] = value
-    def get_programmer(self): return self.programmer
-    def set_programmer(self, programmer): self.programmer = programmer
+    def get_programmer(self):
+        return self.programmer
+    def set_programmer(self, programmer):
+        self.programmer = programmer
     def add_programmer(self, value): self.programmer.append(value)
     def insert_programmer_at(self, index, value): self.programmer.insert(index, value)
     def replace_programmer_at(self, index, value): self.programmer[index] = value
-    def get_python_programmer(self): return self.python_programmer
-    def set_python_programmer(self, python_programmer): self.python_programmer = python_programmer
+    def get_python_programmer(self):
+        return self.python_programmer
+    def set_python_programmer(self, python_programmer):
+        self.python_programmer = python_programmer
     def add_python_programmer(self, value): self.python_programmer.append(value)
     def insert_python_programmer_at(self, index, value): self.python_programmer.insert(index, value)
     def replace_python_programmer_at(self, index, value): self.python_programmer[index] = value
-    def get_java_programmer(self): return self.java_programmer
-    def set_java_programmer(self, java_programmer): self.java_programmer = java_programmer
+    def get_java_programmer(self):
+        return self.java_programmer
+    def set_java_programmer(self, java_programmer):
+        self.java_programmer = java_programmer
     def add_java_programmer(self, value): self.java_programmer.append(value)
     def insert_java_programmer_at(self, index, value): self.java_programmer.insert(index, value)
     def replace_java_programmer_at(self, index, value): self.java_programmer[index] = value
@@ -858,34 +871,34 @@ class peopleType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'comments':
-            obj_ = commentsType.factory()
+            obj_ = commentsType.factory(parent_object_=self)
             obj_.build(child_)
             self.comments.append(obj_)
             obj_.original_tagname_ = 'comments'
         elif nodeName_ == 'person':
             class_obj_ = self.get_class_obj_(child_, personType)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.person.append(obj_)
             obj_.original_tagname_ = 'person'
         elif nodeName_ == 'specialperson':
-            obj_ = specialperson.factory()
+            obj_ = specialperson.factory(parent_object_=self)
             obj_.build(child_)
             self.specialperson.append(obj_)
             obj_.original_tagname_ = 'specialperson'
         elif nodeName_ == 'programmer':
             class_obj_ = self.get_class_obj_(child_, programmerType)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.programmer.append(obj_)
             obj_.original_tagname_ = 'programmer'
         elif nodeName_ == 'python-programmer':
-            obj_ = python_programmerType.factory()
+            obj_ = python_programmerType.factory(parent_object_=self)
             obj_.build(child_)
             self.python_programmer.append(obj_)
             obj_.original_tagname_ = 'python-programmer'
         elif nodeName_ == 'java-programmer':
-            obj_ = java_programmerType.factory()
+            obj_ = java_programmerType.factory(parent_object_=self)
             obj_.build(child_)
             self.java_programmer.append(obj_)
             obj_.original_tagname_ = 'java-programmer'
@@ -900,8 +913,9 @@ class commentsType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, emp=None, bold=None, valueOf_=None, mixedclass_=None, content_=None):
+    def __init__(self, emp=None, bold=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if emp is None:
             self.emp = []
         else:
@@ -931,13 +945,17 @@ class commentsType(GeneratedsSuper):
         else:
             return commentsType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_emp(self): return self.emp
-    def set_emp(self, emp): self.emp = emp
+    def get_emp(self):
+        return self.emp
+    def set_emp(self, emp):
+        self.emp = emp
     def add_emp(self, value): self.emp.append(value)
     def insert_emp_at(self, index, value): self.emp.insert(index, value)
     def replace_emp_at(self, index, value): self.emp[index] = value
-    def get_bold(self): return self.bold
-    def set_bold(self, bold): self.bold = bold
+    def get_bold(self):
+        return self.bold
+    def set_bold(self, bold):
+        self.bold = bold
     def add_bold(self, value): self.bold.append(value)
     def insert_bold_at(self, index, value): self.bold.insert(index, value)
     def replace_bold_at(self, index, value): self.bold[index] = value
@@ -1012,8 +1030,9 @@ class personType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, extensiontype_=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.value = _cast(None, value)
         self.id = _cast(int, id)
         self.ratio = _cast(float, ratio)
@@ -1049,41 +1068,67 @@ class personType(GeneratedsSuper):
         else:
             return personType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_interest(self): return self.interest
-    def set_interest(self, interest): self.interest = interest
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_interest(self):
+        return self.interest
+    def set_interest(self, interest):
+        self.interest = interest
     def add_interest(self, value): self.interest.append(value)
     def insert_interest_at(self, index, value): self.interest.insert(index, value)
     def replace_interest_at(self, index, value): self.interest[index] = value
-    def get_category(self): return self.category
-    def set_category(self, category): self.category = category
-    def get_hot_agent(self): return self.hot_agent
-    def set_hot_agent(self, hot_agent): self.hot_agent = hot_agent
-    def get_agent(self): return self.agent
-    def set_agent(self, agent): self.agent = agent
+    def get_category(self):
+        return self.category
+    def set_category(self, category):
+        self.category = category
+    def get_hot_agent(self):
+        return self.hot_agent
+    def set_hot_agent(self, hot_agent):
+        self.hot_agent = hot_agent
+    def get_agent(self):
+        return self.agent
+    def set_agent(self, agent):
+        self.agent = agent
     def add_agent(self, value): self.agent.append(value)
     def insert_agent_at(self, index, value): self.agent.insert(index, value)
     def replace_agent_at(self, index, value): self.agent[index] = value
-    def get_promoter(self): return self.promoter
-    def set_promoter(self, promoter): self.promoter = promoter
+    def get_promoter(self):
+        return self.promoter
+    def set_promoter(self, promoter):
+        self.promoter = promoter
     def add_promoter(self, value): self.promoter.append(value)
     def insert_promoter_at(self, index, value): self.promoter.insert(index, value)
     def replace_promoter_at(self, index, value): self.promoter[index] = value
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
-    def get_range(self): return self.range_
-    def set_range(self, range_): self.range_ = range_
-    def get_value(self): return self.value
-    def set_value(self, value): self.value = value
-    def get_id(self): return self.id
-    def set_id(self, id): self.id = id
-    def get_ratio(self): return self.ratio
-    def set_ratio(self, ratio): self.ratio = ratio
-    def get_fruit(self): return self.fruit
-    def set_fruit(self, fruit): self.fruit = fruit
-    def get_vegetable(self): return self.vegetable
-    def set_vegetable(self, vegetable): self.vegetable = vegetable
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
+    def get_range(self):
+        return self.range_
+    def set_range(self, range_):
+        self.range_ = range_
+    def get_value(self):
+        return self.value
+    def set_value(self, value):
+        self.value = value
+    def get_id(self):
+        return self.id
+    def set_id(self, id):
+        self.id = id
+    def get_ratio(self):
+        return self.ratio
+    def set_ratio(self, ratio):
+        self.ratio = ratio
+    def get_fruit(self):
+        return self.fruit
+    def set_fruit(self, fruit):
+        self.fruit = fruit
+    def get_vegetable(self):
+        return self.vegetable
+    def set_vegetable(self, vegetable):
+        self.vegetable = vegetable
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def validate_RangeType(self, value):
@@ -1201,18 +1246,18 @@ class personType(GeneratedsSuper):
             ival_ = self.gds_validate_integer(ival_, node, 'category')
             self.category = ival_
         elif nodeName_ == 'hot.agent':
-            obj_ = hot_agent.factory()
+            obj_ = hot_agent.factory(parent_object_=self)
             obj_.build(child_)
             self.hot_agent = obj_
             obj_.original_tagname_ = 'hot.agent'
         elif nodeName_ == 'agent':
             class_obj_ = self.get_class_obj_(child_, agentType)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.agent.append(obj_)
             obj_.original_tagname_ = 'agent'
         elif nodeName_ == 'promoter':
-            obj_ = boosterType.factory()
+            obj_ = boosterType.factory(parent_object_=self)
             obj_.build(child_)
             self.promoter.append(obj_)
             obj_.original_tagname_ = 'promoter'
@@ -1238,9 +1283,10 @@ class specialperson(personType):
     ]
     subclass = None
     superclass = personType
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, **kwargs_):
         self.original_tagname_ = None
-        super(specialperson, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(specialperson, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_,  **kwargs_)
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
@@ -1303,9 +1349,10 @@ class programmerType(personType):
     ]
     subclass = None
     superclass = personType
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
-        super(programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, extensiontype_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, extensiontype_,  **kwargs_)
         self.language = _cast(None, language)
         self.area = _cast(None, area)
         self.attrposint = _cast(int, attrposint)
@@ -1350,44 +1397,82 @@ class programmerType(personType):
         else:
             return programmerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_email(self): return self.email
-    def set_email(self, email): self.email = email
-    def get_elposint(self): return self.elposint
-    def set_elposint(self, elposint): self.elposint = elposint
-    def get_elnonposint(self): return self.elnonposint
-    def set_elnonposint(self, elnonposint): self.elnonposint = elnonposint
-    def get_elnegint(self): return self.elnegint
-    def set_elnegint(self, elnegint): self.elnegint = elnegint
-    def get_elnonnegint(self): return self.elnonnegint
-    def set_elnonnegint(self, elnonnegint): self.elnonnegint = elnonnegint
-    def get_eldate(self): return self.eldate
-    def set_eldate(self, eldate): self.eldate = eldate
-    def get_eldatetime(self): return self.eldatetime
-    def set_eldatetime(self, eldatetime): self.eldatetime = eldatetime
-    def get_eldatetime1(self): return self.eldatetime1
-    def set_eldatetime1(self, eldatetime1): self.eldatetime1 = eldatetime1
-    def get_eltoken(self): return self.eltoken
-    def set_eltoken(self, eltoken): self.eltoken = eltoken
-    def get_elshort(self): return self.elshort
-    def set_elshort(self, elshort): self.elshort = elshort
-    def get_ellong(self): return self.ellong
-    def set_ellong(self, ellong): self.ellong = ellong
-    def get_elparam(self): return self.elparam
-    def set_elparam(self, elparam): self.elparam = elparam
-    def get_elarraytypes(self): return self.elarraytypes
-    def set_elarraytypes(self, elarraytypes): self.elarraytypes = elarraytypes
-    def get_language(self): return self.language
-    def set_language(self, language): self.language = language
-    def get_area(self): return self.area
-    def set_area(self, area): self.area = area
-    def get_attrposint(self): return self.attrposint
-    def set_attrposint(self, attrposint): self.attrposint = attrposint
-    def get_attrnonposint(self): return self.attrnonposint
-    def set_attrnonposint(self, attrnonposint): self.attrnonposint = attrnonposint
-    def get_attrnegint(self): return self.attrnegint
-    def set_attrnegint(self, attrnegint): self.attrnegint = attrnegint
-    def get_attrnonnegint(self): return self.attrnonnegint
-    def set_attrnonnegint(self, attrnonnegint): self.attrnonnegint = attrnonnegint
+    def get_email(self):
+        return self.email
+    def set_email(self, email):
+        self.email = email
+    def get_elposint(self):
+        return self.elposint
+    def set_elposint(self, elposint):
+        self.elposint = elposint
+    def get_elnonposint(self):
+        return self.elnonposint
+    def set_elnonposint(self, elnonposint):
+        self.elnonposint = elnonposint
+    def get_elnegint(self):
+        return self.elnegint
+    def set_elnegint(self, elnegint):
+        self.elnegint = elnegint
+    def get_elnonnegint(self):
+        return self.elnonnegint
+    def set_elnonnegint(self, elnonnegint):
+        self.elnonnegint = elnonnegint
+    def get_eldate(self):
+        return self.eldate
+    def set_eldate(self, eldate):
+        self.eldate = eldate
+    def get_eldatetime(self):
+        return self.eldatetime
+    def set_eldatetime(self, eldatetime):
+        self.eldatetime = eldatetime
+    def get_eldatetime1(self):
+        return self.eldatetime1
+    def set_eldatetime1(self, eldatetime1):
+        self.eldatetime1 = eldatetime1
+    def get_eltoken(self):
+        return self.eltoken
+    def set_eltoken(self, eltoken):
+        self.eltoken = eltoken
+    def get_elshort(self):
+        return self.elshort
+    def set_elshort(self, elshort):
+        self.elshort = elshort
+    def get_ellong(self):
+        return self.ellong
+    def set_ellong(self, ellong):
+        self.ellong = ellong
+    def get_elparam(self):
+        return self.elparam
+    def set_elparam(self, elparam):
+        self.elparam = elparam
+    def get_elarraytypes(self):
+        return self.elarraytypes
+    def set_elarraytypes(self, elarraytypes):
+        self.elarraytypes = elarraytypes
+    def get_language(self):
+        return self.language
+    def set_language(self, language):
+        self.language = language
+    def get_area(self):
+        return self.area
+    def set_area(self, area):
+        self.area = area
+    def get_attrposint(self):
+        return self.attrposint
+    def set_attrposint(self, attrposint):
+        self.attrposint = attrposint
+    def get_attrnonposint(self):
+        return self.attrnonposint
+    def set_attrnonposint(self, attrnonposint):
+        self.attrnonposint = attrnonposint
+    def get_attrnegint(self):
+        return self.attrnegint
+    def set_attrnegint(self, attrnegint):
+        self.attrnegint = attrnegint
+    def get_attrnonnegint(self):
+        return self.attrnonnegint
+    def set_attrnonnegint(self, attrnonnegint):
+        self.attrnonnegint = attrnonnegint
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def validate_ArrayTypes(self, value):
@@ -1619,7 +1704,7 @@ class programmerType(personType):
             ival_ = self.gds_validate_integer(ival_, node, 'ellong')
             self.ellong = ival_
         elif nodeName_ == 'elparam':
-            obj_ = paramType.factory()
+            obj_ = paramType.factory(parent_object_=self)
             obj_.build(child_)
             self.elparam = obj_
             obj_.original_tagname_ = 'elparam'
@@ -1645,8 +1730,9 @@ class paramType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None):
+    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.id = _cast(None, id)
         self.name = _cast(None, name)
         self.sid = _cast(None, sid)
@@ -1665,18 +1751,30 @@ class paramType(GeneratedsSuper):
         else:
             return paramType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_id(self): return self.id
-    def set_id(self, id): self.id = id
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_sid(self): return self.sid
-    def set_sid(self, sid): self.sid = sid
-    def get_flow(self): return self.flow
-    def set_flow(self, flow): self.flow = flow
-    def get_semantic(self): return self.semantic
-    def set_semantic(self, semantic): self.semantic = semantic
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
+    def get_id(self):
+        return self.id
+    def set_id(self, id):
+        self.id = id
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_sid(self):
+        return self.sid
+    def set_sid(self, sid):
+        self.sid = sid
+    def get_flow(self):
+        return self.flow
+    def set_flow(self, flow):
+        self.flow = flow
+    def get_semantic(self):
+        return self.semantic
+    def set_semantic(self, semantic):
+        self.semantic = semantic
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def validate_FlowType(self, value):
@@ -1766,9 +1864,10 @@ class python_programmerType(programmerType):
     ]
     subclass = None
     superclass = programmerType
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, drcs_attr=None, gui_developer=None, favorite_editor=None, flowvalue=None, drcs=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, drcs_attr=None, gui_developer=None, favorite_editor=None, flowvalue=None, drcs=None, **kwargs_):
         self.original_tagname_ = None
-        super(python_programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(python_programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes,  **kwargs_)
         self.nick_name = _cast(None, nick_name)
         self.drcs_attr = _cast(None, drcs_attr)
         self.gui_developer = _cast(bool, gui_developer)
@@ -1787,18 +1886,30 @@ class python_programmerType(programmerType):
         else:
             return python_programmerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_favorite_editor(self): return self.favorite_editor
-    def set_favorite_editor(self, favorite_editor): self.favorite_editor = favorite_editor
-    def get_flowvalue(self): return self.flowvalue
-    def set_flowvalue(self, flowvalue): self.flowvalue = flowvalue
-    def get_drcs(self): return self.drcs
-    def set_drcs(self, drcs): self.drcs = drcs
-    def get_nick_name(self): return self.nick_name
-    def set_nick_name(self, nick_name): self.nick_name = nick_name
-    def get_drcs_attr(self): return self.drcs_attr
-    def set_drcs_attr(self, drcs_attr): self.drcs_attr = drcs_attr
-    def get_gui_developer(self): return self.gui_developer
-    def set_gui_developer(self, gui_developer): self.gui_developer = gui_developer
+    def get_favorite_editor(self):
+        return self.favorite_editor
+    def set_favorite_editor(self, favorite_editor):
+        self.favorite_editor = favorite_editor
+    def get_flowvalue(self):
+        return self.flowvalue
+    def set_flowvalue(self, flowvalue):
+        self.flowvalue = flowvalue
+    def get_drcs(self):
+        return self.drcs
+    def set_drcs(self, drcs):
+        self.drcs = drcs
+    def get_nick_name(self):
+        return self.nick_name
+    def set_nick_name(self, nick_name):
+        self.nick_name = nick_name
+    def get_drcs_attr(self):
+        return self.drcs_attr
+    def set_drcs_attr(self, drcs_attr):
+        self.drcs_attr = drcs_attr
+    def get_gui_developer(self):
+        return self.gui_developer
+    def set_gui_developer(self, gui_developer):
+        self.gui_developer = gui_developer
     def validate_FlowType(self, value):
         # Validate type FlowType, a restriction on xs:integer.
         if value is not None and Validate_simpletypes_:
@@ -1895,9 +2006,10 @@ class java_programmerType(programmerType):
     ]
     subclass = None
     superclass = programmerType
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None, **kwargs_):
         self.original_tagname_ = None
-        super(java_programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(java_programmerType, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes,  **kwargs_)
         self.nick_name = _cast(None, nick_name)
         self.status = _cast(None, status)
         self.favorite_editor = favorite_editor
@@ -1917,22 +2029,38 @@ class java_programmerType(programmerType):
         else:
             return java_programmerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_favorite_editor(self): return self.favorite_editor
-    def set_favorite_editor(self, favorite_editor): self.favorite_editor = favorite_editor
-    def get_datetime1(self): return self.datetime1
-    def set_datetime1(self, datetime1): self.datetime1 = datetime1
-    def get_datetime2(self): return self.datetime2
-    def set_datetime2(self, datetime2): self.datetime2 = datetime2
-    def get_datetime3(self): return self.datetime3
-    def set_datetime3(self, datetime3): self.datetime3 = datetime3
-    def get_datetime4(self): return self.datetime4
-    def set_datetime4(self, datetime4): self.datetime4 = datetime4
-    def get_datetime5(self): return self.datetime5
-    def set_datetime5(self, datetime5): self.datetime5 = datetime5
-    def get_nick_name(self): return self.nick_name
-    def set_nick_name(self, nick_name): self.nick_name = nick_name
-    def get_status(self): return self.status
-    def set_status(self, status): self.status = status
+    def get_favorite_editor(self):
+        return self.favorite_editor
+    def set_favorite_editor(self, favorite_editor):
+        self.favorite_editor = favorite_editor
+    def get_datetime1(self):
+        return self.datetime1
+    def set_datetime1(self, datetime1):
+        self.datetime1 = datetime1
+    def get_datetime2(self):
+        return self.datetime2
+    def set_datetime2(self, datetime2):
+        self.datetime2 = datetime2
+    def get_datetime3(self):
+        return self.datetime3
+    def set_datetime3(self, datetime3):
+        self.datetime3 = datetime3
+    def get_datetime4(self):
+        return self.datetime4
+    def set_datetime4(self, datetime4):
+        self.datetime4 = datetime4
+    def get_datetime5(self):
+        return self.datetime5
+    def set_datetime5(self, datetime5):
+        self.datetime5 = datetime5
+    def get_nick_name(self):
+        return self.nick_name
+    def set_nick_name(self, nick_name):
+        self.nick_name = nick_name
+    def get_status(self):
+        return self.status
+    def set_status(self, status):
+        self.status = status
     def hasContent_(self):
         if (
             self.favorite_editor is not None or
@@ -2029,8 +2157,9 @@ class agentType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, extensiontype_=None):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -2051,16 +2180,26 @@ class agentType(GeneratedsSuper):
         else:
             return agentType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_info(self): return self.info
-    def set_info(self, info): self.info = info
-    def get_vehicle(self): return self.vehicle
-    def set_vehicle(self, vehicle): self.vehicle = vehicle
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_info(self):
+        return self.info
+    def set_info(self, info):
+        self.info = info
+    def get_vehicle(self):
+        return self.vehicle
+    def set_vehicle(self, vehicle):
+        self.vehicle = vehicle
     def add_vehicle(self, value): self.vehicle.append(value)
     def insert_vehicle_at(self, index, value): self.vehicle.insert(index, value)
     def replace_vehicle_at(self, index, value): self.vehicle[index] = value
@@ -2131,7 +2270,7 @@ class agentType(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
-            obj_ = infoType.factory()
+            obj_ = infoType.factory(parent_object_=self)
             obj_.build(child_)
             self.info = obj_
             obj_.original_tagname_ = 'info'
@@ -2168,9 +2307,10 @@ class special_agentType(agentType):
     ]
     subclass = None
     superclass = agentType
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, **kwargs_):
         self.original_tagname_ = None
-        super(special_agentType, self).__init__(firstname, lastname, priority, info, vehicle, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(special_agentType, self).__init__(firstname, lastname, priority, info, vehicle,  **kwargs_)
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -2186,14 +2326,22 @@ class special_agentType(agentType):
         else:
             return special_agentType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_info(self): return self.info
-    def set_info(self, info): self.info = info
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_info(self):
+        return self.info
+    def set_info(self, info):
+        self.info = info
     def hasContent_(self):
         if (
             self.firstname is not None or
@@ -2249,7 +2397,7 @@ class special_agentType(agentType):
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
-            obj_ = infoType.factory()
+            obj_ = infoType.factory(parent_object_=self)
             obj_.build(child_)
             self.info = obj_
             obj_.original_tagname_ = 'info'
@@ -2268,9 +2416,10 @@ class weird_agentType(agentType):
     ]
     subclass = None
     superclass = agentType
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, **kwargs_):
         self.original_tagname_ = None
-        super(weird_agentType, self).__init__(firstname, lastname, priority, info, vehicle, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(weird_agentType, self).__init__(firstname, lastname, priority, info, vehicle,  **kwargs_)
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -2286,14 +2435,22 @@ class weird_agentType(agentType):
         else:
             return weird_agentType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_info(self): return self.info
-    def set_info(self, info): self.info = info
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_info(self):
+        return self.info
+    def set_info(self, info):
+        self.info = info
     def hasContent_(self):
         if (
             self.firstname is not None or
@@ -2349,7 +2506,7 @@ class weird_agentType(agentType):
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
-            obj_ = infoType.factory()
+            obj_ = infoType.factory(parent_object_=self)
             obj_.build(child_)
             self.info = obj_
             obj_.original_tagname_ = 'info'
@@ -2370,8 +2527,9 @@ class boosterType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None):
+    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.member_id = _cast(None, member_id)
         self.firstname = firstname
         self.lastname = lastname
@@ -2400,31 +2558,47 @@ class boosterType(GeneratedsSuper):
         else:
             return boosterType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_other_name(self): return self.other_name
-    def set_other_name(self, other_name): self.other_name = other_name
-    def get_class(self): return self.class_
-    def set_class(self, class_): self.class_ = class_
-    def get_other_value(self): return self.other_value
-    def set_other_value(self, other_value): self.other_value = other_value
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_other_name(self):
+        return self.other_name
+    def set_other_name(self, other_name):
+        self.other_name = other_name
+    def get_class(self):
+        return self.class_
+    def set_class(self, class_):
+        self.class_ = class_
+    def get_other_value(self):
+        return self.other_value
+    def set_other_value(self, other_value):
+        self.other_value = other_value
     def add_other_value(self, value): self.other_value.append(value)
     def insert_other_value_at(self, index, value): self.other_value.insert(index, value)
     def replace_other_value_at(self, index, value): self.other_value[index] = value
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
     def add_type(self, value): self.type_.append(value)
     def insert_type_at(self, index, value): self.type_.insert(index, value)
     def replace_type_at(self, index, value): self.type_[index] = value
-    def get_client_handler(self): return self.client_handler
-    def set_client_handler(self, client_handler): self.client_handler = client_handler
+    def get_client_handler(self):
+        return self.client_handler
+    def set_client_handler(self, client_handler):
+        self.client_handler = client_handler
     def add_client_handler(self, value): self.client_handler.append(value)
     def insert_client_handler_at(self, index, value): self.client_handler.insert(index, value)
     def replace_client_handler_at(self, index, value): self.client_handler[index] = value
-    def get_member_id(self): return self.member_id
-    def set_member_id(self, member_id): self.member_id = member_id
+    def get_member_id(self):
+        return self.member_id
+    def set_member_id(self, member_id):
+        self.member_id = member_id
     def hasContent_(self):
         if (
             self.firstname is not None or
@@ -2520,7 +2694,7 @@ class boosterType(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'type')
             self.type_.append(fval_)
         elif nodeName_ == 'client-handler':
-            obj_ = client_handlerType.factory()
+            obj_ = client_handlerType.factory(parent_object_=self)
             obj_.build(child_)
             self.client_handler.append(obj_)
             obj_.original_tagname_ = 'client-handler'
@@ -2535,8 +2709,9 @@ class infoType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, type_=None, rating=None):
+    def __init__(self, name=None, type_=None, rating=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = _cast(None, name)
         self.type_ = _cast(int, type_)
         self.rating = _cast(float, rating)
@@ -2551,12 +2726,18 @@ class infoType(GeneratedsSuper):
         else:
             return infoType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
-    def get_rating(self): return self.rating
-    def set_rating(self, rating): self.rating = rating
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
+    def get_rating(self):
+        return self.rating
+    def set_rating(self, rating):
+        self.rating = rating
     def hasContent_(self):
         if (
 
@@ -2615,8 +2796,9 @@ class vehicleType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, wheelcount=None, extensiontype_=None):
+    def __init__(self, wheelcount=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.wheelcount = wheelcount
         self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
@@ -2630,8 +2812,10 @@ class vehicleType(GeneratedsSuper):
         else:
             return vehicleType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_wheelcount(self): return self.wheelcount
-    def set_wheelcount(self, wheelcount): self.wheelcount = wheelcount
+    def get_wheelcount(self):
+        return self.wheelcount
+    def set_wheelcount(self, wheelcount):
+        self.wheelcount = wheelcount
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -2684,9 +2868,10 @@ class automobile(vehicleType):
     ]
     subclass = None
     superclass = vehicleType
-    def __init__(self, wheelcount=None, drivername=None):
+    def __init__(self, wheelcount=None, drivername=None, **kwargs_):
         self.original_tagname_ = None
-        super(automobile, self).__init__(wheelcount, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(automobile, self).__init__(wheelcount,  **kwargs_)
         self.drivername = drivername
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -2699,8 +2884,10 @@ class automobile(vehicleType):
         else:
             return automobile(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_drivername(self): return self.drivername
-    def set_drivername(self, drivername): self.drivername = drivername
+    def get_drivername(self):
+        return self.drivername
+    def set_drivername(self, drivername):
+        self.drivername = drivername
     def hasContent_(self):
         if (
             self.drivername is not None or
@@ -2741,9 +2928,10 @@ class airplane(vehicleType):
     ]
     subclass = None
     superclass = vehicleType
-    def __init__(self, wheelcount=None, pilotname=None):
+    def __init__(self, wheelcount=None, pilotname=None, **kwargs_):
         self.original_tagname_ = None
-        super(airplane, self).__init__(wheelcount, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(airplane, self).__init__(wheelcount,  **kwargs_)
         self.pilotname = pilotname
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -2756,8 +2944,10 @@ class airplane(vehicleType):
         else:
             return airplane(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_pilotname(self): return self.pilotname
-    def set_pilotname(self, pilotname): self.pilotname = pilotname
+    def get_pilotname(self):
+        return self.pilotname
+    def set_pilotname(self, pilotname):
+        self.pilotname = pilotname
     def hasContent_(self):
         if (
             self.pilotname is not None or
@@ -2801,8 +2991,9 @@ class hot_agent(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, firstname='empty\\name', lastname='no \'last\' name', priority=None, startDate=None):
+    def __init__(self, firstname='empty\\name', lastname='no \'last\' name', priority=None, startDate=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -2823,14 +3014,22 @@ class hot_agent(GeneratedsSuper):
         else:
             return hot_agent(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_startDate(self): return self.startDate
-    def set_startDate(self, startDate): self.startDate = startDate
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_startDate(self):
+        return self.startDate
+    def set_startDate(self, startDate):
+        self.startDate = startDate
     def get_anyAttributes_(self): return self.anyAttributes_
     def set_anyAttributes_(self, anyAttributes_): self.anyAttributes_ = anyAttributes_
     def hasContent_(self):
@@ -2906,8 +3105,9 @@ class client_handlerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, fullname=None, refid=None):
+    def __init__(self, fullname=None, refid=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.fullname = fullname
         self.refid = refid
     def factory(*args_, **kwargs_):
@@ -2921,10 +3121,14 @@ class client_handlerType(GeneratedsSuper):
         else:
             return client_handlerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_fullname(self): return self.fullname
-    def set_fullname(self, fullname): self.fullname = fullname
-    def get_refid(self): return self.refid
-    def set_refid(self, refid): self.refid = refid
+    def get_fullname(self):
+        return self.fullname
+    def set_fullname(self, fullname):
+        self.fullname = fullname
+    def get_refid(self):
+        return self.refid
+    def set_refid(self, refid):
+        self.refid = refid
     def hasContent_(self):
         if (
             self.fullname is not None or

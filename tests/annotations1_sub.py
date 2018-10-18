@@ -49,22 +49,22 @@ ExternalEncoding = ''
 
 
 class document1TypeSub(supermod.document1Type):
-    def __init__(self, comments=None, otherdoc=None):
-        super(document1TypeSub, self).__init__(comments, otherdoc, )
+    def __init__(self, comments=None, otherdoc=None, **kwargs_):
+        super(document1TypeSub, self).__init__(comments, otherdoc,  **kwargs_)
 supermod.document1Type.subclass = document1TypeSub
 # end class document1TypeSub
 
 
 class document2TypeSub(supermod.document2Type):
-    def __init__(self, comments=None, rating=None, anotherdoc=None):
-        super(document2TypeSub, self).__init__(comments, rating, anotherdoc, )
+    def __init__(self, comments=None, rating=None, anotherdoc=None, **kwargs_):
+        super(document2TypeSub, self).__init__(comments, rating, anotherdoc,  **kwargs_)
 supermod.document2Type.subclass = document2TypeSub
 # end class document2TypeSub
 
 
 class document3TypeSub(supermod.document3Type):
-    def __init__(self, comments=None, rating=None):
-        super(document3TypeSub, self).__init__(comments, rating, )
+    def __init__(self, comments=None, rating=None, **kwargs_):
+        super(document3TypeSub, self).__init__(comments, rating,  **kwargs_)
 supermod.document3Type.subclass = document3TypeSub
 # end class document3TypeSub
 

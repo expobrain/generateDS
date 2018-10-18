@@ -50,15 +50,15 @@ ExternalEncoding = ''
 
 
 class authorsTypeSub(supermod.authorsType):
-    def __init__(self, author=None, cooperation=None):
-        super(authorsTypeSub, self).__init__(author, cooperation, )
+    def __init__(self, author=None, cooperation=None, **kwargs_):
+        super(authorsTypeSub, self).__init__(author, cooperation,  **kwargs_)
 supermod.authorsType.subclass = authorsTypeSub
 # end class authorsTypeSub
 
 
 class authorSub(supermod.author):
-    def __init__(self, description=None):
-        super(authorSub, self).__init__(description, )
+    def __init__(self, description=None, **kwargs_):
+        super(authorSub, self).__init__(description,  **kwargs_)
 supermod.author.subclass = authorSub
 # end class authorSub
 

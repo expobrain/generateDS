@@ -49,22 +49,22 @@ ExternalEncoding = ''
 
 
 class IdentifierTypeSub(supermod.IdentifierType):
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, extensiontype_=None):
-        super(IdentifierTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, extensiontype_, )
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, extensiontype_=None, **kwargs_):
+        super(IdentifierTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, extensiontype_,  **kwargs_)
 supermod.IdentifierType.subclass = IdentifierTypeSub
 # end class IdentifierTypeSub
 
 
 class BillOfResourcesIDTypeSub(supermod.BillOfResourcesIDType):
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None):
-        super(BillOfResourcesIDTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, )
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, **kwargs_):
+        super(BillOfResourcesIDTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_,  **kwargs_)
 supermod.BillOfResourcesIDType.subclass = BillOfResourcesIDTypeSub
 # end class BillOfResourcesIDTypeSub
 
 
 class BillOfMaterialIDTypeSub(supermod.BillOfMaterialIDType):
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None):
-        super(BillOfMaterialIDTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, )
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, **kwargs_):
+        super(BillOfMaterialIDTypeSub, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_,  **kwargs_)
 supermod.BillOfMaterialIDType.subclass = BillOfMaterialIDTypeSub
 # end class BillOfMaterialIDTypeSub
 

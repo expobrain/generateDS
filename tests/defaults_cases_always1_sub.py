@@ -49,22 +49,22 @@ ExternalEncoding = ''
 
 
 class DefaultTypesSub(supermod.DefaultTypes):
-    def __init__(self, default1=None, default2=None):
-        super(DefaultTypesSub, self).__init__(default1, default2, )
+    def __init__(self, default1=None, default2=None, **kwargs_):
+        super(DefaultTypesSub, self).__init__(default1, default2,  **kwargs_)
 supermod.DefaultTypes.subclass = DefaultTypesSub
 # end class DefaultTypesSub
 
 
 class DefaultType1Sub(supermod.DefaultType1):
-    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32):
-        super(DefaultType1Sub, self).__init__(normal01, normal02, default01, default02, normal03, normal04, default03, default04, )
+    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32, **kwargs_):
+        super(DefaultType1Sub, self).__init__(normal01, normal02, default01, default02, normal03, normal04, default03, default04,  **kwargs_)
 supermod.DefaultType1.subclass = DefaultType1Sub
 # end class DefaultType1Sub
 
 
 class DefaultType2Sub(supermod.DefaultType2):
-    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None):
-        super(DefaultType2Sub, self).__init__(attrdefault01, attrdefault02, attrnormal01, attrnormal02, )
+    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None, **kwargs_):
+        super(DefaultType2Sub, self).__init__(attrdefault01, attrdefault02, attrnormal01, attrnormal02,  **kwargs_)
 supermod.DefaultType2.subclass = DefaultType2Sub
 # end class DefaultType2Sub
 

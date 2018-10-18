@@ -52,8 +52,8 @@ ExternalEncoding = ''
 
 
 class PackageTypeSub(supermod.PackageType):
-    def __init__(self, Address=None):
-        super(PackageTypeSub, self).__init__(Address, )
+    def __init__(self, Address=None, **kwargs_):
+        super(PackageTypeSub, self).__init__(Address,  **kwargs_)
 supermod.PackageType.subclass = PackageTypeSub
 # end class PackageTypeSub
 

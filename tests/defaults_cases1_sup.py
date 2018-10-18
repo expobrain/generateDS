@@ -736,8 +736,9 @@ class DefaultTypes(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, default1=None, default2=None, fixed1=None, fixed2=None):
+    def __init__(self, default1=None, default2=None, fixed1=None, fixed2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if default1 is None:
             self.default1 = []
         else:
@@ -765,23 +766,31 @@ class DefaultTypes(GeneratedsSuper):
         else:
             return DefaultTypes(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_default1(self): return self.default1
-    def set_default1(self, default1): self.default1 = default1
+    def get_default1(self):
+        return self.default1
+    def set_default1(self, default1):
+        self.default1 = default1
     def add_default1(self, value): self.default1.append(value)
     def insert_default1_at(self, index, value): self.default1.insert(index, value)
     def replace_default1_at(self, index, value): self.default1[index] = value
-    def get_default2(self): return self.default2
-    def set_default2(self, default2): self.default2 = default2
+    def get_default2(self):
+        return self.default2
+    def set_default2(self, default2):
+        self.default2 = default2
     def add_default2(self, value): self.default2.append(value)
     def insert_default2_at(self, index, value): self.default2.insert(index, value)
     def replace_default2_at(self, index, value): self.default2[index] = value
-    def get_fixed1(self): return self.fixed1
-    def set_fixed1(self, fixed1): self.fixed1 = fixed1
+    def get_fixed1(self):
+        return self.fixed1
+    def set_fixed1(self, fixed1):
+        self.fixed1 = fixed1
     def add_fixed1(self, value): self.fixed1.append(value)
     def insert_fixed1_at(self, index, value): self.fixed1.insert(index, value)
     def replace_fixed1_at(self, index, value): self.fixed1[index] = value
-    def get_fixed2(self): return self.fixed2
-    def set_fixed2(self, fixed2): self.fixed2 = fixed2
+    def get_fixed2(self):
+        return self.fixed2
+    def set_fixed2(self, fixed2):
+        self.fixed2 = fixed2
     def add_fixed2(self, value): self.fixed2.append(value)
     def insert_fixed2_at(self, index, value): self.fixed2.insert(index, value)
     def replace_fixed2_at(self, index, value): self.fixed2[index] = value
@@ -842,22 +851,22 @@ class DefaultTypes(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'default1':
-            obj_ = DefaultType1.factory()
+            obj_ = DefaultType1.factory(parent_object_=self)
             obj_.build(child_)
             self.default1.append(obj_)
             obj_.original_tagname_ = 'default1'
         elif nodeName_ == 'default2':
-            obj_ = DefaultType2.factory()
+            obj_ = DefaultType2.factory(parent_object_=self)
             obj_.build(child_)
             self.default2.append(obj_)
             obj_.original_tagname_ = 'default2'
         elif nodeName_ == 'fixed1':
-            obj_ = FixedType1.factory()
+            obj_ = FixedType1.factory(parent_object_=self)
             obj_.build(child_)
             self.fixed1.append(obj_)
             obj_.original_tagname_ = 'fixed1'
         elif nodeName_ == 'fixed2':
-            obj_ = FixedType2.factory()
+            obj_ = FixedType2.factory(parent_object_=self)
             obj_.build(child_)
             self.fixed2.append(obj_)
             obj_.original_tagname_ = 'fixed2'
@@ -877,8 +886,9 @@ class DefaultType1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32):
+    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.normal01 = normal01
         self.normal02 = normal02
         self.default01 = default01
@@ -898,22 +908,38 @@ class DefaultType1(GeneratedsSuper):
         else:
             return DefaultType1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_normal01(self): return self.normal01
-    def set_normal01(self, normal01): self.normal01 = normal01
-    def get_normal02(self): return self.normal02
-    def set_normal02(self, normal02): self.normal02 = normal02
-    def get_default01(self): return self.default01
-    def set_default01(self, default01): self.default01 = default01
-    def get_default02(self): return self.default02
-    def set_default02(self, default02): self.default02 = default02
-    def get_normal03(self): return self.normal03
-    def set_normal03(self, normal03): self.normal03 = normal03
-    def get_normal04(self): return self.normal04
-    def set_normal04(self, normal04): self.normal04 = normal04
-    def get_default03(self): return self.default03
-    def set_default03(self, default03): self.default03 = default03
-    def get_default04(self): return self.default04
-    def set_default04(self, default04): self.default04 = default04
+    def get_normal01(self):
+        return self.normal01
+    def set_normal01(self, normal01):
+        self.normal01 = normal01
+    def get_normal02(self):
+        return self.normal02
+    def set_normal02(self, normal02):
+        self.normal02 = normal02
+    def get_default01(self):
+        return self.default01
+    def set_default01(self, default01):
+        self.default01 = default01
+    def get_default02(self):
+        return self.default02
+    def set_default02(self, default02):
+        self.default02 = default02
+    def get_normal03(self):
+        return self.normal03
+    def set_normal03(self, normal03):
+        self.normal03 = normal03
+    def get_normal04(self):
+        return self.normal04
+    def set_normal04(self, normal04):
+        self.normal04 = normal04
+    def get_default03(self):
+        return self.default03
+    def set_default03(self, default03):
+        self.default03 = default03
+    def get_default04(self):
+        return self.default04
+    def set_default04(self, default04):
+        self.default04 = default04
     def hasContent_(self):
         if (
             self.normal01 is not None or
@@ -1058,8 +1084,9 @@ class DefaultType2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None):
+    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.attrdefault01 = _cast(None, attrdefault01)
         self.attrdefault02 = _cast(int, attrdefault02)
         self.attrnormal01 = _cast(None, attrnormal01)
@@ -1075,14 +1102,22 @@ class DefaultType2(GeneratedsSuper):
         else:
             return DefaultType2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_attrdefault01(self): return self.attrdefault01
-    def set_attrdefault01(self, attrdefault01): self.attrdefault01 = attrdefault01
-    def get_attrdefault02(self): return self.attrdefault02
-    def set_attrdefault02(self, attrdefault02): self.attrdefault02 = attrdefault02
-    def get_attrnormal01(self): return self.attrnormal01
-    def set_attrnormal01(self, attrnormal01): self.attrnormal01 = attrnormal01
-    def get_attrnormal02(self): return self.attrnormal02
-    def set_attrnormal02(self, attrnormal02): self.attrnormal02 = attrnormal02
+    def get_attrdefault01(self):
+        return self.attrdefault01
+    def set_attrdefault01(self, attrdefault01):
+        self.attrdefault01 = attrdefault01
+    def get_attrdefault02(self):
+        return self.attrdefault02
+    def set_attrdefault02(self, attrdefault02):
+        self.attrdefault02 = attrdefault02
+    def get_attrnormal01(self):
+        return self.attrnormal01
+    def set_attrnormal01(self, attrnormal01):
+        self.attrnormal01 = attrnormal01
+    def get_attrnormal02(self):
+        return self.attrnormal02
+    def set_attrnormal02(self, attrnormal02):
+        self.attrnormal02 = attrnormal02
     def hasContent_(self):
         if (
 
@@ -1173,8 +1208,9 @@ class FixedType1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, normal01=None, normal02=None, fixed01=None, fixed02=None, normal03=None, normal04=None, fixed03=None, fixed04=None):
+    def __init__(self, normal01=None, normal02=None, fixed01=None, fixed02=None, normal03=None, normal04=None, fixed03=None, fixed04=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.normal01 = normal01
         self.normal02 = normal02
         self.fixed01 = fixed01
@@ -1194,22 +1230,38 @@ class FixedType1(GeneratedsSuper):
         else:
             return FixedType1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_normal01(self): return self.normal01
-    def set_normal01(self, normal01): self.normal01 = normal01
-    def get_normal02(self): return self.normal02
-    def set_normal02(self, normal02): self.normal02 = normal02
-    def get_fixed01(self): return self.fixed01
-    def set_fixed01(self, fixed01): self.fixed01 = fixed01
-    def get_fixed02(self): return self.fixed02
-    def set_fixed02(self, fixed02): self.fixed02 = fixed02
-    def get_normal03(self): return self.normal03
-    def set_normal03(self, normal03): self.normal03 = normal03
-    def get_normal04(self): return self.normal04
-    def set_normal04(self, normal04): self.normal04 = normal04
-    def get_fixed03(self): return self.fixed03
-    def set_fixed03(self, fixed03): self.fixed03 = fixed03
-    def get_fixed04(self): return self.fixed04
-    def set_fixed04(self, fixed04): self.fixed04 = fixed04
+    def get_normal01(self):
+        return self.normal01
+    def set_normal01(self, normal01):
+        self.normal01 = normal01
+    def get_normal02(self):
+        return self.normal02
+    def set_normal02(self, normal02):
+        self.normal02 = normal02
+    def get_fixed01(self):
+        return self.fixed01
+    def set_fixed01(self, fixed01):
+        self.fixed01 = fixed01
+    def get_fixed02(self):
+        return self.fixed02
+    def set_fixed02(self, fixed02):
+        self.fixed02 = fixed02
+    def get_normal03(self):
+        return self.normal03
+    def set_normal03(self, normal03):
+        self.normal03 = normal03
+    def get_normal04(self):
+        return self.normal04
+    def set_normal04(self, normal04):
+        self.normal04 = normal04
+    def get_fixed03(self):
+        return self.fixed03
+    def set_fixed03(self, fixed03):
+        self.fixed03 = fixed03
+    def get_fixed04(self):
+        return self.fixed04
+    def set_fixed04(self, fixed04):
+        self.fixed04 = fixed04
     def hasContent_(self):
         if (
             self.normal01 is not None or
@@ -1354,8 +1406,9 @@ class FixedType2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, attrfixed01='abcd', attrfixed02=14, attrnormal01=None, attrnormal02=None):
+    def __init__(self, attrfixed01='abcd', attrfixed02=14, attrnormal01=None, attrnormal02=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.attrfixed01 = _cast(None, attrfixed01)
         self.attrfixed02 = _cast(int, attrfixed02)
         self.attrnormal01 = _cast(None, attrnormal01)
@@ -1371,14 +1424,22 @@ class FixedType2(GeneratedsSuper):
         else:
             return FixedType2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_attrfixed01(self): return self.attrfixed01
-    def set_attrfixed01(self, attrfixed01): self.attrfixed01 = attrfixed01
-    def get_attrfixed02(self): return self.attrfixed02
-    def set_attrfixed02(self, attrfixed02): self.attrfixed02 = attrfixed02
-    def get_attrnormal01(self): return self.attrnormal01
-    def set_attrnormal01(self, attrnormal01): self.attrnormal01 = attrnormal01
-    def get_attrnormal02(self): return self.attrnormal02
-    def set_attrnormal02(self, attrnormal02): self.attrnormal02 = attrnormal02
+    def get_attrfixed01(self):
+        return self.attrfixed01
+    def set_attrfixed01(self, attrfixed01):
+        self.attrfixed01 = attrfixed01
+    def get_attrfixed02(self):
+        return self.attrfixed02
+    def set_attrfixed02(self, attrfixed02):
+        self.attrfixed02 = attrfixed02
+    def get_attrnormal01(self):
+        return self.attrnormal01
+    def set_attrnormal01(self, attrnormal01):
+        self.attrnormal01 = attrnormal01
+    def get_attrnormal02(self):
+        return self.attrnormal02
+    def set_attrnormal02(self, attrnormal02):
+        self.attrnormal02 = attrnormal02
     def hasContent_(self):
         if (
 

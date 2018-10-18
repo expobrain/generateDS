@@ -743,8 +743,9 @@ class GetUserReq(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, sequence=None, value01=None, value02=None, value03=None, value04=None, value05=None, value06=None, value07=None, value08=None, returnedTags=None):
+    def __init__(self, sequence=None, value01=None, value02=None, value03=None, value04=None, value05=None, value06=None, value07=None, value08=None, returnedTags=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.sequence = _cast(int, sequence)
         self.value01 = _cast(None, value01)
         self.value02 = _cast(int, value02)
@@ -766,26 +767,46 @@ class GetUserReq(GeneratedsSuper):
         else:
             return GetUserReq(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_returnedTags(self): return self.returnedTags
-    def set_returnedTags(self, returnedTags): self.returnedTags = returnedTags
-    def get_sequence(self): return self.sequence
-    def set_sequence(self, sequence): self.sequence = sequence
-    def get_value01(self): return self.value01
-    def set_value01(self, value01): self.value01 = value01
-    def get_value02(self): return self.value02
-    def set_value02(self, value02): self.value02 = value02
-    def get_value03(self): return self.value03
-    def set_value03(self, value03): self.value03 = value03
-    def get_value04(self): return self.value04
-    def set_value04(self, value04): self.value04 = value04
-    def get_value05(self): return self.value05
-    def set_value05(self, value05): self.value05 = value05
-    def get_value06(self): return self.value06
-    def set_value06(self, value06): self.value06 = value06
-    def get_value07(self): return self.value07
-    def set_value07(self, value07): self.value07 = value07
-    def get_value08(self): return self.value08
-    def set_value08(self, value08): self.value08 = value08
+    def get_returnedTags(self):
+        return self.returnedTags
+    def set_returnedTags(self, returnedTags):
+        self.returnedTags = returnedTags
+    def get_sequence(self):
+        return self.sequence
+    def set_sequence(self, sequence):
+        self.sequence = sequence
+    def get_value01(self):
+        return self.value01
+    def set_value01(self, value01):
+        self.value01 = value01
+    def get_value02(self):
+        return self.value02
+    def set_value02(self, value02):
+        self.value02 = value02
+    def get_value03(self):
+        return self.value03
+    def set_value03(self, value03):
+        self.value03 = value03
+    def get_value04(self):
+        return self.value04
+    def set_value04(self, value04):
+        self.value04 = value04
+    def get_value05(self):
+        return self.value05
+    def set_value05(self, value05):
+        self.value05 = value05
+    def get_value06(self):
+        return self.value06
+    def set_value06(self, value06):
+        self.value06 = value06
+    def get_value07(self):
+        return self.value07
+    def set_value07(self, value07):
+        self.value07 = value07
+    def get_value08(self):
+        return self.value08
+    def set_value08(self, value08):
+        self.value08 = value08
     def hasContent_(self):
         if (
             self.returnedTags is not None

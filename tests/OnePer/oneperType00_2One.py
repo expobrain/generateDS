@@ -736,8 +736,9 @@ class oneperType00_1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, inner01=None, inner02=None):
+    def __init__(self, inner01=None, inner02=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.inner01 = inner01
         self.inner02 = inner02
     def factory(*args_, **kwargs_):
@@ -751,10 +752,14 @@ class oneperType00_1(GeneratedsSuper):
         else:
             return oneperType00_1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_inner01(self): return self.inner01
-    def set_inner01(self, inner01): self.inner01 = inner01
-    def get_inner02(self): return self.inner02
-    def set_inner02(self, inner02): self.inner02 = inner02
+    def get_inner01(self):
+        return self.inner01
+    def set_inner01(self, inner01):
+        self.inner01 = inner01
+    def get_inner02(self):
+        return self.inner02
+    def set_inner02(self, inner02):
+        self.inner02 = inner02
     def hasContent_(self):
         if (
             self.inner01 is not None or
@@ -806,12 +811,12 @@ class oneperType00_1(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'inner01':
-            obj_ = oneperType01_1.factory()
+            obj_ = oneperType01_1.factory(parent_object_=self)
             obj_.build(child_)
             self.inner01 = obj_
             obj_.original_tagname_ = 'inner01'
         elif nodeName_ == 'inner02':
-            obj_ = oneperType01_2.factory()
+            obj_ = oneperType01_2.factory(parent_object_=self)
             obj_.build(child_)
             self.inner02 = obj_
             obj_.original_tagname_ = 'inner02'

@@ -736,8 +736,9 @@ class oneperType02_1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, clientname=None, inner01=None):
+    def __init__(self, clientname=None, inner01=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.clientname = clientname
         self.inner01 = inner01
     def factory(*args_, **kwargs_):
@@ -751,10 +752,14 @@ class oneperType02_1(GeneratedsSuper):
         else:
             return oneperType02_1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_clientname(self): return self.clientname
-    def set_clientname(self, clientname): self.clientname = clientname
-    def get_inner01(self): return self.inner01
-    def set_inner01(self, inner01): self.inner01 = inner01
+    def get_clientname(self):
+        return self.clientname
+    def set_clientname(self, clientname):
+        self.clientname = clientname
+    def get_inner01(self):
+        return self.inner01
+    def set_inner01(self, inner01):
+        self.inner01 = inner01
     def hasContent_(self):
         if (
             self.clientname is not None or
@@ -811,7 +816,7 @@ class oneperType02_1(GeneratedsSuper):
             clientname_ = self.gds_validate_string(clientname_, node, 'clientname')
             self.clientname = clientname_
         elif nodeName_ == 'inner01':
-            obj_ = oneperType02_2.factory()
+            obj_ = oneperType02_2.factory(parent_object_=self)
             obj_.build(child_)
             self.inner01 = obj_
             obj_.original_tagname_ = 'inner01'
@@ -824,8 +829,9 @@ class oneperType02_2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, clientdescription=None):
+    def __init__(self, clientdescription=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.clientdescription = clientdescription
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -838,8 +844,10 @@ class oneperType02_2(GeneratedsSuper):
         else:
             return oneperType02_2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_clientdescription(self): return self.clientdescription
-    def set_clientdescription(self, clientdescription): self.clientdescription = clientdescription
+    def get_clientdescription(self):
+        return self.clientdescription
+    def set_clientdescription(self, clientdescription):
+        self.clientdescription = clientdescription
     def hasContent_(self):
         if (
             self.clientdescription is not None

@@ -734,8 +734,9 @@ class PackageType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, Address=None):
+    def __init__(self, Address=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if Address is None:
             self.Address = []
         else:
@@ -751,8 +752,10 @@ class PackageType(GeneratedsSuper):
         else:
             return PackageType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Address(self): return self.Address
-    def set_Address(self, Address): self.Address = Address
+    def get_Address(self):
+        return self.Address
+    def set_Address(self, Address):
+        self.Address = Address
     def add_Address(self, value): self.Address.append(value)
     def insert_Address_at(self, index, value): self.Address.insert(index, value)
     def replace_Address_at(self, index, value): self.Address[index] = value

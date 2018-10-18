@@ -49,29 +49,29 @@ ExternalEncoding = ''
 
 
 class carrierTypeSub(supermod.carrierType):
-    def __init__(self, fleet=None):
-        super(carrierTypeSub, self).__init__(fleet, )
+    def __init__(self, fleet=None, **kwargs_):
+        super(carrierTypeSub, self).__init__(fleet,  **kwargs_)
 supermod.carrierType.subclass = carrierTypeSub
 # end class carrierTypeSub
 
 
 class VehicleSub(supermod.Vehicle):
-    def __init__(self, extensiontype_=None):
-        super(VehicleSub, self).__init__(extensiontype_, )
+    def __init__(self, extensiontype_=None, **kwargs_):
+        super(VehicleSub, self).__init__(extensiontype_,  **kwargs_)
 supermod.Vehicle.subclass = VehicleSub
 # end class VehicleSub
 
 
 class CarSub(supermod.Car):
-    def __init__(self):
-        super(CarSub, self).__init__()
+    def __init__(self, **kwargs_):
+        super(CarSub, self).__init__( **kwargs_)
 supermod.Car.subclass = CarSub
 # end class CarSub
 
 
 class PlaneSub(supermod.Plane):
-    def __init__(self):
-        super(PlaneSub, self).__init__()
+    def __init__(self, **kwargs_):
+        super(PlaneSub, self).__init__( **kwargs_)
 supermod.Plane.subclass = PlaneSub
 # end class PlaneSub
 

@@ -736,8 +736,9 @@ class FooList(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, Foo=None, Bar=None, Baz=None):
+    def __init__(self, Foo=None, Bar=None, Baz=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.Foo = Foo
         self.Bar = Bar
         self.Baz = Baz
@@ -752,12 +753,18 @@ class FooList(GeneratedsSuper):
         else:
             return FooList(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_Foo(self): return self.Foo
-    def set_Foo(self, Foo): self.Foo = Foo
-    def get_Bar(self): return self.Bar
-    def set_Bar(self, Bar): self.Bar = Bar
-    def get_Baz(self): return self.Baz
-    def set_Baz(self, Baz): self.Baz = Baz
+    def get_Foo(self):
+        return self.Foo
+    def set_Foo(self, Foo):
+        self.Foo = Foo
+    def get_Bar(self):
+        return self.Bar
+    def set_Bar(self, Bar):
+        self.Bar = Bar
+    def get_Baz(self):
+        return self.Baz
+    def set_Baz(self, Baz):
+        self.Baz = Baz
     def hasContent_(self):
         if (
             self.Foo is not None or
@@ -812,17 +819,17 @@ class FooList(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'Foo':
-            obj_ = FooType1.factory()
+            obj_ = FooType1.factory(parent_object_=self)
             obj_.build(child_)
             self.Foo = obj_
             obj_.original_tagname_ = 'Foo'
         elif nodeName_ == 'Bar':
-            obj_ = BarType2.factory()
+            obj_ = BarType2.factory(parent_object_=self)
             obj_.build(child_)
             self.Bar = obj_
             obj_.original_tagname_ = 'Bar'
         elif nodeName_ == 'Baz':
-            obj_ = BazType3.factory()
+            obj_ = BazType3.factory(parent_object_=self)
             obj_.build(child_)
             self.Baz = obj_
             obj_.original_tagname_ = 'Baz'
@@ -835,8 +842,9 @@ class FooType1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, FooType=None):
+    def __init__(self, FooType=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.FooType = FooType
         self.validate_FooTypeType(self.FooType)
     def factory(*args_, **kwargs_):
@@ -850,8 +858,10 @@ class FooType1(GeneratedsSuper):
         else:
             return FooType1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_FooType(self): return self.FooType
-    def set_FooType(self, FooType): self.FooType = FooType
+    def get_FooType(self):
+        return self.FooType
+    def set_FooType(self, FooType):
+        self.FooType = FooType
     def validate_FooTypeType(self, value):
         # Validate type FooTypeType, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:
@@ -922,8 +932,9 @@ class BarType2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, BarType=None):
+    def __init__(self, BarType=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.BarType = BarType
         self.validate_BarTypeType(self.BarType)
     def factory(*args_, **kwargs_):
@@ -937,8 +948,10 @@ class BarType2(GeneratedsSuper):
         else:
             return BarType2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_BarType(self): return self.BarType
-    def set_BarType(self, BarType): self.BarType = BarType
+    def get_BarType(self):
+        return self.BarType
+    def set_BarType(self, BarType):
+        self.BarType = BarType
     def validate_BarTypeType(self, value):
         # Validate type BarTypeType, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:
@@ -1009,8 +1022,9 @@ class BazType3(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, BazType=None):
+    def __init__(self, BazType=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.BazType = BazType
         self.validate_BazTypeType(self.BazType)
     def factory(*args_, **kwargs_):
@@ -1024,8 +1038,10 @@ class BazType3(GeneratedsSuper):
         else:
             return BazType3(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_BazType(self): return self.BazType
-    def set_BazType(self, BazType): self.BazType = BazType
+    def get_BazType(self):
+        return self.BazType
+    def set_BazType(self, BazType):
+        self.BazType = BazType
     def validate_BazTypeType(self, value):
         # Validate type BazTypeType, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:

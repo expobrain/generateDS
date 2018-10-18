@@ -745,8 +745,9 @@ class containerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, sample1=None, sample2_bad=None, sample3_bad=None, sample4_bad=None, sample2=None):
+    def __init__(self, sample1=None, sample2_bad=None, sample3_bad=None, sample4_bad=None, sample2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if sample1 is None:
             self.sample1 = []
         else:
@@ -778,28 +779,38 @@ class containerType(GeneratedsSuper):
         else:
             return containerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_sample1(self): return self.sample1
-    def set_sample1(self, sample1): self.sample1 = sample1
+    def get_sample1(self):
+        return self.sample1
+    def set_sample1(self, sample1):
+        self.sample1 = sample1
     def add_sample1(self, value): self.sample1.append(value)
     def insert_sample1_at(self, index, value): self.sample1.insert(index, value)
     def replace_sample1_at(self, index, value): self.sample1[index] = value
-    def get_sample2_bad(self): return self.sample2_bad
-    def set_sample2_bad(self, sample2_bad): self.sample2_bad = sample2_bad
+    def get_sample2_bad(self):
+        return self.sample2_bad
+    def set_sample2_bad(self, sample2_bad):
+        self.sample2_bad = sample2_bad
     def add_sample2_bad(self, value): self.sample2_bad.append(value)
     def insert_sample2_bad_at(self, index, value): self.sample2_bad.insert(index, value)
     def replace_sample2_bad_at(self, index, value): self.sample2_bad[index] = value
-    def get_sample3_bad(self): return self.sample3_bad
-    def set_sample3_bad(self, sample3_bad): self.sample3_bad = sample3_bad
+    def get_sample3_bad(self):
+        return self.sample3_bad
+    def set_sample3_bad(self, sample3_bad):
+        self.sample3_bad = sample3_bad
     def add_sample3_bad(self, value): self.sample3_bad.append(value)
     def insert_sample3_bad_at(self, index, value): self.sample3_bad.insert(index, value)
     def replace_sample3_bad_at(self, index, value): self.sample3_bad[index] = value
-    def get_sample4_bad(self): return self.sample4_bad
-    def set_sample4_bad(self, sample4_bad): self.sample4_bad = sample4_bad
+    def get_sample4_bad(self):
+        return self.sample4_bad
+    def set_sample4_bad(self, sample4_bad):
+        self.sample4_bad = sample4_bad
     def add_sample4_bad(self, value): self.sample4_bad.append(value)
     def insert_sample4_bad_at(self, index, value): self.sample4_bad.insert(index, value)
     def replace_sample4_bad_at(self, index, value): self.sample4_bad[index] = value
-    def get_sample2(self): return self.sample2
-    def set_sample2(self, sample2): self.sample2 = sample2
+    def get_sample2(self):
+        return self.sample2
+    def set_sample2(self, sample2):
+        self.sample2 = sample2
     def add_sample2(self, value): self.sample2.append(value)
     def insert_sample2_at(self, index, value): self.sample2.insert(index, value)
     def replace_sample2_at(self, index, value): self.sample2[index] = value
@@ -863,27 +874,27 @@ class containerType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'sample1':
-            obj_ = simpleOneType.factory()
+            obj_ = simpleOneType.factory(parent_object_=self)
             obj_.build(child_)
             self.sample1.append(obj_)
             obj_.original_tagname_ = 'sample1'
         elif nodeName_ == 'sample2_bad':
-            obj_ = simpleOneType.factory()
+            obj_ = simpleOneType.factory(parent_object_=self)
             obj_.build(child_)
             self.sample2_bad.append(obj_)
             obj_.original_tagname_ = 'sample2_bad'
         elif nodeName_ == 'sample3_bad':
-            obj_ = simpleOneType.factory()
+            obj_ = simpleOneType.factory(parent_object_=self)
             obj_.build(child_)
             self.sample3_bad.append(obj_)
             obj_.original_tagname_ = 'sample3_bad'
         elif nodeName_ == 'sample4_bad':
-            obj_ = simpleOneType.factory()
+            obj_ = simpleOneType.factory(parent_object_=self)
             obj_.build(child_)
             self.sample4_bad.append(obj_)
             obj_.original_tagname_ = 'sample4_bad'
         elif nodeName_ == 'sample2':
-            obj_ = simpleTwoType.factory()
+            obj_ = simpleTwoType.factory(parent_object_=self)
             obj_.build(child_)
             self.sample2.append(obj_)
             obj_.original_tagname_ = 'sample2'
@@ -921,8 +932,9 @@ class simpleOneType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
+    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.integer_range_1_value_with_default = _cast(int, integer_range_1_value_with_default)
         self.integer_range_1_value = integer_range_1_value
         self.validate_integer_range_1_st(self.integer_range_1_value)
@@ -1019,58 +1031,110 @@ class simpleOneType(GeneratedsSuper):
         else:
             return simpleOneType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_integer_range_1_value(self): return self.integer_range_1_value
-    def set_integer_range_1_value(self, integer_range_1_value): self.integer_range_1_value = integer_range_1_value
-    def get_pattern_value(self): return self.pattern_value
-    def set_pattern_value(self, pattern_value): self.pattern_value = pattern_value
-    def get_token_enum_value(self): return self.token_enum_value
-    def set_token_enum_value(self, token_enum_value): self.token_enum_value = token_enum_value
-    def get_integer_range_incl_value(self): return self.integer_range_incl_value
-    def set_integer_range_incl_value(self, integer_range_incl_value): self.integer_range_incl_value = integer_range_incl_value
-    def get_integer_range_excl_value(self): return self.integer_range_excl_value
-    def set_integer_range_excl_value(self, integer_range_excl_value): self.integer_range_excl_value = integer_range_excl_value
-    def get_min_max_length_value(self): return self.min_max_length_value
-    def set_min_max_length_value(self, min_max_length_value): self.min_max_length_value = min_max_length_value
-    def get_length_value(self): return self.length_value
-    def set_length_value(self, length_value): self.length_value = length_value
-    def get_totalDigits_value(self): return self.totalDigits_value
-    def set_totalDigits_value(self, totalDigits_value): self.totalDigits_value = totalDigits_value
-    def get_date_minincl_value(self): return self.date_minincl_value
-    def set_date_minincl_value(self, date_minincl_value): self.date_minincl_value = date_minincl_value
-    def get_date_maxincl_value(self): return self.date_maxincl_value
-    def set_date_maxincl_value(self, date_maxincl_value): self.date_maxincl_value = date_maxincl_value
-    def get_date_minexcl_value(self): return self.date_minexcl_value
-    def set_date_minexcl_value(self, date_minexcl_value): self.date_minexcl_value = date_minexcl_value
-    def get_date_maxexcl_value(self): return self.date_maxexcl_value
-    def set_date_maxexcl_value(self, date_maxexcl_value): self.date_maxexcl_value = date_maxexcl_value
-    def get_time_minincl_value(self): return self.time_minincl_value
-    def set_time_minincl_value(self, time_minincl_value): self.time_minincl_value = time_minincl_value
-    def get_time_maxincl_value(self): return self.time_maxincl_value
-    def set_time_maxincl_value(self, time_maxincl_value): self.time_maxincl_value = time_maxincl_value
-    def get_time_minexcl_value(self): return self.time_minexcl_value
-    def set_time_minexcl_value(self, time_minexcl_value): self.time_minexcl_value = time_minexcl_value
-    def get_time_maxexcl_value(self): return self.time_maxexcl_value
-    def set_time_maxexcl_value(self, time_maxexcl_value): self.time_maxexcl_value = time_maxexcl_value
-    def get_datetime_minincl_value(self): return self.datetime_minincl_value
-    def set_datetime_minincl_value(self, datetime_minincl_value): self.datetime_minincl_value = datetime_minincl_value
-    def get_datetime_maxincl_value(self): return self.datetime_maxincl_value
-    def set_datetime_maxincl_value(self, datetime_maxincl_value): self.datetime_maxincl_value = datetime_maxincl_value
-    def get_datetime_minexcl_value(self): return self.datetime_minexcl_value
-    def set_datetime_minexcl_value(self, datetime_minexcl_value): self.datetime_minexcl_value = datetime_minexcl_value
-    def get_datetime_maxexcl_value(self): return self.datetime_maxexcl_value
-    def set_datetime_maxexcl_value(self, datetime_maxexcl_value): self.datetime_maxexcl_value = datetime_maxexcl_value
-    def get_vbar_pattern_value(self): return self.vbar_pattern_value
-    def set_vbar_pattern_value(self, vbar_pattern_value): self.vbar_pattern_value = vbar_pattern_value
-    def get_unicode_pattern_value(self): return self.unicode_pattern_value
-    def set_unicode_pattern_value(self, unicode_pattern_value): self.unicode_pattern_value = unicode_pattern_value
-    def get_anonymous_float_value(self): return self.anonymous_float_value
-    def set_anonymous_float_value(self, anonymous_float_value): self.anonymous_float_value = anonymous_float_value
-    def get_primative_integer(self): return self.primative_integer
-    def set_primative_integer(self, primative_integer): self.primative_integer = primative_integer
-    def get_primative_float(self): return self.primative_float
-    def set_primative_float(self, primative_float): self.primative_float = primative_float
-    def get_integer_range_1_value_with_default(self): return self.integer_range_1_value_with_default
-    def set_integer_range_1_value_with_default(self, integer_range_1_value_with_default): self.integer_range_1_value_with_default = integer_range_1_value_with_default
+    def get_integer_range_1_value(self):
+        return self.integer_range_1_value
+    def set_integer_range_1_value(self, integer_range_1_value):
+        self.integer_range_1_value = integer_range_1_value
+    def get_pattern_value(self):
+        return self.pattern_value
+    def set_pattern_value(self, pattern_value):
+        self.pattern_value = pattern_value
+    def get_token_enum_value(self):
+        return self.token_enum_value
+    def set_token_enum_value(self, token_enum_value):
+        self.token_enum_value = token_enum_value
+    def get_integer_range_incl_value(self):
+        return self.integer_range_incl_value
+    def set_integer_range_incl_value(self, integer_range_incl_value):
+        self.integer_range_incl_value = integer_range_incl_value
+    def get_integer_range_excl_value(self):
+        return self.integer_range_excl_value
+    def set_integer_range_excl_value(self, integer_range_excl_value):
+        self.integer_range_excl_value = integer_range_excl_value
+    def get_min_max_length_value(self):
+        return self.min_max_length_value
+    def set_min_max_length_value(self, min_max_length_value):
+        self.min_max_length_value = min_max_length_value
+    def get_length_value(self):
+        return self.length_value
+    def set_length_value(self, length_value):
+        self.length_value = length_value
+    def get_totalDigits_value(self):
+        return self.totalDigits_value
+    def set_totalDigits_value(self, totalDigits_value):
+        self.totalDigits_value = totalDigits_value
+    def get_date_minincl_value(self):
+        return self.date_minincl_value
+    def set_date_minincl_value(self, date_minincl_value):
+        self.date_minincl_value = date_minincl_value
+    def get_date_maxincl_value(self):
+        return self.date_maxincl_value
+    def set_date_maxincl_value(self, date_maxincl_value):
+        self.date_maxincl_value = date_maxincl_value
+    def get_date_minexcl_value(self):
+        return self.date_minexcl_value
+    def set_date_minexcl_value(self, date_minexcl_value):
+        self.date_minexcl_value = date_minexcl_value
+    def get_date_maxexcl_value(self):
+        return self.date_maxexcl_value
+    def set_date_maxexcl_value(self, date_maxexcl_value):
+        self.date_maxexcl_value = date_maxexcl_value
+    def get_time_minincl_value(self):
+        return self.time_minincl_value
+    def set_time_minincl_value(self, time_minincl_value):
+        self.time_minincl_value = time_minincl_value
+    def get_time_maxincl_value(self):
+        return self.time_maxincl_value
+    def set_time_maxincl_value(self, time_maxincl_value):
+        self.time_maxincl_value = time_maxincl_value
+    def get_time_minexcl_value(self):
+        return self.time_minexcl_value
+    def set_time_minexcl_value(self, time_minexcl_value):
+        self.time_minexcl_value = time_minexcl_value
+    def get_time_maxexcl_value(self):
+        return self.time_maxexcl_value
+    def set_time_maxexcl_value(self, time_maxexcl_value):
+        self.time_maxexcl_value = time_maxexcl_value
+    def get_datetime_minincl_value(self):
+        return self.datetime_minincl_value
+    def set_datetime_minincl_value(self, datetime_minincl_value):
+        self.datetime_minincl_value = datetime_minincl_value
+    def get_datetime_maxincl_value(self):
+        return self.datetime_maxincl_value
+    def set_datetime_maxincl_value(self, datetime_maxincl_value):
+        self.datetime_maxincl_value = datetime_maxincl_value
+    def get_datetime_minexcl_value(self):
+        return self.datetime_minexcl_value
+    def set_datetime_minexcl_value(self, datetime_minexcl_value):
+        self.datetime_minexcl_value = datetime_minexcl_value
+    def get_datetime_maxexcl_value(self):
+        return self.datetime_maxexcl_value
+    def set_datetime_maxexcl_value(self, datetime_maxexcl_value):
+        self.datetime_maxexcl_value = datetime_maxexcl_value
+    def get_vbar_pattern_value(self):
+        return self.vbar_pattern_value
+    def set_vbar_pattern_value(self, vbar_pattern_value):
+        self.vbar_pattern_value = vbar_pattern_value
+    def get_unicode_pattern_value(self):
+        return self.unicode_pattern_value
+    def set_unicode_pattern_value(self, unicode_pattern_value):
+        self.unicode_pattern_value = unicode_pattern_value
+    def get_anonymous_float_value(self):
+        return self.anonymous_float_value
+    def set_anonymous_float_value(self, anonymous_float_value):
+        self.anonymous_float_value = anonymous_float_value
+    def get_primative_integer(self):
+        return self.primative_integer
+    def set_primative_integer(self, primative_integer):
+        self.primative_integer = primative_integer
+    def get_primative_float(self):
+        return self.primative_float
+    def set_primative_float(self, primative_float):
+        self.primative_float = primative_float
+    def get_integer_range_1_value_with_default(self):
+        return self.integer_range_1_value_with_default
+    def set_integer_range_1_value_with_default(self, integer_range_1_value_with_default):
+        self.integer_range_1_value_with_default = integer_range_1_value_with_default
     def validate_integer_range_1_st(self, value):
         # Validate type integer_range_1_st, a restriction on integer_range_2_st.
         if value is not None and Validate_simpletypes_:
@@ -1544,8 +1608,9 @@ class simpleTwoType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, simpleTwoElementOne=None):
+    def __init__(self, simpleTwoElementOne=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.simpleTwoElementOne = simpleTwoElementOne
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1558,8 +1623,10 @@ class simpleTwoType(GeneratedsSuper):
         else:
             return simpleTwoType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_simpleTwoElementOne(self): return self.simpleTwoElementOne
-    def set_simpleTwoElementOne(self, simpleTwoElementOne): self.simpleTwoElementOne = simpleTwoElementOne
+    def get_simpleTwoElementOne(self):
+        return self.simpleTwoElementOne
+    def set_simpleTwoElementOne(self, simpleTwoElementOne):
+        self.simpleTwoElementOne = simpleTwoElementOne
     def hasContent_(self):
         if (
             self.simpleTwoElementOne is not None
@@ -1608,7 +1675,7 @@ class simpleTwoType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'simpleTwoElementOne':
-            obj_ = simpleTwoElementOneType.factory()
+            obj_ = simpleTwoElementOneType.factory(parent_object_=self)
             obj_.build(child_)
             self.simpleTwoElementOne = obj_
             obj_.original_tagname_ = 'simpleTwoElementOne'
@@ -1621,8 +1688,9 @@ class simpleTwoElementOneType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, simpleTwoElementTwo=None):
+    def __init__(self, simpleTwoElementTwo=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.simpleTwoElementTwo = simpleTwoElementTwo
         self.validate_simpleTwoElementTwoType(self.simpleTwoElementTwo)
     def factory(*args_, **kwargs_):
@@ -1636,8 +1704,10 @@ class simpleTwoElementOneType(GeneratedsSuper):
         else:
             return simpleTwoElementOneType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_simpleTwoElementTwo(self): return self.simpleTwoElementTwo
-    def set_simpleTwoElementTwo(self, simpleTwoElementTwo): self.simpleTwoElementTwo = simpleTwoElementTwo
+    def get_simpleTwoElementTwo(self):
+        return self.simpleTwoElementTwo
+    def set_simpleTwoElementTwo(self, simpleTwoElementTwo):
+        self.simpleTwoElementTwo = simpleTwoElementTwo
     def validate_simpleTwoElementTwoType(self, value):
         # Validate type simpleTwoElementTwoType, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:

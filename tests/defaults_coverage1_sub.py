@@ -49,22 +49,22 @@ ExternalEncoding = ''
 
 
 class DefaultTypesSub(supermod.DefaultTypes):
-    def __init__(self, default1=None, default2=None):
-        super(DefaultTypesSub, self).__init__(default1, default2, )
+    def __init__(self, default1=None, default2=None, **kwargs_):
+        super(DefaultTypesSub, self).__init__(default1, default2,  **kwargs_)
 supermod.DefaultTypes.subclass = DefaultTypesSub
 # end class DefaultTypesSub
 
 
 class DefaultType1Sub(supermod.DefaultType1):
-    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None):
-        super(DefaultType1Sub, self).__init__(default01, normal01, default02, normal02, default03, normal03, default04, normal04, default05a, default05b, normal05, default06, normal06, default07, normal07, default08, normal08, )
+    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None, **kwargs_):
+        super(DefaultType1Sub, self).__init__(default01, normal01, default02, normal02, default03, normal03, default04, normal04, default05a, default05b, normal05, default06, normal06, default07, normal07, default08, normal08,  **kwargs_)
 supermod.DefaultType1.subclass = DefaultType1Sub
 # end class DefaultType1Sub
 
 
 class DefaultType2Sub(supermod.DefaultType2):
-    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None):
-        super(DefaultType2Sub, self).__init__(default01, normal01, default02, normal02, default03, normal03, default04, normal04, default05a, default05b, normal05, default06, normal06, default07, normal07, default08, normal08, )
+    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None, **kwargs_):
+        super(DefaultType2Sub, self).__init__(default01, normal01, default02, normal02, default03, normal03, default04, normal04, default05a, default05b, normal05, default06, normal06, default07, normal07, default08, normal08,  **kwargs_)
 supermod.DefaultType2.subclass = DefaultType2Sub
 # end class DefaultType2Sub
 

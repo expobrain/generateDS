@@ -735,8 +735,9 @@ class test1element(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, test1attribute=None, test1member=None):
+    def __init__(self, test1attribute=None, test1member=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.test1attribute = _cast(None, test1attribute)
         self.test1member = test1member
     def factory(*args_, **kwargs_):
@@ -750,10 +751,14 @@ class test1element(GeneratedsSuper):
         else:
             return test1element(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_test1member(self): return self.test1member
-    def set_test1member(self, test1member): self.test1member = test1member
-    def get_test1attribute(self): return self.test1attribute
-    def set_test1attribute(self, test1attribute): self.test1attribute = test1attribute
+    def get_test1member(self):
+        return self.test1member
+    def set_test1member(self, test1member):
+        self.test1member = test1member
+    def get_test1attribute(self):
+        return self.test1attribute
+    def set_test1attribute(self, test1attribute):
+        self.test1attribute = test1attribute
     def hasContent_(self):
         if (
             self.test1member is not None
@@ -807,7 +812,7 @@ class test1element(GeneratedsSuper):
             self.test1attribute = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'test1member':
-            obj_ = cimAnySimpleType.factory()
+            obj_ = cimAnySimpleType.factory(parent_object_=self)
             obj_.build(child_)
             self.test1member = obj_
             obj_.original_tagname_ = 'test1member'
@@ -820,8 +825,9 @@ class cimAnySimpleType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, valueOf_=None):
+    def __init__(self, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.valueOf_ = valueOf_
         self.anyAttributes_ = {}
     def factory(*args_, **kwargs_):

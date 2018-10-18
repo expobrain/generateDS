@@ -49,29 +49,29 @@ ExternalEncoding = ''
 
 
 class FooListSub(supermod.FooList):
-    def __init__(self, Foo=None, Bar=None, Baz=None):
-        super(FooListSub, self).__init__(Foo, Bar, Baz, )
+    def __init__(self, Foo=None, Bar=None, Baz=None, **kwargs_):
+        super(FooListSub, self).__init__(Foo, Bar, Baz,  **kwargs_)
 supermod.FooList.subclass = FooListSub
 # end class FooListSub
 
 
 class FooType1Sub(supermod.FooType1):
-    def __init__(self, FooType=None):
-        super(FooType1Sub, self).__init__(FooType, )
+    def __init__(self, FooType=None, **kwargs_):
+        super(FooType1Sub, self).__init__(FooType,  **kwargs_)
 supermod.FooType1.subclass = FooType1Sub
 # end class FooType1Sub
 
 
 class BarType2Sub(supermod.BarType2):
-    def __init__(self, BarType=None):
-        super(BarType2Sub, self).__init__(BarType, )
+    def __init__(self, BarType=None, **kwargs_):
+        super(BarType2Sub, self).__init__(BarType,  **kwargs_)
 supermod.BarType2.subclass = BarType2Sub
 # end class BarType2Sub
 
 
 class BazType3Sub(supermod.BazType3):
-    def __init__(self, BazType=None):
-        super(BazType3Sub, self).__init__(BazType, )
+    def __init__(self, BazType=None, **kwargs_):
+        super(BazType3Sub, self).__init__(BazType,  **kwargs_)
 supermod.BazType3.subclass = BazType3Sub
 # end class BazType3Sub
 

@@ -741,8 +741,9 @@ class IdentifierType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, extensiontype_=None):
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.schemeID = _cast(None, schemeID)
         self.schemeName = _cast(None, schemeName)
         self.schemeAgencyID = _cast(None, schemeAgencyID)
@@ -763,20 +764,34 @@ class IdentifierType(GeneratedsSuper):
         else:
             return IdentifierType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_schemeID(self): return self.schemeID
-    def set_schemeID(self, schemeID): self.schemeID = schemeID
-    def get_schemeName(self): return self.schemeName
-    def set_schemeName(self, schemeName): self.schemeName = schemeName
-    def get_schemeAgencyID(self): return self.schemeAgencyID
-    def set_schemeAgencyID(self, schemeAgencyID): self.schemeAgencyID = schemeAgencyID
-    def get_schemeAgencyName(self): return self.schemeAgencyName
-    def set_schemeAgencyName(self, schemeAgencyName): self.schemeAgencyName = schemeAgencyName
-    def get_schemeVersionID(self): return self.schemeVersionID
-    def set_schemeVersionID(self, schemeVersionID): self.schemeVersionID = schemeVersionID
-    def get_schemeDataURI(self): return self.schemeDataURI
-    def set_schemeDataURI(self, schemeDataURI): self.schemeDataURI = schemeDataURI
-    def get_schemeURI(self): return self.schemeURI
-    def set_schemeURI(self, schemeURI): self.schemeURI = schemeURI
+    def get_schemeID(self):
+        return self.schemeID
+    def set_schemeID(self, schemeID):
+        self.schemeID = schemeID
+    def get_schemeName(self):
+        return self.schemeName
+    def set_schemeName(self, schemeName):
+        self.schemeName = schemeName
+    def get_schemeAgencyID(self):
+        return self.schemeAgencyID
+    def set_schemeAgencyID(self, schemeAgencyID):
+        self.schemeAgencyID = schemeAgencyID
+    def get_schemeAgencyName(self):
+        return self.schemeAgencyName
+    def set_schemeAgencyName(self, schemeAgencyName):
+        self.schemeAgencyName = schemeAgencyName
+    def get_schemeVersionID(self):
+        return self.schemeVersionID
+    def set_schemeVersionID(self, schemeVersionID):
+        self.schemeVersionID = schemeVersionID
+    def get_schemeDataURI(self):
+        return self.schemeDataURI
+    def set_schemeDataURI(self, schemeDataURI):
+        self.schemeDataURI = schemeDataURI
+    def get_schemeURI(self):
+        return self.schemeURI
+    def set_schemeURI(self, schemeURI):
+        self.schemeURI = schemeURI
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def get_extensiontype_(self): return self.extensiontype_
@@ -889,9 +904,10 @@ class BillOfResourcesIDType(IdentifierType):
     ]
     subclass = None
     superclass = IdentifierType
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None):
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
-        super(BillOfResourcesIDType, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(BillOfResourcesIDType, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_,  **kwargs_)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -961,9 +977,10 @@ class BillOfMaterialIDType(IdentifierType):
     ]
     subclass = None
     superclass = IdentifierType
-    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None):
+    def __init__(self, schemeID=None, schemeName=None, schemeAgencyID=None, schemeAgencyName=None, schemeVersionID=None, schemeDataURI=None, schemeURI=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
-        super(BillOfMaterialIDType, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(BillOfMaterialIDType, self).__init__(schemeID, schemeName, schemeAgencyID, schemeAgencyName, schemeVersionID, schemeDataURI, schemeURI, valueOf_,  **kwargs_)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:

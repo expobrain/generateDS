@@ -52,15 +52,15 @@ ExternalEncoding = ''
 
 
 class peopleTypeSub(supermod.peopleType):
-    def __init__(self, person=None, specialperson=None):
-        super(peopleTypeSub, self).__init__(person, specialperson, )
+    def __init__(self, person=None, specialperson=None, **kwargs_):
+        super(peopleTypeSub, self).__init__(person, specialperson,  **kwargs_)
 supermod.peopleType.subclass = peopleTypeSub
 # end class peopleTypeSub
 
 
 class personTypeSub(supermod.personType):
-    def __init__(self, value=None, id=None, ratio=None, name=None, interest=None, category=None, description=None):
-        super(personTypeSub, self).__init__(value, id, ratio, name, interest, category, description, )
+    def __init__(self, value=None, id=None, ratio=None, name=None, interest=None, category=None, description=None, **kwargs_):
+        super(personTypeSub, self).__init__(value, id, ratio, name, interest, category, description,  **kwargs_)
 supermod.personType.subclass = personTypeSub
 # end class personTypeSub
 

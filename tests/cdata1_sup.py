@@ -735,8 +735,9 @@ class cdataListType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, cdatalist=None):
+    def __init__(self, cdatalist=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if cdatalist is None:
             self.cdatalist = []
         else:
@@ -752,8 +753,10 @@ class cdataListType(GeneratedsSuper):
         else:
             return cdataListType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_cdatalist(self): return self.cdatalist
-    def set_cdatalist(self, cdatalist): self.cdatalist = cdatalist
+    def get_cdatalist(self):
+        return self.cdatalist
+    def set_cdatalist(self, cdatalist):
+        self.cdatalist = cdatalist
     def add_cdatalist(self, value): self.cdatalist.append(value)
     def insert_cdatalist_at(self, index, value): self.cdatalist.insert(index, value)
     def replace_cdatalist_at(self, index, value): self.cdatalist[index] = value
@@ -805,7 +808,7 @@ class cdataListType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'cdatalist':
-            obj_ = cdataType.factory()
+            obj_ = cdataType.factory(parent_object_=self)
             obj_.build(child_)
             self.cdatalist.append(obj_)
             obj_.original_tagname_ = 'cdatalist'
@@ -818,8 +821,9 @@ class cdataType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, script=None):
+    def __init__(self, script=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.script = script
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -832,8 +836,10 @@ class cdataType(GeneratedsSuper):
         else:
             return cdataType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_script(self): return self.script
-    def set_script(self, script): self.script = script
+    def get_script(self):
+        return self.script
+    def set_script(self, script):
+        self.script = script
     def hasContent_(self):
         if (
             self.script is not None

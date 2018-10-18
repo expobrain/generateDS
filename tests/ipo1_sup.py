@@ -744,8 +744,9 @@ class PurchaseOrderType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, orderDate=None, shipTo=None, billTo=None, comment=None, items=None):
+    def __init__(self, orderDate=None, shipTo=None, billTo=None, comment=None, items=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if isinstance(orderDate, BaseStrType_):
             initvalue_ = datetime_.datetime.strptime(orderDate, '%Y-%m-%d').date()
         else:
@@ -766,16 +767,26 @@ class PurchaseOrderType(GeneratedsSuper):
         else:
             return PurchaseOrderType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_shipTo(self): return self.shipTo
-    def set_shipTo(self, shipTo): self.shipTo = shipTo
-    def get_billTo(self): return self.billTo
-    def set_billTo(self, billTo): self.billTo = billTo
-    def get_comment(self): return self.comment
-    def set_comment(self, comment): self.comment = comment
-    def get_items(self): return self.items
-    def set_items(self, items): self.items = items
-    def get_orderDate(self): return self.orderDate
-    def set_orderDate(self, orderDate): self.orderDate = orderDate
+    def get_shipTo(self):
+        return self.shipTo
+    def set_shipTo(self, shipTo):
+        self.shipTo = shipTo
+    def get_billTo(self):
+        return self.billTo
+    def set_billTo(self, billTo):
+        self.billTo = billTo
+    def get_comment(self):
+        return self.comment
+    def set_comment(self, comment):
+        self.comment = comment
+    def get_items(self):
+        return self.items
+    def set_items(self, items):
+        self.items = items
+    def get_orderDate(self):
+        return self.orderDate
+    def set_orderDate(self, orderDate):
+        self.orderDate = orderDate
     def hasContent_(self):
         if (
             self.shipTo is not None or
@@ -843,13 +854,13 @@ class PurchaseOrderType(GeneratedsSuper):
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'shipTo':
             class_obj_ = self.get_class_obj_(child_, Address)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.shipTo = obj_
             obj_.original_tagname_ = 'shipTo'
         elif nodeName_ == 'billTo':
             class_obj_ = self.get_class_obj_(child_, Address)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.billTo = obj_
             obj_.original_tagname_ = 'billTo'
@@ -858,7 +869,7 @@ class PurchaseOrderType(GeneratedsSuper):
             comment_ = self.gds_validate_string(comment_, node, 'comment')
             self.comment = comment_
         elif nodeName_ == 'items':
-            obj_ = Items.factory()
+            obj_ = Items.factory(parent_object_=self)
             obj_.build(child_)
             self.items = obj_
             obj_.original_tagname_ = 'items'
@@ -871,8 +882,9 @@ class Items(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, item=None):
+    def __init__(self, item=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if item is None:
             self.item = []
         else:
@@ -888,8 +900,10 @@ class Items(GeneratedsSuper):
         else:
             return Items(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_item(self): return self.item
-    def set_item(self, item): self.item = item
+    def get_item(self):
+        return self.item
+    def set_item(self, item):
+        self.item = item
     def add_item(self, value): self.item.append(value)
     def insert_item_at(self, index, value): self.item.insert(index, value)
     def replace_item_at(self, index, value): self.item[index] = value
@@ -941,7 +955,7 @@ class Items(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'item':
-            obj_ = item.factory()
+            obj_ = item.factory(parent_object_=self)
             obj_.build(child_)
             self.item.append(obj_)
             obj_.original_tagname_ = 'item'
@@ -959,8 +973,9 @@ class item(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, partNum=None, productName=None, quantity=None, USPrice=None, comment=None, shipDate=None):
+    def __init__(self, partNum=None, productName=None, quantity=None, USPrice=None, comment=None, shipDate=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.partNum = _cast(None, partNum)
         self.productName = productName
         self.quantity = quantity
@@ -982,18 +997,30 @@ class item(GeneratedsSuper):
         else:
             return item(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_productName(self): return self.productName
-    def set_productName(self, productName): self.productName = productName
-    def get_quantity(self): return self.quantity
-    def set_quantity(self, quantity): self.quantity = quantity
-    def get_USPrice(self): return self.USPrice
-    def set_USPrice(self, USPrice): self.USPrice = USPrice
-    def get_comment(self): return self.comment
-    def set_comment(self, comment): self.comment = comment
-    def get_shipDate(self): return self.shipDate
-    def set_shipDate(self, shipDate): self.shipDate = shipDate
-    def get_partNum(self): return self.partNum
-    def set_partNum(self, partNum): self.partNum = partNum
+    def get_productName(self):
+        return self.productName
+    def set_productName(self, productName):
+        self.productName = productName
+    def get_quantity(self):
+        return self.quantity
+    def set_quantity(self, quantity):
+        self.quantity = quantity
+    def get_USPrice(self):
+        return self.USPrice
+    def set_USPrice(self, USPrice):
+        self.USPrice = USPrice
+    def get_comment(self):
+        return self.comment
+    def set_comment(self, comment):
+        self.comment = comment
+    def get_shipDate(self):
+        return self.shipDate
+    def set_shipDate(self, shipDate):
+        self.shipDate = shipDate
+    def get_partNum(self):
+        return self.partNum
+    def set_partNum(self, partNum):
+        self.partNum = partNum
     def hasContent_(self):
         if (
             self.productName is not None or
@@ -1101,8 +1128,9 @@ class quantity(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, valueOf_=None):
+    def __init__(self, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1168,8 +1196,9 @@ class Address(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, street=None, city=None, extensiontype_=None):
+    def __init__(self, name=None, street=None, city=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = name
         self.street = street
         self.city = city
@@ -1185,12 +1214,18 @@ class Address(GeneratedsSuper):
         else:
             return Address(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_street(self): return self.street
-    def set_street(self, street): self.street = street
-    def get_city(self): return self.city
-    def set_city(self, city): self.city = city
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_street(self):
+        return self.street
+    def set_street(self, street):
+        self.street = street
+    def get_city(self):
+        return self.city
+    def set_city(self, city):
+        self.city = city
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -1278,9 +1313,10 @@ class USAddress(Address):
     ]
     subclass = None
     superclass = Address
-    def __init__(self, name=None, street=None, city=None, state=None, zip=None):
+    def __init__(self, name=None, street=None, city=None, state=None, zip=None, **kwargs_):
         self.original_tagname_ = None
-        super(USAddress, self).__init__(name, street, city, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(USAddress, self).__init__(name, street, city,  **kwargs_)
         self.state = state
         self.validate_USState(self.state)
         self.zip = zip
@@ -1295,10 +1331,14 @@ class USAddress(Address):
         else:
             return USAddress(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_state(self): return self.state
-    def set_state(self, state): self.state = state
-    def get_zip(self): return self.zip
-    def set_zip(self, zip): self.zip = zip
+    def get_state(self):
+        return self.state
+    def set_state(self, state):
+        self.state = state
+    def get_zip(self):
+        return self.zip
+    def set_zip(self, zip):
+        self.zip = zip
     def validate_USState(self, value):
         # Validate type USState, a restriction on string.
         if value is not None and Validate_simpletypes_:
@@ -1392,9 +1432,10 @@ class UKAddress(Address):
     ]
     subclass = None
     superclass = Address
-    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None):
+    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None, **kwargs_):
         self.original_tagname_ = None
-        super(UKAddress, self).__init__(name, street, city, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(UKAddress, self).__init__(name, street, city,  **kwargs_)
         self.exportCode = _cast(int, exportCode)
         self.postcode = postcode
     def factory(*args_, **kwargs_):
@@ -1408,10 +1449,14 @@ class UKAddress(Address):
         else:
             return UKAddress(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_postcode(self): return self.postcode
-    def set_postcode(self, postcode): self.postcode = postcode
-    def get_exportCode(self): return self.exportCode
-    def set_exportCode(self, exportCode): self.exportCode = exportCode
+    def get_postcode(self):
+        return self.postcode
+    def set_postcode(self, postcode):
+        self.postcode = postcode
+    def get_exportCode(self):
+        return self.exportCode
+    def set_exportCode(self, exportCode):
+        self.exportCode = exportCode
     def hasContent_(self):
         if (
             self.postcode is not None or

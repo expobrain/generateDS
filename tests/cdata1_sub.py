@@ -50,15 +50,15 @@ ExternalEncoding = ''
 
 
 class cdataListTypeSub(supermod.cdataListType):
-    def __init__(self, cdatalist=None):
-        super(cdataListTypeSub, self).__init__(cdatalist, )
+    def __init__(self, cdatalist=None, **kwargs_):
+        super(cdataListTypeSub, self).__init__(cdatalist,  **kwargs_)
 supermod.cdataListType.subclass = cdataListTypeSub
 # end class cdataListTypeSub
 
 
 class cdataTypeSub(supermod.cdataType):
-    def __init__(self, script=None):
-        super(cdataTypeSub, self).__init__(script, )
+    def __init__(self, script=None, **kwargs_):
+        super(cdataTypeSub, self).__init__(script,  **kwargs_)
 supermod.cdataType.subclass = cdataTypeSub
 # end class cdataTypeSub
 

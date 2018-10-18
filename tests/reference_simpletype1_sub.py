@@ -49,8 +49,8 @@ ExternalEncoding = ''
 
 
 class dummySub(supermod.dummy):
-    def __init__(self, test_ref_attr=None, test_normal_attr=None, test_ref_element=None, test_normal_element=None):
-        super(dummySub, self).__init__(test_ref_attr, test_normal_attr, test_ref_element, test_normal_element, )
+    def __init__(self, test_ref_attr=None, test_normal_attr=None, test_ref_element=None, test_normal_element=None, **kwargs_):
+        super(dummySub, self).__init__(test_ref_attr, test_normal_attr, test_ref_element, test_normal_element,  **kwargs_)
 supermod.dummy.subclass = dummySub
 # end class dummySub
 

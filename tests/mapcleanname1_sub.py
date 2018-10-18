@@ -49,50 +49,50 @@ ExternalEncoding = ''
 
 
 class complex_type01Sub(supermod.complex_type01):
-    def __init__(self, string_value01=None, integer_value01=None, float_value01=None, field01=None):
-        super(complex_type01Sub, self).__init__(string_value01, integer_value01, float_value01, field01, )
+    def __init__(self, string_value01=None, integer_value01=None, float_value01=None, field01=None, **kwargs_):
+        super(complex_type01Sub, self).__init__(string_value01, integer_value01, float_value01, field01,  **kwargs_)
 supermod.complex_type01.subclass = complex_type01Sub
 # end class complex_type01Sub
 
 
 class complex_type02Sub(supermod.complex_type02):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
-        super(complex_type02Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
+        super(complex_type02Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_,  **kwargs_)
 supermod.complex_type02.subclass = complex_type02Sub
 # end class complex_type02Sub
 
 
 class complex_type03Sub(supermod.complex_type03):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
-        super(complex_type03Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
+        super(complex_type03Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03,  **kwargs_)
 supermod.complex_type03.subclass = complex_type03Sub
 # end class complex_type03Sub
 
 
 class type_Sub(supermod.type_):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
-        super(type_Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
+        super(type_Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_,  **kwargs_)
 supermod.type_.subclass = type_Sub
 # end class type_Sub
 
 
 class complex_type04Sub(supermod.complex_type04):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
-        super(complex_type04Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
+        super(complex_type04Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03,  **kwargs_)
 supermod.complex_type04.subclass = complex_type04Sub
 # end class complex_type04Sub
 
 
 class build_Sub(supermod.build_):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
-        super(build_Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
+        super(build_Sub, self).__init__(string_value02, integer_value02, float_value02, extensiontype_,  **kwargs_)
 supermod.build_.subclass = build_Sub
 # end class build_Sub
 
 
 class complex_type05Sub(supermod.complex_type05):
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
-        super(complex_type05Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03, )
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
+        super(complex_type05Sub, self).__init__(string_value02, integer_value02, float_value02, string_value03, integer_value03, float_value03,  **kwargs_)
 supermod.complex_type05.subclass = complex_type05Sub
 # end class complex_type05Sub
 

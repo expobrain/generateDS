@@ -50,43 +50,43 @@ ExternalEncoding = ''
 
 
 class dataKindSub(supermod.dataKind):
-    def __init__(self, data1=None, data2=None, data3=None, data4=None, data5=None):
-        super(dataKindSub, self).__init__(data1, data2, data3, data4, data5, )
+    def __init__(self, data1=None, data2=None, data3=None, data4=None, data5=None, **kwargs_):
+        super(dataKindSub, self).__init__(data1, data2, data3, data4, data5,  **kwargs_)
 supermod.dataKind.subclass = dataKindSub
 # end class dataKindSub
 
 
 class data1KindSub(supermod.data1Kind):
-    def __init__(self, content1=None):
-        super(data1KindSub, self).__init__(content1, )
+    def __init__(self, content1=None, **kwargs_):
+        super(data1KindSub, self).__init__(content1,  **kwargs_)
 supermod.data1Kind.subclass = data1KindSub
 # end class data1KindSub
 
 
 class MlassData2Sub(supermod.MlassData2):
-    def __init__(self, content1=None):
-        super(MlassData2Sub, self).__init__(content1, )
+    def __init__(self, content1=None, **kwargs_):
+        super(MlassData2Sub, self).__init__(content1,  **kwargs_)
 supermod.MlassData2.subclass = MlassData2Sub
 # end class MlassData2Sub
 
 
 class RealTypeData3Sub(supermod.RealTypeData3):
-    def __init__(self, content1=None):
-        super(RealTypeData3Sub, self).__init__(content1, )
+    def __init__(self, content1=None, **kwargs_):
+        super(RealTypeData3Sub, self).__init__(content1,  **kwargs_)
 supermod.RealTypeData3.subclass = RealTypeData3Sub
 # end class RealTypeData3Sub
 
 
 class MMMMMMdataKindSub(supermod.MMMMMMdataKind):
-    def __init__(self, content1=None):
-        super(MMMMMMdataKindSub, self).__init__(content1, )
+    def __init__(self, content1=None, **kwargs_):
+        super(MMMMMMdataKindSub, self).__init__(content1,  **kwargs_)
 supermod.MMMMMMdataKind.subclass = MMMMMMdataKindSub
 # end class MMMMMMdataKindSub
 
 
 class dataTypeNNNMNNNSub(supermod.dataTypeNNNMNNN):
-    def __init__(self, content1=None):
-        super(dataTypeNNNMNNNSub, self).__init__(content1, )
+    def __init__(self, content1=None, **kwargs_):
+        super(dataTypeNNNMNNNSub, self).__init__(content1,  **kwargs_)
 supermod.dataTypeNNNMNNN.subclass = dataTypeNNNMNNNSub
 # end class dataTypeNNNMNNNSub
 

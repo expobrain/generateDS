@@ -736,8 +736,9 @@ class oneperType03_1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, helpername=None, inner01=None):
+    def __init__(self, helpername=None, inner01=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.helpername = helpername
         self.inner01 = inner01
     def factory(*args_, **kwargs_):
@@ -751,10 +752,14 @@ class oneperType03_1(GeneratedsSuper):
         else:
             return oneperType03_1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_helpername(self): return self.helpername
-    def set_helpername(self, helpername): self.helpername = helpername
-    def get_inner01(self): return self.inner01
-    def set_inner01(self, inner01): self.inner01 = inner01
+    def get_helpername(self):
+        return self.helpername
+    def set_helpername(self, helpername):
+        self.helpername = helpername
+    def get_inner01(self):
+        return self.inner01
+    def set_inner01(self, inner01):
+        self.inner01 = inner01
     def hasContent_(self):
         if (
             self.helpername is not None or
@@ -811,7 +816,7 @@ class oneperType03_1(GeneratedsSuper):
             helpername_ = self.gds_validate_string(helpername_, node, 'helpername')
             self.helpername = helpername_
         elif nodeName_ == 'inner01':
-            obj_ = oneperType02_2.factory()
+            obj_ = oneperType02_2.factory(parent_object_=self)
             obj_.build(child_)
             self.inner01 = obj_
             obj_.original_tagname_ = 'inner01'
@@ -824,8 +829,9 @@ class oneperType03_2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, helperdescription=None):
+    def __init__(self, helperdescription=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.helperdescription = helperdescription
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -838,8 +844,10 @@ class oneperType03_2(GeneratedsSuper):
         else:
             return oneperType03_2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_helperdescription(self): return self.helperdescription
-    def set_helperdescription(self, helperdescription): self.helperdescription = helperdescription
+    def get_helperdescription(self):
+        return self.helperdescription
+    def set_helperdescription(self, helperdescription):
+        self.helperdescription = helperdescription
     def hasContent_(self):
         if (
             self.helperdescription is not None

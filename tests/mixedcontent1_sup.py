@@ -733,8 +733,9 @@ class rootType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, markup=None):
+    def __init__(self, markup=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if markup is None:
             self.markup = []
         else:
@@ -750,8 +751,10 @@ class rootType(GeneratedsSuper):
         else:
             return rootType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_markup(self): return self.markup
-    def set_markup(self, markup): self.markup = markup
+    def get_markup(self):
+        return self.markup
+    def set_markup(self, markup):
+        self.markup = markup
     def add_markup(self, value): self.markup.append(value)
     def insert_markup_at(self, index, value): self.markup.insert(index, value)
     def replace_markup_at(self, index, value): self.markup[index] = value
@@ -803,7 +806,7 @@ class rootType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'markup':
-            obj_ = markupType.factory()
+            obj_ = markupType.factory(parent_object_=self)
             obj_.build(child_)
             self.markup.append(obj_)
             obj_.original_tagname_ = 'markup'
@@ -818,8 +821,9 @@ class markupType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, embedded=None, nested=None, valueOf_=None, mixedclass_=None, content_=None):
+    def __init__(self, embedded=None, nested=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if embedded is None:
             self.embedded = []
         else:
@@ -849,13 +853,17 @@ class markupType(GeneratedsSuper):
         else:
             return markupType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_embedded(self): return self.embedded
-    def set_embedded(self, embedded): self.embedded = embedded
+    def get_embedded(self):
+        return self.embedded
+    def set_embedded(self, embedded):
+        self.embedded = embedded
     def add_embedded(self, value): self.embedded.append(value)
     def insert_embedded_at(self, index, value): self.embedded.insert(index, value)
     def replace_embedded_at(self, index, value): self.embedded[index] = value
-    def get_nested(self): return self.nested
-    def set_nested(self, nested): self.nested = nested
+    def get_nested(self):
+        return self.nested
+    def set_nested(self, nested):
+        self.nested = nested
     def add_nested(self, value): self.nested.append(value)
     def insert_nested_at(self, index, value): self.nested.insert(index, value)
     def replace_nested_at(self, index, value): self.nested[index] = value
@@ -927,7 +935,7 @@ class markupType(GeneratedsSuper):
                 MixedContainer.TypeString, 'embedded', valuestr_)
             self.content_.append(obj_)
         elif nodeName_ == 'nested':
-            obj_ = nestedType.factory()
+            obj_ = nestedType.factory(parent_object_=self)
             obj_.build(child_)
             obj_ = self.mixedclass_(MixedContainer.CategoryComplex,
                 MixedContainer.TypeNone, 'nested', obj_)
@@ -951,8 +959,9 @@ class nestedType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, nested1=None, nested2=None, nested3=None):
+    def __init__(self, nested1=None, nested2=None, nested3=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if nested1 is None:
             self.nested1 = []
         else:
@@ -976,18 +985,24 @@ class nestedType(GeneratedsSuper):
         else:
             return nestedType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_nested1(self): return self.nested1
-    def set_nested1(self, nested1): self.nested1 = nested1
+    def get_nested1(self):
+        return self.nested1
+    def set_nested1(self, nested1):
+        self.nested1 = nested1
     def add_nested1(self, value): self.nested1.append(value)
     def insert_nested1_at(self, index, value): self.nested1.insert(index, value)
     def replace_nested1_at(self, index, value): self.nested1[index] = value
-    def get_nested2(self): return self.nested2
-    def set_nested2(self, nested2): self.nested2 = nested2
+    def get_nested2(self):
+        return self.nested2
+    def set_nested2(self, nested2):
+        self.nested2 = nested2
     def add_nested2(self, value): self.nested2.append(value)
     def insert_nested2_at(self, index, value): self.nested2.insert(index, value)
     def replace_nested2_at(self, index, value): self.nested2[index] = value
-    def get_nested3(self): return self.nested3
-    def set_nested3(self, nested3): self.nested3 = nested3
+    def get_nested3(self):
+        return self.nested3
+    def set_nested3(self, nested3):
+        self.nested3 = nested3
     def add_nested3(self, value): self.nested3.append(value)
     def insert_nested3_at(self, index, value): self.nested3.insert(index, value)
     def replace_nested3_at(self, index, value): self.nested3[index] = value
@@ -1047,7 +1062,7 @@ class nestedType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'nested1':
-            obj_ = nested1Type.factory()
+            obj_ = nested1Type.factory(parent_object_=self)
             obj_.build(child_)
             self.nested1.append(obj_)
             obj_.original_tagname_ = 'nested1'
@@ -1073,8 +1088,9 @@ class nested1Type(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, nestedA1=None, nestedA2=None):
+    def __init__(self, nestedA1=None, nestedA2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if nestedA1 is None:
             self.nestedA1 = []
         else:
@@ -1094,13 +1110,17 @@ class nested1Type(GeneratedsSuper):
         else:
             return nested1Type(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_nestedA1(self): return self.nestedA1
-    def set_nestedA1(self, nestedA1): self.nestedA1 = nestedA1
+    def get_nestedA1(self):
+        return self.nestedA1
+    def set_nestedA1(self, nestedA1):
+        self.nestedA1 = nestedA1
     def add_nestedA1(self, value): self.nestedA1.append(value)
     def insert_nestedA1_at(self, index, value): self.nestedA1.insert(index, value)
     def replace_nestedA1_at(self, index, value): self.nestedA1[index] = value
-    def get_nestedA2(self): return self.nestedA2
-    def set_nestedA2(self, nestedA2): self.nestedA2 = nestedA2
+    def get_nestedA2(self):
+        return self.nestedA2
+    def set_nestedA2(self, nestedA2):
+        self.nestedA2 = nestedA2
     def add_nestedA2(self, value): self.nestedA2.append(value)
     def insert_nestedA2_at(self, index, value): self.nestedA2.insert(index, value)
     def replace_nestedA2_at(self, index, value): self.nestedA2[index] = value
@@ -1155,12 +1175,12 @@ class nested1Type(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'nestedA1':
-            obj_ = nested1AType.factory()
+            obj_ = nested1AType.factory(parent_object_=self)
             obj_.build(child_)
             self.nestedA1.append(obj_)
             obj_.original_tagname_ = 'nestedA1'
         elif nodeName_ == 'nestedA2':
-            obj_ = nested1AType.factory()
+            obj_ = nested1AType.factory(parent_object_=self)
             obj_.build(child_)
             self.nestedA2.append(obj_)
             obj_.original_tagname_ = 'nestedA2'
@@ -1174,8 +1194,9 @@ class nested1AType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, nestedB1=None, nestedB2=None):
+    def __init__(self, nestedB1=None, nestedB2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if nestedB1 is None:
             self.nestedB1 = []
         else:
@@ -1195,13 +1216,17 @@ class nested1AType(GeneratedsSuper):
         else:
             return nested1AType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_nestedB1(self): return self.nestedB1
-    def set_nestedB1(self, nestedB1): self.nestedB1 = nestedB1
+    def get_nestedB1(self):
+        return self.nestedB1
+    def set_nestedB1(self, nestedB1):
+        self.nestedB1 = nestedB1
     def add_nestedB1(self, value): self.nestedB1.append(value)
     def insert_nestedB1_at(self, index, value): self.nestedB1.insert(index, value)
     def replace_nestedB1_at(self, index, value): self.nestedB1[index] = value
-    def get_nestedB2(self): return self.nestedB2
-    def set_nestedB2(self, nestedB2): self.nestedB2 = nestedB2
+    def get_nestedB2(self):
+        return self.nestedB2
+    def set_nestedB2(self, nestedB2):
+        self.nestedB2 = nestedB2
     def add_nestedB2(self, value): self.nestedB2.append(value)
     def insert_nestedB2_at(self, index, value): self.nestedB2.insert(index, value)
     def replace_nestedB2_at(self, index, value): self.nestedB2[index] = value

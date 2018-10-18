@@ -736,8 +736,9 @@ class authorsType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, author=None, cooperation=None):
+    def __init__(self, author=None, cooperation=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if author is None:
             self.author = []
         else:
@@ -757,13 +758,17 @@ class authorsType(GeneratedsSuper):
         else:
             return authorsType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_author(self): return self.author
-    def set_author(self, author): self.author = author
+    def get_author(self):
+        return self.author
+    def set_author(self, author):
+        self.author = author
     def add_author(self, value): self.author.append(value)
     def insert_author_at(self, index, value): self.author.insert(index, value)
     def replace_author_at(self, index, value): self.author[index] = value
-    def get_cooperation(self): return self.cooperation
-    def set_cooperation(self, cooperation): self.cooperation = cooperation
+    def get_cooperation(self):
+        return self.cooperation
+    def set_cooperation(self, cooperation):
+        self.cooperation = cooperation
     def add_cooperation(self, value): self.cooperation.append(value)
     def insert_cooperation_at(self, index, value): self.cooperation.insert(index, value)
     def replace_cooperation_at(self, index, value): self.cooperation[index] = value
@@ -819,7 +824,7 @@ class authorsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'author':
-            obj_ = author.factory()
+            obj_ = author.factory(parent_object_=self)
             obj_.build(child_)
             self.author.append(obj_)
             obj_.original_tagname_ = 'author'
@@ -836,8 +841,9 @@ class author(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, description=None):
+    def __init__(self, description=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.description = description
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -850,8 +856,10 @@ class author(GeneratedsSuper):
         else:
             return author(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
     def hasContent_(self):
         if (
             self.description is not None

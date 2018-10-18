@@ -51,127 +51,127 @@ ExternalEncoding = ''
 
 
 class peopleTypeSub(supermod.peopleType):
-    def __init__(self, comments=None, person=None, specialperson=None, programmer=None, python_programmer=None, java_programmer=None):
-        super(peopleTypeSub, self).__init__(comments, person, specialperson, programmer, python_programmer, java_programmer, )
+    def __init__(self, comments=None, person=None, specialperson=None, programmer=None, python_programmer=None, java_programmer=None, **kwargs_):
+        super(peopleTypeSub, self).__init__(comments, person, specialperson, programmer, python_programmer, java_programmer,  **kwargs_)
 supermod.peopleType.subclass = peopleTypeSub
 # end class peopleTypeSub
 
 
 class commentsTypeSub(supermod.commentsType):
-    def __init__(self, emp=None, bold=None, valueOf_=None, mixedclass_=None, content_=None):
-        super(commentsTypeSub, self).__init__(emp, bold, valueOf_, mixedclass_, content_, )
+    def __init__(self, emp=None, bold=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
+        super(commentsTypeSub, self).__init__(emp, bold, valueOf_, mixedclass_, content_,  **kwargs_)
 supermod.commentsType.subclass = commentsTypeSub
 # end class commentsTypeSub
 
 
 class personTypeSub(supermod.personType):
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, extensiontype_=None):
-        super(personTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, extensiontype_, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, extensiontype_=None, **kwargs_):
+        super(personTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, extensiontype_,  **kwargs_)
 supermod.personType.subclass = personTypeSub
 # end class personTypeSub
 
 
 class specialpersonSub(supermod.specialperson):
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None):
-        super(specialpersonSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, **kwargs_):
+        super(specialpersonSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_,  **kwargs_)
 supermod.specialperson.subclass = specialpersonSub
 # end class specialpersonSub
 
 
 class programmerTypeSub(supermod.programmerType):
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None):
-        super(programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, extensiontype_, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None, **kwargs_):
+        super(programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, extensiontype_,  **kwargs_)
 supermod.programmerType.subclass = programmerTypeSub
 # end class programmerTypeSub
 
 
 class paramTypeSub(supermod.paramType):
-    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None):
-        super(paramTypeSub, self).__init__(id, name, sid, flow, semantic, type_, valueOf_, )
+    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None, **kwargs_):
+        super(paramTypeSub, self).__init__(id, name, sid, flow, semantic, type_, valueOf_,  **kwargs_)
 supermod.paramType.subclass = paramTypeSub
 # end class paramTypeSub
 
 
 class python_programmerTypeSub(supermod.python_programmerType):
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, drcs_attr=None, gui_developer=None, favorite_editor=None, flowvalue=None, drcs=None):
-        super(python_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, drcs_attr, gui_developer, favorite_editor, flowvalue, drcs, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, drcs_attr=None, gui_developer=None, favorite_editor=None, flowvalue=None, drcs=None, **kwargs_):
+        super(python_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, drcs_attr, gui_developer, favorite_editor, flowvalue, drcs,  **kwargs_)
 supermod.python_programmerType.subclass = python_programmerTypeSub
 # end class python_programmerTypeSub
 
 
 class java_programmerTypeSub(supermod.java_programmerType):
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None):
-        super(java_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, status, favorite_editor, datetime1, datetime2, datetime3, datetime4, datetime5, )
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, hot_agent=None, agent=None, promoter=None, description=None, range_=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eldatetime1=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None, **kwargs_):
+        super(java_programmerTypeSub, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, hot_agent, agent, promoter, description, range_, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eldatetime1, eltoken, elshort, ellong, elparam, elarraytypes, nick_name, status, favorite_editor, datetime1, datetime2, datetime3, datetime4, datetime5,  **kwargs_)
 supermod.java_programmerType.subclass = java_programmerTypeSub
 # end class java_programmerTypeSub
 
 
 class agentTypeSub(supermod.agentType):
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, extensiontype_=None):
-        super(agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, extensiontype_, )
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, extensiontype_=None, **kwargs_):
+        super(agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, extensiontype_,  **kwargs_)
 supermod.agentType.subclass = agentTypeSub
 # end class agentTypeSub
 
 
 class special_agentTypeSub(supermod.special_agentType):
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
-        super(special_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, )
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, **kwargs_):
+        super(special_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle,  **kwargs_)
 supermod.special_agentType.subclass = special_agentTypeSub
 # end class special_agentTypeSub
 
 
 class weird_agentTypeSub(supermod.weird_agentType):
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None):
-        super(weird_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle, )
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, vehicle=None, **kwargs_):
+        super(weird_agentTypeSub, self).__init__(firstname, lastname, priority, info, vehicle,  **kwargs_)
 supermod.weird_agentType.subclass = weird_agentTypeSub
 # end class weird_agentTypeSub
 
 
 class boosterTypeSub(supermod.boosterType):
-    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None):
-        super(boosterTypeSub, self).__init__(member_id, firstname, lastname, other_name, class_, other_value, type_, client_handler, )
+    def __init__(self, member_id=None, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None, **kwargs_):
+        super(boosterTypeSub, self).__init__(member_id, firstname, lastname, other_name, class_, other_value, type_, client_handler,  **kwargs_)
 supermod.boosterType.subclass = boosterTypeSub
 # end class boosterTypeSub
 
 
 class infoTypeSub(supermod.infoType):
-    def __init__(self, name=None, type_=None, rating=None):
-        super(infoTypeSub, self).__init__(name, type_, rating, )
+    def __init__(self, name=None, type_=None, rating=None, **kwargs_):
+        super(infoTypeSub, self).__init__(name, type_, rating,  **kwargs_)
 supermod.infoType.subclass = infoTypeSub
 # end class infoTypeSub
 
 
 class vehicleTypeSub(supermod.vehicleType):
-    def __init__(self, wheelcount=None, extensiontype_=None):
-        super(vehicleTypeSub, self).__init__(wheelcount, extensiontype_, )
+    def __init__(self, wheelcount=None, extensiontype_=None, **kwargs_):
+        super(vehicleTypeSub, self).__init__(wheelcount, extensiontype_,  **kwargs_)
 supermod.vehicleType.subclass = vehicleTypeSub
 # end class vehicleTypeSub
 
 
 class automobileSub(supermod.automobile):
-    def __init__(self, wheelcount=None, drivername=None):
-        super(automobileSub, self).__init__(wheelcount, drivername, )
+    def __init__(self, wheelcount=None, drivername=None, **kwargs_):
+        super(automobileSub, self).__init__(wheelcount, drivername,  **kwargs_)
 supermod.automobile.subclass = automobileSub
 # end class automobileSub
 
 
 class airplaneSub(supermod.airplane):
-    def __init__(self, wheelcount=None, pilotname=None):
-        super(airplaneSub, self).__init__(wheelcount, pilotname, )
+    def __init__(self, wheelcount=None, pilotname=None, **kwargs_):
+        super(airplaneSub, self).__init__(wheelcount, pilotname,  **kwargs_)
 supermod.airplane.subclass = airplaneSub
 # end class airplaneSub
 
 
 class hot_agentSub(supermod.hot_agent):
-    def __init__(self, firstname='empty\\name', lastname='no \'last\' name', priority=None, startDate=None):
-        super(hot_agentSub, self).__init__(firstname, lastname, priority, startDate, )
+    def __init__(self, firstname='empty\\name', lastname='no \'last\' name', priority=None, startDate=None, **kwargs_):
+        super(hot_agentSub, self).__init__(firstname, lastname, priority, startDate,  **kwargs_)
 supermod.hot_agent.subclass = hot_agentSub
 # end class hot_agentSub
 
 
 class client_handlerTypeSub(supermod.client_handlerType):
-    def __init__(self, fullname=None, refid=None):
-        super(client_handlerTypeSub, self).__init__(fullname, refid, )
+    def __init__(self, fullname=None, refid=None, **kwargs_):
+        super(client_handlerTypeSub, self).__init__(fullname, refid,  **kwargs_)
 supermod.client_handlerType.subclass = client_handlerTypeSub
 # end class client_handlerTypeSub
 

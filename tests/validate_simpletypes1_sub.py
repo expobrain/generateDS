@@ -49,29 +49,29 @@ ExternalEncoding = 'utf-8'
 
 
 class containerTypeSub(supermod.containerType):
-    def __init__(self, sample1=None, sample2_bad=None, sample3_bad=None, sample4_bad=None, sample2=None):
-        super(containerTypeSub, self).__init__(sample1, sample2_bad, sample3_bad, sample4_bad, sample2, )
+    def __init__(self, sample1=None, sample2_bad=None, sample3_bad=None, sample4_bad=None, sample2=None, **kwargs_):
+        super(containerTypeSub, self).__init__(sample1, sample2_bad, sample3_bad, sample4_bad, sample2,  **kwargs_)
 supermod.containerType.subclass = containerTypeSub
 # end class containerTypeSub
 
 
 class simpleOneTypeSub(supermod.simpleOneType):
-    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None):
-        super(simpleOneTypeSub, self).__init__(integer_range_1_value_with_default, integer_range_1_value, pattern_value, token_enum_value, integer_range_incl_value, integer_range_excl_value, min_max_length_value, length_value, totalDigits_value, date_minincl_value, date_maxincl_value, date_minexcl_value, date_maxexcl_value, time_minincl_value, time_maxincl_value, time_minexcl_value, time_maxexcl_value, datetime_minincl_value, datetime_maxincl_value, datetime_minexcl_value, datetime_maxexcl_value, vbar_pattern_value, unicode_pattern_value, anonymous_float_value, primative_integer, primative_float, )
+    def __init__(self, integer_range_1_value_with_default='6', integer_range_1_value=5, pattern_value=None, token_enum_value=None, integer_range_incl_value=None, integer_range_excl_value=None, min_max_length_value=None, length_value=None, totalDigits_value=None, date_minincl_value=None, date_maxincl_value=None, date_minexcl_value=None, date_maxexcl_value=None, time_minincl_value=None, time_maxincl_value=None, time_minexcl_value=None, time_maxexcl_value=None, datetime_minincl_value=None, datetime_maxincl_value=None, datetime_minexcl_value=None, datetime_maxexcl_value=None, vbar_pattern_value=None, unicode_pattern_value=None, anonymous_float_value=None, primative_integer=None, primative_float=None, **kwargs_):
+        super(simpleOneTypeSub, self).__init__(integer_range_1_value_with_default, integer_range_1_value, pattern_value, token_enum_value, integer_range_incl_value, integer_range_excl_value, min_max_length_value, length_value, totalDigits_value, date_minincl_value, date_maxincl_value, date_minexcl_value, date_maxexcl_value, time_minincl_value, time_maxincl_value, time_minexcl_value, time_maxexcl_value, datetime_minincl_value, datetime_maxincl_value, datetime_minexcl_value, datetime_maxexcl_value, vbar_pattern_value, unicode_pattern_value, anonymous_float_value, primative_integer, primative_float,  **kwargs_)
 supermod.simpleOneType.subclass = simpleOneTypeSub
 # end class simpleOneTypeSub
 
 
 class simpleTwoTypeSub(supermod.simpleTwoType):
-    def __init__(self, simpleTwoElementOne=None):
-        super(simpleTwoTypeSub, self).__init__(simpleTwoElementOne, )
+    def __init__(self, simpleTwoElementOne=None, **kwargs_):
+        super(simpleTwoTypeSub, self).__init__(simpleTwoElementOne,  **kwargs_)
 supermod.simpleTwoType.subclass = simpleTwoTypeSub
 # end class simpleTwoTypeSub
 
 
 class simpleTwoElementOneTypeSub(supermod.simpleTwoElementOneType):
-    def __init__(self, simpleTwoElementTwo=None):
-        super(simpleTwoElementOneTypeSub, self).__init__(simpleTwoElementTwo, )
+    def __init__(self, simpleTwoElementTwo=None, **kwargs_):
+        super(simpleTwoElementOneTypeSub, self).__init__(simpleTwoElementTwo,  **kwargs_)
 supermod.simpleTwoElementOneType.subclass = simpleTwoElementOneTypeSub
 # end class simpleTwoElementOneTypeSub
 

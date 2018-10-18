@@ -739,8 +739,9 @@ class dataKind(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, data1=None, data2=None, data3=None, data4=None, data5=None):
+    def __init__(self, data1=None, data2=None, data3=None, data4=None, data5=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.data1 = data1
         self.data2 = data2
         self.data3 = data3
@@ -757,16 +758,26 @@ class dataKind(GeneratedsSuper):
         else:
             return dataKind(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_data1(self): return self.data1
-    def set_data1(self, data1): self.data1 = data1
-    def get_data2(self): return self.data2
-    def set_data2(self, data2): self.data2 = data2
-    def get_data3(self): return self.data3
-    def set_data3(self, data3): self.data3 = data3
-    def get_data4(self): return self.data4
-    def set_data4(self, data4): self.data4 = data4
-    def get_data5(self): return self.data5
-    def set_data5(self, data5): self.data5 = data5
+    def get_data1(self):
+        return self.data1
+    def set_data1(self, data1):
+        self.data1 = data1
+    def get_data2(self):
+        return self.data2
+    def set_data2(self, data2):
+        self.data2 = data2
+    def get_data3(self):
+        return self.data3
+    def set_data3(self, data3):
+        self.data3 = data3
+    def get_data4(self):
+        return self.data4
+    def set_data4(self, data4):
+        self.data4 = data4
+    def get_data5(self):
+        return self.data5
+    def set_data5(self, data5):
+        self.data5 = data5
     def hasContent_(self):
         if (
             self.data1 is not None or
@@ -827,27 +838,27 @@ class dataKind(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'data1':
-            obj_ = data1Kind.factory()
+            obj_ = data1Kind.factory(parent_object_=self)
             obj_.build(child_)
             self.data1 = obj_
             obj_.original_tagname_ = 'data1'
         elif nodeName_ == 'data2':
-            obj_ = MlassData2.factory()
+            obj_ = MlassData2.factory(parent_object_=self)
             obj_.build(child_)
             self.data2 = obj_
             obj_.original_tagname_ = 'data2'
         elif nodeName_ == 'data3':
-            obj_ = RealTypeData3.factory()
+            obj_ = RealTypeData3.factory(parent_object_=self)
             obj_.build(child_)
             self.data3 = obj_
             obj_.original_tagname_ = 'data3'
         elif nodeName_ == 'data4':
-            obj_ = MMMMMMdataKind.factory()
+            obj_ = MMMMMMdataKind.factory(parent_object_=self)
             obj_.build(child_)
             self.data4 = obj_
             obj_.original_tagname_ = 'data4'
         elif nodeName_ == 'data5':
-            obj_ = dataTypeNNNMNNN.factory()
+            obj_ = dataTypeNNNMNNN.factory(parent_object_=self)
             obj_.build(child_)
             self.data5 = obj_
             obj_.original_tagname_ = 'data5'
@@ -860,8 +871,9 @@ class data1Kind(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, content1=None):
+    def __init__(self, content1=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.content1 = content1
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -874,8 +886,10 @@ class data1Kind(GeneratedsSuper):
         else:
             return data1Kind(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_content1(self): return self.content1
-    def set_content1(self, content1): self.content1 = content1
+    def get_content1(self):
+        return self.content1
+    def set_content1(self, content1):
+        self.content1 = content1
     def hasContent_(self):
         if (
             self.content1 is not None
@@ -937,8 +951,9 @@ class MlassData2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, content1=None):
+    def __init__(self, content1=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.content1 = content1
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -951,8 +966,10 @@ class MlassData2(GeneratedsSuper):
         else:
             return MlassData2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_content1(self): return self.content1
-    def set_content1(self, content1): self.content1 = content1
+    def get_content1(self):
+        return self.content1
+    def set_content1(self, content1):
+        self.content1 = content1
     def hasContent_(self):
         if (
             self.content1 is not None
@@ -1014,8 +1031,9 @@ class RealTypeData3(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, content1=None):
+    def __init__(self, content1=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.content1 = content1
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1028,8 +1046,10 @@ class RealTypeData3(GeneratedsSuper):
         else:
             return RealTypeData3(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_content1(self): return self.content1
-    def set_content1(self, content1): self.content1 = content1
+    def get_content1(self):
+        return self.content1
+    def set_content1(self, content1):
+        self.content1 = content1
     def hasContent_(self):
         if (
             self.content1 is not None
@@ -1091,8 +1111,9 @@ class MMMMMMdataKind(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, content1=None):
+    def __init__(self, content1=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.content1 = content1
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1105,8 +1126,10 @@ class MMMMMMdataKind(GeneratedsSuper):
         else:
             return MMMMMMdataKind(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_content1(self): return self.content1
-    def set_content1(self, content1): self.content1 = content1
+    def get_content1(self):
+        return self.content1
+    def set_content1(self, content1):
+        self.content1 = content1
     def hasContent_(self):
         if (
             self.content1 is not None
@@ -1168,8 +1191,9 @@ class dataTypeNNNMNNN(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, content1=None):
+    def __init__(self, content1=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.content1 = content1
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1182,8 +1206,10 @@ class dataTypeNNNMNNN(GeneratedsSuper):
         else:
             return dataTypeNNNMNNN(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_content1(self): return self.content1
-    def set_content1(self, content1): self.content1 = content1
+    def get_content1(self):
+        return self.content1
+    def set_content1(self, content1):
+        self.content1 = content1
     def hasContent_(self):
         if (
             self.content1 is not None

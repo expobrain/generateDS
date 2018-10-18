@@ -734,8 +734,9 @@ class containerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, item1=None, item2=None):
+    def __init__(self, item1=None, item2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.item1 = item1
         self.item2 = item2
     def factory(*args_, **kwargs_):
@@ -749,10 +750,14 @@ class containerType(GeneratedsSuper):
         else:
             return containerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_item1(self): return self.item1
-    def set_item1(self, item1): self.item1 = item1
-    def get_item2(self): return self.item2
-    def set_item2(self, item2): self.item2 = item2
+    def get_item1(self):
+        return self.item1
+    def set_item1(self, item1):
+        self.item1 = item1
+    def get_item2(self):
+        return self.item2
+    def set_item2(self, item2):
+        self.item2 = item2
     def hasContent_(self):
         if (
             self.item1 is not None or
@@ -804,12 +809,12 @@ class containerType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'item1':
-            obj_ = classAType.factory()
+            obj_ = classAType.factory(parent_object_=self)
             obj_.build(child_)
             self.item1 = obj_
             obj_.original_tagname_ = 'item1'
         elif nodeName_ == 'item2':
-            obj_ = classBType.factory()
+            obj_ = classBType.factory(parent_object_=self)
             obj_.build(child_)
             self.item2 = obj_
             obj_.original_tagname_ = 'item2'
@@ -822,8 +827,9 @@ class classAType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, inner=None):
+    def __init__(self, inner=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.inner = inner
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -836,8 +842,10 @@ class classAType(GeneratedsSuper):
         else:
             return classAType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_inner(self): return self.inner
-    def set_inner(self, inner): self.inner = inner
+    def get_inner(self):
+        return self.inner
+    def set_inner(self, inner):
+        self.inner = inner
     def hasContent_(self):
         if (
             self.inner is not None
@@ -886,7 +894,7 @@ class classAType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'inner':
-            obj_ = innerType.factory()
+            obj_ = innerType.factory(parent_object_=self)
             obj_.build(child_)
             self.inner = obj_
             obj_.original_tagname_ = 'inner'
@@ -899,8 +907,9 @@ class classBType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, inner=None):
+    def __init__(self, inner=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.inner = inner
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -913,8 +922,10 @@ class classBType(GeneratedsSuper):
         else:
             return classBType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_inner(self): return self.inner
-    def set_inner(self, inner): self.inner = inner
+    def get_inner(self):
+        return self.inner
+    def set_inner(self, inner):
+        self.inner = inner
     def hasContent_(self):
         if (
             self.inner is not None
@@ -963,7 +974,7 @@ class classBType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'inner':
-            obj_ = innerType1.factory()
+            obj_ = innerType1.factory(parent_object_=self)
             obj_.build(child_)
             self.inner = obj_
             obj_.original_tagname_ = 'inner'
@@ -977,8 +988,9 @@ class innerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, attrA1=None, attrA2=None):
+    def __init__(self, attrA1=None, attrA2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.attrA1 = _cast(None, attrA1)
         self.attrA2 = _cast(None, attrA2)
     def factory(*args_, **kwargs_):
@@ -992,10 +1004,14 @@ class innerType(GeneratedsSuper):
         else:
             return innerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_attrA1(self): return self.attrA1
-    def set_attrA1(self, attrA1): self.attrA1 = attrA1
-    def get_attrA2(self): return self.attrA2
-    def set_attrA2(self, attrA2): self.attrA2 = attrA2
+    def get_attrA1(self):
+        return self.attrA1
+    def set_attrA1(self, attrA1):
+        self.attrA1 = attrA1
+    def get_attrA2(self):
+        return self.attrA2
+    def set_attrA2(self, attrA2):
+        self.attrA2 = attrA2
     def hasContent_(self):
         if (
 
@@ -1060,8 +1076,9 @@ class innerType1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, attrB1=None, attrB2=None):
+    def __init__(self, attrB1=None, attrB2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.attrB1 = _cast(None, attrB1)
         self.attrB2 = _cast(None, attrB2)
     def factory(*args_, **kwargs_):
@@ -1075,10 +1092,14 @@ class innerType1(GeneratedsSuper):
         else:
             return innerType1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_attrB1(self): return self.attrB1
-    def set_attrB1(self, attrB1): self.attrB1 = attrB1
-    def get_attrB2(self): return self.attrB2
-    def set_attrB2(self, attrB2): self.attrB2 = attrB2
+    def get_attrB1(self):
+        return self.attrB1
+    def set_attrB1(self, attrB1):
+        self.attrB1 = attrB1
+    def get_attrB2(self):
+        return self.attrB2
+    def set_attrB2(self, attrB2):
+        self.attrB2 = attrB2
     def hasContent_(self):
         if (
 

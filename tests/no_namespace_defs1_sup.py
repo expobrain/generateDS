@@ -735,8 +735,9 @@ class peopleType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, person=None, specialperson=None):
+    def __init__(self, person=None, specialperson=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if person is None:
             self.person = []
         else:
@@ -756,13 +757,17 @@ class peopleType(GeneratedsSuper):
         else:
             return peopleType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_person(self): return self.person
-    def set_person(self, person): self.person = person
+    def get_person(self):
+        return self.person
+    def set_person(self, person):
+        self.person = person
     def add_person(self, value): self.person.append(value)
     def insert_person_at(self, index, value): self.person.insert(index, value)
     def replace_person_at(self, index, value): self.person[index] = value
-    def get_specialperson(self): return self.specialperson
-    def set_specialperson(self, specialperson): self.specialperson = specialperson
+    def get_specialperson(self):
+        return self.specialperson
+    def set_specialperson(self, specialperson):
+        self.specialperson = specialperson
     def add_specialperson(self, value): self.specialperson.append(value)
     def insert_specialperson_at(self, index, value): self.specialperson.insert(index, value)
     def replace_specialperson_at(self, index, value): self.specialperson[index] = value
@@ -789,8 +794,9 @@ class personType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, value=None, id=None, ratio=None, name=None, interest=None, category=None, description=None):
+    def __init__(self, value=None, id=None, ratio=None, name=None, interest=None, category=None, description=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.value = _cast(None, value)
         self.id = _cast(int, id)
         self.ratio = _cast(float, ratio)
@@ -812,23 +818,37 @@ class personType(GeneratedsSuper):
         else:
             return personType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_interest(self): return self.interest
-    def set_interest(self, interest): self.interest = interest
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_interest(self):
+        return self.interest
+    def set_interest(self, interest):
+        self.interest = interest
     def add_interest(self, value): self.interest.append(value)
     def insert_interest_at(self, index, value): self.interest.insert(index, value)
     def replace_interest_at(self, index, value): self.interest[index] = value
-    def get_category(self): return self.category
-    def set_category(self, category): self.category = category
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
-    def get_value(self): return self.value
-    def set_value(self, value): self.value = value
-    def get_id(self): return self.id
-    def set_id(self, id): self.id = id
-    def get_ratio(self): return self.ratio
-    def set_ratio(self, ratio): self.ratio = ratio
+    def get_category(self):
+        return self.category
+    def set_category(self, category):
+        self.category = category
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
+    def get_value(self):
+        return self.value
+    def set_value(self, value):
+        self.value = value
+    def get_id(self):
+        return self.id
+    def set_id(self, id):
+        self.id = id
+    def get_ratio(self):
+        return self.ratio
+    def set_ratio(self, ratio):
+        self.ratio = ratio
     def hasContent_(self):
         if (
             self.name is not None or

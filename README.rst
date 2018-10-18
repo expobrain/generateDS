@@ -141,6 +141,19 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.1 (10/18/2018)
+
+- New feature -- Each generated data binding class has a new
+  instance variable: `parent_object_`.  It is automatically set to
+  reference the parent (i.e. container) of this object.  Thanks to
+  Florian de Boissieu for suggesting this enhancement.
+- Added a comment to `generateDS.py` to help with customizing the
+  code generated in getters and setters.  You can search
+  `generateDS.py` for "add custom code here" and then add custom
+  code there.  This is not a terribly convenient way for a user to
+  add custom code, so if someone finds a need to use it, please
+  contact me and we'll try to find a better way.
+
 Version 2.29.25 (10/05/2018)
 
 - Added a section to the documentation (generateDS.txt) for types

@@ -49,15 +49,15 @@ ExternalEncoding = ''
 
 
 class test1elementSub(supermod.test1element):
-    def __init__(self, test1attribute=None, test1member=None):
-        super(test1elementSub, self).__init__(test1attribute, test1member, )
+    def __init__(self, test1attribute=None, test1member=None, **kwargs_):
+        super(test1elementSub, self).__init__(test1attribute, test1member,  **kwargs_)
 supermod.test1element.subclass = test1elementSub
 # end class test1elementSub
 
 
 class cimAnySimpleTypeSub(supermod.cimAnySimpleType):
-    def __init__(self, valueOf_=None):
-        super(cimAnySimpleTypeSub, self).__init__(valueOf_, )
+    def __init__(self, valueOf_=None, **kwargs_):
+        super(cimAnySimpleTypeSub, self).__init__(valueOf_,  **kwargs_)
 supermod.cimAnySimpleType.subclass = cimAnySimpleTypeSub
 # end class cimAnySimpleTypeSub
 

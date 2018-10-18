@@ -48,36 +48,36 @@ ExternalEncoding = ''
 
 
 class rootTypeSub(supermod.rootType):
-    def __init__(self, markup=None):
-        super(rootTypeSub, self).__init__(markup, )
+    def __init__(self, markup=None, **kwargs_):
+        super(rootTypeSub, self).__init__(markup,  **kwargs_)
 supermod.rootType.subclass = rootTypeSub
 # end class rootTypeSub
 
 
 class markupTypeSub(supermod.markupType):
-    def __init__(self, embedded=None, nested=None, valueOf_=None, mixedclass_=None, content_=None):
-        super(markupTypeSub, self).__init__(embedded, nested, valueOf_, mixedclass_, content_, )
+    def __init__(self, embedded=None, nested=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
+        super(markupTypeSub, self).__init__(embedded, nested, valueOf_, mixedclass_, content_,  **kwargs_)
 supermod.markupType.subclass = markupTypeSub
 # end class markupTypeSub
 
 
 class nestedTypeSub(supermod.nestedType):
-    def __init__(self, nested1=None, nested2=None, nested3=None):
-        super(nestedTypeSub, self).__init__(nested1, nested2, nested3, )
+    def __init__(self, nested1=None, nested2=None, nested3=None, **kwargs_):
+        super(nestedTypeSub, self).__init__(nested1, nested2, nested3,  **kwargs_)
 supermod.nestedType.subclass = nestedTypeSub
 # end class nestedTypeSub
 
 
 class nested1TypeSub(supermod.nested1Type):
-    def __init__(self, nestedA1=None, nestedA2=None):
-        super(nested1TypeSub, self).__init__(nestedA1, nestedA2, )
+    def __init__(self, nestedA1=None, nestedA2=None, **kwargs_):
+        super(nested1TypeSub, self).__init__(nestedA1, nestedA2,  **kwargs_)
 supermod.nested1Type.subclass = nested1TypeSub
 # end class nested1TypeSub
 
 
 class nested1ATypeSub(supermod.nested1AType):
-    def __init__(self, nestedB1=None, nestedB2=None):
-        super(nested1ATypeSub, self).__init__(nestedB1, nestedB2, )
+    def __init__(self, nestedB1=None, nestedB2=None, **kwargs_):
+        super(nested1ATypeSub, self).__init__(nestedB1, nestedB2,  **kwargs_)
 supermod.nested1AType.subclass = nested1ATypeSub
 # end class nested1ATypeSub
 

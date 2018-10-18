@@ -734,8 +734,9 @@ class simpleTypeTestsType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, simpleTypeTest=None):
+    def __init__(self, simpleTypeTest=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if simpleTypeTest is None:
             self.simpleTypeTest = []
         else:
@@ -751,8 +752,10 @@ class simpleTypeTestsType(GeneratedsSuper):
         else:
             return simpleTypeTestsType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_simpleTypeTest(self): return self.simpleTypeTest
-    def set_simpleTypeTest(self, simpleTypeTest): self.simpleTypeTest = simpleTypeTest
+    def get_simpleTypeTest(self):
+        return self.simpleTypeTest
+    def set_simpleTypeTest(self, simpleTypeTest):
+        self.simpleTypeTest = simpleTypeTest
     def add_simpleTypeTest(self, value): self.simpleTypeTest.append(value)
     def insert_simpleTypeTest_at(self, index, value): self.simpleTypeTest.insert(index, value)
     def replace_simpleTypeTest_at(self, index, value): self.simpleTypeTest[index] = value
@@ -804,7 +807,7 @@ class simpleTypeTestsType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'simpleTypeTest':
-            obj_ = simpleTypeTestDefs.factory()
+            obj_ = simpleTypeTestDefs.factory(parent_object_=self)
             obj_.build(child_)
             self.simpleTypeTest.append(obj_)
             obj_.original_tagname_ = 'simpleTypeTest'
@@ -837,8 +840,9 @@ class simpleTypeTestDefs(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None, integerVal1=None, integerVal2=None, stringVal1=None, stringVal2=None, booleanVal1=None, booleanVal2=None, decimalVal1=None, decimalVal2=None, doubleVal1=None, doubleVal2=None, floatVal1=None, floatVal2=None, dateVal1=None, dateVal2=None, dateTimeVal1=None, dateTimeVal2=None):
+    def __init__(self, datetime1=None, datetime2=None, datetime3=None, datetime4=None, datetime5=None, integerVal1=None, integerVal2=None, stringVal1=None, stringVal2=None, booleanVal1=None, booleanVal2=None, decimalVal1=None, decimalVal2=None, doubleVal1=None, doubleVal2=None, floatVal1=None, floatVal2=None, dateVal1=None, dateVal2=None, dateTimeVal1=None, dateTimeVal2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.datetime1 = datetime1
         self.datetime2 = datetime2
         self.datetime3 = datetime3
@@ -903,69 +907,111 @@ class simpleTypeTestDefs(GeneratedsSuper):
         else:
             return simpleTypeTestDefs(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_datetime1(self): return self.datetime1
-    def set_datetime1(self, datetime1): self.datetime1 = datetime1
-    def get_datetime2(self): return self.datetime2
-    def set_datetime2(self, datetime2): self.datetime2 = datetime2
-    def get_datetime3(self): return self.datetime3
-    def set_datetime3(self, datetime3): self.datetime3 = datetime3
-    def get_datetime4(self): return self.datetime4
-    def set_datetime4(self, datetime4): self.datetime4 = datetime4
-    def get_datetime5(self): return self.datetime5
-    def set_datetime5(self, datetime5): self.datetime5 = datetime5
-    def get_integerVal1(self): return self.integerVal1
-    def set_integerVal1(self, integerVal1): self.integerVal1 = integerVal1
-    def get_integerVal2(self): return self.integerVal2
-    def set_integerVal2(self, integerVal2): self.integerVal2 = integerVal2
+    def get_datetime1(self):
+        return self.datetime1
+    def set_datetime1(self, datetime1):
+        self.datetime1 = datetime1
+    def get_datetime2(self):
+        return self.datetime2
+    def set_datetime2(self, datetime2):
+        self.datetime2 = datetime2
+    def get_datetime3(self):
+        return self.datetime3
+    def set_datetime3(self, datetime3):
+        self.datetime3 = datetime3
+    def get_datetime4(self):
+        return self.datetime4
+    def set_datetime4(self, datetime4):
+        self.datetime4 = datetime4
+    def get_datetime5(self):
+        return self.datetime5
+    def set_datetime5(self, datetime5):
+        self.datetime5 = datetime5
+    def get_integerVal1(self):
+        return self.integerVal1
+    def set_integerVal1(self, integerVal1):
+        self.integerVal1 = integerVal1
+    def get_integerVal2(self):
+        return self.integerVal2
+    def set_integerVal2(self, integerVal2):
+        self.integerVal2 = integerVal2
     def add_integerVal2(self, value): self.integerVal2.append(value)
     def insert_integerVal2_at(self, index, value): self.integerVal2.insert(index, value)
     def replace_integerVal2_at(self, index, value): self.integerVal2[index] = value
-    def get_stringVal1(self): return self.stringVal1
-    def set_stringVal1(self, stringVal1): self.stringVal1 = stringVal1
-    def get_stringVal2(self): return self.stringVal2
-    def set_stringVal2(self, stringVal2): self.stringVal2 = stringVal2
+    def get_stringVal1(self):
+        return self.stringVal1
+    def set_stringVal1(self, stringVal1):
+        self.stringVal1 = stringVal1
+    def get_stringVal2(self):
+        return self.stringVal2
+    def set_stringVal2(self, stringVal2):
+        self.stringVal2 = stringVal2
     def add_stringVal2(self, value): self.stringVal2.append(value)
     def insert_stringVal2_at(self, index, value): self.stringVal2.insert(index, value)
     def replace_stringVal2_at(self, index, value): self.stringVal2[index] = value
-    def get_booleanVal1(self): return self.booleanVal1
-    def set_booleanVal1(self, booleanVal1): self.booleanVal1 = booleanVal1
-    def get_booleanVal2(self): return self.booleanVal2
-    def set_booleanVal2(self, booleanVal2): self.booleanVal2 = booleanVal2
+    def get_booleanVal1(self):
+        return self.booleanVal1
+    def set_booleanVal1(self, booleanVal1):
+        self.booleanVal1 = booleanVal1
+    def get_booleanVal2(self):
+        return self.booleanVal2
+    def set_booleanVal2(self, booleanVal2):
+        self.booleanVal2 = booleanVal2
     def add_booleanVal2(self, value): self.booleanVal2.append(value)
     def insert_booleanVal2_at(self, index, value): self.booleanVal2.insert(index, value)
     def replace_booleanVal2_at(self, index, value): self.booleanVal2[index] = value
-    def get_decimalVal1(self): return self.decimalVal1
-    def set_decimalVal1(self, decimalVal1): self.decimalVal1 = decimalVal1
-    def get_decimalVal2(self): return self.decimalVal2
-    def set_decimalVal2(self, decimalVal2): self.decimalVal2 = decimalVal2
+    def get_decimalVal1(self):
+        return self.decimalVal1
+    def set_decimalVal1(self, decimalVal1):
+        self.decimalVal1 = decimalVal1
+    def get_decimalVal2(self):
+        return self.decimalVal2
+    def set_decimalVal2(self, decimalVal2):
+        self.decimalVal2 = decimalVal2
     def add_decimalVal2(self, value): self.decimalVal2.append(value)
     def insert_decimalVal2_at(self, index, value): self.decimalVal2.insert(index, value)
     def replace_decimalVal2_at(self, index, value): self.decimalVal2[index] = value
-    def get_doubleVal1(self): return self.doubleVal1
-    def set_doubleVal1(self, doubleVal1): self.doubleVal1 = doubleVal1
-    def get_doubleVal2(self): return self.doubleVal2
-    def set_doubleVal2(self, doubleVal2): self.doubleVal2 = doubleVal2
+    def get_doubleVal1(self):
+        return self.doubleVal1
+    def set_doubleVal1(self, doubleVal1):
+        self.doubleVal1 = doubleVal1
+    def get_doubleVal2(self):
+        return self.doubleVal2
+    def set_doubleVal2(self, doubleVal2):
+        self.doubleVal2 = doubleVal2
     def add_doubleVal2(self, value): self.doubleVal2.append(value)
     def insert_doubleVal2_at(self, index, value): self.doubleVal2.insert(index, value)
     def replace_doubleVal2_at(self, index, value): self.doubleVal2[index] = value
-    def get_floatVal1(self): return self.floatVal1
-    def set_floatVal1(self, floatVal1): self.floatVal1 = floatVal1
-    def get_floatVal2(self): return self.floatVal2
-    def set_floatVal2(self, floatVal2): self.floatVal2 = floatVal2
+    def get_floatVal1(self):
+        return self.floatVal1
+    def set_floatVal1(self, floatVal1):
+        self.floatVal1 = floatVal1
+    def get_floatVal2(self):
+        return self.floatVal2
+    def set_floatVal2(self, floatVal2):
+        self.floatVal2 = floatVal2
     def add_floatVal2(self, value): self.floatVal2.append(value)
     def insert_floatVal2_at(self, index, value): self.floatVal2.insert(index, value)
     def replace_floatVal2_at(self, index, value): self.floatVal2[index] = value
-    def get_dateVal1(self): return self.dateVal1
-    def set_dateVal1(self, dateVal1): self.dateVal1 = dateVal1
-    def get_dateVal2(self): return self.dateVal2
-    def set_dateVal2(self, dateVal2): self.dateVal2 = dateVal2
+    def get_dateVal1(self):
+        return self.dateVal1
+    def set_dateVal1(self, dateVal1):
+        self.dateVal1 = dateVal1
+    def get_dateVal2(self):
+        return self.dateVal2
+    def set_dateVal2(self, dateVal2):
+        self.dateVal2 = dateVal2
     def add_dateVal2(self, value): self.dateVal2.append(value)
     def insert_dateVal2_at(self, index, value): self.dateVal2.insert(index, value)
     def replace_dateVal2_at(self, index, value): self.dateVal2[index] = value
-    def get_dateTimeVal1(self): return self.dateTimeVal1
-    def set_dateTimeVal1(self, dateTimeVal1): self.dateTimeVal1 = dateTimeVal1
-    def get_dateTimeVal2(self): return self.dateTimeVal2
-    def set_dateTimeVal2(self, dateTimeVal2): self.dateTimeVal2 = dateTimeVal2
+    def get_dateTimeVal1(self):
+        return self.dateTimeVal1
+    def set_dateTimeVal1(self, dateTimeVal1):
+        self.dateTimeVal1 = dateTimeVal1
+    def get_dateTimeVal2(self):
+        return self.dateTimeVal2
+    def set_dateTimeVal2(self, dateTimeVal2):
+        self.dateTimeVal2 = dateTimeVal2
     def add_dateTimeVal2(self, value): self.dateTimeVal2.append(value)
     def insert_dateTimeVal2_at(self, index, value): self.dateTimeVal2.insert(index, value)
     def replace_dateTimeVal2_at(self, index, value): self.dateTimeVal2[index] = value

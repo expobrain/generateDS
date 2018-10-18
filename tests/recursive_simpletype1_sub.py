@@ -49,8 +49,8 @@ ExternalEncoding = ''
 
 
 class PersonTypeSub(supermod.PersonType):
-    def __init__(self, personId=None, fname=None, lname=None):
-        super(PersonTypeSub, self).__init__(personId, fname, lname, )
+    def __init__(self, personId=None, fname=None, lname=None, **kwargs_):
+        super(PersonTypeSub, self).__init__(personId, fname, lname,  **kwargs_)
 supermod.PersonType.subclass = PersonTypeSub
 # end class PersonTypeSub
 

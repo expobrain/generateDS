@@ -48,43 +48,43 @@ ExternalEncoding = ''
 
 
 class PurchaseOrderTypeSub(supermod.PurchaseOrderType):
-    def __init__(self, orderDate=None, shipTo=None, billTo=None, comment=None, items=None):
-        super(PurchaseOrderTypeSub, self).__init__(orderDate, shipTo, billTo, comment, items, )
+    def __init__(self, orderDate=None, shipTo=None, billTo=None, comment=None, items=None, **kwargs_):
+        super(PurchaseOrderTypeSub, self).__init__(orderDate, shipTo, billTo, comment, items,  **kwargs_)
 supermod.PurchaseOrderType.subclass = PurchaseOrderTypeSub
 # end class PurchaseOrderTypeSub
 
 
 class ItemsSub(supermod.Items):
-    def __init__(self, item=None):
-        super(ItemsSub, self).__init__(item, )
+    def __init__(self, item=None, **kwargs_):
+        super(ItemsSub, self).__init__(item,  **kwargs_)
 supermod.Items.subclass = ItemsSub
 # end class ItemsSub
 
 
 class itemSub(supermod.item):
-    def __init__(self, partNum=None, productName=None, quantity=None, USPrice=None, comment=None, shipDate=None):
-        super(itemSub, self).__init__(partNum, productName, quantity, USPrice, comment, shipDate, )
+    def __init__(self, partNum=None, productName=None, quantity=None, USPrice=None, comment=None, shipDate=None, **kwargs_):
+        super(itemSub, self).__init__(partNum, productName, quantity, USPrice, comment, shipDate,  **kwargs_)
 supermod.item.subclass = itemSub
 # end class itemSub
 
 
 class AddressSub(supermod.Address):
-    def __init__(self, name=None, street=None, city=None, extensiontype_=None):
-        super(AddressSub, self).__init__(name, street, city, extensiontype_, )
+    def __init__(self, name=None, street=None, city=None, extensiontype_=None, **kwargs_):
+        super(AddressSub, self).__init__(name, street, city, extensiontype_,  **kwargs_)
 supermod.Address.subclass = AddressSub
 # end class AddressSub
 
 
 class USAddressSub(supermod.USAddress):
-    def __init__(self, name=None, street=None, city=None, state=None, zip=None):
-        super(USAddressSub, self).__init__(name, street, city, state, zip, )
+    def __init__(self, name=None, street=None, city=None, state=None, zip=None, **kwargs_):
+        super(USAddressSub, self).__init__(name, street, city, state, zip,  **kwargs_)
 supermod.USAddress.subclass = USAddressSub
 # end class USAddressSub
 
 
 class UKAddressSub(supermod.UKAddress):
-    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None):
-        super(UKAddressSub, self).__init__(name, street, city, exportCode, postcode, )
+    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None, **kwargs_):
+        super(UKAddressSub, self).__init__(name, street, city, exportCode, postcode,  **kwargs_)
 supermod.UKAddress.subclass = UKAddressSub
 # end class UKAddressSub
 

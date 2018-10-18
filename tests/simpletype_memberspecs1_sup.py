@@ -750,8 +750,9 @@ class SpecialDate(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, SpecialProperty=None, valueOf_=None):
+    def __init__(self, SpecialProperty=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.SpecialProperty = _cast(None, SpecialProperty)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -765,8 +766,10 @@ class SpecialDate(GeneratedsSuper):
         else:
             return SpecialDate(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_SpecialProperty(self): return self.SpecialProperty
-    def set_SpecialProperty(self, SpecialProperty): self.SpecialProperty = SpecialProperty
+    def get_SpecialProperty(self):
+        return self.SpecialProperty
+    def set_SpecialProperty(self, SpecialProperty):
+        self.SpecialProperty = SpecialProperty
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -828,8 +831,9 @@ class ExtremeDate(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.ExtremeProperty = _cast(None, ExtremeProperty)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -843,8 +847,10 @@ class ExtremeDate(GeneratedsSuper):
         else:
             return ExtremeDate(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_ExtremeProperty(self): return self.ExtremeProperty
-    def set_ExtremeProperty(self, ExtremeProperty): self.ExtremeProperty = ExtremeProperty
+    def get_ExtremeProperty(self):
+        return self.ExtremeProperty
+    def set_ExtremeProperty(self, ExtremeProperty):
+        self.ExtremeProperty = ExtremeProperty
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):

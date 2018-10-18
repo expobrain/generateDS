@@ -49,85 +49,85 @@ ExternalEncoding = ''
 
 
 class SpecialDateSub(supermod.SpecialDate):
-    def __init__(self, SpecialProperty=None, valueOf_=None):
-        super(SpecialDateSub, self).__init__(SpecialProperty, valueOf_, )
+    def __init__(self, SpecialProperty=None, valueOf_=None, **kwargs_):
+        super(SpecialDateSub, self).__init__(SpecialProperty, valueOf_,  **kwargs_)
 supermod.SpecialDate.subclass = SpecialDateSub
 # end class SpecialDateSub
 
 
 class ExtremeDateSub(supermod.ExtremeDate):
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
-        super(ExtremeDateSub, self).__init__(ExtremeProperty, valueOf_, )
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
+        super(ExtremeDateSub, self).__init__(ExtremeProperty, valueOf_,  **kwargs_)
 supermod.ExtremeDate.subclass = ExtremeDateSub
 # end class ExtremeDateSub
 
 
 class singleExtremeDateSub(supermod.singleExtremeDate):
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
-        super(singleExtremeDateSub, self).__init__(ExtremeProperty, valueOf_, )
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
+        super(singleExtremeDateSub, self).__init__(ExtremeProperty, valueOf_,  **kwargs_)
 supermod.singleExtremeDate.subclass = singleExtremeDateSub
 # end class singleExtremeDateSub
 
 
 class containerTypeSub(supermod.containerType):
-    def __init__(self, simplefactoid=None, mixedfactoid=None):
-        super(containerTypeSub, self).__init__(simplefactoid, mixedfactoid, )
+    def __init__(self, simplefactoid=None, mixedfactoid=None, **kwargs_):
+        super(containerTypeSub, self).__init__(simplefactoid, mixedfactoid,  **kwargs_)
 supermod.containerType.subclass = containerTypeSub
 # end class containerTypeSub
 
 
 class simpleFactoidTypeSub(supermod.simpleFactoidType):
-    def __init__(self, relation=None):
-        super(simpleFactoidTypeSub, self).__init__(relation, )
+    def __init__(self, relation=None, **kwargs_):
+        super(simpleFactoidTypeSub, self).__init__(relation,  **kwargs_)
 supermod.simpleFactoidType.subclass = simpleFactoidTypeSub
 # end class simpleFactoidTypeSub
 
 
 class mixedFactoidTypeSub(supermod.mixedFactoidType):
-    def __init__(self, relation=None, valueOf_=None, mixedclass_=None, content_=None):
-        super(mixedFactoidTypeSub, self).__init__(relation, valueOf_, mixedclass_, content_, )
+    def __init__(self, relation=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
+        super(mixedFactoidTypeSub, self).__init__(relation, valueOf_, mixedclass_, content_,  **kwargs_)
 supermod.mixedFactoidType.subclass = mixedFactoidTypeSub
 # end class mixedFactoidTypeSub
 
 
 class BaseTypeSub(supermod.BaseType):
-    def __init__(self, BaseProperty1=None, BaseProperty2=None, valueOf_=None, extensiontype_=None):
-        super(BaseTypeSub, self).__init__(BaseProperty1, BaseProperty2, valueOf_, extensiontype_, )
+    def __init__(self, BaseProperty1=None, BaseProperty2=None, valueOf_=None, extensiontype_=None, **kwargs_):
+        super(BaseTypeSub, self).__init__(BaseProperty1, BaseProperty2, valueOf_, extensiontype_,  **kwargs_)
 supermod.BaseType.subclass = BaseTypeSub
 # end class BaseTypeSub
 
 
 class DerivedTypeSub(supermod.DerivedType):
-    def __init__(self, BaseProperty1=None, BaseProperty2=None, DerivedProperty1=None, DerivedProperty2=None, valueOf_=None):
-        super(DerivedTypeSub, self).__init__(BaseProperty1, BaseProperty2, DerivedProperty1, DerivedProperty2, valueOf_, )
+    def __init__(self, BaseProperty1=None, BaseProperty2=None, DerivedProperty1=None, DerivedProperty2=None, valueOf_=None, **kwargs_):
+        super(DerivedTypeSub, self).__init__(BaseProperty1, BaseProperty2, DerivedProperty1, DerivedProperty2, valueOf_,  **kwargs_)
 supermod.DerivedType.subclass = DerivedTypeSub
 # end class DerivedTypeSub
 
 
 class MyIntegerSub(supermod.MyInteger):
-    def __init__(self, MyAttr=None, valueOf_=None):
-        super(MyIntegerSub, self).__init__(MyAttr, valueOf_, )
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
+        super(MyIntegerSub, self).__init__(MyAttr, valueOf_,  **kwargs_)
 supermod.MyInteger.subclass = MyIntegerSub
 # end class MyIntegerSub
 
 
 class MyBooleanSub(supermod.MyBoolean):
-    def __init__(self, MyAttr=None, valueOf_=None):
-        super(MyBooleanSub, self).__init__(MyAttr, valueOf_, )
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
+        super(MyBooleanSub, self).__init__(MyAttr, valueOf_,  **kwargs_)
 supermod.MyBoolean.subclass = MyBooleanSub
 # end class MyBooleanSub
 
 
 class MyFloatSub(supermod.MyFloat):
-    def __init__(self, MyAttr=None, valueOf_=None):
-        super(MyFloatSub, self).__init__(MyAttr, valueOf_, )
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
+        super(MyFloatSub, self).__init__(MyAttr, valueOf_,  **kwargs_)
 supermod.MyFloat.subclass = MyFloatSub
 # end class MyFloatSub
 
 
 class MyDoubleSub(supermod.MyDouble):
-    def __init__(self, MyAttr=None, valueOf_=None):
-        super(MyDoubleSub, self).__init__(MyAttr, valueOf_, )
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
+        super(MyDoubleSub, self).__init__(MyAttr, valueOf_,  **kwargs_)
 supermod.MyDouble.subclass = MyDoubleSub
 # end class MyDoubleSub
 

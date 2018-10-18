@@ -737,8 +737,9 @@ class complex_type01(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, string_value01=None, integer_value01=None, float_value01=None, field01=None):
+    def __init__(self, string_value01=None, integer_value01=None, float_value01=None, field01=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.string_value01 = string_value01
         if integer_value01 is None:
             self.integer_value01 = []
@@ -757,17 +758,25 @@ class complex_type01(GeneratedsSuper):
         else:
             return complex_type01(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value01(self): return self.string_value01
-    def set_string_value01(self, string_value01): self.string_value01 = string_value01
-    def get_integer_value01(self): return self.integer_value01
-    def set_integer_value01(self, integer_value01): self.integer_value01 = integer_value01
+    def get_string_value01(self):
+        return self.string_value01
+    def set_string_value01(self, string_value01):
+        self.string_value01 = string_value01
+    def get_integer_value01(self):
+        return self.integer_value01
+    def set_integer_value01(self, integer_value01):
+        self.integer_value01 = integer_value01
     def add_integer_value01(self, value): self.integer_value01.append(value)
     def insert_integer_value01_at(self, index, value): self.integer_value01.insert(index, value)
     def replace_integer_value01_at(self, index, value): self.integer_value01[index] = value
-    def get_float_value01(self): return self.float_value01
-    def set_float_value01(self, float_value01): self.float_value01 = float_value01
-    def get_field01(self): return self.field01
-    def set_field01(self, field01): self.field01 = field01
+    def get_float_value01(self):
+        return self.float_value01
+    def set_float_value01(self, float_value01):
+        self.float_value01 = float_value01
+    def get_field01(self):
+        return self.field01
+    def set_field01(self, field01):
+        self.field01 = field01
     def hasContent_(self):
         if (
             self.string_value01 is not None or
@@ -848,7 +857,7 @@ class complex_type01(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'float_value01')
             self.float_value01 = fval_
         elif nodeName_ == 'field01':
-            obj_ = complex_type02.factory()
+            obj_ = complex_type02.factory(parent_object_=self)
             obj_.build(child_)
             self.field01 = obj_
             obj_.original_tagname_ = 'field01'
@@ -863,8 +872,9 @@ class complex_type02(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.string_value02 = string_value02
         if integer_value02 is None:
             self.integer_value02 = []
@@ -883,15 +893,21 @@ class complex_type02(GeneratedsSuper):
         else:
             return complex_type02(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value02(self): return self.string_value02
-    def set_string_value02(self, string_value02): self.string_value02 = string_value02
-    def get_integer_value02(self): return self.integer_value02
-    def set_integer_value02(self, integer_value02): self.integer_value02 = integer_value02
+    def get_string_value02(self):
+        return self.string_value02
+    def set_string_value02(self, string_value02):
+        self.string_value02 = string_value02
+    def get_integer_value02(self):
+        return self.integer_value02
+    def set_integer_value02(self, integer_value02):
+        self.integer_value02 = integer_value02
     def add_integer_value02(self, value): self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
-    def get_float_value02(self): return self.float_value02
-    def set_float_value02(self, float_value02): self.float_value02 = float_value02
+    def get_float_value02(self):
+        return self.float_value02
+    def set_float_value02(self, float_value02):
+        self.float_value02 = float_value02
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -988,9 +1004,10 @@ class complex_type03(complex_type02):
     ]
     subclass = None
     superclass = complex_type02
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
         self.original_tagname_ = None
-        super(complex_type03, self).__init__(string_value02, integer_value02, float_value02, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(complex_type03, self).__init__(string_value02, integer_value02, float_value02,  **kwargs_)
         self.string_value03 = string_value03
         if integer_value03 is None:
             self.integer_value03 = []
@@ -1008,15 +1025,21 @@ class complex_type03(complex_type02):
         else:
             return complex_type03(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value03(self): return self.string_value03
-    def set_string_value03(self, string_value03): self.string_value03 = string_value03
-    def get_integer_value03(self): return self.integer_value03
-    def set_integer_value03(self, integer_value03): self.integer_value03 = integer_value03
+    def get_string_value03(self):
+        return self.string_value03
+    def set_string_value03(self, string_value03):
+        self.string_value03 = string_value03
+    def get_integer_value03(self):
+        return self.integer_value03
+    def set_integer_value03(self, integer_value03):
+        self.integer_value03 = integer_value03
     def add_integer_value03(self, value): self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
-    def get_float_value03(self): return self.float_value03
-    def set_float_value03(self, float_value03): self.float_value03 = float_value03
+    def get_float_value03(self):
+        return self.float_value03
+    def set_float_value03(self, float_value03):
+        self.float_value03 = float_value03
     def hasContent_(self):
         if (
             self.string_value03 is not None or
@@ -1107,8 +1130,9 @@ class type_(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.string_value02 = string_value02
         if integer_value02 is None:
             self.integer_value02 = []
@@ -1127,15 +1151,21 @@ class type_(GeneratedsSuper):
         else:
             return type_(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value02(self): return self.string_value02
-    def set_string_value02(self, string_value02): self.string_value02 = string_value02
-    def get_integer_value02(self): return self.integer_value02
-    def set_integer_value02(self, integer_value02): self.integer_value02 = integer_value02
+    def get_string_value02(self):
+        return self.string_value02
+    def set_string_value02(self, string_value02):
+        self.string_value02 = string_value02
+    def get_integer_value02(self):
+        return self.integer_value02
+    def set_integer_value02(self, integer_value02):
+        self.integer_value02 = integer_value02
     def add_integer_value02(self, value): self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
-    def get_float_value02(self): return self.float_value02
-    def set_float_value02(self, float_value02): self.float_value02 = float_value02
+    def get_float_value02(self):
+        return self.float_value02
+    def set_float_value02(self, float_value02):
+        self.float_value02 = float_value02
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -1232,9 +1262,10 @@ class complex_type04(type_):
     ]
     subclass = None
     superclass = type_
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
         self.original_tagname_ = None
-        super(complex_type04, self).__init__(string_value02, integer_value02, float_value02, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(complex_type04, self).__init__(string_value02, integer_value02, float_value02,  **kwargs_)
         self.string_value03 = string_value03
         if integer_value03 is None:
             self.integer_value03 = []
@@ -1252,15 +1283,21 @@ class complex_type04(type_):
         else:
             return complex_type04(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value03(self): return self.string_value03
-    def set_string_value03(self, string_value03): self.string_value03 = string_value03
-    def get_integer_value03(self): return self.integer_value03
-    def set_integer_value03(self, integer_value03): self.integer_value03 = integer_value03
+    def get_string_value03(self):
+        return self.string_value03
+    def set_string_value03(self, string_value03):
+        self.string_value03 = string_value03
+    def get_integer_value03(self):
+        return self.integer_value03
+    def set_integer_value03(self, integer_value03):
+        self.integer_value03 = integer_value03
     def add_integer_value03(self, value): self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
-    def get_float_value03(self): return self.float_value03
-    def set_float_value03(self, float_value03): self.float_value03 = float_value03
+    def get_float_value03(self):
+        return self.float_value03
+    def set_float_value03(self, float_value03):
+        self.float_value03 = float_value03
     def hasContent_(self):
         if (
             self.string_value03 is not None or
@@ -1351,8 +1388,9 @@ class build_(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.string_value02 = string_value02
         if integer_value02 is None:
             self.integer_value02 = []
@@ -1371,15 +1409,21 @@ class build_(GeneratedsSuper):
         else:
             return build_(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value02(self): return self.string_value02
-    def set_string_value02(self, string_value02): self.string_value02 = string_value02
-    def get_integer_value02(self): return self.integer_value02
-    def set_integer_value02(self, integer_value02): self.integer_value02 = integer_value02
+    def get_string_value02(self):
+        return self.string_value02
+    def set_string_value02(self, string_value02):
+        self.string_value02 = string_value02
+    def get_integer_value02(self):
+        return self.integer_value02
+    def set_integer_value02(self, integer_value02):
+        self.integer_value02 = integer_value02
     def add_integer_value02(self, value): self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
-    def get_float_value02(self): return self.float_value02
-    def set_float_value02(self, float_value02): self.float_value02 = float_value02
+    def get_float_value02(self):
+        return self.float_value02
+    def set_float_value02(self, float_value02):
+        self.float_value02 = float_value02
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -1476,9 +1520,10 @@ class complex_type05(build_):
     ]
     subclass = None
     superclass = build_
-    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None):
+    def __init__(self, string_value02=None, integer_value02=None, float_value02=None, string_value03=None, integer_value03=None, float_value03=None, **kwargs_):
         self.original_tagname_ = None
-        super(complex_type05, self).__init__(string_value02, integer_value02, float_value02, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(complex_type05, self).__init__(string_value02, integer_value02, float_value02,  **kwargs_)
         self.string_value03 = string_value03
         if integer_value03 is None:
             self.integer_value03 = []
@@ -1496,15 +1541,21 @@ class complex_type05(build_):
         else:
             return complex_type05(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_string_value03(self): return self.string_value03
-    def set_string_value03(self, string_value03): self.string_value03 = string_value03
-    def get_integer_value03(self): return self.integer_value03
-    def set_integer_value03(self, integer_value03): self.integer_value03 = integer_value03
+    def get_string_value03(self):
+        return self.string_value03
+    def set_string_value03(self, string_value03):
+        self.string_value03 = string_value03
+    def get_integer_value03(self):
+        return self.integer_value03
+    def set_integer_value03(self, integer_value03):
+        self.integer_value03 = integer_value03
     def add_integer_value03(self, value): self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
-    def get_float_value03(self): return self.float_value03
-    def set_float_value03(self, float_value03): self.float_value03 = float_value03
+    def get_float_value03(self):
+        return self.float_value03
+    def set_float_value03(self, float_value03):
+        self.float_value03 = float_value03
     def hasContent_(self):
         if (
             self.string_value03 is not None or

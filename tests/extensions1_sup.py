@@ -750,8 +750,9 @@ class SpecialDate(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, SpecialProperty=None, valueOf_=None):
+    def __init__(self, SpecialProperty=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.SpecialProperty = _cast(None, SpecialProperty)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -765,8 +766,10 @@ class SpecialDate(GeneratedsSuper):
         else:
             return SpecialDate(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_SpecialProperty(self): return self.SpecialProperty
-    def set_SpecialProperty(self, SpecialProperty): self.SpecialProperty = SpecialProperty
+    def get_SpecialProperty(self):
+        return self.SpecialProperty
+    def set_SpecialProperty(self, SpecialProperty):
+        self.SpecialProperty = SpecialProperty
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -828,8 +831,9 @@ class ExtremeDate(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.ExtremeProperty = _cast(None, ExtremeProperty)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -843,8 +847,10 @@ class ExtremeDate(GeneratedsSuper):
         else:
             return ExtremeDate(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_ExtremeProperty(self): return self.ExtremeProperty
-    def set_ExtremeProperty(self, ExtremeProperty): self.ExtremeProperty = ExtremeProperty
+    def get_ExtremeProperty(self):
+        return self.ExtremeProperty
+    def set_ExtremeProperty(self, ExtremeProperty):
+        self.ExtremeProperty = ExtremeProperty
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -906,8 +912,9 @@ class singleExtremeDate(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.ExtremeProperty = _cast(None, ExtremeProperty)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -921,8 +928,10 @@ class singleExtremeDate(GeneratedsSuper):
         else:
             return singleExtremeDate(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_ExtremeProperty(self): return self.ExtremeProperty
-    def set_ExtremeProperty(self, ExtremeProperty): self.ExtremeProperty = ExtremeProperty
+    def get_ExtremeProperty(self):
+        return self.ExtremeProperty
+    def set_ExtremeProperty(self, ExtremeProperty):
+        self.ExtremeProperty = ExtremeProperty
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -984,8 +993,9 @@ class containerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, simplefactoid=None, mixedfactoid=None):
+    def __init__(self, simplefactoid=None, mixedfactoid=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if simplefactoid is None:
             self.simplefactoid = []
         else:
@@ -1002,13 +1012,17 @@ class containerType(GeneratedsSuper):
         else:
             return containerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_simplefactoid(self): return self.simplefactoid
-    def set_simplefactoid(self, simplefactoid): self.simplefactoid = simplefactoid
+    def get_simplefactoid(self):
+        return self.simplefactoid
+    def set_simplefactoid(self, simplefactoid):
+        self.simplefactoid = simplefactoid
     def add_simplefactoid(self, value): self.simplefactoid.append(value)
     def insert_simplefactoid_at(self, index, value): self.simplefactoid.insert(index, value)
     def replace_simplefactoid_at(self, index, value): self.simplefactoid[index] = value
-    def get_mixedfactoid(self): return self.mixedfactoid
-    def set_mixedfactoid(self, mixedfactoid): self.mixedfactoid = mixedfactoid
+    def get_mixedfactoid(self):
+        return self.mixedfactoid
+    def set_mixedfactoid(self, mixedfactoid):
+        self.mixedfactoid = mixedfactoid
     def hasContent_(self):
         if (
             self.simplefactoid or
@@ -1060,12 +1074,12 @@ class containerType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'simplefactoid':
-            obj_ = simpleFactoidType.factory()
+            obj_ = simpleFactoidType.factory(parent_object_=self)
             obj_.build(child_)
             self.simplefactoid.append(obj_)
             obj_.original_tagname_ = 'simplefactoid'
         elif nodeName_ == 'mixedfactoid':
-            obj_ = mixedFactoidType.factory()
+            obj_ = mixedFactoidType.factory(parent_object_=self)
             obj_.build(child_)
             self.mixedfactoid = obj_
             obj_.original_tagname_ = 'mixedfactoid'
@@ -1078,8 +1092,9 @@ class simpleFactoidType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, relation=None):
+    def __init__(self, relation=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.relation = relation
         self.validate_RelationType(self.relation)
     def factory(*args_, **kwargs_):
@@ -1093,8 +1108,10 @@ class simpleFactoidType(GeneratedsSuper):
         else:
             return simpleFactoidType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_relation(self): return self.relation
-    def set_relation(self, relation): self.relation = relation
+    def get_relation(self):
+        return self.relation
+    def set_relation(self, relation):
+        self.relation = relation
     def validate_RelationType(self, value):
         # Validate type RelationType, a restriction on RelationType2.
         if value is not None and Validate_simpletypes_:
@@ -1189,8 +1206,9 @@ class mixedFactoidType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, relation=None, valueOf_=None, mixedclass_=None, content_=None):
+    def __init__(self, relation=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.relation = relation
         self.validate_RelationType(self.relation)
         self.valueOf_ = valueOf_
@@ -1214,8 +1232,10 @@ class mixedFactoidType(GeneratedsSuper):
         else:
             return mixedFactoidType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_relation(self): return self.relation
-    def set_relation(self, relation): self.relation = relation
+    def get_relation(self):
+        return self.relation
+    def set_relation(self, relation):
+        self.relation = relation
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def validate_RelationType(self, value):
@@ -1325,8 +1345,9 @@ class BaseType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, BaseProperty1=None, BaseProperty2=None, valueOf_=None, extensiontype_=None):
+    def __init__(self, BaseProperty1=None, BaseProperty2=None, valueOf_=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.BaseProperty1 = _cast(None, BaseProperty1)
         self.BaseProperty2 = _cast(None, BaseProperty2)
         self.valueOf_ = valueOf_
@@ -1342,10 +1363,14 @@ class BaseType(GeneratedsSuper):
         else:
             return BaseType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_BaseProperty1(self): return self.BaseProperty1
-    def set_BaseProperty1(self, BaseProperty1): self.BaseProperty1 = BaseProperty1
-    def get_BaseProperty2(self): return self.BaseProperty2
-    def set_BaseProperty2(self, BaseProperty2): self.BaseProperty2 = BaseProperty2
+    def get_BaseProperty1(self):
+        return self.BaseProperty1
+    def set_BaseProperty1(self, BaseProperty1):
+        self.BaseProperty1 = BaseProperty1
+    def get_BaseProperty2(self):
+        return self.BaseProperty2
+    def set_BaseProperty2(self, BaseProperty2):
+        self.BaseProperty2 = BaseProperty2
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def get_extensiontype_(self): return self.extensiontype_
@@ -1425,9 +1450,10 @@ class DerivedType(BaseType):
     ]
     subclass = None
     superclass = BaseType
-    def __init__(self, BaseProperty1=None, BaseProperty2=None, DerivedProperty1=None, DerivedProperty2=None, valueOf_=None):
+    def __init__(self, BaseProperty1=None, BaseProperty2=None, DerivedProperty1=None, DerivedProperty2=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
-        super(DerivedType, self).__init__(BaseProperty1, BaseProperty2, valueOf_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(DerivedType, self).__init__(BaseProperty1, BaseProperty2, valueOf_,  **kwargs_)
         self.DerivedProperty1 = _cast(None, DerivedProperty1)
         self.DerivedProperty2 = _cast(None, DerivedProperty2)
         self.valueOf_ = valueOf_
@@ -1442,10 +1468,14 @@ class DerivedType(BaseType):
         else:
             return DerivedType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_DerivedProperty1(self): return self.DerivedProperty1
-    def set_DerivedProperty1(self, DerivedProperty1): self.DerivedProperty1 = DerivedProperty1
-    def get_DerivedProperty2(self): return self.DerivedProperty2
-    def set_DerivedProperty2(self, DerivedProperty2): self.DerivedProperty2 = DerivedProperty2
+    def get_DerivedProperty1(self):
+        return self.DerivedProperty1
+    def set_DerivedProperty1(self, DerivedProperty1):
+        self.DerivedProperty1 = DerivedProperty1
+    def get_DerivedProperty2(self):
+        return self.DerivedProperty2
+    def set_DerivedProperty2(self, DerivedProperty2):
+        self.DerivedProperty2 = DerivedProperty2
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -1518,8 +1548,9 @@ class MyInteger(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, MyAttr=None, valueOf_=None):
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.MyAttr = _cast(None, MyAttr)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -1533,8 +1564,10 @@ class MyInteger(GeneratedsSuper):
         else:
             return MyInteger(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_MyAttr(self): return self.MyAttr
-    def set_MyAttr(self, MyAttr): self.MyAttr = MyAttr
+    def get_MyAttr(self):
+        return self.MyAttr
+    def set_MyAttr(self, MyAttr):
+        self.MyAttr = MyAttr
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -1596,8 +1629,9 @@ class MyBoolean(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, MyAttr=None, valueOf_=None):
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.MyAttr = _cast(None, MyAttr)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -1611,8 +1645,10 @@ class MyBoolean(GeneratedsSuper):
         else:
             return MyBoolean(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_MyAttr(self): return self.MyAttr
-    def set_MyAttr(self, MyAttr): self.MyAttr = MyAttr
+    def get_MyAttr(self):
+        return self.MyAttr
+    def set_MyAttr(self, MyAttr):
+        self.MyAttr = MyAttr
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -1674,8 +1710,9 @@ class MyFloat(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, MyAttr=None, valueOf_=None):
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.MyAttr = _cast(None, MyAttr)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -1689,8 +1726,10 @@ class MyFloat(GeneratedsSuper):
         else:
             return MyFloat(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_MyAttr(self): return self.MyAttr
-    def set_MyAttr(self, MyAttr): self.MyAttr = MyAttr
+    def get_MyAttr(self):
+        return self.MyAttr
+    def set_MyAttr(self, MyAttr):
+        self.MyAttr = MyAttr
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -1752,8 +1791,9 @@ class MyDouble(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, MyAttr=None, valueOf_=None):
+    def __init__(self, MyAttr=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.MyAttr = _cast(None, MyAttr)
         self.valueOf_ = valueOf_
     def factory(*args_, **kwargs_):
@@ -1767,8 +1807,10 @@ class MyDouble(GeneratedsSuper):
         else:
             return MyDouble(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_MyAttr(self): return self.MyAttr
-    def set_MyAttr(self, MyAttr): self.MyAttr = MyAttr
+    def get_MyAttr(self):
+        return self.MyAttr
+    def set_MyAttr(self, MyAttr):
+        self.MyAttr = MyAttr
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):

@@ -48,36 +48,36 @@ ExternalEncoding = ''
 
 
 class containerTypeSub(supermod.containerType):
-    def __init__(self, item1=None, item2=None):
-        super(containerTypeSub, self).__init__(item1, item2, )
+    def __init__(self, item1=None, item2=None, **kwargs_):
+        super(containerTypeSub, self).__init__(item1, item2,  **kwargs_)
 supermod.containerType.subclass = containerTypeSub
 # end class containerTypeSub
 
 
 class classATypeSub(supermod.classAType):
-    def __init__(self, inner=None):
-        super(classATypeSub, self).__init__(inner, )
+    def __init__(self, inner=None, **kwargs_):
+        super(classATypeSub, self).__init__(inner,  **kwargs_)
 supermod.classAType.subclass = classATypeSub
 # end class classATypeSub
 
 
 class classBTypeSub(supermod.classBType):
-    def __init__(self, inner=None):
-        super(classBTypeSub, self).__init__(inner, )
+    def __init__(self, inner=None, **kwargs_):
+        super(classBTypeSub, self).__init__(inner,  **kwargs_)
 supermod.classBType.subclass = classBTypeSub
 # end class classBTypeSub
 
 
 class innerTypeSub(supermod.innerType):
-    def __init__(self, attrA1=None, attrA2=None):
-        super(innerTypeSub, self).__init__(attrA1, attrA2, )
+    def __init__(self, attrA1=None, attrA2=None, **kwargs_):
+        super(innerTypeSub, self).__init__(attrA1, attrA2,  **kwargs_)
 supermod.innerType.subclass = innerTypeSub
 # end class innerTypeSub
 
 
 class innerType1Sub(supermod.innerType1):
-    def __init__(self, attrB1=None, attrB2=None):
-        super(innerType1Sub, self).__init__(attrB1, attrB2, )
+    def __init__(self, attrB1=None, attrB2=None, **kwargs_):
+        super(innerType1Sub, self).__init__(attrB1, attrB2,  **kwargs_)
 supermod.innerType1.subclass = innerType1Sub
 # end class innerType1Sub
 

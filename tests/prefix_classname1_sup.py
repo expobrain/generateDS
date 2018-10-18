@@ -745,8 +745,9 @@ class tomato_people(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, comments=None, person=None, programmer=None, python_programmer=None, java_programmer=None):
+    def __init__(self, comments=None, person=None, programmer=None, python_programmer=None, java_programmer=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if comments is None:
             self.comments = []
         else:
@@ -778,28 +779,38 @@ class tomato_people(GeneratedsSuper):
         else:
             return tomato_people(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_comments(self): return self.comments
-    def set_comments(self, comments): self.comments = comments
+    def get_comments(self):
+        return self.comments
+    def set_comments(self, comments):
+        self.comments = comments
     def add_comments(self, value): self.comments.append(value)
     def insert_comments_at(self, index, value): self.comments.insert(index, value)
     def replace_comments_at(self, index, value): self.comments[index] = value
-    def get_person(self): return self.person
-    def set_person(self, person): self.person = person
+    def get_person(self):
+        return self.person
+    def set_person(self, person):
+        self.person = person
     def add_person(self, value): self.person.append(value)
     def insert_person_at(self, index, value): self.person.insert(index, value)
     def replace_person_at(self, index, value): self.person[index] = value
-    def get_programmer(self): return self.programmer
-    def set_programmer(self, programmer): self.programmer = programmer
+    def get_programmer(self):
+        return self.programmer
+    def set_programmer(self, programmer):
+        self.programmer = programmer
     def add_programmer(self, value): self.programmer.append(value)
     def insert_programmer_at(self, index, value): self.programmer.insert(index, value)
     def replace_programmer_at(self, index, value): self.programmer[index] = value
-    def get_python_programmer(self): return self.python_programmer
-    def set_python_programmer(self, python_programmer): self.python_programmer = python_programmer
+    def get_python_programmer(self):
+        return self.python_programmer
+    def set_python_programmer(self, python_programmer):
+        self.python_programmer = python_programmer
     def add_python_programmer(self, value): self.python_programmer.append(value)
     def insert_python_programmer_at(self, index, value): self.python_programmer.insert(index, value)
     def replace_python_programmer_at(self, index, value): self.python_programmer[index] = value
-    def get_java_programmer(self): return self.java_programmer
-    def set_java_programmer(self, java_programmer): self.java_programmer = java_programmer
+    def get_java_programmer(self):
+        return self.java_programmer
+    def set_java_programmer(self, java_programmer):
+        self.java_programmer = java_programmer
     def add_java_programmer(self, value): self.java_programmer.append(value)
     def insert_java_programmer_at(self, index, value): self.java_programmer.insert(index, value)
     def replace_java_programmer_at(self, index, value): self.java_programmer[index] = value
@@ -863,29 +874,29 @@ class tomato_people(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'comments':
-            obj_ = tomato_comments.factory()
+            obj_ = tomato_comments.factory(parent_object_=self)
             obj_.build(child_)
             self.comments.append(obj_)
             obj_.original_tagname_ = 'comments'
         elif nodeName_ == 'person':
             class_obj_ = self.get_class_obj_(child_, tomato_person)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.person.append(obj_)
             obj_.original_tagname_ = 'person'
         elif nodeName_ == 'programmer':
             class_obj_ = self.get_class_obj_(child_, tomato_programmer)
-            obj_ = class_obj_.factory()
+            obj_ = class_obj_.factory(parent_object_=self)
             obj_.build(child_)
             self.programmer.append(obj_)
             obj_.original_tagname_ = 'programmer'
         elif nodeName_ == 'python-programmer':
-            obj_ = tomato_python_programmer.factory()
+            obj_ = tomato_python_programmer.factory(parent_object_=self)
             obj_.build(child_)
             self.python_programmer.append(obj_)
             obj_.original_tagname_ = 'python-programmer'
         elif nodeName_ == 'java-programmer':
-            obj_ = tomato_java_programmer.factory()
+            obj_ = tomato_java_programmer.factory(parent_object_=self)
             obj_.build(child_)
             self.java_programmer.append(obj_)
             obj_.original_tagname_ = 'java-programmer'
@@ -899,8 +910,9 @@ class tomato_comments(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, emp=None, valueOf_=None, mixedclass_=None, content_=None):
+    def __init__(self, emp=None, valueOf_=None, mixedclass_=None, content_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if emp is None:
             self.emp = []
         else:
@@ -926,8 +938,10 @@ class tomato_comments(GeneratedsSuper):
         else:
             return tomato_comments(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_emp(self): return self.emp
-    def set_emp(self, emp): self.emp = emp
+    def get_emp(self):
+        return self.emp
+    def set_emp(self, emp):
+        self.emp = emp
     def add_emp(self, value): self.emp.append(value)
     def insert_emp_at(self, index, value): self.emp.insert(index, value)
     def replace_emp_at(self, index, value): self.emp[index] = value
@@ -1018,8 +1032,9 @@ class tomato_person(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, extensiontype_=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.value = _cast(None, value)
         self.id = _cast(int, id)
         self.ratio = _cast(float, ratio)
@@ -1052,37 +1067,59 @@ class tomato_person(GeneratedsSuper):
         else:
             return tomato_person(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_interest(self): return self.interest
-    def set_interest(self, interest): self.interest = interest
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_interest(self):
+        return self.interest
+    def set_interest(self, interest):
+        self.interest = interest
     def add_interest(self, value): self.interest.append(value)
     def insert_interest_at(self, index, value): self.interest.insert(index, value)
     def replace_interest_at(self, index, value): self.interest[index] = value
-    def get_category(self): return self.category
-    def set_category(self, category): self.category = category
-    def get_agent(self): return self.agent
-    def set_agent(self, agent): self.agent = agent
+    def get_category(self):
+        return self.category
+    def set_category(self, category):
+        self.category = category
+    def get_agent(self):
+        return self.agent
+    def set_agent(self, agent):
+        self.agent = agent
     def add_agent(self, value): self.agent.append(value)
     def insert_agent_at(self, index, value): self.agent.insert(index, value)
     def replace_agent_at(self, index, value): self.agent[index] = value
-    def get_promoter(self): return self.promoter
-    def set_promoter(self, promoter): self.promoter = promoter
+    def get_promoter(self):
+        return self.promoter
+    def set_promoter(self, promoter):
+        self.promoter = promoter
     def add_promoter(self, value): self.promoter.append(value)
     def insert_promoter_at(self, index, value): self.promoter.insert(index, value)
     def replace_promoter_at(self, index, value): self.promoter[index] = value
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
-    def get_value(self): return self.value
-    def set_value(self, value): self.value = value
-    def get_id(self): return self.id
-    def set_id(self, id): self.id = id
-    def get_ratio(self): return self.ratio
-    def set_ratio(self, ratio): self.ratio = ratio
-    def get_fruit(self): return self.fruit
-    def set_fruit(self, fruit): self.fruit = fruit
-    def get_vegetable(self): return self.vegetable
-    def set_vegetable(self, vegetable): self.vegetable = vegetable
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
+    def get_value(self):
+        return self.value
+    def set_value(self, value):
+        self.value = value
+    def get_id(self):
+        return self.id
+    def set_id(self, id):
+        self.id = id
+    def get_ratio(self):
+        return self.ratio
+    def set_ratio(self, ratio):
+        self.ratio = ratio
+    def get_fruit(self):
+        return self.fruit
+    def set_fruit(self, fruit):
+        self.fruit = fruit
+    def get_vegetable(self):
+        return self.vegetable
+    def set_vegetable(self, vegetable):
+        self.vegetable = vegetable
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
@@ -1215,12 +1252,12 @@ class tomato_person(GeneratedsSuper):
             ival_ = self.gds_validate_integer(ival_, node, 'category')
             self.category = ival_
         elif nodeName_ == 'agent':
-            obj_ = tomato_agent.factory()
+            obj_ = tomato_agent.factory(parent_object_=self)
             obj_.build(child_)
             self.agent.append(obj_)
             obj_.original_tagname_ = 'agent'
         elif nodeName_ == 'promoter':
-            obj_ = tomato_booster.factory()
+            obj_ = tomato_booster.factory(parent_object_=self)
             obj_.build(child_)
             self.promoter.append(obj_)
             obj_.original_tagname_ = 'promoter'
@@ -1254,9 +1291,10 @@ class tomato_programmer(tomato_person):
     ]
     subclass = None
     superclass = tomato_person
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
-        super(tomato_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, extensiontype_, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(tomato_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, extensiontype_,  **kwargs_)
         self.language = _cast(None, language)
         self.area = _cast(None, area)
         self.attrposint = _cast(int, attrposint)
@@ -1296,42 +1334,78 @@ class tomato_programmer(tomato_person):
         else:
             return tomato_programmer(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_email(self): return self.email
-    def set_email(self, email): self.email = email
-    def get_elposint(self): return self.elposint
-    def set_elposint(self, elposint): self.elposint = elposint
-    def get_elnonposint(self): return self.elnonposint
-    def set_elnonposint(self, elnonposint): self.elnonposint = elnonposint
-    def get_elnegint(self): return self.elnegint
-    def set_elnegint(self, elnegint): self.elnegint = elnegint
-    def get_elnonnegint(self): return self.elnonnegint
-    def set_elnonnegint(self, elnonnegint): self.elnonnegint = elnonnegint
-    def get_eldate(self): return self.eldate
-    def set_eldate(self, eldate): self.eldate = eldate
-    def get_eldatetime(self): return self.eldatetime
-    def set_eldatetime(self, eldatetime): self.eldatetime = eldatetime
-    def get_eltoken(self): return self.eltoken
-    def set_eltoken(self, eltoken): self.eltoken = eltoken
-    def get_elshort(self): return self.elshort
-    def set_elshort(self, elshort): self.elshort = elshort
-    def get_ellong(self): return self.ellong
-    def set_ellong(self, ellong): self.ellong = ellong
-    def get_elparam(self): return self.elparam
-    def set_elparam(self, elparam): self.elparam = elparam
-    def get_elarraytypes(self): return self.elarraytypes
-    def set_elarraytypes(self, elarraytypes): self.elarraytypes = elarraytypes
-    def get_language(self): return self.language
-    def set_language(self, language): self.language = language
-    def get_area(self): return self.area
-    def set_area(self, area): self.area = area
-    def get_attrposint(self): return self.attrposint
-    def set_attrposint(self, attrposint): self.attrposint = attrposint
-    def get_attrnonposint(self): return self.attrnonposint
-    def set_attrnonposint(self, attrnonposint): self.attrnonposint = attrnonposint
-    def get_attrnegint(self): return self.attrnegint
-    def set_attrnegint(self, attrnegint): self.attrnegint = attrnegint
-    def get_attrnonnegint(self): return self.attrnonnegint
-    def set_attrnonnegint(self, attrnonnegint): self.attrnonnegint = attrnonnegint
+    def get_email(self):
+        return self.email
+    def set_email(self, email):
+        self.email = email
+    def get_elposint(self):
+        return self.elposint
+    def set_elposint(self, elposint):
+        self.elposint = elposint
+    def get_elnonposint(self):
+        return self.elnonposint
+    def set_elnonposint(self, elnonposint):
+        self.elnonposint = elnonposint
+    def get_elnegint(self):
+        return self.elnegint
+    def set_elnegint(self, elnegint):
+        self.elnegint = elnegint
+    def get_elnonnegint(self):
+        return self.elnonnegint
+    def set_elnonnegint(self, elnonnegint):
+        self.elnonnegint = elnonnegint
+    def get_eldate(self):
+        return self.eldate
+    def set_eldate(self, eldate):
+        self.eldate = eldate
+    def get_eldatetime(self):
+        return self.eldatetime
+    def set_eldatetime(self, eldatetime):
+        self.eldatetime = eldatetime
+    def get_eltoken(self):
+        return self.eltoken
+    def set_eltoken(self, eltoken):
+        self.eltoken = eltoken
+    def get_elshort(self):
+        return self.elshort
+    def set_elshort(self, elshort):
+        self.elshort = elshort
+    def get_ellong(self):
+        return self.ellong
+    def set_ellong(self, ellong):
+        self.ellong = ellong
+    def get_elparam(self):
+        return self.elparam
+    def set_elparam(self, elparam):
+        self.elparam = elparam
+    def get_elarraytypes(self):
+        return self.elarraytypes
+    def set_elarraytypes(self, elarraytypes):
+        self.elarraytypes = elarraytypes
+    def get_language(self):
+        return self.language
+    def set_language(self, language):
+        self.language = language
+    def get_area(self):
+        return self.area
+    def set_area(self, area):
+        self.area = area
+    def get_attrposint(self):
+        return self.attrposint
+    def set_attrposint(self, attrposint):
+        self.attrposint = attrposint
+    def get_attrnonposint(self):
+        return self.attrnonposint
+    def set_attrnonposint(self, attrnonposint):
+        self.attrnonposint = attrnonposint
+    def get_attrnegint(self):
+        return self.attrnegint
+    def set_attrnegint(self, attrnegint):
+        self.attrnegint = attrnegint
+    def get_attrnonnegint(self):
+        return self.attrnonnegint
+    def set_attrnonnegint(self, attrnonnegint):
+        self.attrnonnegint = attrnonnegint
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def validate_ArrayTypes(self, value):
@@ -1586,7 +1660,7 @@ class tomato_programmer(tomato_person):
             ival_ = self.gds_validate_integer(ival_, node, 'ellong')
             self.ellong = ival_
         elif nodeName_ == 'elparam':
-            obj_ = tomato_param.factory()
+            obj_ = tomato_param.factory(parent_object_=self)
             obj_.build(child_)
             self.elparam = obj_
             obj_.original_tagname_ = 'elparam'
@@ -1614,8 +1688,9 @@ class tomato_param(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None):
+    def __init__(self, id=None, name=None, sid=None, flow=None, semantic=None, type_=None, valueOf_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.id = _cast(None, id)
         self.name = _cast(None, name)
         self.sid = _cast(None, sid)
@@ -1634,18 +1709,30 @@ class tomato_param(GeneratedsSuper):
         else:
             return tomato_param(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_id(self): return self.id
-    def set_id(self, id): self.id = id
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_sid(self): return self.sid
-    def set_sid(self, sid): self.sid = sid
-    def get_flow(self): return self.flow
-    def set_flow(self, flow): self.flow = flow
-    def get_semantic(self): return self.semantic
-    def set_semantic(self, semantic): self.semantic = semantic
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
+    def get_id(self):
+        return self.id
+    def set_id(self, id):
+        self.id = id
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_sid(self):
+        return self.sid
+    def set_sid(self, sid):
+        self.sid = sid
+    def get_flow(self):
+        return self.flow
+    def set_flow(self, flow):
+        self.flow = flow
+    def get_semantic(self):
+        return self.semantic
+    def set_semantic(self, semantic):
+        self.semantic = semantic
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
     def get_valueOf_(self): return self.valueOf_
     def set_valueOf_(self, valueOf_): self.valueOf_ = valueOf_
     def hasContent_(self):
@@ -1743,9 +1830,10 @@ class tomato_python_programmer(tomato_programmer):
     ]
     subclass = None
     superclass = tomato_programmer
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, favorite_editor=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, favorite_editor=None, **kwargs_):
         self.original_tagname_ = None
-        super(tomato_python_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eltoken, elshort, ellong, elparam, elarraytypes, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(tomato_python_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eltoken, elshort, ellong, elparam, elarraytypes,  **kwargs_)
         self.nick_name = _cast(None, nick_name)
         self.favorite_editor = favorite_editor
     def factory(*args_, **kwargs_):
@@ -1759,10 +1847,14 @@ class tomato_python_programmer(tomato_programmer):
         else:
             return tomato_python_programmer(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_favorite_editor(self): return self.favorite_editor
-    def set_favorite_editor(self, favorite_editor): self.favorite_editor = favorite_editor
-    def get_nick_name(self): return self.nick_name
-    def set_nick_name(self, nick_name): self.nick_name = nick_name
+    def get_favorite_editor(self):
+        return self.favorite_editor
+    def set_favorite_editor(self, favorite_editor):
+        self.favorite_editor = favorite_editor
+    def get_nick_name(self):
+        return self.nick_name
+    def set_nick_name(self, nick_name):
+        self.nick_name = nick_name
     def hasContent_(self):
         if (
             self.favorite_editor is not None or
@@ -1836,9 +1928,10 @@ class tomato_java_programmer(tomato_programmer):
     ]
     subclass = None
     superclass = tomato_programmer
-    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None):
+    def __init__(self, value=None, id=None, ratio=None, fruit=None, vegetable=None, name=None, interest=None, category=None, agent=None, promoter=None, description=None, language=None, area=None, attrposint=None, attrnonposint=None, attrnegint=None, attrnonnegint=None, email=None, elposint=None, elnonposint=None, elnegint=None, elnonnegint=None, eldate=None, eldatetime=None, eltoken=None, elshort=None, ellong=None, elparam=None, elarraytypes=None, nick_name=None, status=None, favorite_editor=None, **kwargs_):
         self.original_tagname_ = None
-        super(tomato_java_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eltoken, elshort, ellong, elparam, elarraytypes, )
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(tomato_java_programmer, self).__init__(value, id, ratio, fruit, vegetable, name, interest, category, agent, promoter, description, language, area, attrposint, attrnonposint, attrnegint, attrnonnegint, email, elposint, elnonposint, elnegint, elnonnegint, eldate, eldatetime, eltoken, elshort, ellong, elparam, elarraytypes,  **kwargs_)
         self.nick_name = _cast(None, nick_name)
         self.status = _cast(None, status)
         self.favorite_editor = favorite_editor
@@ -1853,12 +1946,18 @@ class tomato_java_programmer(tomato_programmer):
         else:
             return tomato_java_programmer(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_favorite_editor(self): return self.favorite_editor
-    def set_favorite_editor(self, favorite_editor): self.favorite_editor = favorite_editor
-    def get_nick_name(self): return self.nick_name
-    def set_nick_name(self, nick_name): self.nick_name = nick_name
-    def get_status(self): return self.status
-    def set_status(self, status): self.status = status
+    def get_favorite_editor(self):
+        return self.favorite_editor
+    def set_favorite_editor(self, favorite_editor):
+        self.favorite_editor = favorite_editor
+    def get_nick_name(self):
+        return self.nick_name
+    def set_nick_name(self, nick_name):
+        self.nick_name = nick_name
+    def get_status(self):
+        return self.status
+    def set_status(self, status):
+        self.status = status
     def hasContent_(self):
         if (
             self.favorite_editor is not None or
@@ -1940,8 +2039,9 @@ class tomato_agent(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -1957,14 +2057,22 @@ class tomato_agent(GeneratedsSuper):
         else:
             return tomato_agent(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_info(self): return self.info
-    def set_info(self, info): self.info = info
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_info(self):
+        return self.info
+    def set_info(self, info):
+        self.info = info
     def hasContent_(self):
         if (
             self.firstname is not None or
@@ -2041,7 +2149,7 @@ class tomato_agent(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
-            obj_ = tomato_info.factory()
+            obj_ = tomato_info.factory(parent_object_=self)
             obj_.build(child_)
             self.info = obj_
             obj_.original_tagname_ = 'info'
@@ -2057,8 +2165,9 @@ class tomato_special_agent(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, firstname=None, lastname=None, priority=None, info=None):
+    def __init__(self, firstname=None, lastname=None, priority=None, info=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.firstname = firstname
         self.lastname = lastname
         self.priority = priority
@@ -2074,14 +2183,22 @@ class tomato_special_agent(GeneratedsSuper):
         else:
             return tomato_special_agent(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_priority(self): return self.priority
-    def set_priority(self, priority): self.priority = priority
-    def get_info(self): return self.info
-    def set_info(self, info): self.info = info
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_priority(self):
+        return self.priority
+    def set_priority(self, priority):
+        self.priority = priority
+    def get_info(self):
+        return self.info
+    def set_info(self, info):
+        self.info = info
     def hasContent_(self):
         if (
             self.firstname is not None or
@@ -2158,7 +2275,7 @@ class tomato_special_agent(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
-            obj_ = tomato_info.factory()
+            obj_ = tomato_info.factory(parent_object_=self)
             obj_.build(child_)
             self.info = obj_
             obj_.original_tagname_ = 'info'
@@ -2177,8 +2294,9 @@ class tomato_booster(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None):
+    def __init__(self, firstname=None, lastname=None, other_name=None, class_=None, other_value=None, type_=None, client_handler=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.firstname = firstname
         self.lastname = lastname
         self.other_name = other_name
@@ -2206,26 +2324,40 @@ class tomato_booster(GeneratedsSuper):
         else:
             return tomato_booster(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_firstname(self): return self.firstname
-    def set_firstname(self, firstname): self.firstname = firstname
-    def get_lastname(self): return self.lastname
-    def set_lastname(self, lastname): self.lastname = lastname
-    def get_other_name(self): return self.other_name
-    def set_other_name(self, other_name): self.other_name = other_name
-    def get_class(self): return self.class_
-    def set_class(self, class_): self.class_ = class_
-    def get_other_value(self): return self.other_value
-    def set_other_value(self, other_value): self.other_value = other_value
+    def get_firstname(self):
+        return self.firstname
+    def set_firstname(self, firstname):
+        self.firstname = firstname
+    def get_lastname(self):
+        return self.lastname
+    def set_lastname(self, lastname):
+        self.lastname = lastname
+    def get_other_name(self):
+        return self.other_name
+    def set_other_name(self, other_name):
+        self.other_name = other_name
+    def get_class(self):
+        return self.class_
+    def set_class(self, class_):
+        self.class_ = class_
+    def get_other_value(self):
+        return self.other_value
+    def set_other_value(self, other_value):
+        self.other_value = other_value
     def add_other_value(self, value): self.other_value.append(value)
     def insert_other_value_at(self, index, value): self.other_value.insert(index, value)
     def replace_other_value_at(self, index, value): self.other_value[index] = value
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
     def add_type(self, value): self.type_.append(value)
     def insert_type_at(self, index, value): self.type_.insert(index, value)
     def replace_type_at(self, index, value): self.type_[index] = value
-    def get_client_handler(self): return self.client_handler
-    def set_client_handler(self, client_handler): self.client_handler = client_handler
+    def get_client_handler(self):
+        return self.client_handler
+    def set_client_handler(self, client_handler):
+        self.client_handler = client_handler
     def add_client_handler(self, value): self.client_handler.append(value)
     def insert_client_handler_at(self, index, value): self.client_handler.insert(index, value)
     def replace_client_handler_at(self, index, value): self.client_handler[index] = value
@@ -2341,7 +2473,7 @@ class tomato_booster(GeneratedsSuper):
             fval_ = self.gds_validate_float(fval_, node, 'type')
             self.type_.append(fval_)
         elif nodeName_ == 'client-handler':
-            obj_ = tomato_client_handlerType.factory()
+            obj_ = tomato_client_handlerType.factory(parent_object_=self)
             obj_.build(child_)
             self.client_handler.append(obj_)
             obj_.original_tagname_ = 'client-handler'
@@ -2356,8 +2488,9 @@ class tomato_info(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, type_=None, rating=None):
+    def __init__(self, name=None, type_=None, rating=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = _cast(None, name)
         self.type_ = _cast(int, type_)
         self.rating = _cast(float, rating)
@@ -2372,12 +2505,18 @@ class tomato_info(GeneratedsSuper):
         else:
             return tomato_info(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_type(self): return self.type_
-    def set_type(self, type_): self.type_ = type_
-    def get_rating(self): return self.rating
-    def set_rating(self, rating): self.rating = rating
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_type(self):
+        return self.type_
+    def set_type(self, type_):
+        self.type_ = type_
+    def get_rating(self):
+        return self.rating
+    def set_rating(self, rating):
+        self.rating = rating
     def hasContent_(self):
         if (
 
@@ -2455,8 +2594,9 @@ class tomato_client_handlerType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, fullname=None, refid=None):
+    def __init__(self, fullname=None, refid=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.fullname = fullname
         self.refid = refid
     def factory(*args_, **kwargs_):
@@ -2470,10 +2610,14 @@ class tomato_client_handlerType(GeneratedsSuper):
         else:
             return tomato_client_handlerType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_fullname(self): return self.fullname
-    def set_fullname(self, fullname): self.fullname = fullname
-    def get_refid(self): return self.refid
-    def set_refid(self, refid): self.refid = refid
+    def get_fullname(self):
+        return self.fullname
+    def set_fullname(self, fullname):
+        self.fullname = fullname
+    def get_refid(self):
+        return self.refid
+    def set_refid(self, refid):
+        self.refid = refid
     def hasContent_(self):
         if (
             self.fullname is not None or

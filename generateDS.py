@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.29.25'
+VERSION = '2.30.1'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -3582,11 +3582,13 @@ def generateBuildMixed_1(wrt, prefix, child, headChild, keyword, delayed):
                 wrt("            class_obj_ = self.get_class_obj_("
                     "child_, %s%s)\n" % (
                         prefix, cleanupName(mapName(childType)), ))
-                wrt("            class_obj_ = %s%s.factory()\n" % (
-                    prefix, cleanupName(mapName(childType)), ))
+                wrt("            class_obj_ = %s%s.factory("
+                    "parent_object_=self)\n" % (
+                        prefix, cleanupName(mapName(childType)), ))
             else:
-                wrt("            obj_ = %s%s.factory()\n" % (
-                    prefix, cleanupName(mapName(childType))))
+                wrt("            obj_ = %s%s.factory("
+                    "parent_object_=self)\n" % (
+                        prefix, cleanupName(mapName(childType))))
             wrt("            obj_.build(child_)\n")
 
         wrt("            obj_ = self.mixedclass_("
@@ -3836,10 +3838,12 @@ def generateBuildStandard_1(
                     wrt("            class_obj_ = self.get_class_obj_("
                         "child_, %s%s)\n" %
                         (prefix, type_name, ))
-                    wrt("            obj_ = class_obj_.factory()\n")
+                    wrt("            obj_ = class_obj_.factory("
+                        "parent_object_=self)\n")
                 else:
-                    wrt("            obj_ = %s%s.factory()\n" % (
-                        prefix, type_name, ))
+                    wrt("            obj_ = %s%s.factory("
+                        "parent_object_=self)\n" % (
+                            prefix, type_name, ))
                 wrt("            obj_.build(child_)\n")
         if headChild.getMaxOccurs() > 1:
             substitutionGroup = child.getAttrs().get('substitutionGroup')
@@ -4180,12 +4184,13 @@ def generateCtor(wrt, prefix, element):
     s2 = buildCtorArgs_multilevel(element, childCount)
     if sys.version_info.major == 2:
         s2 = s2.encode('utf-8')
-    wrt('    def __init__(self%s):\n' % s2)
+    wrt('    def __init__(self%s, **kwargs_):\n' % s2)
     # Save the original tag name.  This is needed when there is a
     # xs:substitutionGroup and we later (e.g. during export) do not know
     # which member of the xs:substitutionGroup this specific element
     # came from.
     wrt('        self.original_tagname_ = None\n')
+    wrt("        self.parent_object_ = kwargs_.get('parent_object_')\n")
     parentName, parent = getParentName(element)
     if parentName:
         if parent.getFullyQualifiedName() in AlreadyGenerated:
@@ -4193,10 +4198,10 @@ def generateCtor(wrt, prefix, element):
             s2 = ''.join(args)
             if len(args) > 254:
                 wrt('        arglist_ = (%s)\n' % (s2, ))
-                wrt('        super(%s%s, self).__init__(*arglist_)\n' %
-                    (prefix, elName, ))
+                wrt('        super(%s%s, self).__init__('
+                    '*arglist_, **kwargs_)\n' % (prefix, elName, ))
             else:
-                wrt('        super(%s%s, self).__init__(%s)\n' % (
+                wrt('        super(%s%s, self).__init__(%s **kwargs_)\n' % (
                     prefix, elName, s2, ))
     attrDefs = element.getAttributeDefs()
     for key in element.getAttributeDefsList():
@@ -4718,9 +4723,13 @@ def generateGettersAndSetters(wrt, element):
             name = cleanupName(child.getCleanName())
             unmappedName = cleanupName(child.getName())
             capName = make_gs_name(unmappedName)
-            wrt('    def get%s(self): return self.%s\n' % (capName, name))
-            wrt('    def set%s(self, %s): self.%s = %s\n' %
-                (capName, name, name, name))
+            wrt('    def get%s(self):\n'
+                #'        pass\n'    # add custom code here for getter
+                '        return self.%s\n' % (capName, name))
+            wrt('    def set%s(self, %s):\n'
+                #'        pass\n'    # add custom code here for setter
+                '        self.%s = %s\n' % (
+                    capName, name, name, name))
             if child.getMaxOccurs() > 1:
                 wrt('    def add%s(self, value): self.%s.append(value)\n' %
                     (capName, name))
@@ -4739,11 +4748,15 @@ def generateGettersAndSetters(wrt, element):
         attrDef = attrDefs[key]
         name = cleanupName(attrDef.getName().replace(':', '_'))
         mappedName = mapName(name)
-        wrt('    def get%s(self): return self.%s\n' %
+        wrt('    def get%s(self):\n'
+            #'        pass\n'    # add custom code here for getter
+            '        return self.%s\n' %
             (make_gs_name(name), mappedName))
         gsName = make_gs_name(name)
-        wrt('    def set%s(self, %s): self.%s = %s\n' % (
-            gsName, mappedName, mappedName, mappedName))
+        wrt('    def set%s(self, %s):\n'
+            #'        pass\n'    # add custom code here for setter
+            '        self.%s = %s\n' % (
+                gsName, mappedName, mappedName, mappedName))
         if GenerateProperties:
             wrt('    %sProp = property(get%s, set%s)\n' %
                 (name, gsName, gsName))
@@ -6316,16 +6329,16 @@ def generateSubclass(wrt, element, prefix, xmlbehavior, behaviors, baseUrl):
         prefix, name, SubclassSuffix, prefix, name))
     childCount = countChildren(element, 0)
     s1 = buildCtorArgs_multilevel(element, childCount)
-    wrt('    def __init__(self%s):\n' % s1)
+    wrt('    def __init__(self%s, **kwargs_):\n' % s1)
     args = buildCtorParams(element, element, childCount)
     s1 = ''.join(args)
     if len(args) > 254:
         wrt('        arglist_ = (%s)\n' % (s1, ))
-        wrt('        super(%s%s%s, self).__init__(*arglist_)\n' %
+        wrt('        super(%s%s%s, self).__init__(*arglist_, **kwargs_)\n' %
             (prefix, name, SubclassSuffix, ))
     else:
         #wrt('        supermod.%s%s.__init__(%s)\n' % (prefix, name, s1))
-        wrt('        super(%s%s%s, self).__init__(%s)\n' % (
+        wrt('        super(%s%s%s, self).__init__(%s **kwargs_)\n' % (
             prefix, name, SubclassSuffix, s1, ))
     if xmlbehavior and behaviors:
         wrt('\n')

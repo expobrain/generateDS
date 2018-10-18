@@ -736,8 +736,9 @@ class PlantType_single(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, anytypeobjs_=None, description=None):
+    def __init__(self, name=None, anytypeobjs_=None, description=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = name
         self.anytypeobjs_ = anytypeobjs_
         self.description = description
@@ -752,12 +753,16 @@ class PlantType_single(GeneratedsSuper):
         else:
             return PlantType_single(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
     def get_anytypeobjs_(self): return self.anytypeobjs_
     def set_anytypeobjs_(self, anytypeobjs_): self.anytypeobjs_ = anytypeobjs_
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
     def hasContent_(self):
         if (
             self.name is not None or
@@ -817,7 +822,7 @@ class PlantType_single(GeneratedsSuper):
             name_ = self.gds_validate_string(name_, node, 'name')
             self.name = name_
         elif nodeName_ == 'description':
-            obj_ = DescriptionType.factory()
+            obj_ = DescriptionType.factory(parent_object_=self)
             obj_.build(child_)
             self.description = obj_
             obj_.original_tagname_ = 'description'
@@ -836,8 +841,9 @@ class PlantType_multiple(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, anytypeobjs_=None, description=None):
+    def __init__(self, name=None, anytypeobjs_=None, description=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = name
         if anytypeobjs_ is None:
             self.anytypeobjs_ = []
@@ -855,14 +861,18 @@ class PlantType_multiple(GeneratedsSuper):
         else:
             return PlantType_multiple(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
     def get_anytypeobjs_(self): return self.anytypeobjs_
     def set_anytypeobjs_(self, anytypeobjs_): self.anytypeobjs_ = anytypeobjs_
     def add_anytypeobjs_(self, value): self.anytypeobjs_.append(value)
     def insert_anytypeobjs_(self, index, value): self._anytypeobjs_[index] = value
-    def get_description(self): return self.description
-    def set_description(self, description): self.description = description
+    def get_description(self):
+        return self.description
+    def set_description(self, description):
+        self.description = description
     def hasContent_(self):
         if (
             self.name is not None or
@@ -922,7 +932,7 @@ class PlantType_multiple(GeneratedsSuper):
             name_ = self.gds_validate_string(name_, node, 'name')
             self.name = name_
         elif nodeName_ == 'description':
-            obj_ = DescriptionType.factory()
+            obj_ = DescriptionType.factory(parent_object_=self)
             obj_.build(child_)
             self.description = obj_
             obj_.original_tagname_ = 'description'
@@ -941,8 +951,9 @@ class DescriptionType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, size=None):
+    def __init__(self, name=None, size=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = name
         self.size = size
     def factory(*args_, **kwargs_):
@@ -956,10 +967,14 @@ class DescriptionType(GeneratedsSuper):
         else:
             return DescriptionType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_size(self): return self.size
-    def set_size(self, size): self.size = size
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_size(self):
+        return self.size
+    def set_size(self, size):
+        self.size = size
     def hasContent_(self):
         if (
             self.name is not None or
@@ -1031,8 +1046,9 @@ class CatalogType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, name=None, catagory=None):
+    def __init__(self, name=None, catagory=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.name = name
         self.catagory = catagory
     def factory(*args_, **kwargs_):
@@ -1046,10 +1062,14 @@ class CatalogType(GeneratedsSuper):
         else:
             return CatalogType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self): return self.name
-    def set_name(self, name): self.name = name
-    def get_catagory(self): return self.catagory
-    def set_catagory(self, catagory): self.catagory = catagory
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def get_catagory(self):
+        return self.catagory
+    def set_catagory(self, catagory):
+        self.catagory = catagory
     def hasContent_(self):
         if (
             self.name is not None or
@@ -1123,8 +1143,9 @@ class PlantType_single_nochild(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, anytypeobjs_=None):
+    def __init__(self, anytypeobjs_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.anytypeobjs_ = anytypeobjs_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -1198,8 +1219,9 @@ class PlantType_multiple_nochild(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, anytypeobjs_=None):
+    def __init__(self, anytypeobjs_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if anytypeobjs_ is None:
             self.anytypeobjs_ = []
         else:

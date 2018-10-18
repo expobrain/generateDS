@@ -48,36 +48,36 @@ ExternalEncoding = ''
 
 
 class DefaultTypesSub(supermod.DefaultTypes):
-    def __init__(self, default1=None, default2=None, fixed1=None, fixed2=None):
-        super(DefaultTypesSub, self).__init__(default1, default2, fixed1, fixed2, )
+    def __init__(self, default1=None, default2=None, fixed1=None, fixed2=None, **kwargs_):
+        super(DefaultTypesSub, self).__init__(default1, default2, fixed1, fixed2,  **kwargs_)
 supermod.DefaultTypes.subclass = DefaultTypesSub
 # end class DefaultTypesSub
 
 
 class DefaultType1Sub(supermod.DefaultType1):
-    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32):
-        super(DefaultType1Sub, self).__init__(normal01, normal02, default01, default02, normal03, normal04, default03, default04, )
+    def __init__(self, normal01=None, normal02=None, default01=23, default02='Peach', normal03=None, normal04=None, default03=23.45, default04=54.32, **kwargs_):
+        super(DefaultType1Sub, self).__init__(normal01, normal02, default01, default02, normal03, normal04, default03, default04,  **kwargs_)
 supermod.DefaultType1.subclass = DefaultType1Sub
 # end class DefaultType1Sub
 
 
 class DefaultType2Sub(supermod.DefaultType2):
-    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None):
-        super(DefaultType2Sub, self).__init__(attrdefault01, attrdefault02, attrnormal01, attrnormal02, )
+    def __init__(self, attrdefault01='abcd', attrdefault02=14, attrnormal01=None, attrnormal02=None, **kwargs_):
+        super(DefaultType2Sub, self).__init__(attrdefault01, attrdefault02, attrnormal01, attrnormal02,  **kwargs_)
 supermod.DefaultType2.subclass = DefaultType2Sub
 # end class DefaultType2Sub
 
 
 class FixedType1Sub(supermod.FixedType1):
-    def __init__(self, normal01=None, normal02=None, fixed01=None, fixed02=None, normal03=None, normal04=None, fixed03=None, fixed04=None):
-        super(FixedType1Sub, self).__init__(normal01, normal02, fixed01, fixed02, normal03, normal04, fixed03, fixed04, )
+    def __init__(self, normal01=None, normal02=None, fixed01=None, fixed02=None, normal03=None, normal04=None, fixed03=None, fixed04=None, **kwargs_):
+        super(FixedType1Sub, self).__init__(normal01, normal02, fixed01, fixed02, normal03, normal04, fixed03, fixed04,  **kwargs_)
 supermod.FixedType1.subclass = FixedType1Sub
 # end class FixedType1Sub
 
 
 class FixedType2Sub(supermod.FixedType2):
-    def __init__(self, attrfixed01='abcd', attrfixed02=14, attrnormal01=None, attrnormal02=None):
-        super(FixedType2Sub, self).__init__(attrfixed01, attrfixed02, attrnormal01, attrnormal02, )
+    def __init__(self, attrfixed01='abcd', attrfixed02=14, attrnormal01=None, attrnormal02=None, **kwargs_):
+        super(FixedType2Sub, self).__init__(attrfixed01, attrfixed02, attrnormal01, attrnormal02,  **kwargs_)
 supermod.FixedType2.subclass = FixedType2Sub
 # end class FixedType2Sub
 

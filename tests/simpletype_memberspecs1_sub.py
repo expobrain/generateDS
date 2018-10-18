@@ -49,15 +49,15 @@ ExternalEncoding = ''
 
 
 class SpecialDateSub(supermod.SpecialDate):
-    def __init__(self, SpecialProperty=None, valueOf_=None):
-        super(SpecialDateSub, self).__init__(SpecialProperty, valueOf_, )
+    def __init__(self, SpecialProperty=None, valueOf_=None, **kwargs_):
+        super(SpecialDateSub, self).__init__(SpecialProperty, valueOf_,  **kwargs_)
 supermod.SpecialDate.subclass = SpecialDateSub
 # end class SpecialDateSub
 
 
 class ExtremeDateSub(supermod.ExtremeDate):
-    def __init__(self, ExtremeProperty=None, valueOf_=None):
-        super(ExtremeDateSub, self).__init__(ExtremeProperty, valueOf_, )
+    def __init__(self, ExtremeProperty=None, valueOf_=None, **kwargs_):
+        super(ExtremeDateSub, self).__init__(ExtremeProperty, valueOf_,  **kwargs_)
 supermod.ExtremeDate.subclass = ExtremeDateSub
 # end class ExtremeDateSub
 

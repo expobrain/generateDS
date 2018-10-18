@@ -735,8 +735,9 @@ class DefaultTypes(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, default1=None, default2=None):
+    def __init__(self, default1=None, default2=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.default1 = default1
         self.default2 = default2
     def factory(*args_, **kwargs_):
@@ -750,10 +751,14 @@ class DefaultTypes(GeneratedsSuper):
         else:
             return DefaultTypes(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_default1(self): return self.default1
-    def set_default1(self, default1): self.default1 = default1
-    def get_default2(self): return self.default2
-    def set_default2(self, default2): self.default2 = default2
+    def get_default1(self):
+        return self.default1
+    def set_default1(self, default1):
+        self.default1 = default1
+    def get_default2(self):
+        return self.default2
+    def set_default2(self, default2):
+        self.default2 = default2
     def hasContent_(self):
         if (
             self.default1 is not None or
@@ -805,12 +810,12 @@ class DefaultTypes(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'default1':
-            obj_ = DefaultType1.factory()
+            obj_ = DefaultType1.factory(parent_object_=self)
             obj_.build(child_)
             self.default1 = obj_
             obj_.original_tagname_ = 'default1'
         elif nodeName_ == 'default2':
-            obj_ = DefaultType2.factory()
+            obj_ = DefaultType2.factory(parent_object_=self)
             obj_.build(child_)
             self.default2 = obj_
             obj_.original_tagname_ = 'default2'
@@ -839,8 +844,9 @@ class DefaultType1(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None):
+    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.default01 = default01
         self.normal01 = normal01
         self.default02 = default02
@@ -893,40 +899,74 @@ class DefaultType1(GeneratedsSuper):
         else:
             return DefaultType1(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_default01(self): return self.default01
-    def set_default01(self, default01): self.default01 = default01
-    def get_normal01(self): return self.normal01
-    def set_normal01(self, normal01): self.normal01 = normal01
-    def get_default02(self): return self.default02
-    def set_default02(self, default02): self.default02 = default02
-    def get_normal02(self): return self.normal02
-    def set_normal02(self, normal02): self.normal02 = normal02
-    def get_default03(self): return self.default03
-    def set_default03(self, default03): self.default03 = default03
-    def get_normal03(self): return self.normal03
-    def set_normal03(self, normal03): self.normal03 = normal03
-    def get_default04(self): return self.default04
-    def set_default04(self, default04): self.default04 = default04
-    def get_normal04(self): return self.normal04
-    def set_normal04(self, normal04): self.normal04 = normal04
-    def get_default05a(self): return self.default05a
-    def set_default05a(self, default05a): self.default05a = default05a
-    def get_default05b(self): return self.default05b
-    def set_default05b(self, default05b): self.default05b = default05b
-    def get_normal05(self): return self.normal05
-    def set_normal05(self, normal05): self.normal05 = normal05
-    def get_default06(self): return self.default06
-    def set_default06(self, default06): self.default06 = default06
-    def get_normal06(self): return self.normal06
-    def set_normal06(self, normal06): self.normal06 = normal06
-    def get_default07(self): return self.default07
-    def set_default07(self, default07): self.default07 = default07
-    def get_normal07(self): return self.normal07
-    def set_normal07(self, normal07): self.normal07 = normal07
-    def get_default08(self): return self.default08
-    def set_default08(self, default08): self.default08 = default08
-    def get_normal08(self): return self.normal08
-    def set_normal08(self, normal08): self.normal08 = normal08
+    def get_default01(self):
+        return self.default01
+    def set_default01(self, default01):
+        self.default01 = default01
+    def get_normal01(self):
+        return self.normal01
+    def set_normal01(self, normal01):
+        self.normal01 = normal01
+    def get_default02(self):
+        return self.default02
+    def set_default02(self, default02):
+        self.default02 = default02
+    def get_normal02(self):
+        return self.normal02
+    def set_normal02(self, normal02):
+        self.normal02 = normal02
+    def get_default03(self):
+        return self.default03
+    def set_default03(self, default03):
+        self.default03 = default03
+    def get_normal03(self):
+        return self.normal03
+    def set_normal03(self, normal03):
+        self.normal03 = normal03
+    def get_default04(self):
+        return self.default04
+    def set_default04(self, default04):
+        self.default04 = default04
+    def get_normal04(self):
+        return self.normal04
+    def set_normal04(self, normal04):
+        self.normal04 = normal04
+    def get_default05a(self):
+        return self.default05a
+    def set_default05a(self, default05a):
+        self.default05a = default05a
+    def get_default05b(self):
+        return self.default05b
+    def set_default05b(self, default05b):
+        self.default05b = default05b
+    def get_normal05(self):
+        return self.normal05
+    def set_normal05(self, normal05):
+        self.normal05 = normal05
+    def get_default06(self):
+        return self.default06
+    def set_default06(self, default06):
+        self.default06 = default06
+    def get_normal06(self):
+        return self.normal06
+    def set_normal06(self, normal06):
+        self.normal06 = normal06
+    def get_default07(self):
+        return self.default07
+    def set_default07(self, default07):
+        self.default07 = default07
+    def get_normal07(self):
+        return self.normal07
+    def set_normal07(self, normal07):
+        self.normal07 = normal07
+    def get_default08(self):
+        return self.default08
+    def set_default08(self, default08):
+        self.default08 = default08
+    def get_normal08(self):
+        return self.normal08
+    def set_normal08(self, normal08):
+        self.normal08 = normal08
     def hasContent_(self):
         if (
             self.default01 != 23 or
@@ -1174,8 +1214,9 @@ class DefaultType2(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None):
+    def __init__(self, default01=23, normal01=None, default02='Peach', normal02=None, default03=23.45, normal03=None, default04=54.32, normal04=None, default05a=True, default05b=False, normal05=None, default06='2015-06-21', normal06=None, default07='11:10:09', normal07=None, default08='2015-06-21T14:13:12', normal08=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.default01 = default01
         self.normal01 = normal01
         self.default02 = default02
@@ -1228,40 +1269,74 @@ class DefaultType2(GeneratedsSuper):
         else:
             return DefaultType2(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_default01(self): return self.default01
-    def set_default01(self, default01): self.default01 = default01
-    def get_normal01(self): return self.normal01
-    def set_normal01(self, normal01): self.normal01 = normal01
-    def get_default02(self): return self.default02
-    def set_default02(self, default02): self.default02 = default02
-    def get_normal02(self): return self.normal02
-    def set_normal02(self, normal02): self.normal02 = normal02
-    def get_default03(self): return self.default03
-    def set_default03(self, default03): self.default03 = default03
-    def get_normal03(self): return self.normal03
-    def set_normal03(self, normal03): self.normal03 = normal03
-    def get_default04(self): return self.default04
-    def set_default04(self, default04): self.default04 = default04
-    def get_normal04(self): return self.normal04
-    def set_normal04(self, normal04): self.normal04 = normal04
-    def get_default05a(self): return self.default05a
-    def set_default05a(self, default05a): self.default05a = default05a
-    def get_default05b(self): return self.default05b
-    def set_default05b(self, default05b): self.default05b = default05b
-    def get_normal05(self): return self.normal05
-    def set_normal05(self, normal05): self.normal05 = normal05
-    def get_default06(self): return self.default06
-    def set_default06(self, default06): self.default06 = default06
-    def get_normal06(self): return self.normal06
-    def set_normal06(self, normal06): self.normal06 = normal06
-    def get_default07(self): return self.default07
-    def set_default07(self, default07): self.default07 = default07
-    def get_normal07(self): return self.normal07
-    def set_normal07(self, normal07): self.normal07 = normal07
-    def get_default08(self): return self.default08
-    def set_default08(self, default08): self.default08 = default08
-    def get_normal08(self): return self.normal08
-    def set_normal08(self, normal08): self.normal08 = normal08
+    def get_default01(self):
+        return self.default01
+    def set_default01(self, default01):
+        self.default01 = default01
+    def get_normal01(self):
+        return self.normal01
+    def set_normal01(self, normal01):
+        self.normal01 = normal01
+    def get_default02(self):
+        return self.default02
+    def set_default02(self, default02):
+        self.default02 = default02
+    def get_normal02(self):
+        return self.normal02
+    def set_normal02(self, normal02):
+        self.normal02 = normal02
+    def get_default03(self):
+        return self.default03
+    def set_default03(self, default03):
+        self.default03 = default03
+    def get_normal03(self):
+        return self.normal03
+    def set_normal03(self, normal03):
+        self.normal03 = normal03
+    def get_default04(self):
+        return self.default04
+    def set_default04(self, default04):
+        self.default04 = default04
+    def get_normal04(self):
+        return self.normal04
+    def set_normal04(self, normal04):
+        self.normal04 = normal04
+    def get_default05a(self):
+        return self.default05a
+    def set_default05a(self, default05a):
+        self.default05a = default05a
+    def get_default05b(self):
+        return self.default05b
+    def set_default05b(self, default05b):
+        self.default05b = default05b
+    def get_normal05(self):
+        return self.normal05
+    def set_normal05(self, normal05):
+        self.normal05 = normal05
+    def get_default06(self):
+        return self.default06
+    def set_default06(self, default06):
+        self.default06 = default06
+    def get_normal06(self):
+        return self.normal06
+    def set_normal06(self, normal06):
+        self.normal06 = normal06
+    def get_default07(self):
+        return self.default07
+    def set_default07(self, default07):
+        self.default07 = default07
+    def get_normal07(self):
+        return self.normal07
+    def set_normal07(self, normal07):
+        self.normal07 = normal07
+    def get_default08(self):
+        return self.default08
+    def set_default08(self, default08):
+        self.default08 = default08
+    def get_normal08(self):
+        return self.normal08
+    def set_normal08(self, normal08):
+        self.normal08 = normal08
     def hasContent_(self):
         if (
             self.default01 != 23 or

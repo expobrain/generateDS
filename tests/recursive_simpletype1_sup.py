@@ -736,8 +736,9 @@ class PersonType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, personId=None, fname=None, lname=None):
+    def __init__(self, personId=None, fname=None, lname=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.personId = personId
         self.fname = fname
         self.lname = lname
@@ -752,12 +753,18 @@ class PersonType(GeneratedsSuper):
         else:
             return PersonType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_personId(self): return self.personId
-    def set_personId(self, personId): self.personId = personId
-    def get_fname(self): return self.fname
-    def set_fname(self, fname): self.fname = fname
-    def get_lname(self): return self.lname
-    def set_lname(self, lname): self.lname = lname
+    def get_personId(self):
+        return self.personId
+    def set_personId(self, personId):
+        self.personId = personId
+    def get_fname(self):
+        return self.fname
+    def set_fname(self, fname):
+        self.fname = fname
+    def get_lname(self):
+        return self.lname
+    def set_lname(self, lname):
+        self.lname = lname
     def hasContent_(self):
         if (
             self.personId is not None or

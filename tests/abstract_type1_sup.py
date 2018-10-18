@@ -734,8 +734,9 @@ class carrierType(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, fleet=None):
+    def __init__(self, fleet=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         if fleet is None:
             self.fleet = []
         else:
@@ -751,8 +752,10 @@ class carrierType(GeneratedsSuper):
         else:
             return carrierType(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_fleet(self): return self.fleet
-    def set_fleet(self, fleet): self.fleet = fleet
+    def get_fleet(self):
+        return self.fleet
+    def set_fleet(self, fleet):
+        self.fleet = fleet
     def add_fleet(self, value): self.fleet.append(value)
     def insert_fleet_at(self, index, value): self.fleet.insert(index, value)
     def replace_fleet_at(self, index, value): self.fleet[index] = value
@@ -830,8 +833,9 @@ class Vehicle(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, extensiontype_=None):
+    def __init__(self, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
@@ -903,9 +907,10 @@ class Car(Vehicle):
     ]
     subclass = None
     superclass = Vehicle
-    def __init__(self):
+    def __init__(self, **kwargs_):
         self.original_tagname_ = None
-        super(Car, self).__init__()
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(Car, self).__init__( **kwargs_)
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
@@ -969,9 +974,10 @@ class Plane(Vehicle):
     ]
     subclass = None
     superclass = Vehicle
-    def __init__(self):
+    def __init__(self, **kwargs_):
         self.original_tagname_ = None
-        super(Plane, self).__init__()
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(Plane, self).__init__( **kwargs_)
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(

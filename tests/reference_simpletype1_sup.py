@@ -738,8 +738,9 @@ class dummy(GeneratedsSuper):
     ]
     subclass = None
     superclass = None
-    def __init__(self, test_ref_attr=None, test_normal_attr=None, test_ref_element=None, test_normal_element=None):
+    def __init__(self, test_ref_attr=None, test_normal_attr=None, test_ref_element=None, test_normal_element=None, **kwargs_):
         self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
         self.test_ref_attr = _cast(int, test_ref_attr)
         self.test_normal_attr = _cast(int, test_normal_attr)
         self.test_ref_element = test_ref_element
@@ -755,14 +756,22 @@ class dummy(GeneratedsSuper):
         else:
             return dummy(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_test_ref_element(self): return self.test_ref_element
-    def set_test_ref_element(self, test_ref_element): self.test_ref_element = test_ref_element
-    def get_test_normal_element(self): return self.test_normal_element
-    def set_test_normal_element(self, test_normal_element): self.test_normal_element = test_normal_element
-    def get_test_ref_attr(self): return self.test_ref_attr
-    def set_test_ref_attr(self, test_ref_attr): self.test_ref_attr = test_ref_attr
-    def get_test_normal_attr(self): return self.test_normal_attr
-    def set_test_normal_attr(self, test_normal_attr): self.test_normal_attr = test_normal_attr
+    def get_test_ref_element(self):
+        return self.test_ref_element
+    def set_test_ref_element(self, test_ref_element):
+        self.test_ref_element = test_ref_element
+    def get_test_normal_element(self):
+        return self.test_normal_element
+    def set_test_normal_element(self, test_normal_element):
+        self.test_normal_element = test_normal_element
+    def get_test_ref_attr(self):
+        return self.test_ref_attr
+    def set_test_ref_attr(self, test_ref_attr):
+        self.test_ref_attr = test_ref_attr
+    def get_test_normal_attr(self):
+        return self.test_normal_attr
+    def set_test_normal_attr(self, test_normal_attr):
+        self.test_normal_attr = test_normal_attr
     def hasContent_(self):
         if (
             self.test_ref_element is not None or

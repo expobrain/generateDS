@@ -49,43 +49,43 @@ ExternalEncoding = ''
 
 
 class PlantType_singleSub(supermod.PlantType_single):
-    def __init__(self, name=None, anytypeobjs_=None, description=None):
-        super(PlantType_singleSub, self).__init__(name, anytypeobjs_, description, )
+    def __init__(self, name=None, anytypeobjs_=None, description=None, **kwargs_):
+        super(PlantType_singleSub, self).__init__(name, anytypeobjs_, description,  **kwargs_)
 supermod.PlantType_single.subclass = PlantType_singleSub
 # end class PlantType_singleSub
 
 
 class PlantType_multipleSub(supermod.PlantType_multiple):
-    def __init__(self, name=None, anytypeobjs_=None, description=None):
-        super(PlantType_multipleSub, self).__init__(name, anytypeobjs_, description, )
+    def __init__(self, name=None, anytypeobjs_=None, description=None, **kwargs_):
+        super(PlantType_multipleSub, self).__init__(name, anytypeobjs_, description,  **kwargs_)
 supermod.PlantType_multiple.subclass = PlantType_multipleSub
 # end class PlantType_multipleSub
 
 
 class DescriptionTypeSub(supermod.DescriptionType):
-    def __init__(self, name=None, size=None):
-        super(DescriptionTypeSub, self).__init__(name, size, )
+    def __init__(self, name=None, size=None, **kwargs_):
+        super(DescriptionTypeSub, self).__init__(name, size,  **kwargs_)
 supermod.DescriptionType.subclass = DescriptionTypeSub
 # end class DescriptionTypeSub
 
 
 class CatalogTypeSub(supermod.CatalogType):
-    def __init__(self, name=None, catagory=None):
-        super(CatalogTypeSub, self).__init__(name, catagory, )
+    def __init__(self, name=None, catagory=None, **kwargs_):
+        super(CatalogTypeSub, self).__init__(name, catagory,  **kwargs_)
 supermod.CatalogType.subclass = CatalogTypeSub
 # end class CatalogTypeSub
 
 
 class PlantType_single_nochildSub(supermod.PlantType_single_nochild):
-    def __init__(self, anytypeobjs_=None):
-        super(PlantType_single_nochildSub, self).__init__(anytypeobjs_, )
+    def __init__(self, anytypeobjs_=None, **kwargs_):
+        super(PlantType_single_nochildSub, self).__init__(anytypeobjs_,  **kwargs_)
 supermod.PlantType_single_nochild.subclass = PlantType_single_nochildSub
 # end class PlantType_single_nochildSub
 
 
 class PlantType_multiple_nochildSub(supermod.PlantType_multiple_nochild):
-    def __init__(self, anytypeobjs_=None):
-        super(PlantType_multiple_nochildSub, self).__init__(anytypeobjs_, )
+    def __init__(self, anytypeobjs_=None, **kwargs_):
+        super(PlantType_multiple_nochildSub, self).__init__(anytypeobjs_,  **kwargs_)
 supermod.PlantType_multiple_nochild.subclass = PlantType_multiple_nochildSub
 # end class PlantType_multiple_nochildSub
 
