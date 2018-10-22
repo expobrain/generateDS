@@ -141,15 +141,23 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.2 (11/01/2018)
+
+- When dealing with a derived type, generate "set_xxx" and "add_xxx"
+  methods that automatically set ``original_tagname_`` and
+  ``extensiontype_``, so that when exported ``xsi:type`` is used to
+  specify the type.  Thanks to Edwin Matthijssen for working with me
+  on this.
+
 Version 2.30.1 (10/18/2018)
 
 - New feature -- Each generated data binding class has a new
-  instance variable: `parent_object_`.  It is automatically set to
+  instance variable: ``parent_object_``.  It is automatically set to
   reference the parent (i.e. container) of this object.  Thanks to
   Florian de Boissieu for suggesting this enhancement.
-- Added a comment to `generateDS.py` to help with customizing the
+- Added a comment to ``generateDS.py`` to help with customizing the
   code generated in getters and setters.  You can search
-  `generateDS.py` for "add custom code here" and then add custom
+  ``generateDS.py`` for "add custom code here" and then add custom
   code there.  This is not a terribly convenient way for a user to
   add custom code, so if someone finds a need to use it, please
   contact me and we'll try to find a better way.

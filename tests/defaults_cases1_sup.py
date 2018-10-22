@@ -770,30 +770,50 @@ class DefaultTypes(GeneratedsSuper):
         return self.default1
     def set_default1(self, default1):
         self.default1 = default1
-    def add_default1(self, value): self.default1.append(value)
-    def insert_default1_at(self, index, value): self.default1.insert(index, value)
-    def replace_default1_at(self, index, value): self.default1[index] = value
+    def add_default1(self, value):
+        self.default1.append(value)
+    def add_default1(self, value):
+        self.default1.append(value)
+    def insert_default1_at(self, index, value):
+        self.default1.insert(index, value)
+    def replace_default1_at(self, index, value):
+        self.default1[index] = value
     def get_default2(self):
         return self.default2
     def set_default2(self, default2):
         self.default2 = default2
-    def add_default2(self, value): self.default2.append(value)
-    def insert_default2_at(self, index, value): self.default2.insert(index, value)
-    def replace_default2_at(self, index, value): self.default2[index] = value
+    def add_default2(self, value):
+        self.default2.append(value)
+    def add_default2(self, value):
+        self.default2.append(value)
+    def insert_default2_at(self, index, value):
+        self.default2.insert(index, value)
+    def replace_default2_at(self, index, value):
+        self.default2[index] = value
     def get_fixed1(self):
         return self.fixed1
     def set_fixed1(self, fixed1):
         self.fixed1 = fixed1
-    def add_fixed1(self, value): self.fixed1.append(value)
-    def insert_fixed1_at(self, index, value): self.fixed1.insert(index, value)
-    def replace_fixed1_at(self, index, value): self.fixed1[index] = value
+    def add_fixed1(self, value):
+        self.fixed1.append(value)
+    def add_fixed1(self, value):
+        self.fixed1.append(value)
+    def insert_fixed1_at(self, index, value):
+        self.fixed1.insert(index, value)
+    def replace_fixed1_at(self, index, value):
+        self.fixed1[index] = value
     def get_fixed2(self):
         return self.fixed2
     def set_fixed2(self, fixed2):
         self.fixed2 = fixed2
-    def add_fixed2(self, value): self.fixed2.append(value)
-    def insert_fixed2_at(self, index, value): self.fixed2.insert(index, value)
-    def replace_fixed2_at(self, index, value): self.fixed2[index] = value
+    def add_fixed2(self, value):
+        self.fixed2.append(value)
+    def add_fixed2(self, value):
+        self.fixed2.append(value)
+    def insert_fixed2_at(self, index, value):
+        self.fixed2.insert(index, value)
+    def replace_fixed2_at(self, index, value):
+        self.fixed2[index] = value
     def hasContent_(self):
         if (
             self.default1 or

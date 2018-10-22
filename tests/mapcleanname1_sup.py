@@ -766,9 +766,14 @@ class complex_type01(GeneratedsSuper):
         return self.integer_value01
     def set_integer_value01(self, integer_value01):
         self.integer_value01 = integer_value01
-    def add_integer_value01(self, value): self.integer_value01.append(value)
-    def insert_integer_value01_at(self, index, value): self.integer_value01.insert(index, value)
-    def replace_integer_value01_at(self, index, value): self.integer_value01[index] = value
+    def add_integer_value01(self, value):
+        self.integer_value01.append(value)
+    def add_integer_value01(self, value):
+        self.integer_value01.append(value)
+    def insert_integer_value01_at(self, index, value):
+        self.integer_value01.insert(index, value)
+    def replace_integer_value01_at(self, index, value):
+        self.integer_value01[index] = value
     def get_float_value01(self):
         return self.float_value01
     def set_float_value01(self, float_value01):
@@ -901,9 +906,14 @@ class complex_type02(GeneratedsSuper):
         return self.integer_value02
     def set_integer_value02(self, integer_value02):
         self.integer_value02 = integer_value02
-    def add_integer_value02(self, value): self.integer_value02.append(value)
-    def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
-    def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def insert_integer_value02_at(self, index, value):
+        self.integer_value02.insert(index, value)
+    def replace_integer_value02_at(self, index, value):
+        self.integer_value02[index] = value
     def get_float_value02(self):
         return self.float_value02
     def set_float_value02(self, float_value02):
@@ -1033,9 +1043,14 @@ class complex_type03(complex_type02):
         return self.integer_value03
     def set_integer_value03(self, integer_value03):
         self.integer_value03 = integer_value03
-    def add_integer_value03(self, value): self.integer_value03.append(value)
-    def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
-    def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def insert_integer_value03_at(self, index, value):
+        self.integer_value03.insert(index, value)
+    def replace_integer_value03_at(self, index, value):
+        self.integer_value03[index] = value
     def get_float_value03(self):
         return self.float_value03
     def set_float_value03(self, float_value03):
@@ -1159,9 +1174,14 @@ class type_(GeneratedsSuper):
         return self.integer_value02
     def set_integer_value02(self, integer_value02):
         self.integer_value02 = integer_value02
-    def add_integer_value02(self, value): self.integer_value02.append(value)
-    def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
-    def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def insert_integer_value02_at(self, index, value):
+        self.integer_value02.insert(index, value)
+    def replace_integer_value02_at(self, index, value):
+        self.integer_value02[index] = value
     def get_float_value02(self):
         return self.float_value02
     def set_float_value02(self, float_value02):
@@ -1291,9 +1311,14 @@ class complex_type04(type_):
         return self.integer_value03
     def set_integer_value03(self, integer_value03):
         self.integer_value03 = integer_value03
-    def add_integer_value03(self, value): self.integer_value03.append(value)
-    def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
-    def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def insert_integer_value03_at(self, index, value):
+        self.integer_value03.insert(index, value)
+    def replace_integer_value03_at(self, index, value):
+        self.integer_value03[index] = value
     def get_float_value03(self):
         return self.float_value03
     def set_float_value03(self, float_value03):
@@ -1417,9 +1442,14 @@ class build_(GeneratedsSuper):
         return self.integer_value02
     def set_integer_value02(self, integer_value02):
         self.integer_value02 = integer_value02
-    def add_integer_value02(self, value): self.integer_value02.append(value)
-    def insert_integer_value02_at(self, index, value): self.integer_value02.insert(index, value)
-    def replace_integer_value02_at(self, index, value): self.integer_value02[index] = value
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def add_integer_value02(self, value):
+        self.integer_value02.append(value)
+    def insert_integer_value02_at(self, index, value):
+        self.integer_value02.insert(index, value)
+    def replace_integer_value02_at(self, index, value):
+        self.integer_value02[index] = value
     def get_float_value02(self):
         return self.float_value02
     def set_float_value02(self, float_value02):
@@ -1549,9 +1579,14 @@ class complex_type05(build_):
         return self.integer_value03
     def set_integer_value03(self, integer_value03):
         self.integer_value03 = integer_value03
-    def add_integer_value03(self, value): self.integer_value03.append(value)
-    def insert_integer_value03_at(self, index, value): self.integer_value03.insert(index, value)
-    def replace_integer_value03_at(self, index, value): self.integer_value03[index] = value
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def add_integer_value03(self, value):
+        self.integer_value03.append(value)
+    def insert_integer_value03_at(self, index, value):
+        self.integer_value03.insert(index, value)
+    def replace_integer_value03_at(self, index, value):
+        self.integer_value03[index] = value
     def get_float_value03(self):
         return self.float_value03
     def set_float_value03(self, float_value03):

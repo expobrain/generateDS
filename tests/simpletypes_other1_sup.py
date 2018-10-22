@@ -756,9 +756,14 @@ class simpleTypeTestsType(GeneratedsSuper):
         return self.simpleTypeTest
     def set_simpleTypeTest(self, simpleTypeTest):
         self.simpleTypeTest = simpleTypeTest
-    def add_simpleTypeTest(self, value): self.simpleTypeTest.append(value)
-    def insert_simpleTypeTest_at(self, index, value): self.simpleTypeTest.insert(index, value)
-    def replace_simpleTypeTest_at(self, index, value): self.simpleTypeTest[index] = value
+    def add_simpleTypeTest(self, value):
+        self.simpleTypeTest.append(value)
+    def add_simpleTypeTest(self, value):
+        self.simpleTypeTest.append(value)
+    def insert_simpleTypeTest_at(self, index, value):
+        self.simpleTypeTest.insert(index, value)
+    def replace_simpleTypeTest_at(self, index, value):
+        self.simpleTypeTest[index] = value
     def hasContent_(self):
         if (
             self.simpleTypeTest
@@ -935,9 +940,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.integerVal2
     def set_integerVal2(self, integerVal2):
         self.integerVal2 = integerVal2
-    def add_integerVal2(self, value): self.integerVal2.append(value)
-    def insert_integerVal2_at(self, index, value): self.integerVal2.insert(index, value)
-    def replace_integerVal2_at(self, index, value): self.integerVal2[index] = value
+    def add_integerVal2(self, value):
+        self.integerVal2.append(value)
+    def add_integerVal2(self, value):
+        self.integerVal2.append(value)
+    def insert_integerVal2_at(self, index, value):
+        self.integerVal2.insert(index, value)
+    def replace_integerVal2_at(self, index, value):
+        self.integerVal2[index] = value
     def get_stringVal1(self):
         return self.stringVal1
     def set_stringVal1(self, stringVal1):
@@ -946,9 +956,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.stringVal2
     def set_stringVal2(self, stringVal2):
         self.stringVal2 = stringVal2
-    def add_stringVal2(self, value): self.stringVal2.append(value)
-    def insert_stringVal2_at(self, index, value): self.stringVal2.insert(index, value)
-    def replace_stringVal2_at(self, index, value): self.stringVal2[index] = value
+    def add_stringVal2(self, value):
+        self.stringVal2.append(value)
+    def add_stringVal2(self, value):
+        self.stringVal2.append(value)
+    def insert_stringVal2_at(self, index, value):
+        self.stringVal2.insert(index, value)
+    def replace_stringVal2_at(self, index, value):
+        self.stringVal2[index] = value
     def get_booleanVal1(self):
         return self.booleanVal1
     def set_booleanVal1(self, booleanVal1):
@@ -957,9 +972,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.booleanVal2
     def set_booleanVal2(self, booleanVal2):
         self.booleanVal2 = booleanVal2
-    def add_booleanVal2(self, value): self.booleanVal2.append(value)
-    def insert_booleanVal2_at(self, index, value): self.booleanVal2.insert(index, value)
-    def replace_booleanVal2_at(self, index, value): self.booleanVal2[index] = value
+    def add_booleanVal2(self, value):
+        self.booleanVal2.append(value)
+    def add_booleanVal2(self, value):
+        self.booleanVal2.append(value)
+    def insert_booleanVal2_at(self, index, value):
+        self.booleanVal2.insert(index, value)
+    def replace_booleanVal2_at(self, index, value):
+        self.booleanVal2[index] = value
     def get_decimalVal1(self):
         return self.decimalVal1
     def set_decimalVal1(self, decimalVal1):
@@ -968,9 +988,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.decimalVal2
     def set_decimalVal2(self, decimalVal2):
         self.decimalVal2 = decimalVal2
-    def add_decimalVal2(self, value): self.decimalVal2.append(value)
-    def insert_decimalVal2_at(self, index, value): self.decimalVal2.insert(index, value)
-    def replace_decimalVal2_at(self, index, value): self.decimalVal2[index] = value
+    def add_decimalVal2(self, value):
+        self.decimalVal2.append(value)
+    def add_decimalVal2(self, value):
+        self.decimalVal2.append(value)
+    def insert_decimalVal2_at(self, index, value):
+        self.decimalVal2.insert(index, value)
+    def replace_decimalVal2_at(self, index, value):
+        self.decimalVal2[index] = value
     def get_doubleVal1(self):
         return self.doubleVal1
     def set_doubleVal1(self, doubleVal1):
@@ -979,9 +1004,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.doubleVal2
     def set_doubleVal2(self, doubleVal2):
         self.doubleVal2 = doubleVal2
-    def add_doubleVal2(self, value): self.doubleVal2.append(value)
-    def insert_doubleVal2_at(self, index, value): self.doubleVal2.insert(index, value)
-    def replace_doubleVal2_at(self, index, value): self.doubleVal2[index] = value
+    def add_doubleVal2(self, value):
+        self.doubleVal2.append(value)
+    def add_doubleVal2(self, value):
+        self.doubleVal2.append(value)
+    def insert_doubleVal2_at(self, index, value):
+        self.doubleVal2.insert(index, value)
+    def replace_doubleVal2_at(self, index, value):
+        self.doubleVal2[index] = value
     def get_floatVal1(self):
         return self.floatVal1
     def set_floatVal1(self, floatVal1):
@@ -990,9 +1020,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.floatVal2
     def set_floatVal2(self, floatVal2):
         self.floatVal2 = floatVal2
-    def add_floatVal2(self, value): self.floatVal2.append(value)
-    def insert_floatVal2_at(self, index, value): self.floatVal2.insert(index, value)
-    def replace_floatVal2_at(self, index, value): self.floatVal2[index] = value
+    def add_floatVal2(self, value):
+        self.floatVal2.append(value)
+    def add_floatVal2(self, value):
+        self.floatVal2.append(value)
+    def insert_floatVal2_at(self, index, value):
+        self.floatVal2.insert(index, value)
+    def replace_floatVal2_at(self, index, value):
+        self.floatVal2[index] = value
     def get_dateVal1(self):
         return self.dateVal1
     def set_dateVal1(self, dateVal1):
@@ -1001,9 +1036,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.dateVal2
     def set_dateVal2(self, dateVal2):
         self.dateVal2 = dateVal2
-    def add_dateVal2(self, value): self.dateVal2.append(value)
-    def insert_dateVal2_at(self, index, value): self.dateVal2.insert(index, value)
-    def replace_dateVal2_at(self, index, value): self.dateVal2[index] = value
+    def add_dateVal2(self, value):
+        self.dateVal2.append(value)
+    def add_dateVal2(self, value):
+        self.dateVal2.append(value)
+    def insert_dateVal2_at(self, index, value):
+        self.dateVal2.insert(index, value)
+    def replace_dateVal2_at(self, index, value):
+        self.dateVal2[index] = value
     def get_dateTimeVal1(self):
         return self.dateTimeVal1
     def set_dateTimeVal1(self, dateTimeVal1):
@@ -1012,9 +1052,14 @@ class simpleTypeTestDefs(GeneratedsSuper):
         return self.dateTimeVal2
     def set_dateTimeVal2(self, dateTimeVal2):
         self.dateTimeVal2 = dateTimeVal2
-    def add_dateTimeVal2(self, value): self.dateTimeVal2.append(value)
-    def insert_dateTimeVal2_at(self, index, value): self.dateTimeVal2.insert(index, value)
-    def replace_dateTimeVal2_at(self, index, value): self.dateTimeVal2[index] = value
+    def add_dateTimeVal2(self, value):
+        self.dateTimeVal2.append(value)
+    def add_dateTimeVal2(self, value):
+        self.dateTimeVal2.append(value)
+    def insert_dateTimeVal2_at(self, index, value):
+        self.dateTimeVal2.insert(index, value)
+    def replace_dateTimeVal2_at(self, index, value):
+        self.dateTimeVal2[index] = value
     def hasContent_(self):
         if (
             self.datetime1 is not None or

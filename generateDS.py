@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.1'
+VERSION = '2.30.2'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -4731,14 +4731,33 @@ def generateGettersAndSetters(wrt, element):
                 '        self.%s = %s\n' % (
                     capName, name, name, name))
             if child.getMaxOccurs() > 1:
-                wrt('    def add%s(self, value): self.%s.append(value)\n' %
-                    (capName, name))
+                wrt('    def add%s(self, value):\n'
+                    '        self.%s.append(value)\n' % (
+                        capName, name))
+                childType = child.getType()
+                type_obj = ElementDict.get(childType)
+                if (type_obj is not None and
+                        type_obj.getExtended() and
+                        type_obj.isAbstract()):
+                    suffix = make_gs_name('with_type')
+                    originalTagname = child.getType()
+                    extensionType = 'value.__class__.__name__'
+                    wrt("    def add%s%s(self, value):\n"
+                        "        self.%s.append(value)\n"
+                        "        value.original_tagname_ = '%s'\n"
+                        "        value.extensiontype_ = %s\n" % (
+                            capName, suffix, name,
+                            originalTagname, extensionType))
+                else:
+                    wrt("    def add%s(self, value):\n"
+                        "        self.%s.append(value)\n" % (
+                            capName, name, ))
                 suffix = make_gs_name('at')
-                wrt('    def insert%s%s(self, index, value): '
-                    'self.%s.insert(index, value)\n' %
+                wrt('    def insert%s%s(self, index, value):\n'
+                    '        self.%s.insert(index, value)\n' %
                     (capName, suffix, name))
-                wrt('    def replace%s%s(self, index, value): '
-                    'self.%s[index] = value\n' %
+                wrt('    def replace%s%s(self, index, value):\n'
+                    '        self.%s[index] = value\n' %
                     (capName, suffix, name))
             if GenerateProperties:
                 wrt('    %sProp = property(get%s, set%s)\n' %

@@ -1016,9 +1016,14 @@ class containerType(GeneratedsSuper):
         return self.simplefactoid
     def set_simplefactoid(self, simplefactoid):
         self.simplefactoid = simplefactoid
-    def add_simplefactoid(self, value): self.simplefactoid.append(value)
-    def insert_simplefactoid_at(self, index, value): self.simplefactoid.insert(index, value)
-    def replace_simplefactoid_at(self, index, value): self.simplefactoid[index] = value
+    def add_simplefactoid(self, value):
+        self.simplefactoid.append(value)
+    def add_simplefactoid(self, value):
+        self.simplefactoid.append(value)
+    def insert_simplefactoid_at(self, index, value):
+        self.simplefactoid.insert(index, value)
+    def replace_simplefactoid_at(self, index, value):
+        self.simplefactoid[index] = value
     def get_mixedfactoid(self):
         return self.mixedfactoid
     def set_mixedfactoid(self, mixedfactoid):

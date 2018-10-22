@@ -761,16 +761,26 @@ class DefaultTypes(GeneratedsSuper):
         return self.default1
     def set_default1(self, default1):
         self.default1 = default1
-    def add_default1(self, value): self.default1.append(value)
-    def insert_default1_at(self, index, value): self.default1.insert(index, value)
-    def replace_default1_at(self, index, value): self.default1[index] = value
+    def add_default1(self, value):
+        self.default1.append(value)
+    def add_default1(self, value):
+        self.default1.append(value)
+    def insert_default1_at(self, index, value):
+        self.default1.insert(index, value)
+    def replace_default1_at(self, index, value):
+        self.default1[index] = value
     def get_default2(self):
         return self.default2
     def set_default2(self, default2):
         self.default2 = default2
-    def add_default2(self, value): self.default2.append(value)
-    def insert_default2_at(self, index, value): self.default2.insert(index, value)
-    def replace_default2_at(self, index, value): self.default2[index] = value
+    def add_default2(self, value):
+        self.default2.append(value)
+    def add_default2(self, value):
+        self.default2.append(value)
+    def insert_default2_at(self, index, value):
+        self.default2.insert(index, value)
+    def replace_default2_at(self, index, value):
+        self.default2[index] = value
     def hasContent_(self):
         if (
             self.default1 or

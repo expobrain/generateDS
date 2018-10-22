@@ -756,9 +756,16 @@ class carrierType(GeneratedsSuper):
         return self.fleet
     def set_fleet(self, fleet):
         self.fleet = fleet
-    def add_fleet(self, value): self.fleet.append(value)
-    def insert_fleet_at(self, index, value): self.fleet.insert(index, value)
-    def replace_fleet_at(self, index, value): self.fleet[index] = value
+    def add_fleet(self, value):
+        self.fleet.append(value)
+    def add_fleet_with_type(self, value):
+        self.fleet.append(value)
+        value.original_tagname_ = 'Vehicle'
+        value.extensiontype_ = value.__class__.__name__
+    def insert_fleet_at(self, index, value):
+        self.fleet.insert(index, value)
+    def replace_fleet_at(self, index, value):
+        self.fleet[index] = value
     def hasContent_(self):
         if (
             self.fleet
