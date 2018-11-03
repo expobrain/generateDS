@@ -2914,8 +2914,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         else:
             wrt("            outfile.write('>%s' % (eol_, ))\n")
         wrt("            self.exportChildren(outfile, level + 1, "
-            "namespaceprefix_='%s', name_='%s', pretty_print=pretty_print)\n" %
-            (namespace, encodedname))
+            "namespaceprefix_, name_='%s', pretty_print=pretty_print)\n" %
+            (encodedname))
         # Put a condition on the indent to require children.
         if childCount != 0:
             wrt('            showIndent(outfile, level, pretty_print)\n')
