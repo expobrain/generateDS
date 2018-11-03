@@ -2971,9 +2971,9 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     hasAttributes += generateExportAttributes(wrt, element, hasAttributes)
     if hasAttributes == 0:
         wrt("        pass\n")
-    wrt("    def exportChildren(self, outfile, level, namespaceprefix_='%s', "
+    wrt("    def exportChildren(self, outfile, level, namespaceprefix_, "
         "name_='%s', fromsubclass_=False, pretty_print=True):\n" %
-        (namespace, encodedname, ))
+        (encodedname, ))
     hasChildren = 0
     # Generate call to exportChildren in the superclass only if it is
     #  an extension, but *not* if it is a restriction.
