@@ -6741,7 +6741,7 @@ def generateFromTree(wrt, prefix, elements, processed):
                 generateFromTree(wrt, prefix, element.getChildren(), processed)
 
 
-def generateSimpleTypes(wrt, prefix, simpleTypeDict):
+def generateSimpleTypes(wrt, prefix, simpleTypeDict, root):
     global UppercaseEnums
 
     def value2Uppercase(value):
@@ -6790,7 +6790,10 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict):
             wrt('\n\n')
 
     for simpletypeName in sorted(simpleTypeDict.keys()):
-        if ':' not in simpletypeName:
+        if ':' not in simpletypeName or (
+                root.targetNamespace and
+                root.targetNamespace !=
+                get_prefix_and_value(simpletypeName)[0]):
             continue
         simpleType = simpleTypeDict[simpletypeName]
         writeEnumClass(simpleType)
@@ -6864,7 +6867,7 @@ def generate(outfileName, subclassFilename, behaviorFilename,
     processed = []
     externalImports = getImportsForExternalXsds(root)
     generateHeader(wrt, prefix, options, args, externalImports)
-    generateSimpleTypes(wrt, prefix, SimpleTypeDict)
+    generateSimpleTypes(wrt, prefix, SimpleTypeDict, root)
     DelayedElements = set()
     DelayedElements_subclass = set()
     elements = root.getChildren()
