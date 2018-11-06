@@ -10,15 +10,16 @@
 #   ('--no-versions', '')
 #   ('--member-specs', 'list')
 #   ('-f', '')
-#   ('-o', 'tests/ipo2_sup.py')
-#   ('-s', 'tests/ipo2_sub.py')
-#   ('--super', 'ipo2_sup')
+#   ('-o', 'tests/derived_types2_sup.py')
+#   ('-s', 'tests/derived_types2_sub.py')
+#   ('--super', 'derived_types2_sup')
+#   ('--always-export-default', '')
 #
 # Command line arguments:
-#   tests/ipo.xsd
+#   tests/derived_types.xsd
 #
 # Command line:
-#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/ipo2_sup.py" -s "tests/ipo2_sub.py" --super="ipo2_sup" tests/ipo.xsd
+#   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/derived_types2_sup.py" -s "tests/derived_types2_sub.py" --super="derived_types2_sup" --always-export-default tests/derived_types.xsd
 #
 # Current working directory (os.getcwd()):
 #   generateds
@@ -727,71 +728,53 @@ def _cast(typ, value):
 #
 
 
-class PurchaseOrderType(GeneratedsSuper):
+class animalCollection(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('orderDate', 'date', 0, 1, {'use': 'optional'}),
-        MemberSpec_('shipTo', 'Address', 0, 0, {'name': 'shipTo', 'type': 'Address'}, None),
-        MemberSpec_('billTo', 'Address', 0, 0, {'name': 'billTo', 'type': 'Address'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
-        MemberSpec_('items', 'Items', 0, 0, {'name': 'items', 'type': 'Items'}, None),
+        MemberSpec_('animal', 'animal', 1, 0, {'name': 'animal', 'type': 'animal', 'maxOccurs': 'unbounded'}, None),
     ]
     subclass = None
     superclass = None
-    def __init__(self, orderDate=None, shipTo=None, billTo=None, comment=None, items=None, **kwargs_):
+    def __init__(self, animal=None, **kwargs_):
         self.original_tagname_ = None
         self.parent_object_ = kwargs_.get('parent_object_')
-        if isinstance(orderDate, BaseStrType_):
-            initvalue_ = datetime_.datetime.strptime(orderDate, '%Y-%m-%d').date()
+        if animal is None:
+            self.animal = []
         else:
-            initvalue_ = orderDate
-        self.orderDate = initvalue_
-        self.shipTo = shipTo
-        self.billTo = billTo
-        self.comment = comment
-        self.items = items
+            self.animal = animal
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, PurchaseOrderType)
+                CurrentSubclassModule_, animalCollection)
             if subclass is not None:
                 return subclass(*args_, **kwargs_)
-        if PurchaseOrderType.subclass:
-            return PurchaseOrderType.subclass(*args_, **kwargs_)
+        if animalCollection.subclass:
+            return animalCollection.subclass(*args_, **kwargs_)
         else:
-            return PurchaseOrderType(*args_, **kwargs_)
+            return animalCollection(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_shipTo(self):
-        return self.shipTo
-    def set_shipTo(self, shipTo):
-        self.shipTo = shipTo
-    def get_billTo(self):
-        return self.billTo
-    def set_billTo(self, billTo):
-        self.billTo = billTo
-    def get_comment(self):
-        return self.comment
-    def set_comment(self, comment):
-        self.comment = comment
-    def get_items(self):
-        return self.items
-    def set_items(self, items):
-        self.items = items
-    def get_orderDate(self):
-        return self.orderDate
-    def set_orderDate(self, orderDate):
-        self.orderDate = orderDate
+    def get_animal(self):
+        return self.animal
+    def set_animal(self, animal):
+        self.animal = animal
+    def add_animal(self, value):
+        self.animal.append(value)
+    def add_animal_with_type(self, value):
+        self.animal.append(value)
+        value.original_tagname_ = 'animal'
+        value.extensiontype_ = value.__class__.__name__
+    def insert_animal_at(self, index, value):
+        self.animal.insert(index, value)
+    def replace_animal_at(self, index, value):
+        self.animal[index] = value
     def hasContent_(self):
         if (
-            self.shipTo is not None or
-            self.billTo is not None or
-            self.comment is not None or
-            self.items is not None
+            self.animal
         ):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='PurchaseOrderType', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('PurchaseOrderType')
+    def export(self, outfile, level, namespaceprefix_='', name_='animalCollection', namespacedef_='', pretty_print=True):
+        imported_ns_def_ = GenerateDSNamespaceDefs_.get('animalCollection')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
         if pretty_print:
@@ -803,145 +786,23 @@ class PurchaseOrderType(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='PurchaseOrderType')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='animalCollection')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='PurchaseOrderType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='animalCollection', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='PurchaseOrderType'):
-        if self.orderDate is not None and 'orderDate' not in already_processed:
-            already_processed.add('orderDate')
-            outfile.write(' orderDate="%s"' % self.gds_format_date(self.orderDate, input_name='orderDate'))
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='PurchaseOrderType', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.shipTo is not None:
-            self.shipTo.export(outfile, level, namespaceprefix_, name_='shipTo', pretty_print=pretty_print)
-        if self.billTo is not None:
-            self.billTo.export(outfile, level, namespaceprefix_, name_='billTo', pretty_print=pretty_print)
-        if self.comment is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:comment>%s</ipo:comment>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), eol_))
-        if self.items is not None:
-            self.items.export(outfile, level, namespaceprefix_, name_='items', pretty_print=pretty_print)
-    def build(self, node):
-        already_processed = set()
-        self.buildAttributes(node, node.attrib, already_processed)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-        return self
-    def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('orderDate', node)
-        if value is not None and 'orderDate' not in already_processed:
-            already_processed.add('orderDate')
-            try:
-                self.orderDate = self.gds_parse_date(value)
-            except ValueError as exp:
-                raise ValueError('Bad date attribute (orderDate): %s' % exp)
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'shipTo':
-            class_obj_ = self.get_class_obj_(child_, Address)
-            obj_ = class_obj_.factory(parent_object_=self)
-            obj_.build(child_)
-            self.shipTo = obj_
-            obj_.original_tagname_ = 'shipTo'
-        elif nodeName_ == 'billTo':
-            class_obj_ = self.get_class_obj_(child_, Address)
-            obj_ = class_obj_.factory(parent_object_=self)
-            obj_.build(child_)
-            self.billTo = obj_
-            obj_.original_tagname_ = 'billTo'
-        elif nodeName_ == 'comment':
-            comment_ = child_.text
-            comment_ = self.gds_validate_string(comment_, node, 'comment')
-            self.comment = comment_
-        elif nodeName_ == 'items':
-            obj_ = Items.factory(parent_object_=self)
-            obj_.build(child_)
-            self.items = obj_
-            obj_.original_tagname_ = 'items'
-# end class PurchaseOrderType
-
-
-class Items(GeneratedsSuper):
-    member_data_items_ = [
-        MemberSpec_('item', 'item', 1, 1, {'name': 'item', 'minOccurs': '0', 'maxOccurs': 'unbounded', 'type': 'item'}, None),
-    ]
-    subclass = None
-    superclass = None
-    def __init__(self, item=None, **kwargs_):
-        self.original_tagname_ = None
-        self.parent_object_ = kwargs_.get('parent_object_')
-        if item is None:
-            self.item = []
-        else:
-            self.item = item
-    def factory(*args_, **kwargs_):
-        if CurrentSubclassModule_ is not None:
-            subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, Items)
-            if subclass is not None:
-                return subclass(*args_, **kwargs_)
-        if Items.subclass:
-            return Items.subclass(*args_, **kwargs_)
-        else:
-            return Items(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_item(self):
-        return self.item
-    def set_item(self, item):
-        self.item = item
-    def add_item(self, value):
-        self.item.append(value)
-    def add_item(self, value):
-        self.item.append(value)
-    def insert_item_at(self, index, value):
-        self.item.insert(index, value)
-    def replace_item_at(self, index, value):
-        self.item[index] = value
-    def hasContent_(self):
-        if (
-            self.item
-        ):
-            return True
-        else:
-            return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='Items', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('Items')
-        if imported_ns_def_ is not None:
-            namespacedef_ = imported_ns_def_
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.original_tagname_ is not None:
-            name_ = self.original_tagname_
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Items')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Items', pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='Items'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='animalCollection'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='Items', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='animalCollection', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
-        for item_ in self.item:
-            item_.export(outfile, level, namespaceprefix_, name_='item', pretty_print=pretty_print)
+        for animal_ in self.animal:
+            animal_.export(outfile, level, namespaceprefix_, pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -952,291 +813,59 @@ class Items(GeneratedsSuper):
     def buildAttributes(self, node, attrs, already_processed):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'item':
-            obj_ = item.factory(parent_object_=self)
-            obj_.build(child_)
-            self.item.append(obj_)
-            obj_.original_tagname_ = 'item'
-# end class Items
+        if nodeName_ == 'animal':
+            type_name_ = child_.attrib.get(
+                '{http://www.w3.org/2001/XMLSchema-instance}type')
+            if type_name_ is None:
+                type_name_ = child_.attrib.get('type')
+            if type_name_ is not None:
+                type_names_ = type_name_.split(':')
+                if len(type_names_) == 1:
+                    type_name_ = type_names_[0]
+                else:
+                    type_name_ = type_names_[1]
+                class_ = globals()[type_name_]
+                obj_ = class_.factory()
+                obj_.build(child_)
+            else:
+                raise NotImplementedError(
+                    'Class not implemented for <animal> element')
+            self.animal.append(obj_)
+            obj_.original_tagname_ = 'animal'
+# end class animalCollection
 
 
-class item(GeneratedsSuper):
-    member_data_items_ = [
-        MemberSpec_('partNum', 'ipo:SKU', 0, 0, {'use': 'required'}),
-        MemberSpec_('productName', 'string', 0, 0, {'name': 'productName', 'type': 'string'}, None),
-        MemberSpec_('quantity', ['quantity', 'positiveInteger'], 0, 0, {'name': 'quantity', 'type': 'positiveInteger'}, None),
-        MemberSpec_('USPrice', 'decimal', 0, 0, {'name': 'USPrice', 'type': 'decimal'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
-        MemberSpec_('shipDate', 'date', 0, 1, {'name': 'shipDate', 'type': 'date', 'minOccurs': '0'}, None),
-    ]
-    subclass = None
-    superclass = None
-    def __init__(self, partNum=None, productName=None, quantity=None, USPrice=None, comment=None, shipDate=None, **kwargs_):
-        self.original_tagname_ = None
-        self.parent_object_ = kwargs_.get('parent_object_')
-        self.partNum = _cast(None, partNum)
-        self.productName = productName
-        self.quantity = quantity
-        self.USPrice = USPrice
-        self.comment = comment
-        if isinstance(shipDate, BaseStrType_):
-            initvalue_ = datetime_.datetime.strptime(shipDate, '%Y-%m-%d').date()
-        else:
-            initvalue_ = shipDate
-        self.shipDate = initvalue_
-    def factory(*args_, **kwargs_):
-        if CurrentSubclassModule_ is not None:
-            subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, item)
-            if subclass is not None:
-                return subclass(*args_, **kwargs_)
-        if item.subclass:
-            return item.subclass(*args_, **kwargs_)
-        else:
-            return item(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_productName(self):
-        return self.productName
-    def set_productName(self, productName):
-        self.productName = productName
-    def get_quantity(self):
-        return self.quantity
-    def set_quantity(self, quantity):
-        self.quantity = quantity
-    def get_USPrice(self):
-        return self.USPrice
-    def set_USPrice(self, USPrice):
-        self.USPrice = USPrice
-    def get_comment(self):
-        return self.comment
-    def set_comment(self, comment):
-        self.comment = comment
-    def get_shipDate(self):
-        return self.shipDate
-    def set_shipDate(self, shipDate):
-        self.shipDate = shipDate
-    def get_partNum(self):
-        return self.partNum
-    def set_partNum(self, partNum):
-        self.partNum = partNum
-    def hasContent_(self):
-        if (
-            self.productName is not None or
-            self.quantity is not None or
-            self.USPrice is not None or
-            self.comment is not None or
-            self.shipDate is not None
-        ):
-            return True
-        else:
-            return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='item', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('item')
-        if imported_ns_def_ is not None:
-            namespacedef_ = imported_ns_def_
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.original_tagname_ is not None:
-            name_ = self.original_tagname_
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='item')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='item', pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='item'):
-        if self.partNum is not None and 'partNum' not in already_processed:
-            already_processed.add('partNum')
-            outfile.write(' partNum=%s' % (quote_attrib(self.partNum), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='item', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.productName is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:productName>%s</ipo:productName>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.productName), input_name='productName')), eol_))
-        if self.quantity is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:quantity>%s</ipo:quantity>%s' % (self.gds_format_integer(self.quantity, input_name='quantity'), eol_))
-        if self.USPrice is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:USPrice>%s</ipo:USPrice>%s' % (self.gds_format_float(self.USPrice, input_name='USPrice'), eol_))
-        if self.comment is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:comment>%s</ipo:comment>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), eol_))
-        if self.shipDate is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:shipDate>%s</ipo:shipDate>%s' % (self.gds_format_date(self.shipDate, input_name='shipDate'), eol_))
-    def build(self, node):
-        already_processed = set()
-        self.buildAttributes(node, node.attrib, already_processed)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-        return self
-    def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('partNum', node)
-        if value is not None and 'partNum' not in already_processed:
-            already_processed.add('partNum')
-            self.partNum = value
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'productName':
-            productName_ = child_.text
-            productName_ = self.gds_validate_string(productName_, node, 'productName')
-            self.productName = productName_
-        elif nodeName_ == 'quantity' and child_.text:
-            sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
-            if ival_ <= 0:
-                raise_parse_error(child_, 'requires positiveInteger')
-            ival_ = self.gds_validate_integer(ival_, node, 'quantity')
-            self.quantity = ival_
-        elif nodeName_ == 'USPrice' and child_.text:
-            sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'USPrice')
-            self.USPrice = fval_
-        elif nodeName_ == 'comment':
-            comment_ = child_.text
-            comment_ = self.gds_validate_string(comment_, node, 'comment')
-            self.comment = comment_
-        elif nodeName_ == 'shipDate':
-            sval_ = child_.text
-            dval_ = self.gds_parse_date(sval_)
-            self.shipDate = dval_
-# end class item
-
-
-class quantity(GeneratedsSuper):
+class animal(GeneratedsSuper):
     member_data_items_ = [
     ]
     subclass = None
     superclass = None
-    def __init__(self, valueOf_=None, **kwargs_):
+    def __init__(self, extensiontype_=None, **kwargs_):
         self.original_tagname_ = None
         self.parent_object_ = kwargs_.get('parent_object_')
-        self.valueOf_ = valueOf_
-    def factory(*args_, **kwargs_):
-        if CurrentSubclassModule_ is not None:
-            subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, quantity)
-            if subclass is not None:
-                return subclass(*args_, **kwargs_)
-        if quantity.subclass:
-            return quantity.subclass(*args_, **kwargs_)
-        else:
-            return quantity(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def hasContent_(self):
-        if (
-
-        ):
-            return True
-        else:
-            return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='quantity', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('quantity')
-        if imported_ns_def_ is not None:
-            namespacedef_ = imported_ns_def_
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.original_tagname_ is not None:
-            name_ = self.original_tagname_
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='quantity')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='quantity', pretty_print=pretty_print)
-            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='quantity'):
-        pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='quantity', fromsubclass_=False, pretty_print=True):
-        pass
-    def build(self, node):
-        already_processed = set()
-        self.buildAttributes(node, node.attrib, already_processed)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-        return self
-    def buildAttributes(self, node, attrs, already_processed):
-        pass
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        pass
-# end class quantity
-
-
-class Address(GeneratedsSuper):
-    member_data_items_ = [
-        MemberSpec_('name', 'string', 0, 0, {'name': 'name', 'type': 'string'}, None),
-        MemberSpec_('street', 'string', 0, 0, {'name': 'street', 'type': 'string'}, None),
-        MemberSpec_('city', 'string', 0, 0, {'name': 'city', 'type': 'string'}, None),
-    ]
-    subclass = None
-    superclass = None
-    def __init__(self, name=None, street=None, city=None, extensiontype_=None, **kwargs_):
-        self.original_tagname_ = None
-        self.parent_object_ = kwargs_.get('parent_object_')
-        self.name = name
-        self.street = street
-        self.city = city
         self.extensiontype_ = extensiontype_
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, Address)
+                CurrentSubclassModule_, animal)
             if subclass is not None:
                 return subclass(*args_, **kwargs_)
-        if Address.subclass:
-            return Address.subclass(*args_, **kwargs_)
+        if animal.subclass:
+            return animal.subclass(*args_, **kwargs_)
         else:
-            return Address(*args_, **kwargs_)
+            return animal(*args_, **kwargs_)
     factory = staticmethod(factory)
-    def get_name(self):
-        return self.name
-    def set_name(self, name):
-        self.name = name
-    def get_street(self):
-        return self.street
-    def set_street(self, street):
-        self.street = street
-    def get_city(self):
-        return self.city
-    def set_city(self, city):
-        self.city = city
     def get_extensiontype_(self): return self.extensiontype_
     def set_extensiontype_(self, extensiontype_): self.extensiontype_ = extensiontype_
     def hasContent_(self):
         if (
-            self.name is not None or
-            self.street is not None or
-            self.city is not None
+
         ):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='Address', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('Address')
+    def export(self, outfile, level, namespaceprefix_='', name_='animal', namespacedef_='', pretty_print=True):
+        imported_ns_def_ = GenerateDSNamespaceDefs_.get('animal')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
         if pretty_print:
@@ -1248,34 +877,21 @@ class Address(GeneratedsSuper):
         showIndent(outfile, level, pretty_print)
         outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
         already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Address')
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='animal')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Address', pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='animal', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='Address'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='animal'):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='Address', fromsubclass_=False, pretty_print=True):
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.name is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:name>%s</ipo:name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
-        if self.street is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:street>%s</ipo:street>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.street), input_name='street')), eol_))
-        if self.city is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:city>%s</ipo:city>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.city), input_name='city')), eol_))
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='animal', fromsubclass_=False, pretty_print=True):
+        pass
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1289,244 +905,95 @@ class Address(GeneratedsSuper):
             already_processed.add('xsi:type')
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
+        pass
+# end class animal
+
+
+class dog(animal):
+    member_data_items_ = [
+        MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
+    ]
+    subclass = None
+    superclass = animal
+    def __init__(self, name=None, **kwargs_):
+        self.original_tagname_ = None
+        self.parent_object_ = kwargs_.get('parent_object_')
+        super(dog, self).__init__( **kwargs_)
+        self.name = name
+    def factory(*args_, **kwargs_):
+        if CurrentSubclassModule_ is not None:
+            subclass = getSubclassFromModule_(
+                CurrentSubclassModule_, dog)
+            if subclass is not None:
+                return subclass(*args_, **kwargs_)
+        if dog.subclass:
+            return dog.subclass(*args_, **kwargs_)
+        else:
+            return dog(*args_, **kwargs_)
+    factory = staticmethod(factory)
+    def get_name(self):
+        return self.name
+    def set_name(self, name):
+        self.name = name
+    def hasContent_(self):
+        if (
+            self.name is not None or
+            super(dog, self).hasContent_()
+        ):
+            return True
+        else:
+            return False
+    def export(self, outfile, level, namespaceprefix_='', name_='dog', namespacedef_='', pretty_print=True):
+        imported_ns_def_ = GenerateDSNamespaceDefs_.get('dog')
+        if imported_ns_def_ is not None:
+            namespacedef_ = imported_ns_def_
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.original_tagname_ is not None:
+            name_ = self.original_tagname_
+        showIndent(outfile, level, pretty_print)
+        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
+        already_processed = set()
+        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dog')
+        if self.hasContent_():
+            outfile.write('>%s' % (eol_, ))
+            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dog', pretty_print=pretty_print)
+            showIndent(outfile, level, pretty_print)
+            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
+        else:
+            outfile.write('/>%s' % (eol_, ))
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dog'):
+        super(dog, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dog')
+    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dog', fromsubclass_=False, pretty_print=True):
+        super(dog, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        if pretty_print:
+            eol_ = '\n'
+        else:
+            eol_ = ''
+        if self.name is not None:
+            showIndent(outfile, level, pretty_print)
+            outfile.write('<name>%s</name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+    def build(self, node):
+        already_processed = set()
+        self.buildAttributes(node, node.attrib, already_processed)
+        for child in node:
+            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
+            self.buildChildren(child, node, nodeName_)
+        return self
+    def buildAttributes(self, node, attrs, already_processed):
+        super(dog, self).buildAttributes(node, attrs, already_processed)
+    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'name':
             name_ = child_.text
             name_ = self.gds_validate_string(name_, node, 'name')
             self.name = name_
-        elif nodeName_ == 'street':
-            street_ = child_.text
-            street_ = self.gds_validate_string(street_, node, 'street')
-            self.street = street_
-        elif nodeName_ == 'city':
-            city_ = child_.text
-            city_ = self.gds_validate_string(city_, node, 'city')
-            self.city = city_
-# end class Address
-
-
-class USAddress(Address):
-    member_data_items_ = [
-        MemberSpec_('state', ['USState', 'string'], 0, 0, {'name': 'state', 'type': 'string'}, None),
-        MemberSpec_('zip', 'positiveInteger', 0, 0, {'name': 'zip', 'type': 'positiveInteger'}, None),
-    ]
-    subclass = None
-    superclass = Address
-    def __init__(self, name=None, street=None, city=None, state=None, zip=None, **kwargs_):
-        self.original_tagname_ = None
-        self.parent_object_ = kwargs_.get('parent_object_')
-        super(USAddress, self).__init__(name, street, city,  **kwargs_)
-        self.state = state
-        self.validate_USState(self.state)
-        self.zip = zip
-    def factory(*args_, **kwargs_):
-        if CurrentSubclassModule_ is not None:
-            subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, USAddress)
-            if subclass is not None:
-                return subclass(*args_, **kwargs_)
-        if USAddress.subclass:
-            return USAddress.subclass(*args_, **kwargs_)
-        else:
-            return USAddress(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_state(self):
-        return self.state
-    def set_state(self, state):
-        self.state = state
-    def get_zip(self):
-        return self.zip
-    def set_zip(self, zip):
-        self.zip = zip
-    def validate_USState(self, value):
-        # Validate type USState, a restriction on string.
-        if value is not None and Validate_simpletypes_:
-            value = str(value)
-            enumerations = ['AK', 'AL', 'AR', 'PA']
-            enumeration_respectee = False
-            for enum in enumerations:
-                if value == enum:
-                    enumeration_respectee = True
-                    break
-            if not enumeration_respectee:
-                warnings_.warn('Value "%(value)s" does not match xsd enumeration restriction on USState' % {"value" : value.encode("utf-8")} )
-    def hasContent_(self):
-        if (
-            self.state is not None or
-            self.zip is not None or
-            super(USAddress, self).hasContent_()
-        ):
-            return True
-        else:
-            return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='USAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('USAddress')
-        if imported_ns_def_ is not None:
-            namespacedef_ = imported_ns_def_
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.original_tagname_ is not None:
-            name_ = self.original_tagname_
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='USAddress', pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='USAddress'):
-        super(USAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='USAddress', fromsubclass_=False, pretty_print=True):
-        super(USAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.state is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:state>%s</ipo:state>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.state), input_name='state')), eol_))
-        if self.zip is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:zip>%s</ipo:zip>%s' % (self.gds_format_integer(self.zip, input_name='zip'), eol_))
-    def build(self, node):
-        already_processed = set()
-        self.buildAttributes(node, node.attrib, already_processed)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-        return self
-    def buildAttributes(self, node, attrs, already_processed):
-        super(USAddress, self).buildAttributes(node, attrs, already_processed)
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'state':
-            state_ = child_.text
-            state_ = self.gds_validate_string(state_, node, 'state')
-            self.state = state_
-            # validate type USState
-            self.validate_USState(self.state)
-        elif nodeName_ == 'zip' and child_.text:
-            sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
-            if ival_ <= 0:
-                raise_parse_error(child_, 'requires positiveInteger')
-            ival_ = self.gds_validate_integer(ival_, node, 'zip')
-            self.zip = ival_
-        super(USAddress, self).buildChildren(child_, node, nodeName_, True)
-# end class USAddress
-
-
-class UKAddress(Address):
-    member_data_items_ = [
-        MemberSpec_('exportCode', 'positiveInteger', 0, 1, {'use': 'optional'}),
-        MemberSpec_('postcode', 'string', 0, 0, {'name': 'postcode', 'type': 'string'}, None),
-    ]
-    subclass = None
-    superclass = Address
-    def __init__(self, name=None, street=None, city=None, exportCode=1, postcode=None, **kwargs_):
-        self.original_tagname_ = None
-        self.parent_object_ = kwargs_.get('parent_object_')
-        super(UKAddress, self).__init__(name, street, city,  **kwargs_)
-        self.exportCode = _cast(int, exportCode)
-        self.postcode = postcode
-    def factory(*args_, **kwargs_):
-        if CurrentSubclassModule_ is not None:
-            subclass = getSubclassFromModule_(
-                CurrentSubclassModule_, UKAddress)
-            if subclass is not None:
-                return subclass(*args_, **kwargs_)
-        if UKAddress.subclass:
-            return UKAddress.subclass(*args_, **kwargs_)
-        else:
-            return UKAddress(*args_, **kwargs_)
-    factory = staticmethod(factory)
-    def get_postcode(self):
-        return self.postcode
-    def set_postcode(self, postcode):
-        self.postcode = postcode
-    def get_exportCode(self):
-        return self.exportCode
-    def set_exportCode(self, exportCode):
-        self.exportCode = exportCode
-    def hasContent_(self):
-        if (
-            self.postcode is not None or
-            super(UKAddress, self).hasContent_()
-        ):
-            return True
-        else:
-            return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', name_='UKAddress', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', pretty_print=True):
-        imported_ns_def_ = GenerateDSNamespaceDefs_.get('UKAddress')
-        if imported_ns_def_ is not None:
-            namespacedef_ = imported_ns_def_
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.original_tagname_ is not None:
-            name_ = self.original_tagname_
-        showIndent(outfile, level, pretty_print)
-        outfile.write('<%s%s%s' % (namespaceprefix_, name_, namespacedef_ and ' ' + namespacedef_ or '', ))
-        already_processed = set()
-        self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='UKAddress')
-        if self.hasContent_():
-            outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='UKAddress', pretty_print=pretty_print)
-            showIndent(outfile, level, pretty_print)
-            outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
-        else:
-            outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='UKAddress'):
-        super(UKAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='UKAddress')
-        if self.exportCode != 1 and 'exportCode' not in already_processed:
-            already_processed.add('exportCode')
-            outfile.write(' exportCode="%s"' % self.gds_format_integer(self.exportCode, input_name='exportCode'))
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', name_='UKAddress', fromsubclass_=False, pretty_print=True):
-        super(UKAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
-        if pretty_print:
-            eol_ = '\n'
-        else:
-            eol_ = ''
-        if self.postcode is not None:
-            showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:postcode>%s</ipo:postcode>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.postcode), input_name='postcode')), eol_))
-    def build(self, node):
-        already_processed = set()
-        self.buildAttributes(node, node.attrib, already_processed)
-        for child in node:
-            nodeName_ = Tag_pattern_.match(child.tag).groups()[-1]
-            self.buildChildren(child, node, nodeName_)
-        return self
-    def buildAttributes(self, node, attrs, already_processed):
-        value = find_attr_value_('exportCode', node)
-        if value is not None and 'exportCode' not in already_processed:
-            already_processed.add('exportCode')
-            try:
-                self.exportCode = int(value)
-            except ValueError as exp:
-                raise_parse_error(node, 'Bad integer attribute: %s' % exp)
-            if self.exportCode <= 0:
-                raise_parse_error(node, 'Invalid PositiveInteger')
-        super(UKAddress, self).buildAttributes(node, attrs, already_processed)
-    def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
-        if nodeName_ == 'postcode':
-            postcode_ = child_.text
-            postcode_ = self.gds_validate_string(postcode_, node, 'postcode')
-            self.postcode = postcode_
-        super(UKAddress, self).buildChildren(child_, node, nodeName_, True)
-# end class UKAddress
+        super(dog, self).buildChildren(child_, node, nodeName_, True)
+# end class dog
 
 
 GDSClassesMapping = {
-    'purchaseOrder': PurchaseOrderType,
 }
 
 
@@ -1554,8 +1021,8 @@ def parse(inFileName, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'PurchaseOrderType'
-        rootClass = PurchaseOrderType
+        rootTag = 'animalCollection'
+        rootClass = animalCollection
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -1564,7 +1031,7 @@ def parse(inFileName, silence=False):
         sys.stdout.write('<?xml version="1.0" ?>\n')
         rootObj.export(
             sys.stdout, 0, name_=rootTag,
-            namespacedef_='xmlns:ipo="http://www.example.com/IPO"',
+            namespacedef_='',
             pretty_print=True)
     return rootObj
 
@@ -1575,8 +1042,8 @@ def parseEtree(inFileName, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'PurchaseOrderType'
-        rootClass = PurchaseOrderType
+        rootTag = 'animalCollection'
+        rootClass = animalCollection
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -1606,8 +1073,8 @@ def parseString(inString, silence=False):
     rootNode= parsexmlstring_(inString, parser)
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'PurchaseOrderType'
-        rootClass = PurchaseOrderType
+        rootTag = 'animalCollection'
+        rootClass = animalCollection
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
@@ -1615,7 +1082,7 @@ def parseString(inString, silence=False):
         sys.stdout.write('<?xml version="1.0" ?>\n')
         rootObj.export(
             sys.stdout, 0, name_=rootTag,
-            namespacedef_='xmlns:ipo="http://www.example.com/IPO"')
+            namespacedef_='')
     return rootObj
 
 
@@ -1625,15 +1092,15 @@ def parseLiteral(inFileName, silence=False):
     rootNode = doc.getroot()
     rootTag, rootClass = get_root_tag(rootNode)
     if rootClass is None:
-        rootTag = 'PurchaseOrderType'
-        rootClass = PurchaseOrderType
+        rootTag = 'animalCollection'
+        rootClass = animalCollection
     rootObj = rootClass.factory()
     rootObj.build(rootNode)
     # Enable Python to collect the space used by the DOM.
     doc = None
     if not silence:
-        sys.stdout.write('#from ipo2_sup import *\n\n')
-        sys.stdout.write('import ipo2_sup as model_\n\n')
+        sys.stdout.write('#from derived_types2_sup import *\n\n')
+        sys.stdout.write('import derived_types2_sup as model_\n\n')
         sys.stdout.write('rootObj = model_.rootClass(\n')
         rootObj.exportLiteral(sys.stdout, 0, name_=rootTag)
         sys.stdout.write(')\n')
@@ -1654,9 +1121,7 @@ if __name__ == '__main__':
 
 
 __all__ = [
-    "Address",
-    "Items",
-    "PurchaseOrderType",
-    "UKAddress",
-    "USAddress"
+    "animal",
+    "animalCollection",
+    "dog"
 ]

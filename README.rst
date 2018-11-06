@@ -141,6 +141,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.3 (11/05/2018)
+
+- Merged Mustafa Coşar's fix for enums.  Thank you Mustafa.
+
+- Added several files in the ``test/`` directory to the repo.
+
 Version 2.30.2 (11/01/2018)
 
 - When dealing with a derived type, generate "set_xxx" and "add_xxx"

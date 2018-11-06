@@ -8,7 +8,7 @@ setup(
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-    version="2.30.2",
+    version="2.30.3",
 ##VERSION##
     author="Dave Kuhlman",
     author_email="dkuhlman@davekuhlman.org",
