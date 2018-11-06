@@ -17,5 +17,14 @@
         </xs:sequence>
     </xs:complexType>
 
+    <xs:simpleType name="oneperEnumType01_1">
+        <xs:restriction base="xs:NMTOKEN">
+            <xs:enumeration value="float" />
+            <xs:enumeration value="int" />
+            <xs:enumeration value="Name" />
+            <xs:enumeration value="token" />
+        </xs:restriction>
+    </xs:simpleType>
+
 </xs:schema>
 

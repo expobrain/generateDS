@@ -974,7 +974,7 @@ class GenTest(unittest.TestCase):
                 diffs = difflib.unified_diff(lf, rf)
         diffs = list(diffs)
         if diffs:
-            diffs = ''.join(diffs[2:12])
+            diffs = ''.join(diffs[2:])
             self.fail("Files '{}' and '{}' differed:\n{}".format(
                 left, right, diffs))
 

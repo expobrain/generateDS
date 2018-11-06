@@ -6742,7 +6742,7 @@ def generateFromTree(wrt, prefix, elements, processed):
 
 
 def generateSimpleTypes(wrt, prefix, simpleTypeDict, root):
-    global UppercaseEnums
+    global SingleFileOutput, UppercaseEnums
 
     def value2Uppercase(value):
         if UppercaseEnums:
@@ -6791,6 +6791,7 @@ def generateSimpleTypes(wrt, prefix, simpleTypeDict, root):
 
     for simpletypeName in sorted(simpleTypeDict.keys()):
         if ':' not in simpletypeName or (
+                not SingleFileOutput and
                 root.targetNamespace and
                 root.targetNamespace !=
                 get_prefix_and_value(simpletypeName)[0]):
