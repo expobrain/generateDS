@@ -787,7 +787,7 @@ class simpleTypeTestsType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTypeTestsType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='simpleTypeTestsType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='simpleTypeTestsType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1103,7 +1103,7 @@ class simpleTypeTestDefs(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTypeTestDefs')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='simpleTypeTestDefs', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='simpleTypeTestDefs', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:

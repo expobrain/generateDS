@@ -796,7 +796,7 @@ class SpecialDate(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='pl:', name_='SpecialDate', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='SpecialDate', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -877,7 +877,7 @@ class ExtremeDate(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='pl:', name_='ExtremeDate', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='ExtremeDate', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))

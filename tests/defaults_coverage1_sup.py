@@ -783,7 +783,7 @@ class DefaultTypes(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='DefaultTypes')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='DefaultTypes', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='DefaultTypes', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1006,7 +1006,7 @@ class DefaultType1(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='DefaultType1')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='DefaultType1', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='DefaultType1', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1376,7 +1376,7 @@ class DefaultType2(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='DefaultType2')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='DefaultType2', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='DefaultType2', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:

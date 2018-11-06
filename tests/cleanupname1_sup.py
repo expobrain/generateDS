@@ -805,7 +805,7 @@ class dataKind(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dataType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dataType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='dataType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -913,7 +913,7 @@ class data1Kind(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='data1Type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='data1Type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='data1Type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -993,7 +993,7 @@ class MlassData2(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='TypeData2')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='TypeData2', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='TypeData2', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1073,7 +1073,7 @@ class RealTypeData3(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='RealTypeData3')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='RealTypeData3', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='RealTypeData3', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1153,7 +1153,7 @@ class MMMMMMdataKind(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='AABBCCdataType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='AABBCCdataType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='AABBCCdataType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1233,7 +1233,7 @@ class dataTypeNNNMNNN(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dataTypeXYZAXYZ')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='', name_='dataTypeXYZAXYZ', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='dataTypeXYZAXYZ', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:

@@ -813,7 +813,7 @@ class PurchaseOrderType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='PurchaseOrderType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='PurchaseOrderType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='PurchaseOrderType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -935,7 +935,7 @@ class Items(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Items')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Items', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='Items', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1053,7 +1053,7 @@ class item(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='item')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='item', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='item', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1171,7 +1171,7 @@ class quantity(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='quantity')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='quantity', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='quantity', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -1258,7 +1258,7 @@ class Address(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Address')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='Address', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='Address', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1381,7 +1381,7 @@ class USAddress(Address):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='USAddress', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='USAddress', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1486,7 +1486,7 @@ class UKAddress(Address):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='UKAddress')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_='ipo:', name_='UKAddress', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='UKAddress', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:

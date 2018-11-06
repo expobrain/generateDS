@@ -141,6 +141,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.4 (11/06/2018)
+
+- Another patch from Mustafa for enums.  Thanks Mustafa.
+
+- A fix from François Guimond for passing namespaceprefix_ to
+  ``self.exportChildren``.  Thanks François.
+
 Version 2.30.3 (11/05/2018)
 
 - Merged Mustafa Coşar's fix for enums.  Thank you Mustafa.
