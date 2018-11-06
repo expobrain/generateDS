@@ -729,6 +729,20 @@ def _cast(typ, value):
 #
 
 
+class oneperEnumType00_1(object):
+    FLOAT='float'
+    INT='int'
+    NAME='Name'
+    TOKEN='token'
+
+
+class oneperEnumType01_1(object):
+    FLOAT='float'
+    INT='int'
+    NAME='Name'
+    TOKEN='token'
+
+
 class oneperType02_1(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('clientname', 'xs:string', 0, 0, {'name': 'clientname', 'type': 'xs:string'}, None),
