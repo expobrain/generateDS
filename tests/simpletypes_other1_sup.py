@@ -1117,67 +1117,67 @@ class simpleTypeTestDefs(GeneratedsSuper):
             eol_ = ''
         if self.datetime1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime1>%s</datetime1>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.datetime1), input_name='datetime1')), eol_))
+            outfile.write('<%sdatetime1>%s</%sdatetime1>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.datetime1), input_name='datetime1')), namespaceprefix_ , eol_))
         if self.datetime2 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime2>%s</datetime2>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.datetime2), input_name='datetime2')), eol_))
+            outfile.write('<%sdatetime2>%s</%sdatetime2>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.datetime2), input_name='datetime2')), namespaceprefix_ , eol_))
         if self.datetime3 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime3>%s</datetime3>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.datetime3), input_name='datetime3')), eol_))
+            outfile.write('<%sdatetime3>%s</%sdatetime3>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.datetime3), input_name='datetime3')), namespaceprefix_ , eol_))
         if self.datetime4 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime4>%s</datetime4>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.datetime4), input_name='datetime4')), eol_))
+            outfile.write('<%sdatetime4>%s</%sdatetime4>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.datetime4), input_name='datetime4')), namespaceprefix_ , eol_))
         if self.datetime5 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime5>%s</datetime5>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.datetime5), input_name='datetime5')), eol_))
+            outfile.write('<%sdatetime5>%s</%sdatetime5>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.datetime5), input_name='datetime5')), namespaceprefix_ , eol_))
         if self.integerVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integerVal1>%s</integerVal1>%s' % (self.gds_format_integer(self.integerVal1, input_name='integerVal1'), eol_))
+            outfile.write('<%sintegerVal1>%s</%sintegerVal1>%s' % (namespaceprefix_ , self.gds_format_integer(self.integerVal1, input_name='integerVal1'), namespaceprefix_ , eol_))
         for integerVal2_ in self.integerVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integerVal2>%s</integerVal2>%s' % (self.gds_format_integer(integerVal2_, input_name='integerVal2'), eol_))
+            outfile.write('<%sintegerVal2>%s</%sintegerVal2>%s' % (namespaceprefix_ , self.gds_format_integer(integerVal2_, input_name='integerVal2'), namespaceprefix_ , eol_))
         if self.stringVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<stringVal1>%s</stringVal1>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.stringVal1), input_name='stringVal1')), eol_))
+            outfile.write('<%sstringVal1>%s</%sstringVal1>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.stringVal1), input_name='stringVal1')), namespaceprefix_ , eol_))
         for stringVal2_ in self.stringVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<stringVal2>%s</stringVal2>%s' % (self.gds_encode(self.gds_format_string(quote_xml(stringVal2_), input_name='stringVal2')), eol_))
+            outfile.write('<%sstringVal2>%s</%sstringVal2>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(stringVal2_), input_name='stringVal2')), namespaceprefix_ , eol_))
         if self.booleanVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<booleanVal1>%s</booleanVal1>%s' % (self.gds_format_boolean(self.booleanVal1, input_name='booleanVal1'), eol_))
+            outfile.write('<%sbooleanVal1>%s</%sbooleanVal1>%s' % (namespaceprefix_ , self.gds_format_boolean(self.booleanVal1, input_name='booleanVal1'), namespaceprefix_ , eol_))
         for booleanVal2_ in self.booleanVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<booleanVal2>%s</booleanVal2>%s' % (self.gds_format_boolean(booleanVal2_, input_name='booleanVal2'), eol_))
+            outfile.write('<%sbooleanVal2>%s</%sbooleanVal2>%s' % (namespaceprefix_ , self.gds_format_boolean(booleanVal2_, input_name='booleanVal2'), namespaceprefix_ , eol_))
         if self.decimalVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<decimalVal1>%s</decimalVal1>%s' % (self.gds_format_float(self.decimalVal1, input_name='decimalVal1'), eol_))
+            outfile.write('<%sdecimalVal1>%s</%sdecimalVal1>%s' % (namespaceprefix_ , self.gds_format_float(self.decimalVal1, input_name='decimalVal1'), namespaceprefix_ , eol_))
         for decimalVal2_ in self.decimalVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<decimalVal2>%s</decimalVal2>%s' % (self.gds_format_float(decimalVal2_, input_name='decimalVal2'), eol_))
+            outfile.write('<%sdecimalVal2>%s</%sdecimalVal2>%s' % (namespaceprefix_ , self.gds_format_float(decimalVal2_, input_name='decimalVal2'), namespaceprefix_ , eol_))
         if self.doubleVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<doubleVal1>%s</doubleVal1>%s' % (self.gds_format_double(self.doubleVal1, input_name='doubleVal1'), eol_))
+            outfile.write('<%sdoubleVal1>%s</%sdoubleVal1>%s' % (namespaceprefix_ , self.gds_format_double(self.doubleVal1, input_name='doubleVal1'), namespaceprefix_ , eol_))
         for doubleVal2_ in self.doubleVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<doubleVal2>%s</doubleVal2>%s' % (self.gds_format_double(doubleVal2_, input_name='doubleVal2'), eol_))
+            outfile.write('<%sdoubleVal2>%s</%sdoubleVal2>%s' % (namespaceprefix_ , self.gds_format_double(doubleVal2_, input_name='doubleVal2'), namespaceprefix_ , eol_))
         if self.floatVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<floatVal1>%s</floatVal1>%s' % (self.gds_format_float(self.floatVal1, input_name='floatVal1'), eol_))
+            outfile.write('<%sfloatVal1>%s</%sfloatVal1>%s' % (namespaceprefix_ , self.gds_format_float(self.floatVal1, input_name='floatVal1'), namespaceprefix_ , eol_))
         for floatVal2_ in self.floatVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<floatVal2>%s</floatVal2>%s' % (self.gds_format_float(floatVal2_, input_name='floatVal2'), eol_))
+            outfile.write('<%sfloatVal2>%s</%sfloatVal2>%s' % (namespaceprefix_ , self.gds_format_float(floatVal2_, input_name='floatVal2'), namespaceprefix_ , eol_))
         if self.dateVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<dateVal1>%s</dateVal1>%s' % (self.gds_format_date(self.dateVal1, input_name='dateVal1'), eol_))
+            outfile.write('<%sdateVal1>%s</%sdateVal1>%s' % (namespaceprefix_ , self.gds_format_date(self.dateVal1, input_name='dateVal1'), namespaceprefix_ , eol_))
         for dateVal2_ in self.dateVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<dateVal2>%s</dateVal2>%s' % (self.gds_format_date(dateVal2_, input_name='dateVal2'), eol_))
+            outfile.write('<%sdateVal2>%s</%sdateVal2>%s' % (namespaceprefix_ , self.gds_format_date(dateVal2_, input_name='dateVal2'), namespaceprefix_ , eol_))
         if self.dateTimeVal1 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<dateTimeVal1>%s</dateTimeVal1>%s' % (self.gds_format_datetime(self.dateTimeVal1, input_name='dateTimeVal1'), eol_))
+            outfile.write('<%sdateTimeVal1>%s</%sdateTimeVal1>%s' % (namespaceprefix_ , self.gds_format_datetime(self.dateTimeVal1, input_name='dateTimeVal1'), namespaceprefix_ , eol_))
         for dateTimeVal2_ in self.dateTimeVal2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<dateTimeVal2>%s</dateTimeVal2>%s' % (self.gds_format_datetime(dateTimeVal2_, input_name='dateTimeVal2'), eol_))
+            outfile.write('<%sdateTimeVal2>%s</%sdateTimeVal2>%s' % (namespaceprefix_ , self.gds_format_datetime(dateTimeVal2_, input_name='dateTimeVal2'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

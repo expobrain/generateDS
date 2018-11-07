@@ -804,13 +804,13 @@ class PersonType(GeneratedsSuper):
             eol_ = ''
         if self.personId is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<personId>%s</personId>%s' % (self.gds_format_integer(self.personId, input_name='personId'), eol_))
+            outfile.write('<%spersonId>%s</%spersonId>%s' % (namespaceprefix_ , self.gds_format_integer(self.personId, input_name='personId'), namespaceprefix_ , eol_))
         if self.fname is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<fname>%s</fname>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.fname), input_name='fname')), eol_))
+            outfile.write('<%sfname>%s</%sfname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.fname), input_name='fname')), namespaceprefix_ , eol_))
         if self.lname is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<lname>%s</lname>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.lname), input_name='lname')), eol_))
+            outfile.write('<%slname>%s</%slname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.lname), input_name='lname')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

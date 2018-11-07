@@ -955,28 +955,28 @@ class DefaultType1(GeneratedsSuper):
             eol_ = ''
         if self.normal01 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<normal01>%s</normal01>%s' % (self.gds_format_integer(self.normal01, input_name='normal01'), eol_))
+            outfile.write('<%snormal01>%s</%snormal01>%s' % (namespaceprefix_ , self.gds_format_integer(self.normal01, input_name='normal01'), namespaceprefix_ , eol_))
         if self.normal02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<normal02>%s</normal02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.normal02), input_name='normal02')), eol_))
+            outfile.write('<%snormal02>%s</%snormal02>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.normal02), input_name='normal02')), namespaceprefix_ , eol_))
         if self.default01 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<default01>%s</default01>%s' % (self.gds_format_integer(self.default01, input_name='default01'), eol_))
+            outfile.write('<%sdefault01>%s</%sdefault01>%s' % (namespaceprefix_ , self.gds_format_integer(self.default01, input_name='default01'), namespaceprefix_ , eol_))
         if self.default02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<default02>%s</default02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.default02), input_name='default02')), eol_))
+            outfile.write('<%sdefault02>%s</%sdefault02>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.default02), input_name='default02')), namespaceprefix_ , eol_))
         if self.normal03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<normal03>%s</normal03>%s' % (self.gds_format_float(self.normal03, input_name='normal03'), eol_))
+            outfile.write('<%snormal03>%s</%snormal03>%s' % (namespaceprefix_ , self.gds_format_float(self.normal03, input_name='normal03'), namespaceprefix_ , eol_))
         if self.normal04 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<normal04>%s</normal04>%s' % (self.gds_format_double(self.normal04, input_name='normal04'), eol_))
+            outfile.write('<%snormal04>%s</%snormal04>%s' % (namespaceprefix_ , self.gds_format_double(self.normal04, input_name='normal04'), namespaceprefix_ , eol_))
         if self.default03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<default03>%s</default03>%s' % (self.gds_format_float(self.default03, input_name='default03'), eol_))
+            outfile.write('<%sdefault03>%s</%sdefault03>%s' % (namespaceprefix_ , self.gds_format_float(self.default03, input_name='default03'), namespaceprefix_ , eol_))
         if self.default04 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<default04>%s</default04>%s' % (self.gds_format_double(self.default04, input_name='default04'), eol_))
+            outfile.write('<%sdefault04>%s</%sdefault04>%s' % (namespaceprefix_ , self.gds_format_double(self.default04, input_name='default04'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

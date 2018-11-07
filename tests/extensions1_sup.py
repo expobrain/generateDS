@@ -1184,7 +1184,7 @@ class simpleFactoidType(GeneratedsSuper):
             eol_ = ''
         if self.relation is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<relation>%s</relation>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.relation), input_name='relation')), eol_))
+            outfile.write('<%srelation>%s</%srelation>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.relation), input_name='relation')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1314,7 +1314,7 @@ class mixedFactoidType(GeneratedsSuper):
             eol_ = ''
         if self.relation is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<relation>%s</relation>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.relation), input_name='relation')), eol_))
+            outfile.write('<%srelation>%s</%srelation>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.relation), input_name='relation')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

@@ -815,10 +815,10 @@ class dummy(GeneratedsSuper):
             eol_ = ''
         if self.test_ref_element is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<test_ref_element>%s</test_ref_element>%s' % (self.gds_format_integer(self.test_ref_element, input_name='test_ref_element'), eol_))
+            outfile.write('<%stest_ref_element>%s</%stest_ref_element>%s' % (namespaceprefix_ , self.gds_format_integer(self.test_ref_element, input_name='test_ref_element'), namespaceprefix_ , eol_))
         if self.test_normal_element is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<test_normal_element>%s</test_normal_element>%s' % (self.gds_format_integer(self.test_normal_element, input_name='test_normal_element'), eol_))
+            outfile.write('<%stest_normal_element>%s</%stest_normal_element>%s' % (namespaceprefix_ , self.gds_format_integer(self.test_normal_element, input_name='test_normal_element'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

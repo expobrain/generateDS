@@ -926,7 +926,7 @@ class markupType(GeneratedsSuper):
             eol_ = ''
         for embedded_ in self.embedded:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<embedded>%s</embedded>%s' % (self.gds_encode(self.gds_format_string(quote_xml(embedded_), input_name='embedded')), eol_))
+            outfile.write('<%sembedded>%s</%sembedded>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(embedded_), input_name='embedded')), namespaceprefix_ , eol_))
         for nested_ in self.nested:
             nested_.export(outfile, level, namespaceprefix_, name_='nested', pretty_print=pretty_print)
     def build(self, node):
@@ -1077,10 +1077,10 @@ class nestedType(GeneratedsSuper):
             nested1_.export(outfile, level, namespaceprefix_, name_='nested1', pretty_print=pretty_print)
         for nested2_ in self.nested2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<nested2>%s</nested2>%s' % (self.gds_encode(self.gds_format_string(quote_xml(nested2_), input_name='nested2')), eol_))
+            outfile.write('<%snested2>%s</%snested2>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(nested2_), input_name='nested2')), namespaceprefix_ , eol_))
         for nested3_ in self.nested3:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<nested3>%s</nested3>%s' % (self.gds_format_integer(nested3_, input_name='nested3'), eol_))
+            outfile.write('<%snested3>%s</%snested3>%s' % (namespaceprefix_ , self.gds_format_integer(nested3_, input_name='nested3'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1318,10 +1318,10 @@ class nested1AType(GeneratedsSuper):
             eol_ = ''
         for nestedB1_ in self.nestedB1:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<nestedB1>%s</nestedB1>%s' % (self.gds_encode(self.gds_format_string(quote_xml(nestedB1_), input_name='nestedB1')), eol_))
+            outfile.write('<%snestedB1>%s</%snestedB1>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(nestedB1_), input_name='nestedB1')), namespaceprefix_ , eol_))
         for nestedB2_ in self.nestedB2:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<nestedB2>%s</nestedB2>%s' % (self.gds_encode(self.gds_format_string(quote_xml(nestedB2_), input_name='nestedB2')), eol_))
+            outfile.write('<%snestedB2>%s</%snestedB2>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(nestedB2_), input_name='nestedB2')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

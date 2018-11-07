@@ -833,7 +833,7 @@ class PurchaseOrderType(GeneratedsSuper):
             self.billTo.export(outfile, level, namespaceprefix_, name_='billTo', pretty_print=pretty_print)
         if self.comment is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:comment>%s</ipo:comment>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), eol_))
+            outfile.write('<%scomment>%s</%scomment>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), namespaceprefix_ , eol_))
         if self.items is not None:
             self.items.export(outfile, level, namespaceprefix_, name_='items', pretty_print=pretty_print)
     def build(self, node):
@@ -1069,19 +1069,19 @@ class item(GeneratedsSuper):
             eol_ = ''
         if self.productName is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:productName>%s</ipo:productName>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.productName), input_name='productName')), eol_))
+            outfile.write('<%sproductName>%s</%sproductName>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.productName), input_name='productName')), namespaceprefix_ , eol_))
         if self.quantity is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:quantity>%s</ipo:quantity>%s' % (self.gds_format_integer(self.quantity, input_name='quantity'), eol_))
+            outfile.write('<%squantity>%s</%squantity>%s' % (namespaceprefix_ , self.gds_format_integer(self.quantity, input_name='quantity'), namespaceprefix_ , eol_))
         if self.USPrice is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:USPrice>%s</ipo:USPrice>%s' % (self.gds_format_float(self.USPrice, input_name='USPrice'), eol_))
+            outfile.write('<%sUSPrice>%s</%sUSPrice>%s' % (namespaceprefix_ , self.gds_format_float(self.USPrice, input_name='USPrice'), namespaceprefix_ , eol_))
         if self.comment is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:comment>%s</ipo:comment>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), eol_))
+            outfile.write('<%scomment>%s</%scomment>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), namespaceprefix_ , eol_))
         if self.shipDate is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:shipDate>%s</ipo:shipDate>%s' % (self.gds_format_date(self.shipDate, input_name='shipDate'), eol_))
+            outfile.write('<%sshipDate>%s</%sshipDate>%s' % (namespaceprefix_ , self.gds_format_date(self.shipDate, input_name='shipDate'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1276,13 +1276,13 @@ class Address(GeneratedsSuper):
             eol_ = ''
         if self.name is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:name>%s</ipo:name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+            outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.street is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:street>%s</ipo:street>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.street), input_name='street')), eol_))
+            outfile.write('<%sstreet>%s</%sstreet>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.street), input_name='street')), namespaceprefix_ , eol_))
         if self.city is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:city>%s</ipo:city>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.city), input_name='city')), eol_))
+            outfile.write('<%scity>%s</%scity>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.city), input_name='city')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1396,10 +1396,10 @@ class USAddress(Address):
             eol_ = ''
         if self.state is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:state>%s</ipo:state>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.state), input_name='state')), eol_))
+            outfile.write('<%sstate>%s</%sstate>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.state), input_name='state')), namespaceprefix_ , eol_))
         if self.zip is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:zip>%s</ipo:zip>%s' % (self.gds_format_integer(self.zip, input_name='zip'), eol_))
+            outfile.write('<%szip>%s</%szip>%s' % (namespaceprefix_ , self.gds_format_integer(self.zip, input_name='zip'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1504,7 +1504,7 @@ class UKAddress(Address):
             eol_ = ''
         if self.postcode is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<ipo:postcode>%s</ipo:postcode>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.postcode), input_name='postcode')), eol_))
+            outfile.write('<%spostcode>%s</%spostcode>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.postcode), input_name='postcode')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

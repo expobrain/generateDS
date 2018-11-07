@@ -822,7 +822,7 @@ class authorsType(GeneratedsSuper):
             author_.export(outfile, level, namespaceprefix_, name_='author', pretty_print=pretty_print)
         for cooperation_ in self.cooperation:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<cooperation>%s</cooperation>%s' % (self.gds_encode(self.gds_format_string(quote_xml(cooperation_), input_name='cooperation')), eol_))
+            outfile.write('<%scooperation>%s</%scooperation>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(cooperation_), input_name='cooperation')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -907,7 +907,7 @@ class author(GeneratedsSuper):
             eol_ = ''
         if self.description is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<description>%s</description>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.description), input_name='description')), eol_))
+            outfile.write('<%sdescription>%s</%sdescription>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.description), input_name='description')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

@@ -882,7 +882,7 @@ class cdataType(GeneratedsSuper):
             eol_ = ''
         if self.script is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<script>%s</script>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.script), input_name='script')), eol_))
+            outfile.write('<%sscript>%s</%sscript>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.script), input_name='script')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

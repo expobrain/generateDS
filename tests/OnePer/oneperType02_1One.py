@@ -812,7 +812,7 @@ class oneperType02_1(GeneratedsSuper):
             eol_ = ''
         if self.clientname is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<clientname>%s</clientname>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.clientname), input_name='clientname')), eol_))
+            outfile.write('<%sclientname>%s</%sclientname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.clientname), input_name='clientname')), namespaceprefix_ , eol_))
         if self.inner01 is not None:
             self.inner01.export(outfile, level, namespaceprefix_, name_='inner01', pretty_print=pretty_print)
     def build(self, node):
@@ -899,7 +899,7 @@ class oneperType02_2(GeneratedsSuper):
             eol_ = ''
         if self.clientdescription is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<clientdescription>%s</clientdescription>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.clientdescription), input_name='clientdescription')), eol_))
+            outfile.write('<%sclientdescription>%s</%sclientdescription>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.clientdescription), input_name='clientdescription')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

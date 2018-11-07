@@ -906,7 +906,7 @@ class FooType1(GeneratedsSuper):
             eol_ = ''
         if self.FooType is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<FooType>%s</FooType>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.FooType), input_name='FooType')), eol_))
+            outfile.write('<%sFooType>%s</%sFooType>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.FooType), input_name='FooType')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -996,7 +996,7 @@ class BarType2(GeneratedsSuper):
             eol_ = ''
         if self.BarType is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<BarType>%s</BarType>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.BarType), input_name='BarType')), eol_))
+            outfile.write('<%sBarType>%s</%sBarType>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.BarType), input_name='BarType')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1086,7 +1086,7 @@ class BazType3(GeneratedsSuper):
             eol_ = ''
         if self.BazType is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<BazType>%s</BazType>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.BazType), input_name='BazType')), eol_))
+            outfile.write('<%sBazType>%s</%sBazType>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.BazType), input_name='BazType')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

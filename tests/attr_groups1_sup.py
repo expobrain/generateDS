@@ -870,7 +870,7 @@ class GetUserReq(GeneratedsSuper):
             eol_ = ''
         if self.returnedTags is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<returnedTags>%s</returnedTags>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.returnedTags), input_name='returnedTags')), eol_))
+            outfile.write('<%sreturnedTags>%s</%sreturnedTags>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.returnedTags), input_name='returnedTags')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

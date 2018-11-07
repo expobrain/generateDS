@@ -1363,79 +1363,79 @@ class simpleOneType(GeneratedsSuper):
             eol_ = ''
         if self.integer_range_1_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_range_1_value>%s</integer_range_1_value>%s' % (self.gds_format_integer(self.integer_range_1_value, input_name='integer_range_1_value'), eol_))
+            outfile.write('<%sinteger_range_1_value>%s</%sinteger_range_1_value>%s' % (namespaceprefix_ , self.gds_format_integer(self.integer_range_1_value, input_name='integer_range_1_value'), namespaceprefix_ , eol_))
         if self.pattern_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<pattern_value>%s</pattern_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.pattern_value), input_name='pattern_value')), eol_))
+            outfile.write('<%spattern_value>%s</%spattern_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.pattern_value), input_name='pattern_value')), namespaceprefix_ , eol_))
         if self.token_enum_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<token_enum_value>%s</token_enum_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.token_enum_value), input_name='token_enum_value')), eol_))
+            outfile.write('<%stoken_enum_value>%s</%stoken_enum_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.token_enum_value), input_name='token_enum_value')), namespaceprefix_ , eol_))
         if self.integer_range_incl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_range_incl_value>%s</integer_range_incl_value>%s' % (self.gds_format_integer(self.integer_range_incl_value, input_name='integer_range_incl_value'), eol_))
+            outfile.write('<%sinteger_range_incl_value>%s</%sinteger_range_incl_value>%s' % (namespaceprefix_ , self.gds_format_integer(self.integer_range_incl_value, input_name='integer_range_incl_value'), namespaceprefix_ , eol_))
         if self.integer_range_excl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_range_excl_value>%s</integer_range_excl_value>%s' % (self.gds_format_integer(self.integer_range_excl_value, input_name='integer_range_excl_value'), eol_))
+            outfile.write('<%sinteger_range_excl_value>%s</%sinteger_range_excl_value>%s' % (namespaceprefix_ , self.gds_format_integer(self.integer_range_excl_value, input_name='integer_range_excl_value'), namespaceprefix_ , eol_))
         if self.min_max_length_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<min_max_length_value>%s</min_max_length_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.min_max_length_value), input_name='min_max_length_value')), eol_))
+            outfile.write('<%smin_max_length_value>%s</%smin_max_length_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.min_max_length_value), input_name='min_max_length_value')), namespaceprefix_ , eol_))
         if self.length_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<length_value>%s</length_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.length_value), input_name='length_value')), eol_))
+            outfile.write('<%slength_value>%s</%slength_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.length_value), input_name='length_value')), namespaceprefix_ , eol_))
         if self.totalDigits_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<totalDigits_value>%s</totalDigits_value>%s' % (self.gds_format_float(self.totalDigits_value, input_name='totalDigits_value'), eol_))
+            outfile.write('<%stotalDigits_value>%s</%stotalDigits_value>%s' % (namespaceprefix_ , self.gds_format_float(self.totalDigits_value, input_name='totalDigits_value'), namespaceprefix_ , eol_))
         if self.date_minincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<date_minincl_value>%s</date_minincl_value>%s' % (self.gds_format_date(self.date_minincl_value, input_name='date_minincl_value'), eol_))
+            outfile.write('<%sdate_minincl_value>%s</%sdate_minincl_value>%s' % (namespaceprefix_ , self.gds_format_date(self.date_minincl_value, input_name='date_minincl_value'), namespaceprefix_ , eol_))
         if self.date_maxincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<date_maxincl_value>%s</date_maxincl_value>%s' % (self.gds_format_date(self.date_maxincl_value, input_name='date_maxincl_value'), eol_))
+            outfile.write('<%sdate_maxincl_value>%s</%sdate_maxincl_value>%s' % (namespaceprefix_ , self.gds_format_date(self.date_maxincl_value, input_name='date_maxincl_value'), namespaceprefix_ , eol_))
         if self.date_minexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<date_minexcl_value>%s</date_minexcl_value>%s' % (self.gds_format_date(self.date_minexcl_value, input_name='date_minexcl_value'), eol_))
+            outfile.write('<%sdate_minexcl_value>%s</%sdate_minexcl_value>%s' % (namespaceprefix_ , self.gds_format_date(self.date_minexcl_value, input_name='date_minexcl_value'), namespaceprefix_ , eol_))
         if self.date_maxexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<date_maxexcl_value>%s</date_maxexcl_value>%s' % (self.gds_format_date(self.date_maxexcl_value, input_name='date_maxexcl_value'), eol_))
+            outfile.write('<%sdate_maxexcl_value>%s</%sdate_maxexcl_value>%s' % (namespaceprefix_ , self.gds_format_date(self.date_maxexcl_value, input_name='date_maxexcl_value'), namespaceprefix_ , eol_))
         if self.time_minincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<time_minincl_value>%s</time_minincl_value>%s' % (self.gds_format_time(self.time_minincl_value, input_name='time_minincl_value'), eol_))
+            outfile.write('<%stime_minincl_value>%s</%stime_minincl_value>%s' % (namespaceprefix_ , self.gds_format_time(self.time_minincl_value, input_name='time_minincl_value'), namespaceprefix_ , eol_))
         if self.time_maxincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<time_maxincl_value>%s</time_maxincl_value>%s' % (self.gds_format_time(self.time_maxincl_value, input_name='time_maxincl_value'), eol_))
+            outfile.write('<%stime_maxincl_value>%s</%stime_maxincl_value>%s' % (namespaceprefix_ , self.gds_format_time(self.time_maxincl_value, input_name='time_maxincl_value'), namespaceprefix_ , eol_))
         if self.time_minexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<time_minexcl_value>%s</time_minexcl_value>%s' % (self.gds_format_time(self.time_minexcl_value, input_name='time_minexcl_value'), eol_))
+            outfile.write('<%stime_minexcl_value>%s</%stime_minexcl_value>%s' % (namespaceprefix_ , self.gds_format_time(self.time_minexcl_value, input_name='time_minexcl_value'), namespaceprefix_ , eol_))
         if self.time_maxexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<time_maxexcl_value>%s</time_maxexcl_value>%s' % (self.gds_format_time(self.time_maxexcl_value, input_name='time_maxexcl_value'), eol_))
+            outfile.write('<%stime_maxexcl_value>%s</%stime_maxexcl_value>%s' % (namespaceprefix_ , self.gds_format_time(self.time_maxexcl_value, input_name='time_maxexcl_value'), namespaceprefix_ , eol_))
         if self.datetime_minincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime_minincl_value>%s</datetime_minincl_value>%s' % (self.gds_format_datetime(self.datetime_minincl_value, input_name='datetime_minincl_value'), eol_))
+            outfile.write('<%sdatetime_minincl_value>%s</%sdatetime_minincl_value>%s' % (namespaceprefix_ , self.gds_format_datetime(self.datetime_minincl_value, input_name='datetime_minincl_value'), namespaceprefix_ , eol_))
         if self.datetime_maxincl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime_maxincl_value>%s</datetime_maxincl_value>%s' % (self.gds_format_datetime(self.datetime_maxincl_value, input_name='datetime_maxincl_value'), eol_))
+            outfile.write('<%sdatetime_maxincl_value>%s</%sdatetime_maxincl_value>%s' % (namespaceprefix_ , self.gds_format_datetime(self.datetime_maxincl_value, input_name='datetime_maxincl_value'), namespaceprefix_ , eol_))
         if self.datetime_minexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime_minexcl_value>%s</datetime_minexcl_value>%s' % (self.gds_format_datetime(self.datetime_minexcl_value, input_name='datetime_minexcl_value'), eol_))
+            outfile.write('<%sdatetime_minexcl_value>%s</%sdatetime_minexcl_value>%s' % (namespaceprefix_ , self.gds_format_datetime(self.datetime_minexcl_value, input_name='datetime_minexcl_value'), namespaceprefix_ , eol_))
         if self.datetime_maxexcl_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<datetime_maxexcl_value>%s</datetime_maxexcl_value>%s' % (self.gds_format_datetime(self.datetime_maxexcl_value, input_name='datetime_maxexcl_value'), eol_))
+            outfile.write('<%sdatetime_maxexcl_value>%s</%sdatetime_maxexcl_value>%s' % (namespaceprefix_ , self.gds_format_datetime(self.datetime_maxexcl_value, input_name='datetime_maxexcl_value'), namespaceprefix_ , eol_))
         if self.vbar_pattern_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<vbar_pattern_value>%s</vbar_pattern_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.vbar_pattern_value), input_name='vbar_pattern_value')), eol_))
+            outfile.write('<%svbar_pattern_value>%s</%svbar_pattern_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.vbar_pattern_value), input_name='vbar_pattern_value')), namespaceprefix_ , eol_))
         if self.unicode_pattern_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<unicode_pattern_value>%s</unicode_pattern_value>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.unicode_pattern_value), input_name='unicode_pattern_value')), eol_))
+            outfile.write('<%sunicode_pattern_value>%s</%sunicode_pattern_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.unicode_pattern_value), input_name='unicode_pattern_value')), namespaceprefix_ , eol_))
         if self.anonymous_float_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<anonymous_float_value>%s</anonymous_float_value>%s' % (self.gds_format_float(self.anonymous_float_value, input_name='anonymous_float_value'), eol_))
+            outfile.write('<%sanonymous_float_value>%s</%sanonymous_float_value>%s' % (namespaceprefix_ , self.gds_format_float(self.anonymous_float_value, input_name='anonymous_float_value'), namespaceprefix_ , eol_))
         if self.primative_integer is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<primative_integer>%s</primative_integer>%s' % (self.gds_format_integer(self.primative_integer, input_name='primative_integer'), eol_))
+            outfile.write('<%sprimative_integer>%s</%sprimative_integer>%s' % (namespaceprefix_ , self.gds_format_integer(self.primative_integer, input_name='primative_integer'), namespaceprefix_ , eol_))
         if self.primative_float is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<primative_float>%s</primative_float>%s' % (self.gds_format_float(self.primative_float, input_name='primative_float'), eol_))
+            outfile.write('<%sprimative_float>%s</%sprimative_float>%s' % (namespaceprefix_ , self.gds_format_float(self.primative_float, input_name='primative_float'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1777,7 +1777,7 @@ class simpleTwoElementOneType(GeneratedsSuper):
             eol_ = ''
         if self.simpleTwoElementTwo is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<simpleTwoElementTwo>%s</simpleTwoElementTwo>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.simpleTwoElementTwo), input_name='simpleTwoElementTwo')), eol_))
+            outfile.write('<%ssimpleTwoElementTwo>%s</%ssimpleTwoElementTwo>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.simpleTwoElementTwo), input_name='simpleTwoElementTwo')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

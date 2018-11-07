@@ -802,7 +802,7 @@ class PlantType_single(GeneratedsSuper):
             eol_ = ''
         if self.name is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<name>%s</name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+            outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.description is not None:
             self.description.export(outfile, level, namespaceprefix_, name_='description', pretty_print=pretty_print)
         if self.anytypeobjs_ is not None:
@@ -912,7 +912,7 @@ class PlantType_multiple(GeneratedsSuper):
             eol_ = ''
         if self.name is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<name>%s</name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+            outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.description is not None:
             self.description.export(outfile, level, namespaceprefix_, name_='description', pretty_print=pretty_print)
         for obj_ in self.anytypeobjs_:
@@ -1013,10 +1013,10 @@ class DescriptionType(GeneratedsSuper):
             eol_ = ''
         if self.name is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<name>%s</name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+            outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.size is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<size>%s</size>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.size), input_name='size')), eol_))
+            outfile.write('<%ssize>%s</%ssize>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.size), input_name='size')), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1108,10 +1108,10 @@ class CatalogType(GeneratedsSuper):
             eol_ = ''
         if self.name is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<name>%s</name>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), eol_))
+            outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.catagory is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<catagory>%s</catagory>%s' % (self.gds_format_integer(self.catagory, input_name='catagory'), eol_))
+            outfile.write('<%scatagory>%s</%scatagory>%s' % (namespaceprefix_ , self.gds_format_integer(self.catagory, input_name='catagory'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

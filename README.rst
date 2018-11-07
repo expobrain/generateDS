@@ -141,6 +141,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.5 (11/07/2018)
+
+- Merged namespace prefix changes for export functions from François
+  Guimond.  Thank you François.
+
 Version 2.30.4 (11/06/2018)
 
 - Another patch from Mustafa for enums.  Thanks Mustafa.

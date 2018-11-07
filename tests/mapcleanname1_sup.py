@@ -822,13 +822,13 @@ class complex_type01(GeneratedsSuper):
             eol_ = ''
         if self.string_value01 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value01>%s</string_value01>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value01), input_name='string_value01')), eol_))
+            outfile.write('<%sstring_value01>%s</%sstring_value01>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value01), input_name='string_value01')), namespaceprefix_ , eol_))
         for integer_value01_ in self.integer_value01:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value01>%s</integer_value01>%s' % (self.gds_format_integer(integer_value01_, input_name='integer_value01'), eol_))
+            outfile.write('<%sinteger_value01>%s</%sinteger_value01>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value01_, input_name='integer_value01'), namespaceprefix_ , eol_))
         if self.float_value01 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value01>%s</float_value01>%s' % (self.gds_format_float(self.float_value01, input_name='float_value01'), eol_))
+            outfile.write('<%sfloat_value01>%s</%sfloat_value01>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value01, input_name='float_value01'), namespaceprefix_ , eol_))
         if self.field01 is not None:
             self.field01.export(outfile, level, namespaceprefix_, name_='field01', pretty_print=pretty_print)
     def build(self, node):
@@ -963,13 +963,13 @@ class complex_type02(GeneratedsSuper):
             eol_ = ''
         if self.string_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value02>%s</string_value02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), eol_))
+            outfile.write('<%sstring_value02>%s</%sstring_value02>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), namespaceprefix_ , eol_))
         for integer_value02_ in self.integer_value02:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value02>%s</integer_value02>%s' % (self.gds_format_integer(integer_value02_, input_name='integer_value02'), eol_))
+            outfile.write('<%sinteger_value02>%s</%sinteger_value02>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value02_, input_name='integer_value02'), namespaceprefix_ , eol_))
         if self.float_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value02>%s</float_value02>%s' % (self.gds_format_float(self.float_value02, input_name='float_value02'), eol_))
+            outfile.write('<%sfloat_value02>%s</%sfloat_value02>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value02, input_name='float_value02'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1096,13 +1096,13 @@ class complex_type03(complex_type02):
             eol_ = ''
         if self.string_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value03>%s</string_value03>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), eol_))
+            outfile.write('<%sstring_value03>%s</%sstring_value03>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), namespaceprefix_ , eol_))
         for integer_value03_ in self.integer_value03:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value03>%s</integer_value03>%s' % (self.gds_format_integer(integer_value03_, input_name='integer_value03'), eol_))
+            outfile.write('<%sinteger_value03>%s</%sinteger_value03>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value03_, input_name='integer_value03'), namespaceprefix_ , eol_))
         if self.float_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value03>%s</float_value03>%s' % (self.gds_format_float(self.float_value03, input_name='float_value03'), eol_))
+            outfile.write('<%sfloat_value03>%s</%sfloat_value03>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value03, input_name='float_value03'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1231,13 +1231,13 @@ class type_(GeneratedsSuper):
             eol_ = ''
         if self.string_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value02>%s</string_value02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), eol_))
+            outfile.write('<%sstring_value02>%s</%sstring_value02>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), namespaceprefix_ , eol_))
         for integer_value02_ in self.integer_value02:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value02>%s</integer_value02>%s' % (self.gds_format_integer(integer_value02_, input_name='integer_value02'), eol_))
+            outfile.write('<%sinteger_value02>%s</%sinteger_value02>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value02_, input_name='integer_value02'), namespaceprefix_ , eol_))
         if self.float_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value02>%s</float_value02>%s' % (self.gds_format_float(self.float_value02, input_name='float_value02'), eol_))
+            outfile.write('<%sfloat_value02>%s</%sfloat_value02>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value02, input_name='float_value02'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1364,13 +1364,13 @@ class complex_type04(type_):
             eol_ = ''
         if self.string_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value03>%s</string_value03>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), eol_))
+            outfile.write('<%sstring_value03>%s</%sstring_value03>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), namespaceprefix_ , eol_))
         for integer_value03_ in self.integer_value03:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value03>%s</integer_value03>%s' % (self.gds_format_integer(integer_value03_, input_name='integer_value03'), eol_))
+            outfile.write('<%sinteger_value03>%s</%sinteger_value03>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value03_, input_name='integer_value03'), namespaceprefix_ , eol_))
         if self.float_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value03>%s</float_value03>%s' % (self.gds_format_float(self.float_value03, input_name='float_value03'), eol_))
+            outfile.write('<%sfloat_value03>%s</%sfloat_value03>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value03, input_name='float_value03'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1499,13 +1499,13 @@ class build_(GeneratedsSuper):
             eol_ = ''
         if self.string_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value02>%s</string_value02>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), eol_))
+            outfile.write('<%sstring_value02>%s</%sstring_value02>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value02), input_name='string_value02')), namespaceprefix_ , eol_))
         for integer_value02_ in self.integer_value02:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value02>%s</integer_value02>%s' % (self.gds_format_integer(integer_value02_, input_name='integer_value02'), eol_))
+            outfile.write('<%sinteger_value02>%s</%sinteger_value02>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value02_, input_name='integer_value02'), namespaceprefix_ , eol_))
         if self.float_value02 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value02>%s</float_value02>%s' % (self.gds_format_float(self.float_value02, input_name='float_value02'), eol_))
+            outfile.write('<%sfloat_value02>%s</%sfloat_value02>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value02, input_name='float_value02'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1632,13 +1632,13 @@ class complex_type05(build_):
             eol_ = ''
         if self.string_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<string_value03>%s</string_value03>%s' % (self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), eol_))
+            outfile.write('<%sstring_value03>%s</%sstring_value03>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.string_value03), input_name='string_value03')), namespaceprefix_ , eol_))
         for integer_value03_ in self.integer_value03:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<integer_value03>%s</integer_value03>%s' % (self.gds_format_integer(integer_value03_, input_name='integer_value03'), eol_))
+            outfile.write('<%sinteger_value03>%s</%sinteger_value03>%s' % (namespaceprefix_ , self.gds_format_integer(integer_value03_, input_name='integer_value03'), namespaceprefix_ , eol_))
         if self.float_value03 is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<float_value03>%s</float_value03>%s' % (self.gds_format_float(self.float_value03, input_name='float_value03'), eol_))
+            outfile.write('<%sfloat_value03>%s</%sfloat_value03>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value03, input_name='float_value03'), namespaceprefix_ , eol_))
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
