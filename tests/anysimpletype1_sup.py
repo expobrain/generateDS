@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -766,7 +766,7 @@ class test1element(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='test1element', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='test1element', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('test1element')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -782,7 +782,7 @@ class test1element(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='test1element')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='test1element', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='test1element', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -791,13 +791,13 @@ class test1element(GeneratedsSuper):
         if self.test1attribute is not None and 'test1attribute' not in already_processed:
             already_processed.add('test1attribute')
             outfile.write(' test1attribute=%s' % (quote_attrib(self.test1attribute), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='test1element', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='test1element', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.test1member is not None:
-            self.test1member.export(outfile, level, namespaceprefix_, name_='test1member', pretty_print=pretty_print)
+            self.test1member.export(outfile, level, namespaceprefix_, namespacedef_, name_='test1member', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -852,7 +852,7 @@ class cimAnySimpleType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='cimAnySimpleType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='cimAnySimpleType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('cimAnySimpleType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -869,7 +869,7 @@ class cimAnySimpleType(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='cimAnySimpleType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='cimAnySimpleType', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -906,7 +906,7 @@ class cimAnySimpleType(GeneratedsSuper):
                         outfile.write(' %s=%s' % (
                             name, quote_attrib(value), ))
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='cimAnySimpleType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='cimAnySimpleType', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()

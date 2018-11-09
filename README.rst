@@ -141,6 +141,20 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.6 (11/09/2018)
+
+- Merged additional namespace prefixes from François.
+- Fixed one corner case with the new namespace prefix changes -- For
+  mixed content (character content containing mark-up) the
+  parameters in the call and definition of method ``export`` in
+  class ``MixedContent`` were out of sync.
+- Question: Is it possible that we need an additional change to pass
+  namespace prefixes and their definitions through mixed content and
+  into complex content that it might contain?
+- Added an additional unit test for the namespace prefix changes.
+  See the ``ipo`` unit test.  Thanks again to François Guimond for
+  help with this.
+
 Version 2.30.5 (11/07/2018)
 
 - Merged namespace prefix changes for export functions from François

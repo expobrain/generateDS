@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -803,7 +803,7 @@ class IdentifierType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='IdentifierType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='IdentifierType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('IdentifierType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -820,7 +820,7 @@ class IdentifierType(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='IdentifierType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='IdentifierType', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -850,7 +850,7 @@ class IdentifierType(GeneratedsSuper):
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='IdentifierType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='IdentifierType', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -930,7 +930,7 @@ class BillOfResourcesIDType(IdentifierType):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='BillOfResourcesIDType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfResourcesIDType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('BillOfResourcesIDType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -947,13 +947,13 @@ class BillOfResourcesIDType(IdentifierType):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='BillOfResourcesIDType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='BillOfResourcesIDType', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='BillOfResourcesIDType'):
         super(BillOfResourcesIDType, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='BillOfResourcesIDType')
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='BillOfResourcesIDType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfResourcesIDType', fromsubclass_=False, pretty_print=True):
         super(BillOfResourcesIDType, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
@@ -1003,7 +1003,7 @@ class BillOfMaterialIDType(IdentifierType):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='BillOfMaterialIDType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfMaterialIDType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('BillOfMaterialIDType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1020,13 +1020,13 @@ class BillOfMaterialIDType(IdentifierType):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='BillOfMaterialIDType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='BillOfMaterialIDType', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='BillOfMaterialIDType'):
         super(BillOfMaterialIDType, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='BillOfMaterialIDType')
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='BillOfMaterialIDType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfMaterialIDType', fromsubclass_=False, pretty_print=True):
         super(BillOfMaterialIDType, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):

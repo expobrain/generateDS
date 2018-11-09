@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -814,7 +814,7 @@ class GetUserReq(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='GetUserReq', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='GetUserReq', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('GetUserReq')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -830,7 +830,7 @@ class GetUserReq(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='GetUserReq')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='GetUserReq', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='GetUserReq', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -863,7 +863,7 @@ class GetUserReq(GeneratedsSuper):
         if self.value08 is not None and 'value08' not in already_processed:
             already_processed.add('value08')
             outfile.write(' value08=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.value08), input_name='value08')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='GetUserReq', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='GetUserReq', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

@@ -609,7 +609,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -782,7 +782,7 @@ class oneperType00_1(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='oneperType00_1', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='oneperType00_1', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('oneperType00_1')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -798,22 +798,22 @@ class oneperType00_1(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='oneperType00_1')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='oneperType00_1', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='oneperType00_1', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='oneperType00_1'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='oneperType00_1', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='oneperType00_1', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.inner01 is not None:
-            self.inner01.export(outfile, level, namespaceprefix_, name_='inner01', pretty_print=pretty_print)
+            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner01', pretty_print=pretty_print)
         if self.inner02 is not None:
-            self.inner02.export(outfile, level, namespaceprefix_, name_='inner02', pretty_print=pretty_print)
+            self.inner02.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner02', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

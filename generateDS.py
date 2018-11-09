@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.5'
+VERSION = '2.30.6'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -5367,7 +5367,7 @@ class MixedContainer:
 #xmldisable#            self.exportSimple(outfile, level, name)
 #xmldisable#        else:    # category == MixedContainer.CategoryComplex
 #xmldisable#            self.value.export(
-#xmldisable#                outfile, level, namespace, name,
+#xmldisable#                outfile, level, namespace, name_=name,
 #xmldisable#                pretty_print=pretty_print)
 #xmldisable#    def exportSimple(self, outfile, level, name):
 #xmldisable#        if self.content_type == MixedContainer.TypeString:

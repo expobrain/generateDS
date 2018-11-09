@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -850,7 +850,7 @@ class tomato_people(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='people', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='people', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('people')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -866,14 +866,14 @@ class tomato_people(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='people')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='people', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='people', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='people'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='people', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='people', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -985,7 +985,7 @@ class tomato_comments(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='comments', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='comments', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('comments')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1001,14 +1001,14 @@ class tomato_comments(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='comments')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='comments', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='comments', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='comments'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='comments', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='comments', fromsubclass_=False, pretty_print=True):
         if not fromsubclass_:
             for item_ in self.content_:
                 item_.export(outfile, level, item_.name, namespaceprefix_, pretty_print=pretty_print)
@@ -1179,7 +1179,7 @@ class tomato_person(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='person', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='person', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('person')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1195,7 +1195,7 @@ class tomato_person(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='person')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='person', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='person', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1220,7 +1220,7 @@ class tomato_person(GeneratedsSuper):
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='person', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='person', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1484,7 +1484,7 @@ class tomato_programmer(tomato_person):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='programmer', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='programmer', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('programmer')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1500,7 +1500,7 @@ class tomato_programmer(tomato_person):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='programmer')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='programmer', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='programmer', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1529,7 +1529,7 @@ class tomato_programmer(tomato_person):
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='programmer', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='programmer', fromsubclass_=False, pretty_print=True):
         super(tomato_programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
@@ -1566,7 +1566,7 @@ class tomato_programmer(tomato_person):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sellong>%s</%sellong>%s' % (namespaceprefix_ , self.gds_format_integer(self.ellong, input_name='ellong'), namespaceprefix_ , eol_))
         if self.elparam is not None:
-            self.elparam.export(outfile, level, namespaceprefix_, name_='elparam', pretty_print=pretty_print)
+            self.elparam.export(outfile, level, namespaceprefix_, namespacedef_, name_='elparam', pretty_print=pretty_print)
         if self.elarraytypes is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%selarraytypes>%s</%selarraytypes>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.elarraytypes), input_name='elarraytypes')), namespaceprefix_ , eol_))
@@ -1787,7 +1787,7 @@ class tomato_param(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='param', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='param', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('param')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1804,7 +1804,7 @@ class tomato_param(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='param', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='param', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -1827,7 +1827,7 @@ class tomato_param(GeneratedsSuper):
         if self.type_ is not None and 'type_' not in already_processed:
             already_processed.add('type_')
             outfile.write(' type=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.type_), input_name='type')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='param', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='param', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -1908,7 +1908,7 @@ class tomato_python_programmer(tomato_programmer):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='python-programmer', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='python-programmer', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('python-programmer')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1924,7 +1924,7 @@ class tomato_python_programmer(tomato_programmer):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='python-programmer')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='python-programmer', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='python-programmer', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1934,7 +1934,7 @@ class tomato_python_programmer(tomato_programmer):
         if self.nick_name is not None and 'nick_name' not in already_processed:
             already_processed.add('nick_name')
             outfile.write(' nick-name=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.nick_name), input_name='nick-name')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='python-programmer', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='python-programmer', fromsubclass_=False, pretty_print=True):
         super(tomato_python_programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
@@ -2011,7 +2011,7 @@ class tomato_java_programmer(tomato_programmer):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='java-programmer', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='java-programmer', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('java-programmer')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2027,7 +2027,7 @@ class tomato_java_programmer(tomato_programmer):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='java-programmer')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='java-programmer', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='java-programmer', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -2040,7 +2040,7 @@ class tomato_java_programmer(tomato_programmer):
         if self.status is not None and 'status' not in already_processed:
             already_processed.add('status')
             outfile.write(' status=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.status), input_name='status')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='java-programmer', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='java-programmer', fromsubclass_=False, pretty_print=True):
         super(tomato_java_programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
@@ -2128,7 +2128,7 @@ class tomato_agent(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='agent', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='agent', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('agent')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2144,14 +2144,14 @@ class tomato_agent(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='agent')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='agent', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='agent', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='agent'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='agent', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='agent', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -2166,7 +2166,7 @@ class tomato_agent(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%spriority>%s</%spriority>%s' % (namespaceprefix_ , self.gds_format_float(self.priority, input_name='priority'), namespaceprefix_ , eol_))
         if self.info is not None:
-            self.info.export(outfile, level, namespaceprefix_, name_='info', pretty_print=pretty_print)
+            self.info.export(outfile, level, namespaceprefix_, namespacedef_, name_='info', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -2254,7 +2254,7 @@ class tomato_special_agent(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='special-agent', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='special-agent', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('special-agent')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2270,14 +2270,14 @@ class tomato_special_agent(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='special-agent')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='special-agent', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='special-agent', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='special-agent'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='special-agent', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='special-agent', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -2292,7 +2292,7 @@ class tomato_special_agent(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%spriority>%s</%spriority>%s' % (namespaceprefix_ , self.gds_format_float(self.priority, input_name='priority'), namespaceprefix_ , eol_))
         if self.info is not None:
-            self.info.export(outfile, level, namespaceprefix_, name_='info', pretty_print=pretty_print)
+            self.info.export(outfile, level, namespaceprefix_, namespacedef_, name_='info', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -2434,7 +2434,7 @@ class tomato_booster(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='booster', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='booster', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('booster')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2450,14 +2450,14 @@ class tomato_booster(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='booster')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='booster', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='booster', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='booster'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='booster', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='booster', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -2584,7 +2584,7 @@ class tomato_info(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='info', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='info', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('info')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2600,7 +2600,7 @@ class tomato_info(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='info')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='info', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='info', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -2614,7 +2614,7 @@ class tomato_info(GeneratedsSuper):
         if self.rating is not None and 'rating' not in already_processed:
             already_processed.add('rating')
             outfile.write(' rating="%s"' % self.gds_format_float(self.rating, input_name='rating'))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='info', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='info', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -2686,7 +2686,7 @@ class tomato_client_handlerType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='client-handlerType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='client-handlerType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('client-handlerType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -2702,14 +2702,14 @@ class tomato_client_handlerType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='client-handlerType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='client-handlerType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='client-handlerType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='client-handlerType'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='client-handlerType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='client-handlerType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

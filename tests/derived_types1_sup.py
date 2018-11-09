@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -773,7 +773,7 @@ class animalCollection(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='animalCollection', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='animalCollection', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('animalCollection')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -789,20 +789,20 @@ class animalCollection(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='animalCollection')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='animalCollection', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='animalCollection', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='animalCollection'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='animalCollection', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='animalCollection', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         for animal_ in self.animal:
-            animal_.export(outfile, level, namespaceprefix_, pretty_print=pretty_print)
+            animal_.export(outfile, level, namespaceprefix_, namespacedef_, pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -864,7 +864,7 @@ class animal(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='animal', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='animal', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('animal')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -880,7 +880,7 @@ class animal(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='animal')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='animal', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='animal', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -890,7 +890,7 @@ class animal(GeneratedsSuper):
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
             outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='animal', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='animal', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -943,7 +943,7 @@ class dog(animal):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='dog', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='dog', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('dog')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -959,14 +959,14 @@ class dog(animal):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dog')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='dog', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='dog', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dog'):
         super(dog, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dog')
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dog', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='dog', fromsubclass_=False, pretty_print=True):
         super(dog, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'

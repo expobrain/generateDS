@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -850,7 +850,7 @@ class containerType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='containerType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='containerType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('containerType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -866,14 +866,14 @@ class containerType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='containerType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='containerType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='containerType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='containerType'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='containerType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='containerType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1331,7 +1331,7 @@ class simpleOneType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='simpleOneType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleOneType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('simpleOneType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1347,7 +1347,7 @@ class simpleOneType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleOneType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='simpleOneType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='simpleOneType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -1356,7 +1356,7 @@ class simpleOneType(GeneratedsSuper):
         if self.integer_range_1_value_with_default != "6" and 'integer_range_1_value_with_default' not in already_processed:
             already_processed.add('integer_range_1_value_with_default')
             outfile.write(' integer_range_1_value_with_default=%s' % (quote_attrib(self.integer_range_1_value_with_default), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='simpleOneType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleOneType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1659,7 +1659,7 @@ class simpleTwoType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='simpleTwoType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleTwoType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('simpleTwoType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1675,20 +1675,20 @@ class simpleTwoType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTwoType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='simpleTwoType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='simpleTwoType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='simpleTwoType'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='simpleTwoType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleTwoType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
             eol_ = ''
         if self.simpleTwoElementOne is not None:
-            self.simpleTwoElementOne.export(outfile, level, namespaceprefix_, name_='simpleTwoElementOne', pretty_print=pretty_print)
+            self.simpleTwoElementOne.export(outfile, level, namespaceprefix_, namespacedef_, name_='simpleTwoElementOne', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1747,7 +1747,7 @@ class simpleTwoElementOneType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='simpleTwoElementOneType', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleTwoElementOneType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('simpleTwoElementOneType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1763,14 +1763,14 @@ class simpleTwoElementOneType(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='simpleTwoElementOneType')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='simpleTwoElementOneType', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='simpleTwoElementOneType', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='simpleTwoElementOneType'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='simpleTwoElementOneType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='simpleTwoElementOneType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

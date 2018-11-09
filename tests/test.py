@@ -367,6 +367,8 @@ class GenTest(unittest.TestCase):
         self.remove('{}2_sup.py'.format(t_))
         self.remove('{}2_sub.py'.format(t_))
 
+    #
+    # Also perform a test of passing namespace to child exports.
     def test_014_ipo(self):
         cmdTempl = (
             'python generateDS.py --no-dates --no-versions '
@@ -388,6 +390,13 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_out.xml'.format(t_))
+        cmdTempl = ('python -c "import {0}_test_namespace; '
+                    '{0}_test_namespace.export(\'{0}2_namespace_out.xml\')"')
+        cmd = cmdTempl.format(t_)
+        result, err = self.execute(cmd)
+        self.compareFiles(
+            '{}1_namespace_out.xml'.format(t_),
+            '{}2_namespace_out.xml'.format(t_))
 
     def test_015_recursive_simpletype(self):
         cmdTempl = (

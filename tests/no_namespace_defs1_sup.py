@@ -608,7 +608,7 @@ class MixedContainer:
 ##             self.exportSimple(outfile, level, name)
 ##         else:    # category == MixedContainer.CategoryComplex
 ##             self.value.export(
-##                 outfile, level, namespace, name,
+##                 outfile, level, namespace, name_=name,
 ##                 pretty_print=pretty_print)
 ##     def exportSimple(self, outfile, level, name):
 ##         if self.content_type == MixedContainer.TypeString:

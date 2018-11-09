@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -770,7 +770,7 @@ class document1Type(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='document1Type', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document1Type', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('document1Type')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -786,14 +786,14 @@ class document1Type(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='document1Type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='document1Type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='document1Type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='document1Type'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='document1Type', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document1Type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -802,7 +802,7 @@ class document1Type(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%scomments>%s</%scomments>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.comments), input_name='comments')), namespaceprefix_ , eol_))
         if self.otherdoc is not None:
-            self.otherdoc.export(outfile, level, namespaceprefix_, name_='otherdoc', pretty_print=pretty_print)
+            self.otherdoc.export(outfile, level, namespaceprefix_, namespacedef_, name_='otherdoc', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -874,7 +874,7 @@ class document2Type(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='document2Type', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document2Type', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('document2Type')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -890,14 +890,14 @@ class document2Type(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='document2Type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='document2Type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='document2Type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='document2Type'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='document2Type', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document2Type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -909,7 +909,7 @@ class document2Type(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%srating>%s</%srating>%s' % (namespaceprefix_ , self.gds_format_integer(self.rating, input_name='rating'), namespaceprefix_ , eol_))
         if self.anotherdoc is not None:
-            self.anotherdoc.export(outfile, level, namespaceprefix_, name_='anotherdoc', pretty_print=pretty_print)
+            self.anotherdoc.export(outfile, level, namespaceprefix_, namespacedef_, name_='anotherdoc', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -980,7 +980,7 @@ class document3Type(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='document3Type', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document3Type', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('document3Type')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -996,14 +996,14 @@ class document3Type(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='document3Type')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='document3Type', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='document3Type', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='document3Type'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='document3Type', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='document3Type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

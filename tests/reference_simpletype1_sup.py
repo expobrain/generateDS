@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -780,7 +780,7 @@ class dummy(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', name_='dummy', namespacedef_='', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='dummy', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('dummy')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -796,7 +796,7 @@ class dummy(GeneratedsSuper):
         self.exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dummy')
         if self.hasContent_():
             outfile.write('>%s' % (eol_, ))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='dummy', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='dummy', pretty_print=pretty_print)
             showIndent(outfile, level, pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
@@ -808,7 +808,7 @@ class dummy(GeneratedsSuper):
         if self.test_normal_attr is not None and 'test_normal_attr' not in already_processed:
             already_processed.add('test_normal_attr')
             outfile.write(' test_normal_attr="%s"' % self.gds_format_integer(self.test_normal_attr, input_name='test_normal_attr'))
-    def exportChildren(self, outfile, level, namespaceprefix_='', name_='dummy', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='dummy', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

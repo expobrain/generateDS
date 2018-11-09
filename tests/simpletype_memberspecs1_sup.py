@@ -608,7 +608,7 @@ class MixedContainer:
             self.exportSimple(outfile, level, name)
         else:    # category == MixedContainer.CategoryComplex
             self.value.export(
-                outfile, level, namespace, name,
+                outfile, level, namespace, name_=name,
                 pretty_print=pretty_print)
     def exportSimple(self, outfile, level, name):
         if self.content_type == MixedContainer.TypeString:
@@ -779,7 +779,7 @@ class SpecialDate(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='pl:', name_='SpecialDate', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='pl:', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', name_='SpecialDate', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('SpecialDate')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -796,7 +796,7 @@ class SpecialDate(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='SpecialDate', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='SpecialDate', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -804,7 +804,7 @@ class SpecialDate(GeneratedsSuper):
         if self.SpecialProperty is not None and 'SpecialProperty' not in already_processed:
             already_processed.add('SpecialProperty')
             outfile.write(' SpecialProperty=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.SpecialProperty), input_name='SpecialProperty')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='pl:', name_='SpecialDate', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='pl:', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', name_='SpecialDate', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -860,7 +860,7 @@ class ExtremeDate(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='pl:', name_='ExtremeDate', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='pl:', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', name_='ExtremeDate', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('ExtremeDate')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -877,7 +877,7 @@ class ExtremeDate(GeneratedsSuper):
         if self.hasContent_():
             outfile.write('>')
             outfile.write(self.convert_unicode(self.valueOf_))
-            self.exportChildren(outfile, level + 1, namespaceprefix_, name_='ExtremeDate', pretty_print=pretty_print)
+            self.exportChildren(outfile, level + 1, namespaceprefix_, namespacedef_, name_='ExtremeDate', pretty_print=pretty_print)
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
@@ -885,7 +885,7 @@ class ExtremeDate(GeneratedsSuper):
         if self.ExtremeProperty is not None and 'ExtremeProperty' not in already_processed:
             already_processed.add('ExtremeProperty')
             outfile.write(' ExtremeProperty=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.ExtremeProperty), input_name='ExtremeProperty')), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='pl:', name_='ExtremeDate', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='pl:', namespacedef_='xmlns:pl="http://kuhlman.com/people.xsd"', name_='ExtremeDate', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
