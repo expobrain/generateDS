@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.6'
+VERSION = '2.30.7'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2133,7 +2133,8 @@ def generateExportFn_1(wrt, child, name, fill):
         wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         wrt('%s            showIndent(outfile, level, pretty_print)\n' % fill)
         s1 = ("%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% "
-              "(namespaceprefix_ , self.gds_format_base64(self.%s, input_name='%s'), "
+              "(namespaceprefix_ , self.gds_format_base64(self.%s, "
+              "input_name='%s'), "
               "namespaceprefix_ , eol_))\n" % (
                   fill, name, name, mappedName, name, ))
         wrt(s1)
@@ -2148,7 +2149,8 @@ def generateExportFn_1(wrt, child, name, fill):
             namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
-            s1 = "%s            self.%s.export(outfile, level, %s, namespacedef_, " \
+            s1 = "%s            self.%s.export(outfile, level, %s, " \
+                "namespacedef_, " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
                 (fill, mappedName, namespaceprefix, name)
         wrt(s1)
@@ -2164,21 +2166,24 @@ def generateExportFn_2(wrt, child, name, fill):
     if child_type == DateTimeType:
         wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
         s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
-            "(namespaceprefix_ , self.gds_format_datetime(%s_, input_name='%s')" \
+            "(namespaceprefix_ , self.gds_format_datetime(%s_, " \
+            "input_name='%s')" \
             ", namespaceprefix_ , eol_))\n" % \
             (fill, name, name, cleanName, name, )
         wrt(s1)
     elif child_type == DateType:
         wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
         s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
-            "(namespaceprefix_ , self.gds_format_date(%s_, input_name='%s'), " \
+            "(namespaceprefix_ , self.gds_format_date(%s_, " \
+            "input_name='%s'), " \
             "namespaceprefix_ , eol_))\n" % \
             (fill, name, name, cleanName, name, )
         wrt(s1)
     elif child_type == TimeType:
         wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
         s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
-            "(namespaceprefix_ , self.gds_format_time(%s_, input_name='%s'), " \
+            "(namespaceprefix_ , self.gds_format_time(%s_, " \
+            "input_name='%s'), " \
             "namespaceprefix_ , eol_))\n" % \
             (fill, name, name, cleanName, name, )
         wrt(s1)
@@ -2246,14 +2251,16 @@ def generateExportFn_2(wrt, child, name, fill):
                 (fill, name, name, cleanName, name, )
         else:
             s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
-                "(namespaceprefix_ , self.gds_format_double(%s_, input_name='%s'), " \
+                "(namespaceprefix_ , self.gds_format_double(%s_, " \
+                "input_name='%s'), " \
                 "namespaceprefix_ , eol_))\n" % \
                 (fill, name, name, cleanName, name, )
         wrt(s1)
     elif child_type == Base64Type:
         wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
         s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
-            "(namespaceprefix_ , self.gds_format_base64(%s_, input_name='%s'), " \
+            "(namespaceprefix_ , self.gds_format_base64(%s_, " \
+            "input_name='%s'), " \
             "namespaceprefix_ , eol_))\n" % \
             (fill, name, name, cleanName, name, )
         wrt(s1)
@@ -2781,7 +2788,8 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
                 if abstract_child and child.getMaxOccurs() > 1:
                     wrt("%sfor %s_ in self.%s:\n" % (
                         fill, name, name,))
-                    wrt("%s    %s_.export(outfile, level, namespaceprefix_, namespacedef_, "
+                    wrt("%s    %s_.export(outfile, level, "
+                        "namespaceprefix_, namespacedef_, "
                         "pretty_print=pretty_print)\n" % (
                             fill, name, ))
                 elif abstract_child:
@@ -2885,7 +2893,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     if childCount == 0 and element.isMixed():
         wrt("        outfile.write('>')\n")
         wrt("        self.exportChildren(outfile, level + 1, "
-            "namespaceprefix_, namespacedef_, name_, pretty_print=pretty_print)\n")
+            "namespaceprefix_, namespacedef_, name_, "
+            "pretty_print=pretty_print)\n")
         wrt("        outfile.write(self.convert_unicode("
             "self.valueOf_))\n")
         wrt("        outfile.write('</%s%s>%s' % ("
@@ -2901,7 +2910,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         else:
             wrt("            outfile.write('>%s' % (eol_, ))\n")
         wrt("            self.exportChildren(outfile, level + 1, "
-            "namespaceprefix_, namespacedef_, name_='%s', pretty_print=pretty_print)\n" %
+            "namespaceprefix_, namespacedef_, name_='%s', "
+            "pretty_print=pretty_print)\n" %
             (encodedname))
         # Put a condition on the indent to require children.
         if childCount != 0:
@@ -2958,7 +2968,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     hasAttributes += generateExportAttributes(wrt, element, hasAttributes)
     if hasAttributes == 0:
         wrt("        pass\n")
-    wrt("    def exportChildren(self, outfile, level, namespaceprefix_='%s', namespacedef_='%s', "
+    wrt("    def exportChildren(self, outfile, level, "
+        "namespaceprefix_='%s', namespacedef_='%s', "
         "name_='%s', fromsubclass_=False, pretty_print=True):\n" %
         (namespace, nameSpacesDef, encodedname, ))
     hasChildren = 0
@@ -5818,7 +5829,7 @@ class GeneratedsSuper(object):
 
 def getSubclassFromModule_(module, class_):
     '''Get the subclass of a class from a specific module.'''
-    name = class_.__name__ + 'Sub'
+    name = class_.__name__ + '{SubclassSuffix}'
     if hasattr(module, name):
         return getattr(module, name)
     else:
@@ -5906,7 +5917,8 @@ def generateHeader(wrt, prefix, options, args, externalImports):
         "s1 = (isinstance(inStr, BaseStrType_) and inStr or '%s' % inStr)"
 
     import_string = TEMPLATE_GENERATEDS_SUPER.format(
-        gds_reverse_node_mapping_text=gds_reverse_node_mapping_text)
+        gds_reverse_node_mapping_text=gds_reverse_node_mapping_text,
+        SubclassSuffix=SubclassSuffix)
     if UseGeneratedssuperLookup:
         s0 = """try:
     from generatedssuper import GeneratedsSuper

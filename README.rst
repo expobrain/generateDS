@@ -141,13 +141,20 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.7 (11/12/2018)
+
+- Applied patch with fix for subclass suffix "Sub".  Thanks to
+  Lucius for this fix.
+- Fixed lines in ``generateDS.py`` that were too long and exceeded
+  the style guide recommendation (PEP 8).
+
 Version 2.30.6 (11/09/2018)
 
 - Merged additional namespace prefixes from François.
 - Fixed one corner case with the new namespace prefix changes -- For
   mixed content (character content containing mark-up) the
   parameters in the call and definition of method ``export`` in
-  class ``MixedContent`` were out of sync.
+  class ``MixedContainer`` were out of sync.
 - Question: Is it possible that we need an additional change to pass
   namespace prefixes and their definitions through mixed content and
   into complex content that it might contain?
