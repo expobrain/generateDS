@@ -975,6 +975,37 @@ class GenTest(unittest.TestCase):
         self.remove('{}2_sub.py'.format(t_))
         self.remove('{}2_out.xml'.format(t_))
 
+    def test_038_enum_import(self):
+        cmdTempl = (
+            'python generateDS.py --disable-generatedssuper-lookup '
+            '--disable-xml --no-dates --no-versions '
+            '--silence --member-specs=dict -f '
+            '--one-file-per-xsd --output-directory="tests/EnumImport" '
+            '--use-source-file-as-module-name '
+            'tests/%s00.xsd'
+        )
+        t_ = 'enum_import'
+        cmd = cmdTempl % (t_, )
+        self.executeClean(cmd, cwd='..')
+        self.compareFiles(
+            'EnumImport{}{}00.py'.format(os.sep, t_),
+            'EnumImport{}{}00_2.py'.format(os.sep, t_),
+            )
+        self.compareFiles(
+            'EnumImport{}{}01.py'.format(os.sep, t_),
+            'EnumImport{}{}01_2.py'.format(os.sep, t_),
+            )
+        self.compareFiles(
+            'EnumImport{}{}02.py'.format(os.sep, t_),
+            'EnumImport{}{}02_2.py'.format(os.sep, t_)
+            )
+        cmd = 'python test_generated_code.py'
+        self.executeClean(cmd, cwd='./EnumImport')
+        # cleanup generated files
+        self.remove('EnumImport{}{}Type00.py'.format(os.sep, t_))
+        self.remove('EnumImport{}{}Type01.py'.format(os.sep, t_))
+        self.remove('EnumImport{}{}Type02.py'.format(os.sep, t_))
+
     def compareFiles(self, left, right, ignore=None):
         with open(left) as left_file:
             with open(right) as right_file:
