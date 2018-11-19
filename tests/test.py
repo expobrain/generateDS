@@ -1,5 +1,16 @@
 #!/usr/bin/env python
 
+"""
+synopsis:
+    Run unit tests for generateDS.
+usage:
+    On the command line:
+        $ cd generateds/tests
+        $ python test.py
+notes:
+    Only Python 3, not Python 2, is supported for unit tests.
+"""
+
 from __future__ import print_function
 
 import difflib
@@ -990,17 +1001,17 @@ class GenTest(unittest.TestCase):
         self.compareFiles(
             'EnumImport{}{}00.py'.format(os.sep, t_),
             'EnumImport{}{}00_2.py'.format(os.sep, t_),
-            )
+        )
         self.compareFiles(
             'EnumImport{}{}01.py'.format(os.sep, t_),
             'EnumImport{}{}01_2.py'.format(os.sep, t_),
-            )
+        )
         self.compareFiles(
             'EnumImport{}{}02.py'.format(os.sep, t_),
             'EnumImport{}{}02_2.py'.format(os.sep, t_)
-            )
+        )
         cmd = 'python test_generated_code.py'
-        self.executeClean(cmd, cwd='./EnumImport')
+        self.execute(cmd, cwd='./EnumImport')
         # cleanup generated files
         self.remove('EnumImport{}{}Type00.py'.format(os.sep, t_))
         self.remove('EnumImport{}{}Type01.py'.format(os.sep, t_))
@@ -1050,9 +1061,16 @@ def strip_build_comments(lines):
 def suite():
     # The following is obsolete.  See Lib/unittest.py.
     #return unittest.makeSuite(GenTest)
+    suite = unittest.TestSuite()
     loader = unittest.defaultTestLoader
-    testsuite = loader.loadTestsFromTestCase(GenTest)
-    return testsuite
+    testsuite1 = loader.loadTestsFromTestCase(GenTest)
+    from EnumImport.test_generated_code import EnumTest
+    testsuite2 = loader.loadTestsFromTestCase(EnumTest)
+    suite.addTests([
+        testsuite1,
+        testsuite2,
+    ])
+    return suite
 
 
 # Make the test suite and run the tests.

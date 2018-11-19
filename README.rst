@@ -141,6 +141,15 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.8 (11/14/2018)
+
+- Added unit tests for enum import.  Thanks to Mustafa Şenol Coşar
+  for adding these tests.
+- Fix to generation of ``externalImports`` so that the generated
+  import statements will be in a consistent, predictable order.
+- Converted ``tests/EnumImport/test_generated_code.py`` to use the
+  Python unit test framework.
+
 Version 2.30.7 (11/12/2018)
 
 - Applied patch with fix for subclass suffix "Sub".  Thanks to

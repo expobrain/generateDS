@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.7'
+VERSION = '2.30.8'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -4413,7 +4413,7 @@ def get_target_value(default, stName):
     return targetValue
 
 
-Vbar_repl_pat = re.compile('([^\\\])\|')
+Vbar_repl_pat = re.compile(r'([^\\])\|')
 
 
 # Replace vertical bars with "$|^", unless escaped with backslash.
@@ -5948,9 +5948,10 @@ except ImportError as exp:
         quote_attrib_text=quote_attrib_text,
     )
     wrt(s1)
+    # Ensure that imports are generated in the same, predictable order.
+    externalImports = sorted(externalImports)
     for externalImport in externalImports:
         wrt(externalImport + "\n")
-
     wrt("\n")
 
 

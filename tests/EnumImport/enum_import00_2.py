@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 2.7.15rc1 (default, Nov 12 2018, 14:31:15)  [GCC 7.3.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--disable-generatedssuper-lookup', '')
@@ -738,8 +738,8 @@ class EnumType00_1(object):
 
 class Type00_1(GeneratedsSuper):
     member_data_items_ = {
-        'inner01': MemberSpec_('inner01', 'Type01_1', 0, 0, {u'type': u'Type01_1', u'name': u'inner01'}, None),
-        'inner02': MemberSpec_('inner02', 'Type02_1', 0, 0, {u'type': u'Type02_1', u'name': u'inner02'}, None),
+        'inner01': MemberSpec_('inner01', 'Type01_1', 0, 0, {'name': 'inner01', 'type': 'Type01_1'}, None),
+        'inner02': MemberSpec_('inner02', 'Type02_1', 0, 0, {'name': 'inner02', 'type': 'Type02_1'}, None),
     }
     subclass = None
     superclass = None
