@@ -10,10 +10,10 @@
 
     <xs:simpleType name="EnumType02_1">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="float" />
-            <xs:enumeration value="int" />
-            <xs:enumeration value="Name" />
-            <xs:enumeration value="token" />
+            <xs:enumeration value="float"/>
+            <xs:enumeration value="int"/>
+            <xs:enumeration value="Name"/>
+            <xs:enumeration value="token"/>
         </xs:restriction>
     </xs:simpleType>
 

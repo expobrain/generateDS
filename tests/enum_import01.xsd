@@ -8,7 +8,7 @@
     <xs:complexType name="Type01_1">
         <xs:sequence>
             <xs:element name="username" type="xs:string"/>
-            <xs:element name="inner01" type="enum_import02:Type02_1" />
+            <xs:element name="inner01" type="enum_import02:Type02_1"/>
         </xs:sequence>
     </xs:complexType>
 
@@ -21,10 +21,10 @@
 
     <xs:simpleType name="EnumType01_1">
         <xs:restriction base="xs:string">
-            <xs:enumeration value="float" />
-            <xs:enumeration value="int" />
-            <xs:enumeration value="Name" />
-            <xs:enumeration value="token" />
+            <xs:enumeration value="float"/>
+            <xs:enumeration value="int"/>
+            <xs:enumeration value="Name"/>
+            <xs:enumeration value="token"/>
         </xs:restriction>
     </xs:simpleType>
 

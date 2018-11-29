@@ -9,7 +9,7 @@ What is it
 generateDS.py generates Python data structures from an Xschema
 document.  It generates a file containing: (1) a Python class for
 each element definition and (2) parsers (which use the Python
-minidom module) for XML documents that satisfy the Xschema
+lxml library) for XML documents that satisfy the Xschema
 document.  The class definitions contain:
 
 - A constructor with initializers for member variables.
@@ -21,9 +21,10 @@ document.  The class definitions contain:
 - An 'export' method that will re-create (write out) the XML element
   in an XML document.
 
-- An 'exportLiteral' method that will write out a text (literal)
-  Python data structure that represents the content of the XML
-  document.
+- Etc.
+
+See ``generateDS.txt``/``generateDS.html`` for information about
+more capabilities, how to use it, etc.
 
 
 ---------------------------
@@ -140,6 +141,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 --------------
 Change history
 --------------
+
+Version 2.30.9 (11/29/2018)
+
+- Fix imported module is generated more than once.  Thank you
+  Mustafa Senol Cosar for this fix.
 
 Version 2.30.8 (11/14/2018)
 

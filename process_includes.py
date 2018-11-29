@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.8'
+VERSION = '2.30.9'
 ##VERSION##
 
 CatalogDict = {}

@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.8'
+VERSION = '2.30.9'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -5054,7 +5054,8 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
         parentFQN = base.getFullyQualifiedName()
         if parentFQN not in AlreadyGenerated:
             PostponedExtensions.append(element)
-            _log.debug("Postponing the class %s since its parent has not been generated")
+            _log.debug("Postponing the class %s since its parent "
+                       "has not been generated")
             return
     if mappedName in AlreadyGenerated:
         _log.debug("The class for %s has already been generated" % mappedName)
@@ -7169,7 +7170,6 @@ def parseAndGenerate(
         for root, modulePath in rootInfos:
             if modulePath and modulePath not in generatedModules:
                 generatedModules.add(modulePath)
-                print(modulePath)
                 generatedClasses = generate(
                     modulePath, subclassFilename, behaviorFilename,
                     prefix, root, options, args, superModule)
