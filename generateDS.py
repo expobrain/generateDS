@@ -5055,7 +5055,7 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
         if parentFQN not in AlreadyGenerated:
             PostponedExtensions.append(element)
             _log.debug("Postponing the class %s since its parent "
-                       "has not been generated")
+                       "has not been generated" % (mappedName, ))
             return
     if mappedName in AlreadyGenerated:
         _log.debug("The class for %s has already been generated" % mappedName)
