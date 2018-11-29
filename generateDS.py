@@ -5039,7 +5039,7 @@ FactoryMethodTemplate = """\
 
 
 def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
-    _log.debug("Generating class for: %s" % element)
+    _log.debug("Generating class for: %s", element)
     mappedName = element.getFullyQualifiedName()
     parentName, base = getParentName(element)
     _log.debug("Element base: %s" % base)
@@ -5054,8 +5054,10 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
         parentFQN = base.getFullyQualifiedName()
         if parentFQN not in AlreadyGenerated:
             PostponedExtensions.append(element)
+            _log.debug("Postponing the class %s since its parent has not been generated")
             return
     if mappedName in AlreadyGenerated:
+        _log.debug("The class for %s has already been generated" % mappedName)
         return
     AlreadyGenerated.add(mappedName)
     if element.getMixedExtensionError():
@@ -5116,6 +5118,7 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
     generateUserMethods(wrt, element)
     wrt('# end class %s%s\n' % (prefix, name, ))
     wrt('\n\n')
+    _log.debug("Finished generating the class %s", name)
 # end generateClasses
 
 
@@ -7162,8 +7165,11 @@ def parseAndGenerate(
                             os.sep + moduleName +
                             ModuleSuffix + ".py")
             rootInfos.append((root, modulePath))
+        generatedModules = set()
         for root, modulePath in rootInfos:
-            if modulePath:
+            if modulePath and modulePath not in generatedModules:
+                generatedModules.add(modulePath)
+                print(modulePath)
                 generatedClasses = generate(
                     modulePath, subclassFilename, behaviorFilename,
                     prefix, root, options, args, superModule)
