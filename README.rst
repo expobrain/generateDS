@@ -142,6 +142,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.10 (11/30/2018)
+
+- Fixes to logging.  Pass arguments to logging methods, instead of
+  formatting before the call so the formatting will not be done
+  unnecessarily.  Thanks to Mustafa Şenol Coşar for these fixes.
+
 Version 2.30.9 (11/29/2018)
 
 - Fix imported module is generated more than once.  Thank you
