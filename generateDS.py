@@ -1615,7 +1615,7 @@ class XschemaHandler(handler.ContentHandler):
 
     def startElement(self, name, attrs):
         global Targetnamespace, NamespacesDict, XsdNameSpace, fqnToElementDict
-        _log.debug("Start element: %s %s" % (name, repr(attrs.items())))
+        _log.debug("Start element: %s %s", name, repr(attrs.items()))
         if len(self.stack) == 0 and self.firstElement:
             self.firstElement = False
             schemaNamespace = self.extractSchemaNamespace(attrs)
@@ -1890,11 +1890,11 @@ class XschemaHandler(handler.ContentHandler):
         elif name == DocumentationType:
             if self.inAnnotationType:
                 self.inDocumentationType = 1
-        _log.debug("Start element stack: %d" % len(self.stack))
+        _log.debug("Start element stack: %d", len(self.stack))
 
     def endElement(self, name):
-        _log.debug("End element: %s" % (name))
-        _log.debug("End element stack: %d" % (len(self.stack)))
+        _log.debug("End element: %s", name)
+        _log.debug("End element stack: %d", len(self.stack))
         if name == SimpleTypeType:      # and self.inSimpleType:
             self.inSimpleType -= 1
             if self.inAttribute:
@@ -1976,12 +1976,12 @@ class XschemaHandler(handler.ContentHandler):
                     len(self.stack), ))
                 sys.exit(1)
             if self.root:       # change made to avoide logging error
-                _log.debug("Previous root: %s" % (self.root.name))
+                _log.debug("Previous root: %s", self.root.name)
             else:
                 _log.debug("Prvious root:   None")
             self.root = self.stack[0]
             if self.root:
-                _log.debug("New root: %s" % (self.root.name))
+                _log.debug("New root: %s", self.root.name)
             else:
                 _log.debug("New root: None")
         elif name == SimpleContentType:
@@ -4247,8 +4247,8 @@ def generateCtor(wrt, prefix, element):
             mbrname = name + '_member'
         else:
             mbrname = name
-        _log.debug("Constructor child: %s" % name)
-        _log.debug("Dump: %s" % child.__dict__)
+        _log.debug("Constructor child: %s", name)
+        _log.debug("Dump: %s", child.__dict__)
         childType = child.getType()
         childTypeDef = ElementDict.get(childType)
         if childTypeDef is not None:
@@ -5042,7 +5042,7 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
     _log.debug("Generating class for: %s", element)
     mappedName = element.getFullyQualifiedName()
     parentName, base = getParentName(element)
-    _log.debug("Element base: %s" % base)
+    _log.debug("Element base: %s", base)
     if not element.isExplicitDefine():
         _log.debug("Not an explicit define, returning.")
         if element.isComplex() and element.getName() != element.getType():
@@ -5055,10 +5055,10 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
         if parentFQN not in AlreadyGenerated:
             PostponedExtensions.append(element)
             _log.debug("Postponing the class %s since its parent "
-                       "has not been generated" % (mappedName, ))
+                       "has not been generated", mappedName)
             return
     if mappedName in AlreadyGenerated:
-        _log.debug("The class for %s has already been generated" % mappedName)
+        _log.debug("The class for %s has already been generated", mappedName)
         return
     AlreadyGenerated.add(mappedName)
     if element.getMixedExtensionError():
