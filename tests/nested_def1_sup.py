@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -795,9 +795,9 @@ class containerType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.item1 is not None:
-            self.item1.export(outfile, level, namespaceprefix_, namespacedef_, name_='item1', pretty_print=pretty_print)
+            self.item1.export(outfile, level, namespaceprefix_, namespacedef_='', name_='item1', pretty_print=pretty_print)
         if self.item2 is not None:
-            self.item2.export(outfile, level, namespaceprefix_, namespacedef_, name_='item2', pretty_print=pretty_print)
+            self.item2.export(outfile, level, namespaceprefix_, namespacedef_='', name_='item2', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -882,7 +882,7 @@ class classAType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.inner is not None:
-            self.inner.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner', pretty_print=pretty_print)
+            self.inner.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -962,7 +962,7 @@ class classBType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.inner is not None:
-            self.inner.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner', pretty_print=pretty_print)
+            self.inner.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

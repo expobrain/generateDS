@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -802,7 +802,7 @@ class document1Type(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%scomments>%s</%scomments>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.comments), input_name='comments')), namespaceprefix_ , eol_))
         if self.otherdoc is not None:
-            self.otherdoc.export(outfile, level, namespaceprefix_, namespacedef_, name_='otherdoc', pretty_print=pretty_print)
+            self.otherdoc.export(outfile, level, namespaceprefix_, namespacedef_='', name_='otherdoc', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -909,7 +909,7 @@ class document2Type(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%srating>%s</%srating>%s' % (namespaceprefix_ , self.gds_format_integer(self.rating, input_name='rating'), namespaceprefix_ , eol_))
         if self.anotherdoc is not None:
-            self.anotherdoc.export(outfile, level, namespaceprefix_, namespacedef_, name_='anotherdoc', pretty_print=pretty_print)
+            self.anotherdoc.export(outfile, level, namespaceprefix_, namespacedef_='', name_='anotherdoc', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

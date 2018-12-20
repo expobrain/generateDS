@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -879,15 +879,15 @@ class tomato_people(GeneratedsSuper):
         else:
             eol_ = ''
         for comments_ in self.comments:
-            comments_.export(outfile, level, namespaceprefix_, name_='comments', pretty_print=pretty_print)
+            comments_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='comments', pretty_print=pretty_print)
         for person_ in self.person:
-            person_.export(outfile, level, namespaceprefix_, name_='person', pretty_print=pretty_print)
+            person_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='person', pretty_print=pretty_print)
         for programmer_ in self.programmer:
-            programmer_.export(outfile, level, namespaceprefix_, name_='programmer', pretty_print=pretty_print)
+            programmer_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='programmer', pretty_print=pretty_print)
         for python_programmer_ in self.python_programmer:
-            python_programmer_.export(outfile, level, namespaceprefix_, name_='python-programmer', pretty_print=pretty_print)
+            python_programmer_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='python-programmer', pretty_print=pretty_print)
         for java_programmer_ in self.java_programmer:
-            java_programmer_.export(outfile, level, namespaceprefix_, name_='java-programmer', pretty_print=pretty_print)
+            java_programmer_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='java-programmer', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1235,9 +1235,9 @@ class tomato_person(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%scategory>%s</%scategory>%s' % (namespaceprefix_ , self.gds_format_integer(self.category, input_name='category'), namespaceprefix_ , eol_))
         for agent_ in self.agent:
-            agent_.export(outfile, level, namespaceprefix_, name_='agent', pretty_print=pretty_print)
+            agent_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='agent', pretty_print=pretty_print)
         for promoter_ in self.promoter:
-            promoter_.export(outfile, level, namespaceprefix_, name_='promoter', pretty_print=pretty_print)
+            promoter_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='promoter', pretty_print=pretty_print)
         if self.description is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sdescription>%s</%sdescription>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.description), input_name='description')), namespaceprefix_ , eol_))
@@ -1566,7 +1566,7 @@ class tomato_programmer(tomato_person):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sellong>%s</%sellong>%s' % (namespaceprefix_ , self.gds_format_integer(self.ellong, input_name='ellong'), namespaceprefix_ , eol_))
         if self.elparam is not None:
-            self.elparam.export(outfile, level, namespaceprefix_, namespacedef_, name_='elparam', pretty_print=pretty_print)
+            self.elparam.export(outfile, level, namespaceprefix_, namespacedef_='', name_='elparam', pretty_print=pretty_print)
         if self.elarraytypes is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%selarraytypes>%s</%selarraytypes>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.elarraytypes), input_name='elarraytypes')), namespaceprefix_ , eol_))
@@ -2166,7 +2166,7 @@ class tomato_agent(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%spriority>%s</%spriority>%s' % (namespaceprefix_ , self.gds_format_float(self.priority, input_name='priority'), namespaceprefix_ , eol_))
         if self.info is not None:
-            self.info.export(outfile, level, namespaceprefix_, namespacedef_, name_='info', pretty_print=pretty_print)
+            self.info.export(outfile, level, namespaceprefix_, namespacedef_='', name_='info', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -2292,7 +2292,7 @@ class tomato_special_agent(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%spriority>%s</%spriority>%s' % (namespaceprefix_ , self.gds_format_float(self.priority, input_name='priority'), namespaceprefix_ , eol_))
         if self.info is not None:
-            self.info.export(outfile, level, namespaceprefix_, namespacedef_, name_='info', pretty_print=pretty_print)
+            self.info.export(outfile, level, namespaceprefix_, namespacedef_='', name_='info', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -2481,7 +2481,7 @@ class tomato_booster(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%stype>%s</%stype>%s' % (namespaceprefix_ , self.gds_format_float(type_, input_name='type'), namespaceprefix_ , eol_))
         for client_handler_ in self.client_handler:
-            client_handler_.export(outfile, level, namespaceprefix_, name_='client-handler', pretty_print=pretty_print)
+            client_handler_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='client-handler', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

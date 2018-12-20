@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -804,7 +804,7 @@ class PlantType_single(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.description is not None:
-            self.description.export(outfile, level, namespaceprefix_, namespacedef_, name_='description', pretty_print=pretty_print)
+            self.description.export(outfile, level, namespaceprefix_, namespacedef_='', name_='description', pretty_print=pretty_print)
         if self.anytypeobjs_ is not None:
             self.anytypeobjs_.export(outfile, level, namespaceprefix_, pretty_print=pretty_print)
     def build(self, node):
@@ -914,7 +914,7 @@ class PlantType_multiple(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sname>%s</%sname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.name), input_name='name')), namespaceprefix_ , eol_))
         if self.description is not None:
-            self.description.export(outfile, level, namespaceprefix_, namespacedef_, name_='description', pretty_print=pretty_print)
+            self.description.export(outfile, level, namespaceprefix_, namespacedef_='', name_='description', pretty_print=pretty_print)
         for obj_ in self.anytypeobjs_:
             obj_.export(outfile, level, namespaceprefix_, pretty_print=pretty_print)
     def build(self, node):

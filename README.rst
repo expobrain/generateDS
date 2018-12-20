@@ -142,6 +142,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.11 (12/19/2018)
+
+- Fixes to export of `namespacedef_` so that exporting does not
+  repeat the namespace prefix definition in nested elements.
+
 Version 2.30.10 (11/30/2018)
 
 - Fixes to logging.  Pass arguments to logging methods, instead of

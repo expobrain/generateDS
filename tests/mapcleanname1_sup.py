@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -830,7 +830,7 @@ class complex_type01(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sfloat_value01>%s</%sfloat_value01>%s' % (namespaceprefix_ , self.gds_format_float(self.float_value01, input_name='float_value01'), namespaceprefix_ , eol_))
         if self.field01 is not None:
-            self.field01.export(outfile, level, namespaceprefix_, namespacedef_, name_='field01', pretty_print=pretty_print)
+            self.field01.export(outfile, level, namespaceprefix_, namespacedef_='', name_='field01', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

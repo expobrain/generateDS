@@ -811,9 +811,9 @@ class oneperType00_1(GeneratedsSuper):
         else:
             eol_ = ''
         if self.inner01 is not None:
-            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner01', pretty_print=pretty_print)
+            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner01', pretty_print=pretty_print)
         if self.inner02 is not None:
-            self.inner02.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner02', pretty_print=pretty_print)
+            self.inner02.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner02', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

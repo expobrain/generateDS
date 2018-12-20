@@ -799,7 +799,7 @@ class rootType(GeneratedsSuper):
         else:
             eol_ = ''
         for markup_ in self.markup:
-            markup_.export(outfile, level, namespaceprefix_, name_='markup', pretty_print=pretty_print)
+            markup_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='markup', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -928,7 +928,7 @@ class markupType(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sembedded>%s</%sembedded>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(embedded_), input_name='embedded')), namespaceprefix_ , eol_))
         for nested_ in self.nested:
-            nested_.export(outfile, level, namespaceprefix_, name_='nested', pretty_print=pretty_print)
+            nested_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='nested', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1074,7 +1074,7 @@ class nestedType(GeneratedsSuper):
         else:
             eol_ = ''
         for nested1_ in self.nested1:
-            nested1_.export(outfile, level, namespaceprefix_, name_='nested1', pretty_print=pretty_print)
+            nested1_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='nested1', pretty_print=pretty_print)
         for nested2_ in self.nested2:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%snested2>%s</%snested2>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(nested2_), input_name='nested2')), namespaceprefix_ , eol_))
@@ -1201,9 +1201,9 @@ class nested1Type(GeneratedsSuper):
         else:
             eol_ = ''
         for nestedA1_ in self.nestedA1:
-            nestedA1_.export(outfile, level, namespaceprefix_, name_='nestedA1', pretty_print=pretty_print)
+            nestedA1_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='nestedA1', pretty_print=pretty_print)
         for nestedA2_ in self.nestedA2:
-            nestedA2_.export(outfile, level, namespaceprefix_, name_='nestedA2', pretty_print=pretty_print)
+            nestedA2_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='nestedA2', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

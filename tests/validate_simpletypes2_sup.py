@@ -879,15 +879,15 @@ class containerType(GeneratedsSuper):
         else:
             eol_ = ''
         for sample1_ in self.sample1:
-            sample1_.export(outfile, level, namespaceprefix_, name_='sample1', pretty_print=pretty_print)
+            sample1_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='sample1', pretty_print=pretty_print)
         for sample2_bad_ in self.sample2_bad:
-            sample2_bad_.export(outfile, level, namespaceprefix_, name_='sample2_bad', pretty_print=pretty_print)
+            sample2_bad_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='sample2_bad', pretty_print=pretty_print)
         for sample3_bad_ in self.sample3_bad:
-            sample3_bad_.export(outfile, level, namespaceprefix_, name_='sample3_bad', pretty_print=pretty_print)
+            sample3_bad_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='sample3_bad', pretty_print=pretty_print)
         for sample4_bad_ in self.sample4_bad:
-            sample4_bad_.export(outfile, level, namespaceprefix_, name_='sample4_bad', pretty_print=pretty_print)
+            sample4_bad_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='sample4_bad', pretty_print=pretty_print)
         for sample2_ in self.sample2:
-            sample2_.export(outfile, level, namespaceprefix_, name_='sample2', pretty_print=pretty_print)
+            sample2_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='sample2', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1688,7 +1688,7 @@ class simpleTwoType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.simpleTwoElementOne is not None:
-            self.simpleTwoElementOne.export(outfile, level, namespaceprefix_, namespacedef_, name_='simpleTwoElementOne', pretty_print=pretty_print)
+            self.simpleTwoElementOne.export(outfile, level, namespaceprefix_, namespacedef_='', name_='simpleTwoElementOne', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

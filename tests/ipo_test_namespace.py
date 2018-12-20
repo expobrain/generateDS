@@ -18,12 +18,12 @@ def export(outfilename):
             outfile, 1, name_=rootTag, namespaceprefix_='',
             namespacedef_='',
             pretty_print=True)
-        outfile.write("    <!-- =============================== -->\n")
+        outfile.write("    <!-- 1. =============================== -->\n")
         rootObj.export(
             outfile, 1, name_=rootTag, namespaceprefix_='ABC:',
             namespacedef_='xmlns:ABC="http://www.example.com/IPO"',
             pretty_print=True)
-        outfile.write("    <!-- =============================== -->\n")
+        outfile.write("    <!-- 2. =============================== -->\n")
         rootObj.export(
             outfile, 1, name_=rootTag, namespaceprefix_='ipo:',
             namespacedef_='xmlns:ipo="http://www.example.com/IPO"',

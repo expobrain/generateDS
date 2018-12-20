@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -819,7 +819,7 @@ class authorsType(GeneratedsSuper):
         else:
             eol_ = ''
         for author_ in self.author:
-            author_.export(outfile, level, namespaceprefix_, name_='author', pretty_print=pretty_print)
+            author_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='author', pretty_print=pretty_print)
         for cooperation_ in self.cooperation:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%scooperation>%s</%scooperation>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(cooperation_), input_name='cooperation')), namespaceprefix_ , eol_))

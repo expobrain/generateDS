@@ -818,9 +818,9 @@ class DefaultTypes(GeneratedsSuper):
         else:
             eol_ = ''
         for default1_ in self.default1:
-            default1_.export(outfile, level, namespaceprefix_, name_='default1', pretty_print=pretty_print)
+            default1_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='default1', pretty_print=pretty_print)
         for default2_ in self.default2:
-            default2_.export(outfile, level, namespaceprefix_, name_='default2', pretty_print=pretty_print)
+            default2_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='default2', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

@@ -814,7 +814,7 @@ class oneperType03_1(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%shelpername>%s</%shelpername>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.helpername), input_name='helpername')), namespaceprefix_ , eol_))
         if self.inner01 is not None:
-            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner01', pretty_print=pretty_print)
+            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner01', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

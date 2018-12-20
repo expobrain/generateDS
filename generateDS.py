@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.10'
+VERSION = '2.30.11'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2143,16 +2143,20 @@ def generateExportFn_1(wrt, child, name, fill):
         # name_type_problem
         if False:        # name == child.getType():
             s1 = "%s            self.%s.export(outfile, level, " \
-                "namespaceprefix_, pretty_print=pretty_print)\n" % \
+                "namespaceprefix_, namespacedef_='', pretty_print=pretty_print)\n" % \
                 (fill, mappedName)
         else:
-            namespaceprefix = 'namespaceprefix_'
+            namespaceprefix = "namespaceprefix_"
+            # Prevent namespace prefix definitions from repeating
+            # in nested elements.
+            namespacedef = "namespacedef_=''"
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
+                # dbg
+                #namespacedef += "=namespacedef_"
             s1 = "%s            self.%s.export(outfile, level, %s, " \
-                "namespacedef_, " \
-                "name_='%s', pretty_print=pretty_print)\n" % \
-                (fill, mappedName, namespaceprefix, name)
+                "%s, name_='%s', pretty_print=pretty_print)\n" % \
+                (fill, mappedName, namespaceprefix, namespacedef, name)
         wrt(s1)
 # end generateExportFn_1
 
@@ -2273,7 +2277,7 @@ def generateExportFn_2(wrt, child, name, fill):
             namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
-            s1 = "%s        %s_.export(outfile, level, %s, " \
+            s1 = "%s        %s_.export(outfile, level, %s, namespacedef_='', " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
                 (fill, cleanName, namespaceprefix, name)
         wrt(s1)
@@ -2451,6 +2455,7 @@ def generateExportFn_3(wrt, child, name, fill):
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
             s1 = "%s            self.%s.export(outfile, level, %s, " \
+                "namespacedef_='', " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
                 (fill, mappedName, namespaceprefix, name)
         wrt(s1)
@@ -2789,13 +2794,13 @@ def generateExportChildren(wrt, element, hasChildren, namespace):
                     wrt("%sfor %s_ in self.%s:\n" % (
                         fill, name, name,))
                     wrt("%s    %s_.export(outfile, level, "
-                        "namespaceprefix_, namespacedef_, "
+                        "namespaceprefix_, namespacedef_='', "
                         "pretty_print=pretty_print)\n" % (
                             fill, name, ))
                 elif abstract_child:
                     wrt("%sif self.%s is not None:\n" % (fill, name, ))
                     wrt("%s    self.%s.export(outfile, level, "
-                        "namespaceprefix_, namespacedef_, "
+                        "namespaceprefix_, namespacedef_='', "
                         "pretty_print=pretty_print)\n" % (
                             fill, name, ))
                 elif child.getMaxOccurs() > 1:

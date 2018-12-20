@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -818,15 +818,15 @@ class dataKind(GeneratedsSuper):
         else:
             eol_ = ''
         if self.data1 is not None:
-            self.data1.export(outfile, level, namespaceprefix_, namespacedef_, name_='data1', pretty_print=pretty_print)
+            self.data1.export(outfile, level, namespaceprefix_, namespacedef_='', name_='data1', pretty_print=pretty_print)
         if self.data2 is not None:
-            self.data2.export(outfile, level, namespaceprefix_, namespacedef_, name_='data2', pretty_print=pretty_print)
+            self.data2.export(outfile, level, namespaceprefix_, namespacedef_='', name_='data2', pretty_print=pretty_print)
         if self.data3 is not None:
-            self.data3.export(outfile, level, namespaceprefix_, namespacedef_, name_='data3', pretty_print=pretty_print)
+            self.data3.export(outfile, level, namespaceprefix_, namespacedef_='', name_='data3', pretty_print=pretty_print)
         if self.data4 is not None:
-            self.data4.export(outfile, level, namespaceprefix_, namespacedef_, name_='data4', pretty_print=pretty_print)
+            self.data4.export(outfile, level, namespaceprefix_, namespacedef_='', name_='data4', pretty_print=pretty_print)
         if self.data5 is not None:
-            self.data5.export(outfile, level, namespaceprefix_, namespacedef_, name_='data5', pretty_print=pretty_print)
+            self.data5.export(outfile, level, namespaceprefix_, namespacedef_='', name_='data5', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

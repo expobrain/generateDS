@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -800,7 +800,7 @@ class simpleTypeTestsType(GeneratedsSuper):
         else:
             eol_ = ''
         for simpleTypeTest_ in self.simpleTypeTest:
-            simpleTypeTest_.export(outfile, level, namespaceprefix_, name_='simpleTypeTest', pretty_print=pretty_print)
+            simpleTypeTest_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='simpleTypeTest', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

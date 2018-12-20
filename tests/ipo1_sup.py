@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -828,14 +828,14 @@ class PurchaseOrderType(GeneratedsSuper):
         else:
             eol_ = ''
         if self.shipTo is not None:
-            self.shipTo.export(outfile, level, namespaceprefix_, namespacedef_, name_='shipTo', pretty_print=pretty_print)
+            self.shipTo.export(outfile, level, namespaceprefix_, namespacedef_='', name_='shipTo', pretty_print=pretty_print)
         if self.billTo is not None:
-            self.billTo.export(outfile, level, namespaceprefix_, namespacedef_, name_='billTo', pretty_print=pretty_print)
+            self.billTo.export(outfile, level, namespaceprefix_, namespacedef_='', name_='billTo', pretty_print=pretty_print)
         if self.comment is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%scomment>%s</%scomment>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.comment), input_name='comment')), namespaceprefix_ , eol_))
         if self.items is not None:
-            self.items.export(outfile, level, namespaceprefix_, namespacedef_, name_='items', pretty_print=pretty_print)
+            self.items.export(outfile, level, namespaceprefix_, namespacedef_='', name_='items', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -948,7 +948,7 @@ class Items(GeneratedsSuper):
         else:
             eol_ = ''
         for item_ in self.item:
-            item_.export(outfile, level, namespaceprefix_, name_='item', pretty_print=pretty_print)
+            item_.export(outfile, level, namespaceprefix_, namespacedef_='', name_='item', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)

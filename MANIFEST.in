@@ -146,6 +146,8 @@ include tests/mixedcontent1_out.xml
 include tests/mixedcontent1_sub.py
 include tests/mixedcontent1_sup.py
 include tests/check_results.rb
+include enum_import00.xsd enum_import01.xsd enum_import02.xsd
+include derived_types1_sub.py derived_types1_sup.py
 
 include gui/generateds_gui.py
 include gui/generateds_gui.glade

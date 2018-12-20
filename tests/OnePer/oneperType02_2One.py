@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Jun 28 2018, 17:14:51)  [GCC 7.2.0]
+# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -814,7 +814,7 @@ class oneperType02_1(GeneratedsSuper):
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sclientname>%s</%sclientname>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.clientname), input_name='clientname')), namespaceprefix_ , eol_))
         if self.inner01 is not None:
-            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_, name_='inner01', pretty_print=pretty_print)
+            self.inner01.export(outfile, level, namespaceprefix_, namespacedef_='', name_='inner01', pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
