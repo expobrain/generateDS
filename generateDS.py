@@ -5149,6 +5149,7 @@ TEMPLATE_HEADER = """\
 #   {current_working_directory}
 #
 
+import os
 import sys
 import re as re_
 import base64
@@ -5176,7 +5177,7 @@ else:
 #xmldisable#        except AttributeError:
 #xmldisable#            # fallback to xml.etree
 #xmldisable#            parser = etree_.XMLParser()
-#xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
+#xmldisable#    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
 #xmldisable#    return doc
 
 #xmldisable#def parsexmlstring_(instring, parser=None, **kwargs):
@@ -6407,6 +6408,7 @@ TEMPLATE_SUBCLASS_HEADER = """\
 #   %s
 #
 
+import os
 import sys
 #xmldisable#from lxml import etree as etree_
 
@@ -6417,7 +6419,7 @@ import %s as supermod
 #xmldisable#        # Use the lxml ElementTree compatible parser so that, e.g.,
 #xmldisable#        #   we ignore comments.
 #xmldisable#        parser = etree_.ETCompatXMLParser()
-#xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
+#xmldisable#    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
 #xmldisable#    return doc
 
 #
