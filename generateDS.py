@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.11'
+VERSION = '2.30.12'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2152,8 +2152,6 @@ def generateExportFn_1(wrt, child, name, fill):
             namespacedef = "namespacedef_=''"
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
-                # dbg
-                #namespacedef += "=namespacedef_"
             s1 = "%s            self.%s.export(outfile, level, %s, " \
                 "%s, name_='%s', pretty_print=pretty_print)\n" % \
                 (fill, mappedName, namespaceprefix, namespacedef, name)

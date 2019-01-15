@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
+# Python 3.6.7 |Anaconda, Inc.| (default, Oct 23 2018, 19:16:44)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -26,6 +26,7 @@
 #   generateds
 #
 
+import os
 import sys
 import re as re_
 import base64
@@ -53,7 +54,7 @@ def parsexml_(infile, parser=None, **kwargs):
         except AttributeError:
             # fallback to xml.etree
             parser = etree_.XMLParser()
-    doc = etree_.parse(infile, parser=parser, **kwargs)
+    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
     return doc
 
 def parsexmlstring_(instring, parser=None, **kwargs):

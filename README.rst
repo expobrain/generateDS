@@ -142,6 +142,13 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.12 (01/14/2019)
+
+- Merged pull request that fixed the `parsexml_` generated function
+  so that it now handles paths that are consistent with `pathlib`
+  objects in addition to paths represented as strings.  Thanks to
+  Chris Barnes for this fix.
+
 Version 2.30.11 (12/19/2018)
 
 - Fixes to export of `namespacedef_` so that exporting does not

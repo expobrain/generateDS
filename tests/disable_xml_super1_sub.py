@@ -2,7 +2,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.6 |Anaconda custom (64-bit)| (default, Oct  9 2018, 12:34:16)  [GCC 7.3.0]
+# Python 3.6.7 |Anaconda, Inc.| (default, Oct 23 2018, 19:16:44)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -27,6 +27,7 @@
 #   generateds
 #
 
+import os
 import sys
 ## from lxml import etree as etree_
 
@@ -37,7 +38,7 @@ import disable_xml_super2_sup as supermod
 ##         # Use the lxml ElementTree compatible parser so that, e.g.,
 ##         #   we ignore comments.
 ##         parser = etree_.ETCompatXMLParser()
-##     doc = etree_.parse(infile, parser=parser, **kwargs)
+##     doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
 ##     return doc
 
 #
