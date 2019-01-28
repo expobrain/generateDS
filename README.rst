@@ -142,7 +142,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
-Version 2.30.13 (01/24,2019)
+Version 2.30.13 (01/28,2019)
 
 - Fix to order of arguments generated for call to superclass
   `exportChildren` method.  Thank you to Edwin Matthijssen for
@@ -151,6 +151,10 @@ Version 2.30.13 (01/24,2019)
   extensions and abstract and cardinality of zero or one.  Again,
   thanks to Edwin for describing this need.
 - Removed duplicate generation of `add_xxxx` method.
+- Fix to generation of "xsi:type" attributes.  Added use of table
+  `GenerateDSNamespaceTypePrefixes` from module
+  `generatedsnamespaces.py` to specify the namespace prefix on a
+  per type basis.
 
 Version 2.30.12 (01/14/2019)
 
