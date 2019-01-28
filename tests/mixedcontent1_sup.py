@@ -758,8 +758,6 @@ class rootType(GeneratedsSuper):
         self.markup = markup
     def add_markup(self, value):
         self.markup.append(value)
-    def add_markup(self, value):
-        self.markup.append(value)
     def insert_markup_at(self, index, value):
         self.markup.insert(index, value)
     def replace_markup_at(self, index, value):
@@ -865,8 +863,6 @@ class markupType(GeneratedsSuper):
         self.embedded = embedded
     def add_embedded(self, value):
         self.embedded.append(value)
-    def add_embedded(self, value):
-        self.embedded.append(value)
     def insert_embedded_at(self, index, value):
         self.embedded.insert(index, value)
     def replace_embedded_at(self, index, value):
@@ -875,8 +871,6 @@ class markupType(GeneratedsSuper):
         return self.nested
     def set_nested(self, nested):
         self.nested = nested
-    def add_nested(self, value):
-        self.nested.append(value)
     def add_nested(self, value):
         self.nested.append(value)
     def insert_nested_at(self, index, value):
@@ -1007,8 +1001,6 @@ class nestedType(GeneratedsSuper):
         self.nested1 = nested1
     def add_nested1(self, value):
         self.nested1.append(value)
-    def add_nested1(self, value):
-        self.nested1.append(value)
     def insert_nested1_at(self, index, value):
         self.nested1.insert(index, value)
     def replace_nested1_at(self, index, value):
@@ -1019,8 +1011,6 @@ class nestedType(GeneratedsSuper):
         self.nested2 = nested2
     def add_nested2(self, value):
         self.nested2.append(value)
-    def add_nested2(self, value):
-        self.nested2.append(value)
     def insert_nested2_at(self, index, value):
         self.nested2.insert(index, value)
     def replace_nested2_at(self, index, value):
@@ -1029,8 +1019,6 @@ class nestedType(GeneratedsSuper):
         return self.nested3
     def set_nested3(self, nested3):
         self.nested3 = nested3
-    def add_nested3(self, value):
-        self.nested3.append(value)
     def add_nested3(self, value):
         self.nested3.append(value)
     def insert_nested3_at(self, index, value):
@@ -1147,8 +1135,6 @@ class nested1Type(GeneratedsSuper):
         self.nestedA1 = nestedA1
     def add_nestedA1(self, value):
         self.nestedA1.append(value)
-    def add_nestedA1(self, value):
-        self.nestedA1.append(value)
     def insert_nestedA1_at(self, index, value):
         self.nestedA1.insert(index, value)
     def replace_nestedA1_at(self, index, value):
@@ -1157,8 +1143,6 @@ class nested1Type(GeneratedsSuper):
         return self.nestedA2
     def set_nestedA2(self, nestedA2):
         self.nestedA2 = nestedA2
-    def add_nestedA2(self, value):
-        self.nestedA2.append(value)
     def add_nestedA2(self, value):
         self.nestedA2.append(value)
     def insert_nestedA2_at(self, index, value):
@@ -1263,8 +1247,6 @@ class nested1AType(GeneratedsSuper):
         self.nestedB1 = nestedB1
     def add_nestedB1(self, value):
         self.nestedB1.append(value)
-    def add_nestedB1(self, value):
-        self.nestedB1.append(value)
     def insert_nestedB1_at(self, index, value):
         self.nestedB1.insert(index, value)
     def replace_nestedB1_at(self, index, value):
@@ -1273,8 +1255,6 @@ class nested1AType(GeneratedsSuper):
         return self.nestedB2
     def set_nestedB2(self, nestedB2):
         self.nestedB2 = nestedB2
-    def add_nestedB2(self, value):
-        self.nestedB2.append(value)
     def add_nestedB2(self, value):
         self.nestedB2.append(value)
     def insert_nestedB2_at(self, index, value):

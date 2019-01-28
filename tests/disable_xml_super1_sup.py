@@ -759,8 +759,6 @@ class PackageType(GeneratedsSuper):
         self.Address = Address
     def add_Address(self, value):
         self.Address.append(value)
-    def add_Address(self, value):
-        self.Address.append(value)
     def insert_Address_at(self, index, value):
         self.Address.insert(index, value)
     def replace_Address_at(self, index, value):

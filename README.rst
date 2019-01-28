@@ -142,6 +142,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.13 (01/24,2019)
+
+- Fix to order of arguments generated for call to superclass
+  `exportChildren` method.  Thank you to Edwin Matthijssen for
+  identifying and reporting this.
+- Added generation of `set_xxxx_with_type` for children that are
+  extensions and abstract and cardinality of zero or one.  Again,
+  thanks to Edwin for describing this need.
+- Removed duplicate generation of `add_xxxx` method.
+
 Version 2.30.12 (01/14/2019)
 
 - Merged pull request that fixed the `parsexml_` generated function

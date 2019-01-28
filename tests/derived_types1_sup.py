@@ -757,6 +757,10 @@ class animalCollection(GeneratedsSuper):
         return self.animal
     def set_animal(self, animal):
         self.animal = animal
+    def set_animal_with_type(self, value):
+        self.animal = value
+        value.original_tagname_ = 'animal'
+        value.extensiontype_ = value.__class__.__name__
     def add_animal(self, value):
         self.animal.append(value)
     def add_animal_with_type(self, value):
@@ -889,7 +893,10 @@ class animal(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='animal', fromsubclass_=False, pretty_print=True):
         pass
@@ -968,7 +975,7 @@ class dog(animal):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='dog'):
         super(dog, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='dog')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='dog', fromsubclass_=False, pretty_print=True):
-        super(dog, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(dog, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:

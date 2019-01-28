@@ -764,8 +764,6 @@ class peopleType(GeneratedsSuper):
         self.person = person
     def add_person(self, value):
         self.person.append(value)
-    def add_person(self, value):
-        self.person.append(value)
     def insert_person_at(self, index, value):
         self.person.insert(index, value)
     def replace_person_at(self, index, value):
@@ -774,8 +772,6 @@ class peopleType(GeneratedsSuper):
         return self.specialperson
     def set_specialperson(self, specialperson):
         self.specialperson = specialperson
-    def add_specialperson(self, value):
-        self.specialperson.append(value)
     def add_specialperson(self, value):
         self.specialperson.append(value)
     def insert_specialperson_at(self, index, value):
@@ -837,8 +833,6 @@ class personType(GeneratedsSuper):
         return self.interest
     def set_interest(self, interest):
         self.interest = interest
-    def add_interest(self, value):
-        self.interest.append(value)
     def add_interest(self, value):
         self.interest.append(value)
     def insert_interest_at(self, index, value):

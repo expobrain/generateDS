@@ -907,8 +907,6 @@ class Items(GeneratedsSuper):
         self.item = item
     def add_item(self, value):
         self.item.append(value)
-    def add_item(self, value):
-        self.item.append(value)
     def insert_item_at(self, index, value):
         self.item.insert(index, value)
     def replace_item_at(self, index, value):
@@ -1268,7 +1266,10 @@ class Address(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='Address', fromsubclass_=False, pretty_print=True):
         if pretty_print:
@@ -1390,7 +1391,7 @@ class USAddress(Address):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='USAddress'):
         super(USAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
     def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='USAddress', fromsubclass_=False, pretty_print=True):
-        super(USAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(USAddress, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1498,7 +1499,7 @@ class UKAddress(Address):
             already_processed.add('exportCode')
             outfile.write(' exportCode="%s"' % self.gds_format_integer(self.exportCode, input_name='exportCode'))
     def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='UKAddress', fromsubclass_=False, pretty_print=True):
-        super(UKAddress, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(UKAddress, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:

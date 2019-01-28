@@ -786,8 +786,6 @@ class containerType(GeneratedsSuper):
         self.sample1 = sample1
     def add_sample1(self, value):
         self.sample1.append(value)
-    def add_sample1(self, value):
-        self.sample1.append(value)
     def insert_sample1_at(self, index, value):
         self.sample1.insert(index, value)
     def replace_sample1_at(self, index, value):
@@ -796,8 +794,6 @@ class containerType(GeneratedsSuper):
         return self.sample2_bad
     def set_sample2_bad(self, sample2_bad):
         self.sample2_bad = sample2_bad
-    def add_sample2_bad(self, value):
-        self.sample2_bad.append(value)
     def add_sample2_bad(self, value):
         self.sample2_bad.append(value)
     def insert_sample2_bad_at(self, index, value):
@@ -810,8 +806,6 @@ class containerType(GeneratedsSuper):
         self.sample3_bad = sample3_bad
     def add_sample3_bad(self, value):
         self.sample3_bad.append(value)
-    def add_sample3_bad(self, value):
-        self.sample3_bad.append(value)
     def insert_sample3_bad_at(self, index, value):
         self.sample3_bad.insert(index, value)
     def replace_sample3_bad_at(self, index, value):
@@ -822,8 +816,6 @@ class containerType(GeneratedsSuper):
         self.sample4_bad = sample4_bad
     def add_sample4_bad(self, value):
         self.sample4_bad.append(value)
-    def add_sample4_bad(self, value):
-        self.sample4_bad.append(value)
     def insert_sample4_bad_at(self, index, value):
         self.sample4_bad.insert(index, value)
     def replace_sample4_bad_at(self, index, value):
@@ -832,8 +824,6 @@ class containerType(GeneratedsSuper):
         return self.sample2
     def set_sample2(self, sample2):
         self.sample2 = sample2
-    def add_sample2(self, value):
-        self.sample2.append(value)
     def add_sample2(self, value):
         self.sample2.append(value)
     def insert_sample2_at(self, index, value):

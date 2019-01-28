@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.12'
+VERSION = '2.30.13'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2754,7 +2754,13 @@ def generateExportAttributes(wrt, element, hasAttributes):
         wrt("            already_processed.add('xsi:type')\n")
         wrt("            outfile.write("
             "' xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"')\n")
-        wrt('''            outfile.write('''
+        # fix
+        #wrt('''            if namespaceprefix_ not in self.extensiontype_:\n'''
+        wrt('''            if ":" not in self.extensiontype_:\n'''
+            '''                outfile.write('''
+            '''' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))\n'''
+            '''            else:\n'''
+            '''                outfile.write('''
             '''' xsi:type="%s"' % self.extensiontype_)\n''')
     return hasAttributes
 # end generateExportAttributes
@@ -2983,7 +2989,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         hasChildren += 1
         elName = element.getCleanName()
         wrt("        super(%s%s, self).exportChildren(outfile, level, "
-            "namespaceprefix_, name_, True, pretty_print=pretty_print)\n" %
+            "namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)\n" %
             (prefix, elName, ))
     hasChildren += generateExportChildren(wrt, element, hasChildren, namespace)
     if childCount == 0:   # and not element.isMixed():
@@ -4731,17 +4737,29 @@ def generateGettersAndSetters(wrt, element):
                 #'        pass\n'    # add custom code here for setter
                 '        self.%s = %s\n' % (
                     capName, name, name, name))
+            childType = child.getType()
+            type_obj = ElementDict.get(childType)
+            if (type_obj is not None and
+                    type_obj.getExtended() and
+                    type_obj.isAbstract()):
+                suffix = make_gs_name('with_type')
+                originalTagname = child.getName()
+                extensionType = 'value.__class__.__name__'
+                wrt("    def set%s%s(self, value):\n"
+                    "        self.%s = value\n"
+                    "        value.original_tagname_ = '%s'\n"
+                    "        value.extensiontype_ = %s\n" % (
+                        capName, suffix, name,
+                        originalTagname, extensionType))
             if child.getMaxOccurs() > 1:
                 wrt('    def add%s(self, value):\n'
                     '        self.%s.append(value)\n' % (
                         capName, name))
-                childType = child.getType()
-                type_obj = ElementDict.get(childType)
                 if (type_obj is not None and
                         type_obj.getExtended() and
                         type_obj.isAbstract()):
                     suffix = make_gs_name('with_type')
-                    originalTagname = child.getType()
+                    originalTagname = child.getName()
                     extensionType = 'value.__class__.__name__'
                     wrt("    def add%s%s(self, value):\n"
                         "        self.%s.append(value)\n"
@@ -4749,10 +4767,6 @@ def generateGettersAndSetters(wrt, element):
                         "        value.extensiontype_ = %s\n" % (
                             capName, suffix, name,
                             originalTagname, extensionType))
-                else:
-                    wrt("    def add%s(self, value):\n"
-                        "        self.%s.append(value)\n" % (
-                            capName, name, ))
                 suffix = make_gs_name('at')
                 wrt('    def insert%s%s(self, index, value):\n'
                     '        self.%s.insert(index, value)\n' %

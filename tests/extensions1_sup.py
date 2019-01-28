@@ -1019,8 +1019,6 @@ class containerType(GeneratedsSuper):
         self.simplefactoid = simplefactoid
     def add_simplefactoid(self, value):
         self.simplefactoid.append(value)
-    def add_simplefactoid(self, value):
-        self.simplefactoid.append(value)
     def insert_simplefactoid_at(self, index, value):
         self.simplefactoid.insert(index, value)
     def replace_simplefactoid_at(self, index, value):
@@ -1419,7 +1417,10 @@ class BaseType(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BaseType', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
@@ -1522,7 +1523,7 @@ class DerivedType(BaseType):
             already_processed.add('DerivedProperty2')
             outfile.write(' DerivedProperty2=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.DerivedProperty2), input_name='DerivedProperty2')), ))
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='DerivedType', fromsubclass_=False, pretty_print=True):
-        super(DerivedType, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(DerivedType, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()

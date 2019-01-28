@@ -760,8 +760,6 @@ class cdataListType(GeneratedsSuper):
         self.cdatalist = cdatalist
     def add_cdatalist(self, value):
         self.cdatalist.append(value)
-    def add_cdatalist(self, value):
-        self.cdatalist.append(value)
     def insert_cdatalist_at(self, index, value):
         self.cdatalist.insert(index, value)
     def replace_cdatalist_at(self, index, value):

@@ -757,11 +757,15 @@ class carrierType(GeneratedsSuper):
         return self.fleet
     def set_fleet(self, fleet):
         self.fleet = fleet
+    def set_fleet_with_type(self, value):
+        self.fleet = value
+        value.original_tagname_ = 'fleet'
+        value.extensiontype_ = value.__class__.__name__
     def add_fleet(self, value):
         self.fleet.append(value)
     def add_fleet_with_type(self, value):
         self.fleet.append(value)
-        value.original_tagname_ = 'Vehicle'
+        value.original_tagname_ = 'fleet'
         value.extensiontype_ = value.__class__.__name__
     def insert_fleet_at(self, index, value):
         self.fleet.insert(index, value)
@@ -889,7 +893,10 @@ class Vehicle(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='target:', namespacedef_='xmlns:target="http://cars.example.com/schema"', name_='Vehicle', fromsubclass_=False, pretty_print=True):
         pass
@@ -960,7 +967,7 @@ class Car(Vehicle):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='Car'):
         super(Car, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Car')
     def exportChildren(self, outfile, level, namespaceprefix_='target:', namespacedef_='xmlns:target="http://cars.example.com/schema"', name_='Car', fromsubclass_=False, pretty_print=True):
-        super(Car, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(Car, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()
@@ -1027,7 +1034,7 @@ class Plane(Vehicle):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='target:', name_='Plane'):
         super(Plane, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='Plane')
     def exportChildren(self, outfile, level, namespaceprefix_='target:', namespacedef_='xmlns:target="http://cars.example.com/schema"', name_='Plane', fromsubclass_=False, pretty_print=True):
-        super(Plane, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(Plane, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()

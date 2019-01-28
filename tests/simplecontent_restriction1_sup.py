@@ -850,7 +850,10 @@ class IdentifierType(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='IdentifierType', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
@@ -955,7 +958,7 @@ class BillOfResourcesIDType(IdentifierType):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='BillOfResourcesIDType'):
         super(BillOfResourcesIDType, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='BillOfResourcesIDType')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfResourcesIDType', fromsubclass_=False, pretty_print=True):
-        super(BillOfResourcesIDType, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(BillOfResourcesIDType, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()
@@ -1028,7 +1031,7 @@ class BillOfMaterialIDType(IdentifierType):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='BillOfMaterialIDType'):
         super(BillOfMaterialIDType, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='BillOfMaterialIDType')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='BillOfMaterialIDType', fromsubclass_=False, pretty_print=True):
-        super(BillOfMaterialIDType, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(BillOfMaterialIDType, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         pass
     def build(self, node):
         already_processed = set()

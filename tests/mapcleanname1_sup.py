@@ -769,8 +769,6 @@ class complex_type01(GeneratedsSuper):
         self.integer_value01 = integer_value01
     def add_integer_value01(self, value):
         self.integer_value01.append(value)
-    def add_integer_value01(self, value):
-        self.integer_value01.append(value)
     def insert_integer_value01_at(self, index, value):
         self.integer_value01.insert(index, value)
     def replace_integer_value01_at(self, index, value):
@@ -909,8 +907,6 @@ class complex_type02(GeneratedsSuper):
         self.integer_value02 = integer_value02
     def add_integer_value02(self, value):
         self.integer_value02.append(value)
-    def add_integer_value02(self, value):
-        self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value):
         self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value):
@@ -955,7 +951,10 @@ class complex_type02(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='complex-type02', fromsubclass_=False, pretty_print=True):
         if pretty_print:
@@ -1046,8 +1045,6 @@ class complex_type03(complex_type02):
         self.integer_value03 = integer_value03
     def add_integer_value03(self, value):
         self.integer_value03.append(value)
-    def add_integer_value03(self, value):
-        self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value):
         self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value):
@@ -1090,7 +1087,7 @@ class complex_type03(complex_type02):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type03'):
         super(complex_type03, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type03')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='complex-type03', fromsubclass_=False, pretty_print=True):
-        super(complex_type03, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(complex_type03, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1177,8 +1174,6 @@ class type_(GeneratedsSuper):
         self.integer_value02 = integer_value02
     def add_integer_value02(self, value):
         self.integer_value02.append(value)
-    def add_integer_value02(self, value):
-        self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value):
         self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value):
@@ -1223,7 +1218,10 @@ class type_(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='type', fromsubclass_=False, pretty_print=True):
         if pretty_print:
@@ -1314,8 +1312,6 @@ class complex_type04(type_):
         self.integer_value03 = integer_value03
     def add_integer_value03(self, value):
         self.integer_value03.append(value)
-    def add_integer_value03(self, value):
-        self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value):
         self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value):
@@ -1358,7 +1354,7 @@ class complex_type04(type_):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type04'):
         super(complex_type04, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type04')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='complex-type04', fromsubclass_=False, pretty_print=True):
-        super(complex_type04, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(complex_type04, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1445,8 +1441,6 @@ class build_(GeneratedsSuper):
         self.integer_value02 = integer_value02
     def add_integer_value02(self, value):
         self.integer_value02.append(value)
-    def add_integer_value02(self, value):
-        self.integer_value02.append(value)
     def insert_integer_value02_at(self, index, value):
         self.integer_value02.insert(index, value)
     def replace_integer_value02_at(self, index, value):
@@ -1491,7 +1485,10 @@ class build_(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='build', fromsubclass_=False, pretty_print=True):
         if pretty_print:
@@ -1582,8 +1579,6 @@ class complex_type05(build_):
         self.integer_value03 = integer_value03
     def add_integer_value03(self, value):
         self.integer_value03.append(value)
-    def add_integer_value03(self, value):
-        self.integer_value03.append(value)
     def insert_integer_value03_at(self, index, value):
         self.integer_value03.insert(index, value)
     def replace_integer_value03_at(self, index, value):
@@ -1626,7 +1621,7 @@ class complex_type05(build_):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='complex-type05'):
         super(complex_type05, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='complex-type05')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='complex-type05', fromsubclass_=False, pretty_print=True):
-        super(complex_type05, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(complex_type05, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:

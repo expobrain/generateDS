@@ -764,8 +764,6 @@ class DefaultTypes(GeneratedsSuper):
         self.default1 = default1
     def add_default1(self, value):
         self.default1.append(value)
-    def add_default1(self, value):
-        self.default1.append(value)
     def insert_default1_at(self, index, value):
         self.default1.insert(index, value)
     def replace_default1_at(self, index, value):
@@ -774,8 +772,6 @@ class DefaultTypes(GeneratedsSuper):
         return self.default2
     def set_default2(self, default2):
         self.default2 = default2
-    def add_default2(self, value):
-        self.default2.append(value)
     def add_default2(self, value):
         self.default2.append(value)
     def insert_default2_at(self, index, value):

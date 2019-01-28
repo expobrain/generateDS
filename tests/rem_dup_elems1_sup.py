@@ -765,8 +765,6 @@ class authorsType(GeneratedsSuper):
         self.author = author
     def add_author(self, value):
         self.author.append(value)
-    def add_author(self, value):
-        self.author.append(value)
     def insert_author_at(self, index, value):
         self.author.insert(index, value)
     def replace_author_at(self, index, value):
@@ -775,8 +773,6 @@ class authorsType(GeneratedsSuper):
         return self.cooperation
     def set_cooperation(self, cooperation):
         self.cooperation = cooperation
-    def add_cooperation(self, value):
-        self.cooperation.append(value)
     def add_cooperation(self, value):
         self.cooperation.append(value)
     def insert_cooperation_at(self, index, value):

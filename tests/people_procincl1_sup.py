@@ -792,8 +792,6 @@ class people(GeneratedsSuper):
         self.comments = comments
     def add_comments(self, value):
         self.comments.append(value)
-    def add_comments(self, value):
-        self.comments.append(value)
     def insert_comments_at(self, index, value):
         self.comments.insert(index, value)
     def replace_comments_at(self, index, value):
@@ -802,8 +800,6 @@ class people(GeneratedsSuper):
         return self.person
     def set_person(self, person):
         self.person = person
-    def add_person(self, value):
-        self.person.append(value)
     def add_person(self, value):
         self.person.append(value)
     def insert_person_at(self, index, value):
@@ -816,8 +812,6 @@ class people(GeneratedsSuper):
         self.specialperson = specialperson
     def add_specialperson(self, value):
         self.specialperson.append(value)
-    def add_specialperson(self, value):
-        self.specialperson.append(value)
     def insert_specialperson_at(self, index, value):
         self.specialperson.insert(index, value)
     def replace_specialperson_at(self, index, value):
@@ -826,8 +820,6 @@ class people(GeneratedsSuper):
         return self.programmer
     def set_programmer(self, programmer):
         self.programmer = programmer
-    def add_programmer(self, value):
-        self.programmer.append(value)
     def add_programmer(self, value):
         self.programmer.append(value)
     def insert_programmer_at(self, index, value):
@@ -840,8 +832,6 @@ class people(GeneratedsSuper):
         self.python_programmer = python_programmer
     def add_python_programmer(self, value):
         self.python_programmer.append(value)
-    def add_python_programmer(self, value):
-        self.python_programmer.append(value)
     def insert_python_programmer_at(self, index, value):
         self.python_programmer.insert(index, value)
     def replace_python_programmer_at(self, index, value):
@@ -850,8 +840,6 @@ class people(GeneratedsSuper):
         return self.java_programmer
     def set_java_programmer(self, java_programmer):
         self.java_programmer = java_programmer
-    def add_java_programmer(self, value):
-        self.java_programmer.append(value)
     def add_java_programmer(self, value):
         self.java_programmer.append(value)
     def insert_java_programmer_at(self, index, value):
@@ -1001,8 +989,6 @@ class comments(GeneratedsSuper):
         self.emp = emp
     def add_emp(self, value):
         self.emp.append(value)
-    def add_emp(self, value):
-        self.emp.append(value)
     def insert_emp_at(self, index, value):
         self.emp.insert(index, value)
     def replace_emp_at(self, index, value):
@@ -1011,8 +997,6 @@ class comments(GeneratedsSuper):
         return self.bold
     def set_bold(self, bold):
         self.bold = bold
-    def add_bold(self, value):
-        self.bold.append(value)
     def add_bold(self, value):
         self.bold.append(value)
     def insert_bold_at(self, index, value):
@@ -1163,8 +1147,6 @@ class person(GeneratedsSuper):
         self.interest = interest
     def add_interest(self, value):
         self.interest.append(value)
-    def add_interest(self, value):
-        self.interest.append(value)
     def insert_interest_at(self, index, value):
         self.interest.insert(index, value)
     def replace_interest_at(self, index, value):
@@ -1179,8 +1161,6 @@ class person(GeneratedsSuper):
         self.agent = agent
     def add_agent(self, value):
         self.agent.append(value)
-    def add_agent(self, value):
-        self.agent.append(value)
     def insert_agent_at(self, index, value):
         self.agent.insert(index, value)
     def replace_agent_at(self, index, value):
@@ -1189,8 +1169,6 @@ class person(GeneratedsSuper):
         return self.promoter
     def set_promoter(self, promoter):
         self.promoter = promoter
-    def add_promoter(self, value):
-        self.promoter.append(value)
     def add_promoter(self, value):
         self.promoter.append(value)
     def insert_promoter_at(self, index, value):
@@ -1275,7 +1253,10 @@ class person(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='person', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
@@ -1420,7 +1401,7 @@ class specialperson(person):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='specialperson'):
         super(specialperson, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='specialperson')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='specialperson', fromsubclass_=False, pretty_print=True):
-        super(specialperson, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(specialperson, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
     def build(self, node):
         already_processed = set()
         self.buildAttributes(node, node.attrib, already_processed)
@@ -1637,6 +1618,10 @@ class agent(GeneratedsSuper):
         return self.vehicle
     def set_vehicle(self, vehicle):
         self.vehicle = vehicle
+    def set_vehicle_with_type(self, value):
+        self.vehicle = value
+        value.original_tagname_ = 'vehicle'
+        value.extensiontype_ = value.__class__.__name__
     def add_vehicle(self, value):
         self.vehicle.append(value)
     def add_vehicle_with_type(self, value):
@@ -1946,8 +1931,6 @@ class booster(GeneratedsSuper):
         self.other_value = other_value
     def add_other_value(self, value):
         self.other_value.append(value)
-    def add_other_value(self, value):
-        self.other_value.append(value)
     def insert_other_value_at(self, index, value):
         self.other_value.insert(index, value)
     def replace_other_value_at(self, index, value):
@@ -1958,8 +1941,6 @@ class booster(GeneratedsSuper):
         self.type_ = type_
     def add_type(self, value):
         self.type_.append(value)
-    def add_type(self, value):
-        self.type_.append(value)
     def insert_type_at(self, index, value):
         self.type_.insert(index, value)
     def replace_type_at(self, index, value):
@@ -1968,8 +1949,6 @@ class booster(GeneratedsSuper):
         return self.client_handler
     def set_client_handler(self, client_handler):
         self.client_handler = client_handler
-    def add_client_handler(self, value):
-        self.client_handler.append(value)
     def add_client_handler(self, value):
         self.client_handler.append(value)
     def insert_client_handler_at(self, index, value):
@@ -2271,7 +2250,10 @@ class vehicle(GeneratedsSuper):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='vehicle', fromsubclass_=False, pretty_print=True):
         if pretty_print:
@@ -2363,7 +2345,7 @@ class automobile(vehicle):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='automobile'):
         super(automobile, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='automobile')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='automobile', fromsubclass_=False, pretty_print=True):
-        super(automobile, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(automobile, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -2447,7 +2429,7 @@ class airplane(vehicle):
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='airplane'):
         super(airplane, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='airplane')
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='airplane', fromsubclass_=False, pretty_print=True):
-        super(airplane, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(airplane, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -2679,9 +2661,12 @@ class programmer(person):
         if self.extensiontype_ is not None and 'xsi:type' not in already_processed:
             already_processed.add('xsi:type')
             outfile.write(' xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
-            outfile.write(' xsi:type="%s"' % self.extensiontype_)
+            if ":" not in self.extensiontype_:
+                outfile.write(' xsi:type="%s%s"' % (namespaceprefix_, self.extensiontype_))
+            else:
+                outfile.write(' xsi:type="%s"' % self.extensiontype_)
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='programmer', fromsubclass_=False, pretty_print=True):
-        super(programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(programmer, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -3040,7 +3025,7 @@ class java_programmer(programmer):
             already_processed.add('status')
             outfile.write(' status=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.status), input_name='status')), ))
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='java-programmer', fromsubclass_=False, pretty_print=True):
-        super(java_programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(java_programmer, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
@@ -3143,7 +3128,7 @@ class python_programmer(programmer):
             already_processed.add('nick_name')
             outfile.write(' nick-name=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.nick_name), input_name='nick-name')), ))
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='python-programmer', fromsubclass_=False, pretty_print=True):
-        super(python_programmer, self).exportChildren(outfile, level, namespaceprefix_, name_, True, pretty_print=pretty_print)
+        super(python_programmer, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
         else:
