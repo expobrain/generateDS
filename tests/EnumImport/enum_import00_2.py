@@ -101,8 +101,8 @@ else:
 #     # File: generatedsnamespaces.py
 #
 #     GenerateDSNamespaceTypePrefixes = {
-#         "ElementtypeC": "http://www.xxx.com/namespaceC",
-#         "ElementtypeD": "http://www.xxx.com/namespaceD",
+#         "ElementtypeC": "aaa:",
+#         "ElementtypeD": "bbb:",
 #     }
 #
 

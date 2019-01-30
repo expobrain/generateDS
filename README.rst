@@ -149,12 +149,16 @@ Version 2.30.13 (01/28,2019)
   identifying and reporting this.
 - Added generation of `set_xxxx_with_type` for children that are
   extensions and abstract and cardinality of zero or one.  Again,
-  thanks to Edwin for describing this need.
+  thanks to Edwin for describing this need and for his guidance
+  with implementing it..
 - Removed duplicate generation of `add_xxxx` method.
 - Fix to generation of "xsi:type" attributes.  Added use of table
   `GenerateDSNamespaceTypePrefixes` from module
   `generatedsnamespaces.py` to specify the namespace prefix on a
   per type basis.
+- Added ability to specify the namespace prefix for types that are
+  extensions of (derived from) an abstract type and that are
+  specified on export with the "xsi:type" attribute.
 
 Version 2.30.12 (01/14/2019)
 
