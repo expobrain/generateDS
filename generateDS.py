@@ -5190,7 +5190,12 @@ else:
 #xmldisable#        except AttributeError:
 #xmldisable#            # fallback to xml.etree
 #xmldisable#            parser = etree_.XMLParser()
-#xmldisable#    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
+#xmldisable#    try:
+#xmldisable#        if isinstance(infile, os.PathLike):
+#xmldisable#            infile = os.path.join(infile)
+#xmldisable#    except AttributeError:
+#xmldisable#        pass
+#xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
 #xmldisable#    return doc
 
 #xmldisable#def parsexmlstring_(instring, parser=None, **kwargs):
@@ -6452,7 +6457,12 @@ import %s as supermod
 #xmldisable#        # Use the lxml ElementTree compatible parser so that, e.g.,
 #xmldisable#        #   we ignore comments.
 #xmldisable#        parser = etree_.ETCompatXMLParser()
-#xmldisable#    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
+#xmldisable#    try:
+#xmldisable#        if isinstance(infile, os.PathLike):
+#xmldisable#            infile = os.path.join(infile)
+#xmldisable#    except AttributeError:
+#xmldisable#        pass
+#xmldisable#    doc = etree_.parse(infile, parser=parser, **kwargs)
 #xmldisable#    return doc
 
 #
