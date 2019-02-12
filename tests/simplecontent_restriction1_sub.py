@@ -2,7 +2,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.7 |Anaconda, Inc.| (default, Oct 23 2018, 19:16:44)  [GCC 7.3.0]
+# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/simplecontent_restriction2_sup.py" -s "tests/simplecontent_restriction2_sub.py" --super="simplecontent_restriction2_sup" tests/simplecontent_restriction.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   generateds_brodtkorb
 #
 
 import os
@@ -35,7 +35,12 @@ def parsexml_(infile, parser=None, **kwargs):
         # Use the lxml ElementTree compatible parser so that, e.g.,
         #   we ignore comments.
         parser = etree_.ETCompatXMLParser()
-    doc = etree_.parse(os.path.join(infile), parser=parser, **kwargs)
+    try:
+        if isinstance(infile, os.PathLike):
+            infile = os.path.join(infile)
+    except AttributeError:
+        pass
+    doc = etree_.parse(infile, parser=parser, **kwargs)
     return doc
 
 #

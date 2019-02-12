@@ -142,7 +142,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
-Version 2.30.13 (01/28,2019)
+Version 2.30.14 (02/12/2019)
+
+- Bugfix: Avoid the TypeError which was caused if infile is a file
+  object or BytesIO object.  Thank you, Andreas Brodtkor.
+
+Version 2.30.13 (01/28/2019)
 
 - Fix to order of arguments generated for call to superclass
   `exportChildren` method.  Thank you to Edwin Matthijssen for
