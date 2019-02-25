@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/defaults_cases2_sup.py" -s "tests/defaults_cases2_sub.py" --super="defaults_cases2_sup" tests/defaults_cases.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

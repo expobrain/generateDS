@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/simpletype_memberspecs2_sup.py" -s "tests/simpletype_memberspecs2_sub.py" --super="simpletype_memberspecs2_sup" tests/simpletype_memberspecs.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

@@ -15,17 +15,17 @@ Examples:
 
 import sys
 import os
+import copy
+from optparse import OptionParser, Values
+import itertools
+from copy import deepcopy
+from lxml import etree
 if sys.version_info.major == 2:
     import urllib2
 else:
     import urllib.request
     import urllib.error
     import urllib.parse
-import copy
-from optparse import OptionParser, Values
-import itertools
-from copy import deepcopy
-from lxml import etree
 
 try:
     from gds_inner_name_map import Inner_name_map
@@ -40,7 +40,7 @@ except ImportError:
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.14'
+VERSION = '2.30.15'
 ##VERSION##
 
 CatalogDict = {}
@@ -85,8 +85,9 @@ def process_include_files(
         'no_collect_includes': no_collect_includes,
         'no_redefine_groups': no_redefine_groups,
     })
-    doc, ns_dict = prep_schema_doc(infile, outfile, inpath, options)
-    return doc, ns_dict
+    doc, ns_dict, schema_ns_dict = prep_schema_doc(
+        infile, outfile, inpath, options)
+    return doc, ns_dict, schema_ns_dict
 
 
 def get_all_root_file_paths(
@@ -231,25 +232,27 @@ def resolve_ref(node, params, options):
     return content
 
 
-def collect_inserts(node, params, inserts, ns_dict, options):
+def collect_inserts(node, params, inserts, ns_dict, schema_ns_dict, options):
     namespace = node.nsmap[node.prefix]
     roots = []
     child_iter1 = node.iterfind('{%s}include' % (namespace, ))
     child_iter2 = node.iterfind('{%s}import' % (namespace, ))
     for child in itertools.chain(child_iter1, child_iter2):
         aux_roots = collect_inserts_aux(
-            child, params, inserts, ns_dict, options)
+            child, params, inserts, ns_dict, schema_ns_dict, options)
         roots.extend(aux_roots)
     return roots
 
 
-def collect_inserts_aux(child, params, inserts, ns_dict, options):
+def collect_inserts_aux(
+        child, params, inserts, ns_dict, schema_ns_dict, options):
     roots = []
     save_base_url = params.base_url
     string_content = resolve_ref(child, params, options)
     if string_content is not None:
         root = etree.fromstring(string_content, base_url=params.base_url)
         roots.append(root)
+        schema_ns_dict.update(root.nsmap)
         update_ns_dict(root, ns_dict, options)
         for child1 in root:
             if not isinstance(child1, etree._Comment):
@@ -260,7 +263,8 @@ def collect_inserts_aux(child, params, inserts, ns_dict, options):
                     comment.tail = '\n'
                     inserts.append(comment)
                     inserts.append(child1)
-        insert_roots = collect_inserts(root, params, inserts, ns_dict, options)
+        insert_roots = collect_inserts(
+            root, params, inserts, ns_dict, schema_ns_dict, options)
         roots.extend(insert_roots)
     params.base_url = save_base_url
     return roots
@@ -280,7 +284,7 @@ def update_ns_dict(root, ns_dict, options):
             items1 = root.xpath('./xs:complexType', namespaces=nsmap)
             items2 = root.xpath('./xs:element', namespaces=nsmap)
             names = ([item.get('name') for item in items1] +
-                [item.get('name') for item in items2])
+                     [item.get('name') for item in items2])
             for name in names:
                 ns_dict[name] = (prefix, namespace)
 
@@ -329,8 +333,11 @@ def prep_schema_doc(infile, outfile, inpath, options):
     params.base_url = os.path.split(inpath)[0]
     inserts = []
     ns_dict = {}
+    schema_ns_dict = {}
+    schema_ns_dict.update(root1.nsmap)
     if not options.no_collect_includes:
-        collect_inserts(root1, params, inserts, ns_dict, options)
+        collect_inserts(root1, params, inserts, ns_dict,
+                        schema_ns_dict, options)
         root2 = copy.copy(root1)
         clear_includes_and_imports(root2)
         for insert_node in inserts:
@@ -346,7 +353,7 @@ def prep_schema_doc(infile, outfile, inpath, options):
         doc2.write(outfile)
     else:
         outfile.write(etree.tostring(root2).decode('utf-8'))
-    return doc2, ns_dict
+    return doc2, ns_dict, schema_ns_dict
 
 
 def prep_schema(inpath, outpath, options):
@@ -526,7 +533,7 @@ def raise_anon_complextypes(root):
         pattern = './*/*//complexType|./*/*//simpleType'
         element_tag = 'element'
         defs = root.xpath(pattern)
-        annotation_pattern = './annotation' % (prefix,)
+        annotation_pattern = './%s:annotation' % (prefix,)
     for node in defs:
         parent = node.getparent()
         if parent.tag != element_tag:

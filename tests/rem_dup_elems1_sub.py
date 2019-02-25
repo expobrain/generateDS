@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -a "xsd:" -o "tests/rem_dup_elems2_sup.py" -s "tests/rem_dup_elems2_sub.py" --super="rem_dup_elems2_sup" --no-warnings tests/rem_dup_elems.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

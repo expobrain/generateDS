@@ -142,6 +142,16 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.15 (02/25/2019)
+
+- Fixed error that occurs when one schema includes another (with
+  `xs:include`) and the included schema docs use a difference
+  namespace prefix for the XML schema namespace than the main schema
+  doc.  For example, one uses "xs:" and the other uses "xsd:".
+- Merged fix to `process_includes.py` that copies and preserves
+  annotations in `raise_anon_complestypes`.  Thanks to Raphaël Valyi
+  for this fix.
+
 Version 2.30.14 (02/12/2019)
 
 - Bugfix: Avoid the TypeError which was caused if infile is a file

@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/reference_simpletype2_sup.py" -s "tests/reference_simpletype2_sub.py" --super="reference_simpletype2_sup" tests/reference_simpletype.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

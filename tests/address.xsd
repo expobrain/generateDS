@@ -1,6 +1,6 @@
 <schema targetNamespace="http://www.example.com/IPO"
-        xmlns="http://www.w3.org/2001/XMLSchema"
-        xmlns:ipo="http://www.example.com/IPO">
+  xmlns="http://www.w3.org/2001/XMLSchema"
+  xmlns:ipo="http://www.example.com/IPO">
 
   <annotation>
     <documentation xml:lang="en">
@@ -52,5 +52,11 @@
   </simpleType>
 
   <!-- simple type definition for UKPostcode -->
+
+  <simpleType name="UKPostcode">
+    <restriction base="string">
+      <maxLength value="24"/>
+    </restriction>
+  </simpleType>
 
 </schema>

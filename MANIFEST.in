@@ -2,17 +2,18 @@ include README.rst LICENSE MANIFEST.in
 include setup.py
 include generateDS.py
 include generateds_config.py
-include generateDS.txt
+include generateDS.txt generateDS.html
+include process_includes.py
+include generate_coverage.py
+include gends_user_methods.py
+include generateds_gui_notes.txt
+include generateds_gui_notes.html
+
 include django/gends_run_gen_django.py
 include django/gends_extract_simple_types.py
 include django/gends_generate_django.py
 include django/generatedssuper.py
-include process_includes.py
-include generate_coverage.py
-include generateDS.html
-include gends_user_methods.py
-include generateds_gui_notes.txt
-include generateds_gui_notes.html
+
 include Demos/People/people.xsd
 include Demos/People/people.xml
 include Demos/People/run_test
@@ -145,9 +146,14 @@ include tests/mixedcontent.xml
 include tests/mixedcontent1_out.xml
 include tests/mixedcontent1_sub.py
 include tests/mixedcontent1_sup.py
+include tests/derived_types1_sub.py tests/derived_types1_sup.py
+include tests/enum_import00.xsd tests/enum_import01.xsd tests/enum_import02.xsd
+include tests/EnumImport/__init__.py tests/EnumImport/copy_enum_import.sh
+include tests/EnumImport/enum_import00_2.py tests/EnumImport/enum_import01_2.py
+include tests/EnumImport/enum_import02_2.py
+include tests/EnumImport/test_generated_code.py
+
 include tests/check_results.rb
-include enum_import00.xsd enum_import01.xsd enum_import02.xsd
-include derived_types1_sub.py derived_types1_sup.py
 
 include gui/generateds_gui.py
 include gui/generateds_gui.glade

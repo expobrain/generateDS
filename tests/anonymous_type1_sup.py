@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/anonymous_type2_sup.py" -s "tests/anonymous_type2_sub.py" --super="anonymous_type2_sup" tests/anonymous_type.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

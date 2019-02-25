@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.14'
+VERSION = '2.30.15'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2143,7 +2143,8 @@ def generateExportFn_1(wrt, child, name, fill):
         # name_type_problem
         if False:        # name == child.getType():
             s1 = "%s            self.%s.export(outfile, level, " \
-                "namespaceprefix_, namespacedef_='', pretty_print=pretty_print)\n" % \
+                "namespaceprefix_, namespacedef_='', " \
+                "pretty_print=pretty_print)\n" % \
                 (fill, mappedName)
         else:
             namespaceprefix = "namespaceprefix_"
@@ -2275,7 +2276,8 @@ def generateExportFn_2(wrt, child, name, fill):
             namespaceprefix = 'namespaceprefix_'
             if child.prefix and 'ref' in child.attrs:
                 namespaceprefix += "='%s:'" % child.prefix
-            s1 = "%s        %s_.export(outfile, level, %s, namespacedef_='', " \
+            s1 = "%s        %s_.export(outfile, level, %s, " \
+                "namespacedef_='', " \
                 "name_='%s', pretty_print=pretty_print)\n" % \
                 (fill, cleanName, namespaceprefix, name)
         wrt(s1)
@@ -2755,11 +2757,13 @@ def generateExportAttributes(wrt, element, hasAttributes):
         wrt("            outfile.write("
             "' xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"')\n")
         # fix
-        #wrt('''            if namespaceprefix_ not in self.extensiontype_:\n'''
         wrt('''            if ":" not in self.extensiontype_:\n'''
-            '''                imported_ns_type_prefix_ = GenerateDSNamespaceTypePrefixes_.get(self.extensiontype_, '')\n'''
+            '''                imported_ns_type_prefix_ = '''
+            '''GenerateDSNamespaceTypePrefixes_.get('''
+            '''self.extensiontype_, '')\n'''
             '''                outfile.write('''
-            '''' xsi:type="%s%s"' % (imported_ns_type_prefix_, self.extensiontype_))\n'''
+            '''' xsi:type="%s%s"' % (imported_ns_type_prefix_, '''
+            '''self.extensiontype_))\n'''
             '''            else:\n'''
             '''                outfile.write('''
             '''' xsi:type="%s"' % self.extensiontype_)\n''')
@@ -2865,17 +2869,19 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     base = element.getBase()
     ns_prefix = SchemaNamespaceDict.get(name)
     if ns_prefix is not None and ns_prefix[0] is not None:
-        namespace = ns_prefix[0] + ':'
+        namespacepfx = ns_prefix[0] + ':'
+    else:
+        namespacepfx = ''
     # Was the --no-namespace-defs command line option used?
     if nameSpacesDef:
         if ns_prefix is not None and ns_prefix[0] is not None:
-            namespace = ns_prefix[0] + ':'
+            namespacepfx = ns_prefix[0] + ':'
             ns_def = 'xmlns:{}'.format(ns_prefix[0])
             if ns_def not in nameSpacesDef:
                 nameSpacesDef += ' {}="{}"'.format(ns_def, ns_prefix[1])
     wrt("    def export(self, outfile, level, namespaceprefix_='%s', "
         "namespacedef_='%s', name_='%s', pretty_print=True):\n" %
-        (namespace, nameSpacesDef, encodedname, ))
+        (namespacepfx, nameSpacesDef, encodedname, ))
     wrt("        imported_ns_def_ = GenerateDSNamespaceDefs_.get"
         "('%s')\n" % (encodedname, ))
     wrt("        if imported_ns_def_ is not None:\n")
@@ -2932,7 +2938,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         wrt("            outfile.write('/>%s' % (eol_, ))\n")
     wrt("    def exportAttributes(self, outfile, level, "
         "already_processed, namespaceprefix_='%s', name_='%s'):\n" %
-        (namespace, encodedname, ))
+        (namespacepfx, encodedname, ))
     hasAttributes = 0
     if element.getAnyAttribute():
         wrt("""\
@@ -2981,7 +2987,7 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
     wrt("    def exportChildren(self, outfile, level, "
         "namespaceprefix_='%s', namespacedef_='%s', "
         "name_='%s', fromsubclass_=False, pretty_print=True):\n" %
-        (namespace, nameSpacesDef, encodedname, ))
+        (namespacepfx, nameSpacesDef, encodedname, ))
     hasChildren = 0
     # Generate call to exportChildren in the superclass only if it is
     #  an extension, but *not* if it is a restriction.
@@ -2990,7 +2996,8 @@ def generateExportFn(wrt, prefix, element, namespace, nameSpacesDef):
         hasChildren += 1
         elName = element.getCleanName()
         wrt("        super(%s%s, self).exportChildren(outfile, level, "
-            "namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)\n" %
+            "namespaceprefix_, namespacedef_, name_, True, "
+            "pretty_print=pretty_print)\n" %
             (prefix, elName, ))
     hasChildren += generateExportChildren(wrt, element, hasChildren, namespace)
     if childCount == 0:   # and not element.isMixed():
@@ -7100,7 +7107,7 @@ def parseAndGenerate(
                 outfile = StringIO.StringIO()
             else:
                 outfile = io.StringIO()
-            doc, SchemaNamespaceDict = process_includes.process_include_files(
+            result = process_includes.process_include_files(
                 infile, outfile,
                 inpath=xschemaFileName,
                 catalogpath=catalogFilename,
@@ -7108,6 +7115,11 @@ def parseAndGenerate(
                 no_collect_includes=noCollectIncludes,
                 no_redefine_groups=noRedefineGroups,
             )
+            doc, SchemaNamespaceDict, schema_ns_dict = result
+            # dbg
+            #print('SchemaNamespaceDict: {}\n'.format(SchemaNamespaceDict))
+            #print('schema_ns_dict: {}\n'.format(schema_ns_dict))
+            prefixToNamespaceMap.update(schema_ns_dict)
             outfile.seek(0)
             infile = outfile
             SchemaLxmlTree = doc.getroot()
@@ -7137,11 +7149,13 @@ def parseAndGenerate(
                 outfile = StringIO.StringIO()
             else:
                 outfile = io.StringIO()
-            doc, SchemaNamespaceDict = process_includes.process_include_files(
+            result = process_includes.process_include_files(
                 infile, outfile,
                 inpath=xschemaFileName,
                 catalogpath=catalogFilename,
                 fixtypenames=FixTypeNames)
+            doc, SchemaNamespaceDict, schema_ns_dict = result
+            prefixToNamespaceMap.update(schema_ns_dict)
             outfile.close()
             outfile = None
             SchemaLxmlTree = doc.getroot()

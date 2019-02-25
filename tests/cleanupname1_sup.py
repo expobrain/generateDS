@@ -23,7 +23,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/cleanupname2_sup.py" -s "tests/cleanupname2_sub.py" --super="cleanupname2_sup" --cleanup-name-list="[('[-:.]', '_'), ('^Type', 'Class'), ('Type$', 'Kind'), ('[ABC]', 'M'), ('[XYZ]', 'N'), ]" tests/cleanupname.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/anysimpletype2_sup.py" -s "tests/anysimpletype2_sub.py" --super="anysimpletype2_sup" tests/anysimpletype.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os
@@ -791,7 +791,7 @@ class test1element(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='test1element', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_=' xmlns:None="http://www.vmware.com/vcloud/v0.8" ', name_='test1element', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('test1element')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -816,7 +816,7 @@ class test1element(GeneratedsSuper):
         if self.test1attribute is not None and 'test1attribute' not in already_processed:
             already_processed.add('test1attribute')
             outfile.write(' test1attribute=%s' % (quote_attrib(self.test1attribute), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='test1element', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_=' xmlns:None="http://www.vmware.com/vcloud/v0.8" ', name_='test1element', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:

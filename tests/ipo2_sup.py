@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/ipo2_sup.py" -s "tests/ipo2_sub.py" --super="ipo2_sup" tests/ipo.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os
@@ -822,7 +822,7 @@ class PurchaseOrderType(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='PurchaseOrderType', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='PurchaseOrderType', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('PurchaseOrderType')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -843,11 +843,11 @@ class PurchaseOrderType(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='PurchaseOrderType'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='PurchaseOrderType'):
         if self.orderDate is not None and 'orderDate' not in already_processed:
             already_processed.add('orderDate')
             outfile.write(' orderDate="%s"' % self.gds_format_date(self.orderDate, input_name='orderDate'))
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='PurchaseOrderType', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='PurchaseOrderType', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -942,7 +942,7 @@ class Items(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='Items', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='Items', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Items')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -963,9 +963,9 @@ class Items(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='Items'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='Items'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='Items', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='Items', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1060,7 +1060,7 @@ class item(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='item', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='item', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('item')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1081,11 +1081,11 @@ class item(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='item'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='item'):
         if self.partNum is not None and 'partNum' not in already_processed:
             already_processed.add('partNum')
             outfile.write(' partNum=%s' % (quote_attrib(self.partNum), ))
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='item', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='item', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1178,7 +1178,7 @@ class quantity(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='quantity', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='quantity', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('quantity')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1198,9 +1198,9 @@ class quantity(GeneratedsSuper):
             outfile.write('</%s%s>%s' % (namespaceprefix_, name_, eol_))
         else:
             outfile.write('/>%s' % (eol_, ))
-    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='quantity'):
+    def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='quantity'):
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='quantity', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='quantity', fromsubclass_=False, pretty_print=True):
         pass
     def build(self, node):
         already_processed = set()
@@ -1265,7 +1265,7 @@ class Address(GeneratedsSuper):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='Address', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='Address', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('Address')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1296,7 +1296,7 @@ class Address(GeneratedsSuper):
             else:
                 outfile.write(' xsi:type="%s"' % self.extensiontype_)
         pass
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='Address', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='Address', fromsubclass_=False, pretty_print=True):
         if pretty_print:
             eol_ = '\n'
         else:
@@ -1392,7 +1392,7 @@ class USAddress(Address):
             return True
         else:
             return False
-    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='USAddress', pretty_print=True):
+    def export(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='USAddress', pretty_print=True):
         imported_ns_def_ = GenerateDSNamespaceDefs_.get('USAddress')
         if imported_ns_def_ is not None:
             namespacedef_ = imported_ns_def_
@@ -1415,7 +1415,7 @@ class USAddress(Address):
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='ipo:', name_='USAddress'):
         super(USAddress, self).exportAttributes(outfile, level, already_processed, namespaceprefix_, name_='USAddress')
-    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO"', name_='USAddress', fromsubclass_=False, pretty_print=True):
+    def exportChildren(self, outfile, level, namespaceprefix_='ipo:', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='USAddress', fromsubclass_=False, pretty_print=True):
         super(USAddress, self).exportChildren(outfile, level, namespaceprefix_, namespacedef_, name_, True, pretty_print=pretty_print)
         if pretty_print:
             eol_ = '\n'
@@ -1460,7 +1460,7 @@ class USAddress(Address):
 class UKAddress(Address):
     member_data_items_ = [
         MemberSpec_('exportCode', 'positiveInteger', 0, 1, {'use': 'optional'}),
-        MemberSpec_('postcode', 'string', 0, 0, {'name': 'postcode', 'type': 'string'}, None),
+        MemberSpec_('postcode', ['UKPostcode', 'string'], 0, 0, {'name': 'postcode', 'type': 'string'}, None),
     ]
     subclass = None
     superclass = Address
@@ -1470,6 +1470,7 @@ class UKAddress(Address):
         super(UKAddress, self).__init__(name, street, city,  **kwargs_)
         self.exportCode = _cast(int, exportCode)
         self.postcode = postcode
+        self.validate_UKPostcode(self.postcode)
     def factory(*args_, **kwargs_):
         if CurrentSubclassModule_ is not None:
             subclass = getSubclassFromModule_(
@@ -1489,6 +1490,11 @@ class UKAddress(Address):
         return self.exportCode
     def set_exportCode(self, exportCode):
         self.exportCode = exportCode
+    def validate_UKPostcode(self, value):
+        # Validate type UKPostcode, a restriction on string.
+        if value is not None and Validate_simpletypes_:
+            if len(value) > 24:
+                warnings_.warn('Value "%(value)s" does not match xsd maxLength restriction on UKPostcode' % {"value" : value.encode("utf-8")} )
     def hasContent_(self):
         if (
             self.postcode is not None or
@@ -1555,6 +1561,8 @@ class UKAddress(Address):
             postcode_ = child_.text
             postcode_ = self.gds_validate_string(postcode_, node, 'postcode')
             self.postcode = postcode_
+            # validate type UKPostcode
+            self.validate_UKPostcode(self.postcode)
         super(UKAddress, self).buildChildren(child_, node, nodeName_, True)
 # end class UKAddress
 

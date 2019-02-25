@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f -o "tests/defaults_coverage2_sup.py" -s "tests/defaults_coverage2_sub.py" --super="defaults_coverage2_sup" tests/defaults_coverage.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

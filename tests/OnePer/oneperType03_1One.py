@@ -23,7 +23,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f --one-file-per-xsd --output-directory="tests/OnePer" --module-suffix="One" --super="oneper2_sup" tests/oneper00.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

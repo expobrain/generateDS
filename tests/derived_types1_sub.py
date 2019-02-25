@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/derived_types2_sup.py" -s "tests/derived_types2_sub.py" --super="derived_types2_sup" --always-export-default tests/derived_types.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

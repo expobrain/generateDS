@@ -20,7 +20,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/nested_def2_sup.py" -s "tests/nested_def2_sub.py" --super="nested_def2_sup" tests/nested_def.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

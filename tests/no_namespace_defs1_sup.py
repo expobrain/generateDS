@@ -25,7 +25,7 @@
 #   generateDS.py --no-dates --no-versions --disable-xml --disable-generatedssuper-lookup --member-specs="list" -f -a "xsd:" -o "tests/no_namespace_defs2_sup.py" -s "tests/no_namespace_defs2_sub.py" --super="no_namespace_defs2_sup" --no-warnings tests/no_namespace_defs.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os

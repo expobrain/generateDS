@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions -p "tomato_" --member-specs="list" -f -o "tests/prefix_classname2_sup.py" -s "tests/prefix_classname2_sub.py" --super="prefix_classname2_sup" tests/prefix_classname.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds_brodtkorb
+#   generateds
 #
 
 import os
