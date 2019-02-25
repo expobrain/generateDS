@@ -521,10 +521,12 @@ def raise_anon_complextypes(root):
         element_tag = '{%s}element' % (root.nsmap[prefix], )
         namespaces = {prefix: root.nsmap[prefix]}
         defs = root.xpath(pattern, namespaces=namespaces)
+        annotation_pattern = './%s:annotation' % (prefix,)
     else:
         pattern = './*/*//complexType|./*/*//simpleType'
         element_tag = 'element'
         defs = root.xpath(pattern)
+        annotation_pattern = './annotation' % (prefix,)
     for node in defs:
         parent = node.getparent()
         if parent.tag != element_tag:
@@ -537,6 +539,10 @@ def raise_anon_complextypes(root):
             type_name, def_count = unique_name(type_name, def_names, def_count)
         else:
             type_name = map_inner_name(node, Inner_name_map)
+        annotations = parent.xpath(annotation_pattern, namespaces=namespaces)
+        for annotation in reversed(annotations):
+            type_annotation = deepcopy(annotation)
+            node.insert(0, type_annotation)
         def_names.add(type_name)
         parent.set('type', type_name)
         node.set('name', type_name)
