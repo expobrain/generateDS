@@ -754,8 +754,8 @@ def _cast(typ, value):
 
 
 class document1Type(GeneratedsSuper):
-    """This is a element of Type 1. It has some very nice documentation for
-    test purposes. It should make a somewhat uninteresting
+    """This is a element of Type 1. It has some very nice documentation
+    for test purposes. It should make a somewhat uninteresting
     docstring."""
     member_data_items_ = [
         MemberSpec_('comments', 'xs:string', 0, 0, {'name': 'comments', 'type': 'xs:string'}, None),
@@ -851,8 +851,8 @@ class document1Type(GeneratedsSuper):
 
 
 class document2Type(GeneratedsSuper):
-    """This is a element of Type 2. It has some very nice documentation for
-    test purposes. It should make a somewhat uninteresting
+    """This is a element of Type 2. It has some very nice documentation
+    for test purposes. It should make a somewhat uninteresting
     docstring."""
     member_data_items_ = [
         MemberSpec_('comments', 'xs:string', 0, 0, {'name': 'comments', 'type': 'xs:string'}, None),

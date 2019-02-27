@@ -1108,9 +1108,9 @@ class comments(GeneratedsSuper):
 
 
 class person(GeneratedsSuper):
-    """A generic person. This is the base for a number of different kinds
-    of people. They are each an extension of this base type of
-    person."""
+    """A generic person. This is the base for a number of different
+    kinds of people. They are each an extension of this base
+    type of person."""
     member_data_items_ = [
         MemberSpec_('value', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('id', 'xs:integer', 0, 1, {'use': 'optional'}),
@@ -1443,8 +1443,8 @@ class specialperson(person):
 
 
 class param(GeneratedsSuper):
-    """Finding flow attribute unneccesary in practice. A unnamed parameter
-    is unbound/skipped."""
+    """Finding flow attribute unneccesary in practice. A unnamed parameter is
+    unbound/skipped."""
     member_data_items_ = [
         MemberSpec_('id', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('name', 'xs:NCName', 0, 1, {'use': 'optional'}),
@@ -1763,8 +1763,8 @@ class agent(GeneratedsSuper):
 
 
 class special_agent(GeneratedsSuper):
-    """This is a good kind of agent for testing the generation of Python
-    bindings for an XML schema."""
+    """This is a good kind of agent for testing the generation
+    of Python bindings for an XML schema."""
     member_data_items_ = [
         MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
         MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
@@ -2482,8 +2482,8 @@ class airplane(vehicle):
 
 
 class programmer(person):
-    """A programmer type of person. Programmers are very special but also a
-    little shy."""
+    """A programmer type of person. Programmers are very special
+    but also a little shy."""
     member_data_items_ = [
         MemberSpec_('language', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('area', 'xs:string', 0, 1, {'use': 'optional'}),
@@ -2974,8 +2974,8 @@ class client_handlerType(GeneratedsSuper):
 
 
 class java_programmer(programmer):
-    """A Java programmer type of person. Programmers are very special and
-    Java programmers are nice also, but not as especially wonderful
+    """A Java programmer type of person. Programmers are very special
+    and Java programmers are nice also, but not as especially wonderful
     as Python programmers, of course."""
     member_data_items_ = [
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
@@ -3087,8 +3087,9 @@ class java_programmer(programmer):
 
 
 class python_programmer(programmer):
-    """A Python programmer type of person. Programmers are very special and
-    Python programmers are especially wonderful kinds of people."""
+    """A Python programmer type of person. Programmers are very special
+    and Python programmers are especially wonderful kinds
+    of people."""
     member_data_items_ = [
         MemberSpec_('nick-name', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('favorite_editor', 'xs:string', 0, 0, {'name': 'favorite-editor', 'type': 'xs:string'}, None),

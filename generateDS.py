@@ -5100,15 +5100,27 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
     wrt(s1)
     # If this element has documentation, generate a doc-string.
     if element.documentation:
-        s2 = ' '.join(element.documentation.strip().split())
-        s2 = textwrap.fill(s2, width=68, subsequent_indent='    ')
-        if sys.version_info.major == 2:
-            s2 = s2.encode('utf-8')
+        s2 = element.documentation.strip()
         if len(s2) > 1:
-            if s2[0] == '"' or s2[-1] == '"':
-                s2 = '    """ %s """\n' % (s2, )
+            if s2[0] == '"':
+                s2 = '""" %s' % (s2, )
             else:
-                s2 = '    """%s"""\n' % (s2, )
+                s2 = '"""%s' % (s2, )
+            if s2[-1] == '"':
+                s2 = '%s """' % (s2, )
+            else:
+                s2 = '%s"""' % (s2, )
+
+            lines = []
+            for l in s2.splitlines():
+                if l.strip() != '':
+                    lines.append(textwrap.fill(' '.join(l.strip().split()),
+                                               width=75,
+                                               subsequent_indent='    '))
+            s2 = '\n    '.join(lines)
+            if sys.version_info.major == 2:
+                s2 = s2.encode('utf-8')
+            s2 = '    %s\n' % (s2, )
             wrt(s2)
     if UserMethodsModule or MemberSpecs:
         generateMemberSpec(wrt, element)
