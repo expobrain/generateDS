@@ -142,6 +142,10 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.16 (03/04/2019)
+
+- Merged Raphaël's fix in ``process_includes.py``.
+
 Version 2.30.15 (02/25/2019)
 
 - Fixed error that occurs when one schema includes another (with
