@@ -2258,7 +2258,7 @@ class param(GeneratedsSuper):
         if self.semantic is not None and 'semantic' not in already_processed:
             already_processed.add('semantic')
             outfile.write(' semantic=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.semantic), input_name='semantic')), ))
-        if self.type_ is not None and 'type_' not in already_processed:
+        if 'type_' not in already_processed:
             already_processed.add('type_')
             outfile.write(' type=%s' % (self.gds_encode(self.gds_format_string(quote_attrib(self.type_), input_name='type')), ))
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='', name_='param', fromsubclass_=False, pretty_print=True):

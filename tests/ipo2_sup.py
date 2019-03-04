@@ -1082,7 +1082,7 @@ class item(GeneratedsSuper):
         else:
             outfile.write('/>%s' % (eol_, ))
     def exportAttributes(self, outfile, level, already_processed, namespaceprefix_='', name_='item'):
-        if self.partNum is not None and 'partNum' not in already_processed:
+        if 'partNum' not in already_processed:
             already_processed.add('partNum')
             outfile.write(' partNum=%s' % (quote_attrib(self.partNum), ))
     def exportChildren(self, outfile, level, namespaceprefix_='', namespacedef_='xmlns:ipo="http://www.example.com/IPO" xmlns:None="http://www.w3.org/2001/XMLSchema" ', name_='item', fromsubclass_=False, pretty_print=True):

@@ -142,6 +142,12 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.18 (03/04/2019)
+
+- Fixed export of attributes so that they are not omitted when
+  use="required".  Thanks to Andrii Iudin for reporting this and
+  providing a test case.
+
 Version 2.30.17 (03/04/2019)
 
 - Merged Raphaël's fix to improve capture of annotations.  Thanks,

@@ -58,7 +58,7 @@
         <eltoken>aa bb cc dd</eltoken>
         <elshort>123</elshort>
         <ellong>13241234123412341234</ellong>
-        <elparam id="id001" name="Davy" semantic="a big semantic"/>
+        <elparam id="id001" name="Davy" semantic="a big semantic" type="None"/>
     </programmer>
     <python-programmer value="abcd" id="232" ratio="8.699999999999999" fruit="peach" vegetable="tomato" language="python" area="xml" nick-name="davy">
         <name>Darrel Dawson</name>

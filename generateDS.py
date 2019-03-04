@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.17'
+VERSION = '2.30.18'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2665,7 +2665,9 @@ def generateExportAttributes(wrt, element, hasAttributes):
             cleanName = mapName(cleanupName(name))
             if True:            # attrDef.getUse() == 'optional':
                 default = attrDef.getDefault()
-                if default is None or AlwaysExportDefault:
+                if attrDef.getUse() == 'required':
+                    s1 = '        if '
+                elif default is None or AlwaysExportDefault:
                     s1 = '        if self.%s is not None and ' % (cleanName, )
                 else:
                     attr_type = attrDef.getBaseType()
