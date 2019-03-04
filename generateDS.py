@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.16'
+VERSION = '2.30.17'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -5110,7 +5110,6 @@ def generateClasses(wrt, prefix, element, delayed, nameSpacesDef=''):
                 s2 = '%s """' % (s2, )
             else:
                 s2 = '%s"""' % (s2, )
-
             lines = []
             for l in s2.splitlines():
                 if l.strip() != '':

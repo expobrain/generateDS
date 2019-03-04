@@ -142,6 +142,11 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.17 (03/04/2019)
+
+- Merged Raphaël's fix to improve capture of annotations.  Thanks,
+  Raphaël.
+
 Version 2.30.16 (03/04/2019)
 
 - Merged Raphaël's fix in ``process_includes.py``.
