@@ -1735,8 +1735,8 @@ class tomato_programmer(tomato_person):
 
 
 class tomato_param(GeneratedsSuper):
-    """Finding flow attribute unneccesary in practice. A unnamed parameter
-    is unbound/skipped."""
+    """Finding flow attribute unneccesary in practice. A unnamed parameter is
+    unbound/skipped."""
     member_data_items_ = [
         MemberSpec_('id', 'xs:string', 0, 1, {'use': 'optional'}),
         MemberSpec_('name', 'xs:NCName', 0, 1, {'use': 'optional'}),

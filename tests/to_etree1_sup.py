@@ -2358,8 +2358,8 @@ class agentType(GeneratedsSuper):
 
 
 class special_agentType(agentType):
-    """This is a good kind of agent for testing the generation of Python
-    bindings for an XML schema."""
+    """This is a good kind of agent for testing the generation
+    of Python bindings for an XML schema."""
     member_data_items_ = [
         MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
         MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
@@ -2467,8 +2467,8 @@ class special_agentType(agentType):
 
 
 class weird_agentType(agentType):
-    """This is a good kind of agent for testing the generation of Python
-    bindings for an XML schema."""
+    """This is a good kind of agent for testing the generation
+    of Python bindings for an XML schema."""
     member_data_items_ = [
         MemberSpec_('firstname', 'xs:string', 0, 0, {'name': 'firstname', 'type': 'xs:string'}, None),
         MemberSpec_('lastname', 'xs:string', 0, 0, {'name': 'lastname', 'type': 'xs:string'}, None),
