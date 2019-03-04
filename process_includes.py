@@ -533,7 +533,7 @@ def raise_anon_complextypes(root):
         pattern = './*/*//complexType|./*/*//simpleType'
         element_tag = 'element'
         defs = root.xpath(pattern)
-        annotation_pattern = './%s:annotation' % (prefix,)
+        annotation_pattern = './annotation'
     for node in defs:
         parent = node.getparent()
         if parent.tag != element_tag:
