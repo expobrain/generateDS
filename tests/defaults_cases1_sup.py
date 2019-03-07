@@ -30,6 +30,7 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
+import decimal as decimal_
 try:
     from lxml import etree as etree_
 except ImportError:
@@ -142,6 +143,8 @@ except ImportError as exp:
                 return None
         def gds_format_string(self, input_data, input_name=''):
             return input_data
+        def gds_parse_string(self, input_data, node=None, input_name=''):
+            return input_data
         def gds_validate_string(self, input_data, node=None, input_name=''):
             if not input_data:
                 return ''
@@ -153,6 +156,12 @@ except ImportError as exp:
             return input_data
         def gds_format_integer(self, input_data, input_name=''):
             return '%d' % input_data
+        def gds_parse_integer(self, input_data, node=None, input_name=''):
+            try:
+                ival = int(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires integer: %s' % exp)
+            return ival
         def gds_validate_integer(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_integer_list(self, input_data, input_name=''):
@@ -168,8 +177,18 @@ except ImportError as exp:
             return values
         def gds_format_float(self, input_data, input_name=''):
             return ('%.15f' % input_data).rstrip('0')
+        def gds_parse_float(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_float(self, input_data, node=None, input_name=''):
-            return input_data
+            try:
+                value = float(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires sequence of floats')
+            return value
         def gds_format_float_list(self, input_data, input_name=''):
             return '%s' % ' '.join(input_data)
         def gds_validate_float_list(
@@ -181,8 +200,39 @@ except ImportError as exp:
                 except (TypeError, ValueError):
                     raise_parse_error(node, 'Requires sequence of floats')
             return values
+        def gds_format_decimal(self, input_data, input_name=''):
+            return ('%0.10f' % input_data).rstrip('0')
+        def gds_parse_decimal(self, input_data, node=None, input_name=''):
+            try:
+                decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return input_data
+        def gds_validate_decimal(self, input_data, node=None, input_name=''):
+            try:
+                value = decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return value
+        def gds_format_decimal_list(self, input_data, input_name=''):
+            return '%s' % ' '.join(input_data)
+        def gds_validate_decimal_list(
+                self, input_data, node=None, input_name=''):
+            values = input_data.split()
+            for value in values:
+                try:
+                    decimal_.Decimal(value)
+                except (TypeError, ValueError):
+                    raise_parse_error(node, 'Requires sequence of decimal values')
+            return values
         def gds_format_double(self, input_data, input_name=''):
             return '%e' % input_data
+        def gds_parse_double(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_double(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_double_list(self, input_data, input_name=''):
@@ -198,6 +248,14 @@ except ImportError as exp:
             return values
         def gds_format_boolean(self, input_data, input_name=''):
             return ('%s' % input_data).lower()
+        def gds_parse_boolean(self, input_data, node=None, input_name=''):
+            if input_data in ('true', '1'):
+                bval = True
+            elif input_data in ('false', '0'):
+                bval = False
+            else:
+                raise_parse_error(node, 'requires boolean')
+            return bval
         def gds_validate_boolean(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_boolean_list(self, input_data, input_name=''):
@@ -589,7 +647,8 @@ class GDSParseError(Exception):
 
 
 def raise_parse_error(node, msg):
-    msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
+    if node is not None:
+        msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
     raise GDSParseError(msg)
 
 
@@ -1055,59 +1114,43 @@ class DefaultType1(GeneratedsSuper):
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'normal01' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'normal01')
             ival_ = self.gds_validate_integer(ival_, node, 'normal01')
             self.normal01 = ival_
         elif nodeName_ == 'normal02':
-            normal02_ = child_.text
-            normal02_ = self.gds_validate_string(normal02_, node, 'normal02')
-            self.normal02 = normal02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'normal02')
+            value_ = self.gds_validate_string(value_, node, 'normal02')
+            self.normal02 = value_
         elif nodeName_ == 'default01' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'default01')
             ival_ = self.gds_validate_integer(ival_, node, 'default01')
             self.default01 = ival_
         elif nodeName_ == 'default02':
-            default02_ = child_.text
-            default02_ = self.gds_validate_string(default02_, node, 'default02')
-            self.default02 = default02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'default02')
+            value_ = self.gds_validate_string(value_, node, 'default02')
+            self.default02 = value_
         elif nodeName_ == 'normal03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'normal03')
             fval_ = self.gds_validate_float(fval_, node, 'normal03')
             self.normal03 = fval_
         elif nodeName_ == 'normal04' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'normal04')
+            fval_ = self.gds_parse_double(sval_, node, 'normal04')
+            fval_ = self.gds_validate_double(fval_, node, 'normal04')
             self.normal04 = fval_
         elif nodeName_ == 'default03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'default03')
             fval_ = self.gds_validate_float(fval_, node, 'default03')
             self.default03 = fval_
         elif nodeName_ == 'default04' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'default04')
+            fval_ = self.gds_parse_double(sval_, node, 'default04')
+            fval_ = self.gds_validate_double(fval_, node, 'default04')
             self.default04 = fval_
 # end class DefaultType1
 
@@ -1377,59 +1420,43 @@ class FixedType1(GeneratedsSuper):
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'normal01' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'normal01')
             ival_ = self.gds_validate_integer(ival_, node, 'normal01')
             self.normal01 = ival_
         elif nodeName_ == 'normal02':
-            normal02_ = child_.text
-            normal02_ = self.gds_validate_string(normal02_, node, 'normal02')
-            self.normal02 = normal02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'normal02')
+            value_ = self.gds_validate_string(value_, node, 'normal02')
+            self.normal02 = value_
         elif nodeName_ == 'fixed01' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'fixed01')
             ival_ = self.gds_validate_integer(ival_, node, 'fixed01')
             self.fixed01 = ival_
         elif nodeName_ == 'fixed02':
-            fixed02_ = child_.text
-            fixed02_ = self.gds_validate_string(fixed02_, node, 'fixed02')
-            self.fixed02 = fixed02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'fixed02')
+            value_ = self.gds_validate_string(value_, node, 'fixed02')
+            self.fixed02 = value_
         elif nodeName_ == 'normal03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'normal03')
             fval_ = self.gds_validate_float(fval_, node, 'normal03')
             self.normal03 = fval_
         elif nodeName_ == 'normal04' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'normal04')
+            fval_ = self.gds_parse_double(sval_, node, 'normal04')
+            fval_ = self.gds_validate_double(fval_, node, 'normal04')
             self.normal04 = fval_
         elif nodeName_ == 'fixed03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'fixed03')
             fval_ = self.gds_validate_float(fval_, node, 'fixed03')
             self.fixed03 = fval_
         elif nodeName_ == 'fixed04' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'fixed04')
+            fval_ = self.gds_parse_double(sval_, node, 'fixed04')
+            fval_ = self.gds_validate_double(fval_, node, 'fixed04')
             self.fixed04 = fval_
 # end class FixedType1
 

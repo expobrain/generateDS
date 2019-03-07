@@ -31,6 +31,7 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
+import decimal as decimal_
 try:
     from lxml import etree as etree_
 except ImportError:
@@ -143,6 +144,8 @@ except ImportError as exp:
                 return None
         def gds_format_string(self, input_data, input_name=''):
             return input_data
+        def gds_parse_string(self, input_data, node=None, input_name=''):
+            return input_data
         def gds_validate_string(self, input_data, node=None, input_name=''):
             if not input_data:
                 return ''
@@ -154,6 +157,12 @@ except ImportError as exp:
             return input_data
         def gds_format_integer(self, input_data, input_name=''):
             return '%d' % input_data
+        def gds_parse_integer(self, input_data, node=None, input_name=''):
+            try:
+                ival = int(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires integer: %s' % exp)
+            return ival
         def gds_validate_integer(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_integer_list(self, input_data, input_name=''):
@@ -169,8 +178,18 @@ except ImportError as exp:
             return values
         def gds_format_float(self, input_data, input_name=''):
             return ('%.15f' % input_data).rstrip('0')
+        def gds_parse_float(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_float(self, input_data, node=None, input_name=''):
-            return input_data
+            try:
+                value = float(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires sequence of floats')
+            return value
         def gds_format_float_list(self, input_data, input_name=''):
             return '%s' % ' '.join(input_data)
         def gds_validate_float_list(
@@ -182,8 +201,39 @@ except ImportError as exp:
                 except (TypeError, ValueError):
                     raise_parse_error(node, 'Requires sequence of floats')
             return values
+        def gds_format_decimal(self, input_data, input_name=''):
+            return ('%0.10f' % input_data).rstrip('0')
+        def gds_parse_decimal(self, input_data, node=None, input_name=''):
+            try:
+                decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return input_data
+        def gds_validate_decimal(self, input_data, node=None, input_name=''):
+            try:
+                value = decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return value
+        def gds_format_decimal_list(self, input_data, input_name=''):
+            return '%s' % ' '.join(input_data)
+        def gds_validate_decimal_list(
+                self, input_data, node=None, input_name=''):
+            values = input_data.split()
+            for value in values:
+                try:
+                    decimal_.Decimal(value)
+                except (TypeError, ValueError):
+                    raise_parse_error(node, 'Requires sequence of decimal values')
+            return values
         def gds_format_double(self, input_data, input_name=''):
             return '%e' % input_data
+        def gds_parse_double(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_double(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_double_list(self, input_data, input_name=''):
@@ -199,6 +249,14 @@ except ImportError as exp:
             return values
         def gds_format_boolean(self, input_data, input_name=''):
             return ('%s' % input_data).lower()
+        def gds_parse_boolean(self, input_data, node=None, input_name=''):
+            if input_data in ('true', '1'):
+                bval = True
+            elif input_data in ('false', '0'):
+                bval = False
+            else:
+                raise_parse_error(node, 'requires boolean')
+            return bval
         def gds_validate_boolean(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_boolean_list(self, input_data, input_name=''):
@@ -590,7 +648,8 @@ class GDSParseError(Exception):
 
 
 def raise_parse_error(node, msg):
-    msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
+    if node is not None:
+        msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
     raise GDSParseError(msg)
 
 
@@ -1399,7 +1458,7 @@ class simpleOneType(GeneratedsSuper):
             outfile.write('<%slength_value>%s</%slength_value>%s' % (namespaceprefix_ , self.gds_encode(self.gds_format_string(quote_xml(self.length_value), input_name='length_value')), namespaceprefix_ , eol_))
         if self.totalDigits_value is not None:
             showIndent(outfile, level, pretty_print)
-            outfile.write('<%stotalDigits_value>%s</%stotalDigits_value>%s' % (namespaceprefix_ , self.gds_format_float(self.totalDigits_value, input_name='totalDigits_value'), namespaceprefix_ , eol_))
+            outfile.write('<%stotalDigits_value>%s</%stotalDigits_value>%s' % (namespaceprefix_ , self.gds_format_decimal(self.totalDigits_value, input_name='totalDigits_value'), namespaceprefix_ , eol_))
         if self.date_minincl_value is not None:
             showIndent(outfile, level, pretty_print)
             outfile.write('<%sdate_minincl_value>%s</%sdate_minincl_value>%s' % (namespaceprefix_ , self.gds_format_date(self.date_minincl_value, input_name='date_minincl_value'), namespaceprefix_ , eol_))
@@ -1467,65 +1526,57 @@ class simpleOneType(GeneratedsSuper):
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'integer_range_1_value' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_range_1_value')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_range_1_value')
             self.integer_range_1_value = ival_
             # validate type integer_range_1_st
             self.validate_integer_range_1_st(self.integer_range_1_value)
         elif nodeName_ == 'pattern_value':
-            pattern_value_ = child_.text
-            pattern_value_ = self.gds_validate_string(pattern_value_, node, 'pattern_value')
-            self.pattern_value = pattern_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'pattern_value')
+            value_ = self.gds_validate_string(value_, node, 'pattern_value')
+            self.pattern_value = value_
             # validate type pattern_st
             self.validate_pattern_st(self.pattern_value)
         elif nodeName_ == 'token_enum_value':
-            token_enum_value_ = child_.text
-            token_enum_value_ = self.gds_validate_string(token_enum_value_, node, 'token_enum_value')
-            self.token_enum_value = token_enum_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'token_enum_value')
+            value_ = self.gds_validate_string(value_, node, 'token_enum_value')
+            self.token_enum_value = value_
             # validate type token_enum_st
             self.validate_token_enum_st(self.token_enum_value)
         elif nodeName_ == 'integer_range_incl_value' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_range_incl_value')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_range_incl_value')
             self.integer_range_incl_value = ival_
             # validate type integer_range_incl_st
             self.validate_integer_range_incl_st(self.integer_range_incl_value)
         elif nodeName_ == 'integer_range_excl_value' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_range_excl_value')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_range_excl_value')
             self.integer_range_excl_value = ival_
             # validate type integer_range_excl_st
             self.validate_integer_range_excl_st(self.integer_range_excl_value)
         elif nodeName_ == 'min_max_length_value':
-            min_max_length_value_ = child_.text
-            min_max_length_value_ = self.gds_validate_string(min_max_length_value_, node, 'min_max_length_value')
-            self.min_max_length_value = min_max_length_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'min_max_length_value')
+            value_ = self.gds_validate_string(value_, node, 'min_max_length_value')
+            self.min_max_length_value = value_
             # validate type min_max_length_st
             self.validate_min_max_length_st(self.min_max_length_value)
         elif nodeName_ == 'length_value':
-            length_value_ = child_.text
-            length_value_ = self.gds_validate_string(length_value_, node, 'length_value')
-            self.length_value = length_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'length_value')
+            value_ = self.gds_validate_string(value_, node, 'length_value')
+            self.length_value = value_
             # validate type length_st
             self.validate_length_st(self.length_value)
         elif nodeName_ == 'totalDigits_value' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
-            fval_ = self.gds_validate_float(fval_, node, 'totalDigits_value')
+            fval_ = self.gds_parse_decimal(sval_, node, 'totalDigits_value')
+            fval_ = self.gds_validate_decimal(fval_, node, 'totalDigits_value')
             self.totalDigits_value = fval_
             # validate type totalDigits_st
             self.validate_totalDigits_st(self.totalDigits_value)
@@ -1602,41 +1653,34 @@ class simpleOneType(GeneratedsSuper):
             # validate type datetime_maxexcl_st
             self.validate_datetime_maxexcl_st(self.datetime_maxexcl_value)
         elif nodeName_ == 'vbar_pattern_value':
-            vbar_pattern_value_ = child_.text
-            vbar_pattern_value_ = self.gds_validate_string(vbar_pattern_value_, node, 'vbar_pattern_value')
-            self.vbar_pattern_value = vbar_pattern_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'vbar_pattern_value')
+            value_ = self.gds_validate_string(value_, node, 'vbar_pattern_value')
+            self.vbar_pattern_value = value_
             # validate type vbar_pattern_st
             self.validate_vbar_pattern_st(self.vbar_pattern_value)
         elif nodeName_ == 'unicode_pattern_value':
-            unicode_pattern_value_ = child_.text
-            unicode_pattern_value_ = self.gds_validate_string(unicode_pattern_value_, node, 'unicode_pattern_value')
-            self.unicode_pattern_value = unicode_pattern_value_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'unicode_pattern_value')
+            value_ = self.gds_validate_string(value_, node, 'unicode_pattern_value')
+            self.unicode_pattern_value = value_
             # validate type unicode_pattern_st
             self.validate_unicode_pattern_st(self.unicode_pattern_value)
         elif nodeName_ == 'anonymous_float_value' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'anonymous_float_value')
             fval_ = self.gds_validate_float(fval_, node, 'anonymous_float_value')
             self.anonymous_float_value = fval_
             # validate type anonymous_float_valueType
             self.validate_anonymous_float_valueType(self.anonymous_float_value)
         elif nodeName_ == 'primative_integer' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'primative_integer')
             ival_ = self.gds_validate_integer(ival_, node, 'primative_integer')
             self.primative_integer = ival_
         elif nodeName_ == 'primative_float' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'primative_float')
             fval_ = self.gds_validate_float(fval_, node, 'primative_float')
             self.primative_float = fval_
 # end class simpleOneType
@@ -1804,9 +1848,10 @@ class simpleTwoElementOneType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'simpleTwoElementTwo':
-            simpleTwoElementTwo_ = child_.text
-            simpleTwoElementTwo_ = self.gds_validate_string(simpleTwoElementTwo_, node, 'simpleTwoElementTwo')
-            self.simpleTwoElementTwo = simpleTwoElementTwo_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'simpleTwoElementTwo')
+            value_ = self.gds_validate_string(value_, node, 'simpleTwoElementTwo')
+            self.simpleTwoElementTwo = value_
             # validate type simpleTwoElementTwoType
             self.validate_simpleTwoElementTwoType(self.simpleTwoElementTwo)
 # end class simpleTwoElementOneType

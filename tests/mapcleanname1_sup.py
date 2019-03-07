@@ -31,6 +31,7 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
+import decimal as decimal_
 try:
     from lxml import etree as etree_
 except ImportError:
@@ -143,6 +144,8 @@ except ImportError as exp:
                 return None
         def gds_format_string(self, input_data, input_name=''):
             return input_data
+        def gds_parse_string(self, input_data, node=None, input_name=''):
+            return input_data
         def gds_validate_string(self, input_data, node=None, input_name=''):
             if not input_data:
                 return ''
@@ -154,6 +157,12 @@ except ImportError as exp:
             return input_data
         def gds_format_integer(self, input_data, input_name=''):
             return '%d' % input_data
+        def gds_parse_integer(self, input_data, node=None, input_name=''):
+            try:
+                ival = int(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires integer: %s' % exp)
+            return ival
         def gds_validate_integer(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_integer_list(self, input_data, input_name=''):
@@ -169,8 +178,18 @@ except ImportError as exp:
             return values
         def gds_format_float(self, input_data, input_name=''):
             return ('%.15f' % input_data).rstrip('0')
+        def gds_parse_float(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_float(self, input_data, node=None, input_name=''):
-            return input_data
+            try:
+                value = float(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires sequence of floats')
+            return value
         def gds_format_float_list(self, input_data, input_name=''):
             return '%s' % ' '.join(input_data)
         def gds_validate_float_list(
@@ -182,8 +201,39 @@ except ImportError as exp:
                 except (TypeError, ValueError):
                     raise_parse_error(node, 'Requires sequence of floats')
             return values
+        def gds_format_decimal(self, input_data, input_name=''):
+            return ('%0.10f' % input_data).rstrip('0')
+        def gds_parse_decimal(self, input_data, node=None, input_name=''):
+            try:
+                decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return input_data
+        def gds_validate_decimal(self, input_data, node=None, input_name=''):
+            try:
+                value = decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return value
+        def gds_format_decimal_list(self, input_data, input_name=''):
+            return '%s' % ' '.join(input_data)
+        def gds_validate_decimal_list(
+                self, input_data, node=None, input_name=''):
+            values = input_data.split()
+            for value in values:
+                try:
+                    decimal_.Decimal(value)
+                except (TypeError, ValueError):
+                    raise_parse_error(node, 'Requires sequence of decimal values')
+            return values
         def gds_format_double(self, input_data, input_name=''):
             return '%e' % input_data
+        def gds_parse_double(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_double(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_double_list(self, input_data, input_name=''):
@@ -199,6 +249,14 @@ except ImportError as exp:
             return values
         def gds_format_boolean(self, input_data, input_name=''):
             return ('%s' % input_data).lower()
+        def gds_parse_boolean(self, input_data, node=None, input_name=''):
+            if input_data in ('true', '1'):
+                bval = True
+            elif input_data in ('false', '0'):
+                bval = False
+            else:
+                raise_parse_error(node, 'requires boolean')
+            return bval
         def gds_validate_boolean(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_boolean_list(self, input_data, input_name=''):
@@ -590,7 +648,8 @@ class GDSParseError(Exception):
 
 
 def raise_parse_error(node, msg):
-    msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
+    if node is not None:
+        msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
     raise GDSParseError(msg)
 
 
@@ -865,23 +924,18 @@ class complex_type01(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value01':
-            string_value01_ = child_.text
-            string_value01_ = self.gds_validate_string(string_value01_, node, 'string_value01')
-            self.string_value01 = string_value01_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value01')
+            value_ = self.gds_validate_string(value_, node, 'string_value01')
+            self.string_value01 = value_
         elif nodeName_ == 'integer_value01' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value01')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value01')
             self.integer_value01.append(ival_)
         elif nodeName_ == 'float_value01' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value01')
             fval_ = self.gds_validate_float(fval_, node, 'float_value01')
             self.float_value01 = fval_
         elif nodeName_ == 'field01':
@@ -1009,23 +1063,18 @@ class complex_type02(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value02':
-            string_value02_ = child_.text
-            string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
-            self.string_value02 = string_value02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value02')
+            value_ = self.gds_validate_string(value_, node, 'string_value02')
+            self.string_value02 = value_
         elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value02')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
         elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value02')
             fval_ = self.gds_validate_float(fval_, node, 'float_value02')
             self.float_value02 = fval_
 # end class complex_type02
@@ -1137,23 +1186,18 @@ class complex_type03(complex_type02):
         super(complex_type03, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value03':
-            string_value03_ = child_.text
-            string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
-            self.string_value03 = string_value03_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value03')
+            value_ = self.gds_validate_string(value_, node, 'string_value03')
+            self.string_value03 = value_
         elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value03')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
         elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value03')
             fval_ = self.gds_validate_float(fval_, node, 'float_value03')
             self.float_value03 = fval_
         super(complex_type03, self).buildChildren(child_, node, nodeName_, True)
@@ -1277,23 +1321,18 @@ class type_(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value02':
-            string_value02_ = child_.text
-            string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
-            self.string_value02 = string_value02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value02')
+            value_ = self.gds_validate_string(value_, node, 'string_value02')
+            self.string_value02 = value_
         elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value02')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
         elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value02')
             fval_ = self.gds_validate_float(fval_, node, 'float_value02')
             self.float_value02 = fval_
 # end class type_
@@ -1405,23 +1444,18 @@ class complex_type04(type_):
         super(complex_type04, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value03':
-            string_value03_ = child_.text
-            string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
-            self.string_value03 = string_value03_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value03')
+            value_ = self.gds_validate_string(value_, node, 'string_value03')
+            self.string_value03 = value_
         elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value03')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
         elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value03')
             fval_ = self.gds_validate_float(fval_, node, 'float_value03')
             self.float_value03 = fval_
         super(complex_type04, self).buildChildren(child_, node, nodeName_, True)
@@ -1545,23 +1579,18 @@ class build_(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value02':
-            string_value02_ = child_.text
-            string_value02_ = self.gds_validate_string(string_value02_, node, 'string_value02')
-            self.string_value02 = string_value02_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value02')
+            value_ = self.gds_validate_string(value_, node, 'string_value02')
+            self.string_value02 = value_
         elif nodeName_ == 'integer_value02' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value02')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value02')
             self.integer_value02.append(ival_)
         elif nodeName_ == 'float_value02' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value02')
             fval_ = self.gds_validate_float(fval_, node, 'float_value02')
             self.float_value02 = fval_
 # end class build_
@@ -1673,23 +1702,18 @@ class complex_type05(build_):
         super(complex_type05, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'string_value03':
-            string_value03_ = child_.text
-            string_value03_ = self.gds_validate_string(string_value03_, node, 'string_value03')
-            self.string_value03 = string_value03_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'string_value03')
+            value_ = self.gds_validate_string(value_, node, 'string_value03')
+            self.string_value03 = value_
         elif nodeName_ == 'integer_value03' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'integer_value03')
             ival_ = self.gds_validate_integer(ival_, node, 'integer_value03')
             self.integer_value03.append(ival_)
         elif nodeName_ == 'float_value03' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'float_value03')
             fval_ = self.gds_validate_float(fval_, node, 'float_value03')
             self.float_value03 = fval_
         super(complex_type05, self).buildChildren(child_, node, nodeName_, True)

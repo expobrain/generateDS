@@ -31,6 +31,7 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
+import decimal as decimal_
 try:
     from lxml import etree as etree_
 except ImportError:
@@ -143,6 +144,8 @@ except ImportError as exp:
                 return None
         def gds_format_string(self, input_data, input_name=''):
             return input_data
+        def gds_parse_string(self, input_data, node=None, input_name=''):
+            return input_data
         def gds_validate_string(self, input_data, node=None, input_name=''):
             if not input_data:
                 return ''
@@ -154,6 +157,12 @@ except ImportError as exp:
             return input_data
         def gds_format_integer(self, input_data, input_name=''):
             return '%d' % input_data
+        def gds_parse_integer(self, input_data, node=None, input_name=''):
+            try:
+                ival = int(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires integer: %s' % exp)
+            return ival
         def gds_validate_integer(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_integer_list(self, input_data, input_name=''):
@@ -169,8 +178,18 @@ except ImportError as exp:
             return values
         def gds_format_float(self, input_data, input_name=''):
             return ('%.15f' % input_data).rstrip('0')
+        def gds_parse_float(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_float(self, input_data, node=None, input_name=''):
-            return input_data
+            try:
+                value = float(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires sequence of floats')
+            return value
         def gds_format_float_list(self, input_data, input_name=''):
             return '%s' % ' '.join(input_data)
         def gds_validate_float_list(
@@ -182,8 +201,39 @@ except ImportError as exp:
                 except (TypeError, ValueError):
                     raise_parse_error(node, 'Requires sequence of floats')
             return values
+        def gds_format_decimal(self, input_data, input_name=''):
+            return ('%0.10f' % input_data).rstrip('0')
+        def gds_parse_decimal(self, input_data, node=None, input_name=''):
+            try:
+                decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return input_data
+        def gds_validate_decimal(self, input_data, node=None, input_name=''):
+            try:
+                value = decimal_.Decimal(input_data)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires decimal value')
+            return value
+        def gds_format_decimal_list(self, input_data, input_name=''):
+            return '%s' % ' '.join(input_data)
+        def gds_validate_decimal_list(
+                self, input_data, node=None, input_name=''):
+            values = input_data.split()
+            for value in values:
+                try:
+                    decimal_.Decimal(value)
+                except (TypeError, ValueError):
+                    raise_parse_error(node, 'Requires sequence of decimal values')
+            return values
         def gds_format_double(self, input_data, input_name=''):
             return '%e' % input_data
+        def gds_parse_double(self, input_data, node=None, input_name=''):
+            try:
+                fval_ = float(input_data)
+            except (TypeError, ValueError) as exp:
+                raise_parse_error(node, 'requires float or double: %s' % exp)
+            return fval_
         def gds_validate_double(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_double_list(self, input_data, input_name=''):
@@ -199,6 +249,14 @@ except ImportError as exp:
             return values
         def gds_format_boolean(self, input_data, input_name=''):
             return ('%s' % input_data).lower()
+        def gds_parse_boolean(self, input_data, node=None, input_name=''):
+            if input_data in ('true', '1'):
+                bval = True
+            elif input_data in ('false', '0'):
+                bval = False
+            else:
+                raise_parse_error(node, 'requires boolean')
+            return bval
         def gds_validate_boolean(self, input_data, node=None, input_name=''):
             return input_data
         def gds_format_boolean_list(self, input_data, input_name=''):
@@ -590,7 +648,8 @@ class GDSParseError(Exception):
 
 
 def raise_parse_error(node, msg):
-    msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
+    if node is not None:
+        msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
     raise GDSParseError(msg)
 
 
@@ -1049,6 +1108,8 @@ class tomato_comments(GeneratedsSuper):
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'emp' and child_.text is not None:
             valuestr_ = child_.text
+            valuestr_ = self.gds_parse_string(valuestr_, node, 'emp')
+            valuestr_ = self.gds_validate_string(valuestr_, node, 'emp')
             obj_ = self.mixedclass_(MixedContainer.CategorySimple,
                 MixedContainer.TypeString, 'emp', valuestr_)
             self.content_.append(obj_)
@@ -1292,19 +1353,18 @@ class tomato_person(GeneratedsSuper):
             self.extensiontype_ = value
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'name':
-            name_ = child_.text
-            name_ = self.gds_validate_string(name_, node, 'name')
-            self.name = name_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'name')
+            value_ = self.gds_validate_string(value_, node, 'name')
+            self.name = value_
         elif nodeName_ == 'interest':
-            interest_ = child_.text
-            interest_ = self.gds_validate_string(interest_, node, 'interest')
-            self.interest.append(interest_)
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'interest')
+            value_ = self.gds_validate_string(value_, node, 'interest')
+            self.interest.append(value_)
         elif nodeName_ == 'category' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'category')
             ival_ = self.gds_validate_integer(ival_, node, 'category')
             self.category = ival_
         elif nodeName_ == 'agent':
@@ -1318,9 +1378,10 @@ class tomato_person(GeneratedsSuper):
             self.promoter.append(obj_)
             obj_.original_tagname_ = 'promoter'
         elif nodeName_ == 'description':
-            description_ = child_.text
-            description_ = self.gds_validate_string(description_, node, 'description')
-            self.description = description_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'description')
+            value_ = self.gds_validate_string(value_, node, 'description')
+            self.description = value_
 # end class tomato_person
 
 
@@ -1644,45 +1705,34 @@ class tomato_programmer(tomato_person):
         super(tomato_programmer, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'email':
-            email_ = child_.text
-            email_ = self.gds_validate_string(email_, node, 'email')
-            self.email = email_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'email')
+            value_ = self.gds_validate_string(value_, node, 'email')
+            self.email = value_
         elif nodeName_ == 'elposint' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'elposint')
             if ival_ <= 0:
                 raise_parse_error(child_, 'requires positiveInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elposint')
             self.elposint = ival_
         elif nodeName_ == 'elnonposint' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'elnonposint')
             if ival_ > 0:
                 raise_parse_error(child_, 'requires nonPositiveInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elnonposint')
             self.elnonposint = ival_
         elif nodeName_ == 'elnegint' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'elnegint')
             if ival_ >= 0:
                 raise_parse_error(child_, 'requires negativeInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elnegint')
             self.elnegint = ival_
         elif nodeName_ == 'elnonnegint' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'elnonnegint')
             if ival_ < 0:
                 raise_parse_error(child_, 'requires nonNegativeInteger')
             ival_ = self.gds_validate_integer(ival_, node, 'elnonnegint')
@@ -1696,27 +1746,22 @@ class tomato_programmer(tomato_person):
             dval_ = self.gds_parse_datetime(sval_)
             self.eldatetime = dval_
         elif nodeName_ == 'eltoken':
-            eltoken_ = child_.text
-            if eltoken_:
-                eltoken_ = re_.sub(String_cleanup_pat_, " ", eltoken_).strip()
+            value_ = child_.text
+            if value_:
+                value_ = re_.sub(String_cleanup_pat_, " ", value_).strip()
             else:
-                eltoken_ = ""
-            eltoken_ = self.gds_validate_string(eltoken_, node, 'eltoken')
-            self.eltoken = eltoken_
+                value_ = ""
+            value_ = self.gds_parse_string(value_, node, 'eltoken')
+            value_ = self.gds_validate_string(value_, node, 'eltoken')
+            self.eltoken = value_
         elif nodeName_ == 'elshort' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'elshort')
             ival_ = self.gds_validate_integer(ival_, node, 'elshort')
             self.elshort = ival_
         elif nodeName_ == 'ellong' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'ellong')
             ival_ = self.gds_validate_integer(ival_, node, 'ellong')
             self.ellong = ival_
         elif nodeName_ == 'elparam':
@@ -1725,9 +1770,10 @@ class tomato_programmer(tomato_person):
             self.elparam = obj_
             obj_.original_tagname_ = 'elparam'
         elif nodeName_ == 'elarraytypes':
-            elarraytypes_ = child_.text
-            elarraytypes_ = self.gds_validate_string(elarraytypes_, node, 'elarraytypes')
-            self.elarraytypes = elarraytypes_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'elarraytypes')
+            value_ = self.gds_validate_string(value_, node, 'elarraytypes')
+            self.elarraytypes = value_
             # validate type ArrayTypes
             self.validate_ArrayTypes(self.elarraytypes)
         super(tomato_programmer, self).buildChildren(child_, node, nodeName_, True)
@@ -1973,9 +2019,10 @@ class tomato_python_programmer(tomato_programmer):
         super(tomato_python_programmer, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'favorite-editor':
-            favorite_editor_ = child_.text
-            favorite_editor_ = self.gds_validate_string(favorite_editor_, node, 'favorite_editor')
-            self.favorite_editor = favorite_editor_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'favorite_editor')
+            value_ = self.gds_validate_string(value_, node, 'favorite_editor')
+            self.favorite_editor = value_
         super(tomato_python_programmer, self).buildChildren(child_, node, nodeName_, True)
 # end class tomato_python_programmer
 
@@ -2083,9 +2130,10 @@ class tomato_java_programmer(tomato_programmer):
         super(tomato_java_programmer, self).buildAttributes(node, attrs, already_processed)
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'favorite-editor':
-            favorite_editor_ = child_.text
-            favorite_editor_ = self.gds_validate_string(favorite_editor_, node, 'favorite_editor')
-            self.favorite_editor = favorite_editor_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'favorite_editor')
+            value_ = self.gds_validate_string(value_, node, 'favorite_editor')
+            self.favorite_editor = value_
         super(tomato_java_programmer, self).buildChildren(child_, node, nodeName_, True)
 # end class tomato_java_programmer
 
@@ -2193,19 +2241,18 @@ class tomato_agent(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'firstname':
-            firstname_ = child_.text
-            firstname_ = self.gds_validate_string(firstname_, node, 'firstname')
-            self.firstname = firstname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'firstname')
+            value_ = self.gds_validate_string(value_, node, 'firstname')
+            self.firstname = value_
         elif nodeName_ == 'lastname':
-            lastname_ = child_.text
-            lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
-            self.lastname = lastname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'lastname')
+            value_ = self.gds_validate_string(value_, node, 'lastname')
+            self.lastname = value_
         elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'priority')
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
@@ -2319,19 +2366,18 @@ class tomato_special_agent(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'firstname':
-            firstname_ = child_.text
-            firstname_ = self.gds_validate_string(firstname_, node, 'firstname')
-            self.firstname = firstname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'firstname')
+            value_ = self.gds_validate_string(value_, node, 'firstname')
+            self.firstname = value_
         elif nodeName_ == 'lastname':
-            lastname_ = child_.text
-            lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
-            self.lastname = lastname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'lastname')
+            value_ = self.gds_validate_string(value_, node, 'lastname')
+            self.lastname = value_
         elif nodeName_ == 'priority' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'priority')
             fval_ = self.gds_validate_float(fval_, node, 'priority')
             self.priority = fval_
         elif nodeName_ == 'info':
@@ -2502,43 +2548,33 @@ class tomato_booster(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'firstname':
-            firstname_ = child_.text
-            firstname_ = self.gds_validate_string(firstname_, node, 'firstname')
-            self.firstname = firstname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'firstname')
+            value_ = self.gds_validate_string(value_, node, 'firstname')
+            self.firstname = value_
         elif nodeName_ == 'lastname':
-            lastname_ = child_.text
-            lastname_ = self.gds_validate_string(lastname_, node, 'lastname')
-            self.lastname = lastname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'lastname')
+            value_ = self.gds_validate_string(value_, node, 'lastname')
+            self.lastname = value_
         elif nodeName_ == 'other-name' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'other_name')
             fval_ = self.gds_validate_float(fval_, node, 'other_name')
             self.other_name = fval_
         elif nodeName_ == 'class' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'class')
             fval_ = self.gds_validate_float(fval_, node, 'class')
             self.class_ = fval_
         elif nodeName_ == 'other-value' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'other_value')
             fval_ = self.gds_validate_float(fval_, node, 'other_value')
             self.other_value.append(fval_)
         elif nodeName_ == 'type' and child_.text:
             sval_ = child_.text
-            try:
-                fval_ = float(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires float or double: %s' % exp)
+            fval_ = self.gds_parse_float(sval_, node, 'type')
             fval_ = self.gds_validate_float(fval_, node, 'type')
             self.type_.append(fval_)
         elif nodeName_ == 'client-handler':
@@ -2740,15 +2776,13 @@ class tomato_client_handlerType(GeneratedsSuper):
         pass
     def buildChildren(self, child_, node, nodeName_, fromsubclass_=False):
         if nodeName_ == 'fullname':
-            fullname_ = child_.text
-            fullname_ = self.gds_validate_string(fullname_, node, 'fullname')
-            self.fullname = fullname_
+            value_ = child_.text
+            value_ = self.gds_parse_string(value_, node, 'fullname')
+            value_ = self.gds_validate_string(value_, node, 'fullname')
+            self.fullname = value_
         elif nodeName_ == 'refid' and child_.text:
             sval_ = child_.text
-            try:
-                ival_ = int(sval_)
-            except (TypeError, ValueError) as exp:
-                raise_parse_error(child_, 'requires integer: %s' % exp)
+            ival_ = self.gds_parse_integer(sval_, node, 'refid')
             ival_ = self.gds_validate_integer(ival_, node, 'refid')
             self.refid = ival_
 # end class tomato_client_handlerType

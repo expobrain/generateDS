@@ -232,7 +232,7 @@ _log = logging.getLogger(__name__)
 # Do not modify the following VERSION comments.
 # Used by updateversion.py.
 ##VERSION##
-VERSION = '2.30.18'
+VERSION = '2.30.19'
 ##VERSION##
 
 BaseStrTypes = six.string_types
@@ -2100,8 +2100,7 @@ def generateExportFn_1(wrt, child, name, fill):
                 "self.%s, input_name='%s'), namespaceprefix_ , eol_))\n" % (
                     fill, name, name, mappedName, name, )
         wrt(s1)
-    elif (child_type == FloatType or
-            child_type == DecimalType):
+    elif child_type == FloatType:
         wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         wrt('%s            showIndent(outfile, level, pretty_print)\n' % fill)
         if child.isListType():
@@ -2112,6 +2111,20 @@ def generateExportFn_1(wrt, child, name, fill):
         else:
             s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
                 "(namespaceprefix_ , self.gds_format_float(self.%s, " \
+                "input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, mappedName, name, )
+        wrt(s1)
+    elif child_type == DecimalType:
+        wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
+        wrt('%s            showIndent(outfile, level, pretty_print)\n' % fill)
+        if child.isListType():
+            s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal_list(self.%s, " \
+                "input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, mappedName, name, )
+        else:
+            s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal(self.%s, " \
                 "input_name='%s'), namespaceprefix_ , eol_))\n" % \
                 (fill, name, name, mappedName, name, )
         wrt(s1)
@@ -2231,8 +2244,7 @@ def generateExportFn_2(wrt, child, name, fill):
                 "namespaceprefix_ , eol_))\n" % \
                 (fill, name, name, cleanName, name, )
         wrt(s1)
-    elif (child_type == FloatType or
-            child_type == DecimalType):
+    elif child_type == FloatType:
         wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
         if child.isListType():
             s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
@@ -2242,6 +2254,19 @@ def generateExportFn_2(wrt, child, name, fill):
         else:
             s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
                 "(namespaceprefix_ , self.gds_format_float(" \
+                "%s_, input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, cleanName, name, )
+        wrt(s1)
+    elif child_type == DecimalType:
+        wrt('%s        showIndent(outfile, level, pretty_print)\n' % fill)
+        if child.isListType():
+            s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal_list(%s_, " \
+                "input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, cleanName, name, )
+        else:
+            s1 = "%s        outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal(" \
                 "%s_, input_name='%s'), namespaceprefix_ , eol_))\n" % \
                 (fill, name, name, cleanName, name, )
         wrt(s1)
@@ -2397,8 +2422,7 @@ def generateExportFn_3(wrt, child, name, fill):
                 "namespaceprefix_ , eol_))\n" % (
                     fill, name, name, mappedName, name)
         wrt(s1)
-    elif (child_type == FloatType or
-            child_type == DecimalType):
+    elif child_type == FloatType:
         if default is None or AlwaysExportDefault:
             wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
         else:
@@ -2413,6 +2437,24 @@ def generateExportFn_3(wrt, child, name, fill):
         else:
             s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
                 "(namespaceprefix_ , self.gds_format_float(" \
+                "self.%s, input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, mappedName, name, )
+        wrt(s1)
+    elif child_type == DecimalType:
+        if default is None or AlwaysExportDefault:
+            wrt('%s        if self.%s is not None:\n' % (fill, mappedName, ))
+        else:
+            wrt('%s        if self.%s != %s:\n' % (
+                fill, mappedName, default, ))
+        wrt('%s            showIndent(outfile, level, pretty_print)\n' % fill)
+        if child.isListType():
+            s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal_list(" \
+                "self.%s, input_name='%s'), namespaceprefix_ , eol_))\n" % \
+                (fill, name, name, mappedName, name, )
+        else:
+            s1 = "%s            outfile.write('<%%s%s>%%s</%%s%s>%%s' %% " \
+                "(namespaceprefix_ , self.gds_format_decimal(" \
                 "self.%s, input_name='%s'), namespaceprefix_ , eol_))\n" % \
                 (fill, name, name, mappedName, name, )
         wrt(s1)
@@ -2736,9 +2778,13 @@ def generateExportAttributes(wrt, element, hasAttributes):
                     '''self.gds_format_boolean(''' \
                     '''self.%s, input_name='%s'))\n''' % (
                         indent, orig_name, cleanName, name, )
-            elif attrDefType == FloatType or attrDefType == DecimalType:
+            elif attrDefType == FloatType:
                 s1 = '''%s        outfile.write(' %s="%%s"' %% self.''' \
                     '''gds_format_float(self.%s, input_name='%s'))\n''' % (
+                        indent, orig_name, cleanName, name)
+            elif attrDefType == DecimalType:
+                s1 = '''%s        outfile.write(' %s="%%s"' %% self.''' \
+                    '''gds_format_decimal(self.%s, input_name='%s'))\n''' % (
                         indent, orig_name, cleanName, name)
             elif attrDefType == DoubleType:
                 s1 = '''%s        outfile.write(' %s="%%s"' %% ''' \
@@ -3082,8 +3128,11 @@ def generateExportLiteralFn_1(wrt, child, name, fill):
                 (fill, mappedName, mappedName, ))
         elif childType == DoubleType:
             wrt('%s            showIndent(outfile, level)\n' % fill)
-            wrt("%s            outfile.write('%s=%%e,\\n' %% self.%s)\n" %
-                (fill, name, mappedName, ))
+            # dbg
+            #wrt("%s            outfile.write('%s=%%e,\\n' %% self.%s)\n" %
+            wrt("%s            outfile.write("
+                "%s=self.gds_format_double(self.%s))\n" % (
+                    fill, name, mappedName, ))
         else:
             wrt('%s            showIndent(outfile, level)\n' % fill)
             wrt("%s            outfile.write('%s=model_.%s(\\n')\n" %
@@ -3488,6 +3537,12 @@ def generateBuildMixed_1(wrt, prefix, child, headChild, keyword, delayed):
         wrt("        %s nodeName_ == '%s' and child_.text is not None:\n" % (
             keyword, origName, ))
         wrt("            valuestr_ = child_.text\n")
+        wrt("            valuestr_ = self.gds_parse_string("
+            "valuestr_, node, '%s')\n" %
+            (name, ))
+        wrt("            valuestr_ = self.gds_validate_string("
+            "valuestr_, node, '%s')\n" %
+            (name, ))
         if childType == TokenType:
             wrt('            valuestr_ = re_.sub(String_cleanup_pat_, '
                 '" ", valuestr_).strip()\n')
@@ -3504,11 +3559,10 @@ def generateBuildMixed_1(wrt, prefix, child, headChild, keyword, delayed):
         wrt("        %s nodeName_ == '%s' and child_.text is not None:\n" % (
             keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            try:\n")
-        wrt("                ival_ = int(sval_)\n")
-        wrt("            except (TypeError, ValueError) as exp:\n")
-        wrt("                raise_parse_error(child_, "
-            "'requires integer: %s' % exp)\n")
+        wrt("            ival_ = self.gds_parse_integer("
+            "sval_, node, '%s')\n" % (name, ))
+        wrt("            ival_ = self.gds_validate_integer("
+            "ival_, node, '%s')\n" % (name, ))
         if childType == PositiveIntegerType:
             wrt("            if ival_ <= 0:\n")
             wrt("                raise_parse_error(child_, "
@@ -3534,27 +3588,37 @@ def generateBuildMixed_1(wrt, prefix, child, headChild, keyword, delayed):
         wrt("        %s nodeName_ == '%s' and child_.text is not None:\n" % (
             keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            if sval_ in ('true', '1'):\n")
-        wrt("                ival_ = True\n")
-        wrt("            elif sval_ in ('false', '0'):\n")
-        wrt("                ival_ = False\n")
-        wrt("            else:\n")
-        wrt("                raise_parse_error(child_, 'requires boolean')\n")
-        wrt("        obj_ = self.mixedclass_(MixedContainer.CategorySimple,\n")
+        wrt("            ival_ = self.gds_parse_boolean(sval_, "
+            "node, '%s')\n" %
+            (name, ))
+        wrt("            ival_ = self.gds_validate_boolean(ival_, "
+            "node, '%s')\n" %
+            (name, ))
+        wrt("            obj_ = self.mixedclass_("
+            "MixedContainer.CategorySimple,\n")
         wrt("            MixedContainer.TypeInteger, '%s', ival_)\n" %
             origName)
-        wrt("        self.content_.append(obj_)\n")
+        wrt("            self.content_.append(obj_)\n")
     elif (childType == FloatType or
             childType == DoubleType or
             childType == DecimalType):
+        if childType == FloatType:
+            parser_name = 'gds_parse_float'
+            validator_name = 'gds_validate_float'
+        elif childType == DoubleType:
+            parser_name = 'gds_parse_double'
+            validator_name = 'gds_validate_double'
+        elif childType == DecimalType:
+            parser_name = 'gds_parse_decimal'
+            validator_name = 'gds_validate_decimal'
         wrt("        %s nodeName_ == '%s' and child_.text is not None:\n" % (
             keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            try:\n")
-        wrt("                fval_ = float(sval_)\n")
-        wrt("            except (TypeError, ValueError) as exp:\n")
-        wrt("                raise_parse_error(child_, "
-            "'requires float or double: %s' % exp)\n")
+        wrt("            fval_ = self.%s("
+            "sval_, node, '%s')\n" % (parser_name, name, ))
+        wrt("            fval_ = self.%s("
+            "fval_, node, '%s')\n" %
+            (validator_name, name, ))
         wrt("            obj_ = self.mixedclass_("
             "MixedContainer.CategorySimple,\n")
         wrt("                MixedContainer.TypeFloat, '%s', fval_)\n" %
@@ -3686,47 +3750,52 @@ def generateBuildStandard_1(
             wrt("            mo_ = PRESERVE_CDATA_TAGS_PAT.search("
                 "etree_.tostring(child_).strip().decode())\n")
             wrt("            if mo_ is None:\n")
-            wrt("                %s_ = ''\n" % name)
+            wrt("                value_ = ''\n")
             wrt("            else:\n")
-            wrt("                %s_ = mo_.group(1)\n" % name)
+            wrt("                value = mo_.group(1)\n")
         else:
-            wrt("            %s_ = child_.text\n" % name)
+            wrt("            value_ = child_.text\n")
         if childType == TokenType:
-            wrt('            if %s_:\n' % (name, ))
-            wrt('                %s_ = re_.sub('
-                'String_cleanup_pat_, " ", %s_).strip()\n' % (name, name))
+            wrt('            if value_:\n')
+            wrt('                value_ = re_.sub('
+                'String_cleanup_pat_, " ", value_).strip()\n')
             wrt('            else:\n')
-            wrt('                %s_ = ""\n' % (name, ))
+            wrt('                value_ = ""\n')
         if child.isListType():
             if (childType in IntegerType or
                     childType == PositiveIntegerType or
                     childType == NonPositiveIntegerType or
                     childType == NegativeIntegerType or
                     childType == NonNegativeIntegerType):
-                wrt("            %s_ = self.gds_validate_integer_list("
-                    "%s_, node, '%s')\n" %
-                    (name, name, name, ))
+                wrt("            value_ = self.gds_validate_integer_list("
+                    "value_, node, '%s')\n" % (name, ))
             elif childType == BooleanType:
-                wrt("            %s_ = self.gds_validate_boolean_list("
-                    "%s_, node, '%s')\n" %
-                    (name, name, name, ))
-            elif (childType == FloatType or
-                    childType == DecimalType):
-                wrt("            %s_ = self.gds_validate_float_list("
-                    "%s_, node, '%s')\n" %
-                    (name, name, name, ))
+                wrt("            value_ = self.gds_validate_boolean_list("
+                    "value_, node, '%s')\n" %
+                    (name, ))
+            elif childType == FloatType:
+                wrt("            value_ = self.gds_validate_float_list("
+                    "value_, node, '%s')\n" %
+                    (name, ))
+            elif childType == DecimalType:
+                wrt("            value_ = self.gds_validate_decimal_list("
+                    "value_, node, '%s')\n" %
+                    (name, ))
             elif childType == DoubleType:
-                wrt("            %s_ = self.gds_validate_double_list("
-                    "%s_, node, '%s')\n" %
-                    (name, name, name, ))
+                wrt("            value_ = self.gds_validate_double_list("
+                    "value_, node, '%s')\n" %
+                    (name, ))
         else:
-            wrt("            %s_ = self.gds_validate_string("
-                "%s_, node, '%s')\n" %
-                (name, name, name, ))
+            wrt("            value_ = self.gds_parse_string("
+                "value_, node, '%s')\n" %
+                (name, ))
+            wrt("            value_ = self.gds_validate_string("
+                "value_, node, '%s')\n" %
+                (name, ))
         if child.getMaxOccurs() > 1:
-            wrt("            self.%s.append(%s_)\n" % (mappedName, name, ))
+            wrt("            self.%s.append(value_)\n" % (mappedName, ))
         else:
-            wrt("            self.%s = %s_\n" % (mappedName, name, ))
+            wrt("            self.%s = value_\n" % (mappedName, ))
     elif (childType in IntegerType or
             childType == PositiveIntegerType or
             childType == NonPositiveIntegerType or
@@ -3735,11 +3804,8 @@ def generateBuildStandard_1(
         wrt("        %s nodeName_ == '%s' and child_.text:\n" % (
             keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            try:\n")
-        wrt("                ival_ = int(sval_)\n")
-        wrt("            except (TypeError, ValueError) as exp:\n")
-        wrt("                raise_parse_error(child_, "
-            "'requires integer: %s' % exp)\n")
+        wrt("            ival_ = self.gds_parse_integer("
+            "sval_, node, '%s')\n" % (name, ))
         if childType == PositiveIntegerType:
             wrt("            if ival_ <= 0:\n")
             wrt("                raise_parse_error("
@@ -3766,12 +3832,9 @@ def generateBuildStandard_1(
     elif childType == BooleanType:
         wrt("        %s nodeName_ == '%s':\n" % (keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            if sval_ in ('true', '1'):\n")
-        wrt("                ival_ = True\n")
-        wrt("            elif sval_ in ('false', '0'):\n")
-        wrt("                ival_ = False\n")
-        wrt("            else:\n")
-        wrt("                raise_parse_error(child_, 'requires boolean')\n")
+        wrt("            ival_ = self.gds_parse_boolean(sval_, "
+            "node, '%s')\n" %
+            (name, ))
         wrt("            ival_ = self.gds_validate_boolean(ival_, "
             "node, '%s')\n" %
             (name, ))
@@ -3782,17 +3845,23 @@ def generateBuildStandard_1(
     elif (childType == FloatType or
             childType == DoubleType or
             childType == DecimalType):
+        if childType == FloatType:
+            parser_name = 'gds_parse_float'
+            validator_name = 'gds_validate_float'
+        elif childType == DoubleType:
+            parser_name = 'gds_parse_double'
+            validator_name = 'gds_validate_double'
+        elif childType == DecimalType:
+            parser_name = 'gds_parse_decimal'
+            validator_name = 'gds_validate_decimal'
         wrt("        %s nodeName_ == '%s' and child_.text:\n" % (
             keyword, origName, ))
         wrt("            sval_ = child_.text\n")
-        wrt("            try:\n")
-        wrt("                fval_ = float(sval_)\n")
-        wrt("            except (TypeError, ValueError) as exp:\n")
-        wrt("                raise_parse_error("
-            "child_, 'requires float or double: %s' % exp)\n")
-        wrt("            fval_ = self.gds_validate_float("
+        wrt("            fval_ = self.%s("
+            "sval_, node, '%s')\n" % (parser_name, name, ))
+        wrt("            fval_ = self.%s("
             "fval_, node, '%s')\n" %
-            (name, ))
+            (validator_name, name, ))
         if child.getMaxOccurs() > 1:
             wrt("            self.%s.append(fval_)\n" % (mappedName, ))
         else:
@@ -5188,6 +5257,7 @@ import re as re_
 import base64
 import datetime as datetime_
 import warnings as warnings_
+import decimal as decimal_
 #xmldisable#try:
 #xmldisable#    from lxml import etree as etree_
 #xmldisable#except ImportError:
@@ -5403,7 +5473,8 @@ class GDSParseError(Exception):
 
 
 def raise_parse_error(node, msg):
-    msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
+    if node is not None:
+        msg = '%s (element %s/line %d)' % (msg, node.tag, node.sourceline, )
     raise GDSParseError(msg)
 
 
@@ -5583,6 +5654,8 @@ class GeneratedsSuper(object):
             return None
     def gds_format_string(self, input_data, input_name=''):
         return input_data
+    def gds_parse_string(self, input_data, node=None, input_name=''):
+        return input_data
     def gds_validate_string(self, input_data, node=None, input_name=''):
         if not input_data:
             return ''
@@ -5594,6 +5667,12 @@ class GeneratedsSuper(object):
         return input_data
     def gds_format_integer(self, input_data, input_name=''):
         return '%d' % input_data
+    def gds_parse_integer(self, input_data, node=None, input_name=''):
+        try:
+            ival = int(input_data)
+        except (TypeError, ValueError) as exp:
+            raise_parse_error(node, 'requires integer: %s' % exp)
+        return ival
     def gds_validate_integer(self, input_data, node=None, input_name=''):
         return input_data
     def gds_format_integer_list(self, input_data, input_name=''):
@@ -5609,8 +5688,18 @@ class GeneratedsSuper(object):
         return values
     def gds_format_float(self, input_data, input_name=''):
         return ('%.15f' % input_data).rstrip('0')
+    def gds_parse_float(self, input_data, node=None, input_name=''):
+        try:
+            fval_ = float(input_data)
+        except (TypeError, ValueError) as exp:
+            raise_parse_error(node, 'requires float or double: %s' % exp)
+        return fval_
     def gds_validate_float(self, input_data, node=None, input_name=''):
-        return input_data
+        try:
+            value = float(input_data)
+        except (TypeError, ValueError):
+            raise_parse_error(node, 'Requires sequence of floats')
+        return value
     def gds_format_float_list(self, input_data, input_name=''):
         return '%s' % ' '.join(input_data)
     def gds_validate_float_list(
@@ -5622,8 +5711,39 @@ class GeneratedsSuper(object):
             except (TypeError, ValueError):
                 raise_parse_error(node, 'Requires sequence of floats')
         return values
+    def gds_format_decimal(self, input_data, input_name=''):
+        return ('%0.10f' % input_data).rstrip('0')
+    def gds_parse_decimal(self, input_data, node=None, input_name=''):
+        try:
+            decimal_.Decimal(input_data)
+        except (TypeError, ValueError):
+            raise_parse_error(node, 'Requires decimal value')
+        return input_data
+    def gds_validate_decimal(self, input_data, node=None, input_name=''):
+        try:
+            value = decimal_.Decimal(input_data)
+        except (TypeError, ValueError):
+            raise_parse_error(node, 'Requires decimal value')
+        return value
+    def gds_format_decimal_list(self, input_data, input_name=''):
+        return '%s' % ' '.join(input_data)
+    def gds_validate_decimal_list(
+            self, input_data, node=None, input_name=''):
+        values = input_data.split()
+        for value in values:
+            try:
+                decimal_.Decimal(value)
+            except (TypeError, ValueError):
+                raise_parse_error(node, 'Requires sequence of decimal values')
+        return values
     def gds_format_double(self, input_data, input_name=''):
         return '%e' % input_data
+    def gds_parse_double(self, input_data, node=None, input_name=''):
+        try:
+            fval_ = float(input_data)
+        except (TypeError, ValueError) as exp:
+            raise_parse_error(node, 'requires float or double: %s' % exp)
+        return fval_
     def gds_validate_double(self, input_data, node=None, input_name=''):
         return input_data
     def gds_format_double_list(self, input_data, input_name=''):
@@ -5639,6 +5759,14 @@ class GeneratedsSuper(object):
         return values
     def gds_format_boolean(self, input_data, input_name=''):
         return ('%s' % input_data).lower()
+    def gds_parse_boolean(self, input_data, node=None, input_name=''):
+        if input_data in ('true', '1'):
+            bval = True
+        elif input_data in ('false', '0'):
+            bval = False
+        else:
+            raise_parse_error(node, 'requires boolean')
+        return bval
     def gds_validate_boolean(self, input_data, node=None, input_name=''):
         return input_data
     def gds_format_boolean_list(self, input_data, input_name=''):

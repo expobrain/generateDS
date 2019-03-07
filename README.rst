@@ -142,6 +142,20 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 Change history
 --------------
 
+Version 2.30.19 (03/07/2019)
+
+- Modifications so that during export, the gds_format_xxx,
+  gds_parse_xxx, and gds_validate_xxx methods in class
+  ``GeneratedsSuper`` in either the generated superclass module or
+  in module ``generatedssuper``, if that can be imported at
+  run-time, are called.  That enables the user to provide a special,
+  customized version of that module, which when importable can
+  provide custom formatting during export.  A customized version of
+  that module can be created by copying class ``GeneratedsSuper``
+  and some required imports, function definitions, etc. from a
+  generated superclass module.  Thanks to Gérard Yin for focusing me
+  on this issue.
+
 Version 2.30.18 (03/04/2019)
 
 - Fixed export of attributes so that they are not omitted when
