@@ -15,7 +15,7 @@ Examples:
 
 import sys
 import os
-import urllib2
+import requests
 import ftplib
 import copy
 import types
@@ -33,7 +33,7 @@ from lxml import etree
 
 def process_include_files(infile, outfile, inpath=''):
     options = Values({
-        'force': False, 
+        'force': False,
         })
     prep_schema_doc(infile, outfile, inpath, options)
 
@@ -100,12 +100,10 @@ def resolve_ref(node, params, options):
             print '    locn  : %s' % (locn, )
             if locn.startswith('http:') or locn.startswith('ftp:'):
                 try:
-                    urlfile = urllib2.urlopen(locn)
-                    content = urlfile.read()
-                    urlfile.close()
+                    content = requests.get(locn).content
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
-                except urllib2.HTTPError, exp:
+                except requests.exceptions.HTTPError, exp:
                     msg = "Can't find file %s referenced in %s." % (
                         locn, params.parent_url, )
                     raise SchemaIOError(msg)
@@ -224,8 +222,7 @@ def main():
         usage(parser)
     prep_schema(inpath, outpath, options)
 
-        
+
 if __name__ == "__main__":
     #import pdb; pdb.set_trace()
     main()
-

@@ -56,5 +56,6 @@ XML document.""",
     install_requires=[
         "six",
         "lxml",
+        "requests>=2.21.0"
     ],
 )

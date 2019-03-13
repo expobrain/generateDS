@@ -20,12 +20,7 @@ from optparse import OptionParser, Values
 import itertools
 from copy import deepcopy
 from lxml import etree
-if sys.version_info.major == 2:
-    import urllib2
-else:
-    import urllib.request
-    import urllib.error
-    import urllib.parse
+import requests
 
 try:
     from gds_inner_name_map import Inner_name_map
@@ -193,19 +188,11 @@ def resolve_ref(node, params, options):
 ##             print '    locn        : %s' % (locn, )
 ##             print '    schema_name : %s\n' % (schema_name, )
             if locn.startswith('http:') or locn.startswith('ftp:'):
-                if sys.version_info.major == 2:
-                    urllib_urlopen = urllib2.urlopen
-                    urllib_httperror = urllib2.HTTPError
-                else:
-                    urllib_urlopen = urllib.request.urlopen
-                    urllib_httperror = urllib.error.HTTPError
                 try:
-                    urlfile = urllib_urlopen(locn)
-                    content = urlfile.read()
-                    urlfile.close()
+                    content = requests.get(locn).content
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
-                except urllib_httperror:
+                except requests.exceptions.HTTPError:
                     msg = "Can't find file %s referenced in %s." % (
                         locn, params.parent_url, )
                     raise SchemaIOError(msg)
