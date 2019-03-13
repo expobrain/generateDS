@@ -1,16 +1,3 @@
-#!/usr/bin/env python
-
-"""
-synopsis:
-    Run unit tests for generateDS.
-usage:
-    On the command line:
-        $ cd generateds/tests
-        $ python test.py
-notes:
-    Only Python 3, not Python 2, is supported for unit tests.
-"""
-
 from __future__ import print_function
 
 import difflib
@@ -22,17 +9,27 @@ import unittest
 
 from lxml import etree
 
-#import generateDS
-
 
 TEST_DIR = os.path.dirname(__file__)
 
 
 class GenTest(unittest.TestCase):
 
-    def execute(self, cmd, env=None):
+    original_cwd = os.path.abspath(os.path.curdir)
+
+    @classmethod
+    def setUp(cls):
+        os.chdir(os.path.dirname(__file__))
+
+    @classmethod
+    def tearDown(cls):
+        os.chdir(cls.original_cwd)
+
+    def execute(self, cmd, cwd=None, env=None):
+        cwd = os.path.join(TEST_DIR, '..') if cwd is None else cwd
         p = subprocess.Popen(
-            cmd, cwd=os.path.join(TEST_DIR, '..'),
+            cmd,
+            cwd=cwd,
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             shell=True,
             env=env)
@@ -42,7 +39,7 @@ class GenTest(unittest.TestCase):
     def executeClean(self, cmd, env=None):
         if env is None:
             env = os.environ
-        stdout, stderr = self.execute(cmd, env)
+        stdout, stderr = self.execute(cmd, env=env)
         self.assertEqual(
             len(stdout), 0, "stdout was not empty:\n{}".format(stdout))
         self.assertEqual(
@@ -67,6 +64,7 @@ class GenTest(unittest.TestCase):
 ##                 pass
 
     def test_001_compare_superclasses(self):
+        print(os.path.curdir)
         cmd = (
             'python generateDS.py --no-dates --no-versions -f '
             '-o tests/out2_sup.py -s tests/out2_sub.py '
@@ -98,7 +96,7 @@ class GenTest(unittest.TestCase):
             '%s_sub.node2TypeSub.member_data_items_ ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
-        result, err = self.execute(cmd)
+        result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
         self.failUnlessEqual(result, """\
@@ -115,7 +113,7 @@ class GenTest(unittest.TestCase):
             'print([ getattr(obj.node2, x) for x in fields ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
-        result, err = self.execute(cmd)
+        result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
         self.failUnlessEqual(result, """\
@@ -149,7 +147,7 @@ class GenTest(unittest.TestCase):
             'print([ (x.get_name(), x.get_valueOf_()) for x in children ])"'
         )
         cmd = cmdTempl % (t_, t_, t_)
-        result, err = self.execute(cmd)
+        result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
         self.failUnlessEqual(result, """\
@@ -171,7 +169,7 @@ class GenTest(unittest.TestCase):
         )
         cmd = cmdTempl % (t_, t_)
         #print('cmd:', cmd)
-        result, err = self.execute(cmd)
+        result, err = self.execute(cmd, cwd=TEST_DIR)
         #print('result: %s' % result)
         if sys.version_info.major != 2:
             result = result.decode()
@@ -408,7 +406,7 @@ class GenTest(unittest.TestCase):
         cmdTempl = ('python -c "import {0}_test_namespace; '
                     '{0}_test_namespace.export(\'{0}2_namespace_out.xml\')"')
         cmd = cmdTempl.format(t_)
-        result, err = self.execute(cmd)
+        result, err = self.execute(cmd, cwd=TEST_DIR)
         self.compareFiles(
             '{}1_namespace_out.xml'.format(t_),
             '{}2_namespace_out.xml'.format(t_))
@@ -1062,61 +1060,3 @@ def strip_build_comments(lines):
         del lines[n + 1]
 
     return lines
-
-
-# Make the test suite.
-def suite():
-    # The following is obsolete.  See Lib/unittest.py.
-    #return unittest.makeSuite(GenTest)
-    suite = unittest.TestSuite()
-    loader = unittest.defaultTestLoader
-    testsuite1 = loader.loadTestsFromTestCase(GenTest)
-    from EnumImport.test_generated_code import EnumTest
-    testsuite2 = loader.loadTestsFromTestCase(EnumTest)
-    suite.addTests([
-        testsuite1,
-        testsuite2,
-    ])
-    return suite
-
-
-# Make the test suite and run the tests.
-def test():
-    testsuite = suite()
-    runner = unittest.TextTestRunner(sys.stdout, verbosity=2)
-    runner.run(testsuite)
-
-
-USAGE_TEXT = """
-Usage:
-    python test.py [options]
-Options:
-    -h, --help      Display this help message.
-Example:
-    python test.py
-"""
-
-
-def usage():
-    print(USAGE_TEXT)
-    sys.exit(-1)
-
-
-def main():
-    args = sys.argv[1:]
-    try:
-        opts, args = getopt.getopt(args, 'h', ['help'])
-    except getopt.GetoptError:
-        usage()
-    for opt, val in opts:
-        if opt in ('-h', '--help'):
-            usage()
-    if len(args) != 0:
-        usage()
-    test()
-
-
-if __name__ == '__main__':
-    main()
-    #import pdb
-    #pdb.run('main()')

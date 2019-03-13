@@ -22,11 +22,13 @@ import unittest
 
 class EnumTest(unittest.TestCase):
 
+    original_cwd = os.path.abspath(os.path.curdir)
+
     def setUp(self):
-        os.chdir(os.path.join(os.path.dirname(__file__), 'EnumImport'))
+        os.chdir(os.path.dirname(__file__))
 
     def tearDown(self):
-        os.chdir(os.path.join(os.path.dirname(__file__), '..'))
+        os.chdir(self.original_cwd)
 
     def test_enum_import(self):
 
@@ -37,7 +39,7 @@ class EnumTest(unittest.TestCase):
         self.assertRaises(ImportError, import_check)
 
     def test_enum_type(self):
-        sys.path.append('.')
+        sys.path.append(os.path.dirname(__file__))
         from enum_import00 import Type00_2
         testType = Type00_2()
         self.assertEqual(type(testType.get_attr1()), int)
