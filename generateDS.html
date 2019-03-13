@@ -2073,6 +2073,8 @@ Dembovsky of Systemsfusion Inc.  Thanks, Colin.  (I've included it
 in the <tt class="docutils literal">generateDS.py</tt> script, but commented out, for those who
 want to use and possibly extend it.):</p>
 <pre class="literal-block">
+import requests
+
 def get_impl_body(classBehavior, baseImplUrl, implUrl):
     impl = '        pass\n'
     if implUrl:
@@ -2080,9 +2082,7 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
         try:
-            implFile = urllib2.urlopen(implUrl)
-            impl = implFile.read()
-            implFile.close()
+            impl = requests.get(implUrl)
         except:
             trylocal = 1
         if trylocal:

@@ -187,7 +187,7 @@ also generates member specifications in each class (in a dictionary).
 
 from __future__ import print_function
 from six.moves import input
-from six.moves import urllib
+import requests
 import six
 import sys
 import os.path
@@ -6432,12 +6432,10 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
         try:
-            implFile = urllib.request.urlopen(implUrl)
-            impl = implFile.read()
-            implFile.close()
-        except urllib.error.HTTPError:
+            impl = requests.get(implUrl)
+        except requests.exceptions.HTTPError:
             err_msg('*** Implementation at %s not found.\n' % implUrl)
-        except urllib.error.URLError:
+        except requests.exceptions.RequestException:
             err_msg('*** Connection refused for URL: %s\n' % implUrl)
     return impl
 
@@ -6447,6 +6445,8 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
 ###   the local file system (baseImplUrl) for a file (implUrl)
 ###   containing the implementation body.
 ###
+##import requests
+##
 ##def get_impl_body(classBehavior, baseImplUrl, implUrl):
 ##    impl = '        pass\n'
 ##    if implUrl:
@@ -6454,9 +6454,7 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
 ##        if baseImplUrl:
 ##            implUrl = '%s%s' % (baseImplUrl, implUrl)
 ##        try:
-##            implFile = urllib2.urlopen(implUrl)
-##            impl = implFile.read()
-##            implFile.close()
+##            impl = requests.get(implUrl)
 ##        except:
 ##            trylocal = 1
 ##        if trylocal:
@@ -7309,9 +7307,7 @@ def parseAndGenerate(
         for path in rootPaths:
             if path.startswith('http:') or path.startswith('ftp:'):
                 try:
-                    urlfile = urllib.request.urlopen(path)
-                    content = urlfile.read()
-                    urlfile.close()
+                    content = requests.get(path)
                     if sys.version_info.major == 2:
                         rootFile = StringIO.StringIO()
                     else:
@@ -7319,7 +7315,7 @@ def parseAndGenerate(
                         content = content.decode()
                     rootFile.write(content)
                     rootFile.seek(0)
-                except urllib.error.HTTPError:
+                except requests.exceptions.HTTPError:
                     msg = "Can't find file %s." % (path, )
                     raise IOError(msg)
             else:

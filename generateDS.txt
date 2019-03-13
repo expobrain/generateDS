@@ -692,7 +692,7 @@ cleanup-name-list=<replacement-map>
     https://docs.python.org/2/library/re.html#module-re) The second
     item of each pair is a string that will replace anything matched
     by the pattern.  Also see `Cleaning up names with special characters etc.`_
-    
+
     The intension is to enable us to replace
     special characters in names that would cause the generation of
     invalid Python names, for example the names of generated
@@ -701,7 +701,7 @@ cleanup-name-list=<replacement-map>
     characters by any other single character or sequence of
     characters.  Example:
     ``[(':', 'colon'), ('-', 'dash'), ('.', 'dot')]``.
-    
+
     The default when omitted is ``[('[-:.]', '_')]``.
 
 mixed-case-enums
@@ -780,7 +780,7 @@ and avoiding name conflicts:
   1. Create a module named ``generateds_config.py``.
 
   2. Define a dictionary in that module named ``NameTable``.
-  
+
   3. Place additional name mappings in that dictionary.  Here is a
      sample::
 
@@ -889,7 +889,7 @@ Here are a few notes on how to use the GUI front-end.
 
 - You can also save and later reload your values and
   flags in a session file.  See the ``Save session``,
-  ``Save session as``, and ``Load session`` items under the ``File`` menu. 
+  ``Save session as``, and ``Load session`` items under the ``File`` menu.
   By default, a session file has the extension ".session".
 
 - You can load a session on start-up with the "-s" or "--session"
@@ -930,7 +930,7 @@ Namespace prefix mis-match
 --------------------------
 
 ``generateDS.py`` is not very intelligent about detecting what
-prefix is used in the schema file for the XML Schema namespace. 
+prefix is used in the schema file for the XML Schema namespace.
 When this problem occurs, you may see the following when running
 ``generateDS.py``::
 
@@ -977,7 +977,7 @@ There are two alternative solutions to this problem:
    in each generated superclass.  You can change the value of this
    variable before parsing an XML document and building instances of
    the generated classes to determine which subclass module is to be
-   used during the "build" phase.  
+   used during the "build" phase.
 
    Here is an example of the use of this feature::
 
@@ -1829,7 +1829,7 @@ The elements in the XMLBehavior document type are the following:
           - <xb:name> -- The name of the argument.
 
           - <xb:data-type> -- The data-type of the argument.
-                    
+
       - <xb:return-type> -- The data-type of the value returned by
         the behavior/method.
 
@@ -1890,6 +1890,8 @@ Dembovsky of Systemsfusion Inc.  Thanks, Colin.  (I've included it
 in the ``generateDS.py`` script, but commented out, for those who
 want to use and possibly extend it.)::
 
+    import requests
+
     def get_impl_body(classBehavior, baseImplUrl, implUrl):
         impl = '        pass\n'
         if implUrl:
@@ -1897,9 +1899,7 @@ want to use and possibly extend it.)::
             if baseImplUrl:
                 implUrl = '%s%s' % (baseImplUrl, implUrl)
             try:
-                implFile = urllib2.urlopen(implUrl)
-                impl = implFile.read()
-                implFile.close()
+                impl = requests.get(implUrl)
             except:
                 trylocal = 1
             if trylocal:
@@ -1921,7 +1921,7 @@ Allan.  Many thanks.
 xsd:list element support
 ------------------------
 
-xsd:list elements can be used with a child xsd:simpleType which 
+xsd:list elements can be used with a child xsd:simpleType which
 confuses the XschemaHandler stack unrolling.  xsd:list element
 support should allow the following XML Schema definition to be
 supported in ``generateDS.py``::
@@ -1955,7 +1955,7 @@ available through the instance attribute ``unionOf``.
 Extended xsd:choice support
 ---------------------------
 
-When a parent xsd:choice is exists, an element's "maxOccurs" and 
+When a parent xsd:choice is exists, an element's "maxOccurs" and
 "minOccurs" values can be inherited from the xsd:choice rather
 than the element itself. xsd:choice elements have been added to
 the child element via the ``choice`` instance attribute and are
@@ -2156,7 +2156,7 @@ do so, follow these steps:
 
 1. Create a module named ``gds_inner_name_map``
    (``gds_inner_name_map.py``).
-   
+
 2. Place that module where Python can import it when you run
    ``generateDS.py``.  You can do this either by adding an
    additional directory to the environment variable ``PYTHONPATH``
@@ -2268,7 +2268,7 @@ following strategies:
            # Enable Python to collect the space used by the DOM.
            doc = None
            sys.stdout.write('<?xml version="1.0" ?>\n')
-           rootObj.export(sys.stdout, 0, name_="type1", 
+           rootObj.export(sys.stdout, 0, name_="type1",
                namespacedef_='')
            return rootObj
 
@@ -2282,7 +2282,7 @@ following strategies:
            # Enable Python to collect the space used by the DOM.
            doc = None
            sys.stdout.write('<?xml version="1.0" ?>\n')
-           rootObj.export(sys.stdout, 0, name_="type2", 
+           rootObj.export(sys.stdout, 0, name_="type2",
                namespacedef_='')
            return rootObj
 
@@ -2346,7 +2346,7 @@ following strategies:
                parse(infilename, options)
            else:
                usage(parser)
-               
+
        if __name__ == "__main__":
            main()
 
@@ -2668,7 +2668,7 @@ directory containing your user methods module to the
 The module specified with the "--user-methods" flag should define
 a variable ``METHOD_SPECS`` which contains a list of instances of
 a class that implements methods ``match_name`` and
-``get_interpolated_source``. 
+``get_interpolated_source``.
 
 See file `gends_user_methods.py`_ for an example of this
 specification file and the definition of class ``MethodSpec``.
@@ -2747,8 +2747,8 @@ There are a number of things of interest in this sample file
 
 - Notice how the ``types`` module is used to determine whether a
   member variable contains a simple type or an instance of a
-  class.  Example:: 
-  
+  class.  Example::
+
       obj1 = getattr(self, member[0])
       if type(obj1) == types.InstanceType:
           ...
@@ -2772,11 +2772,11 @@ Suggestion -- How to begin:
    source code and the class_name pattern in each specification.
 
 3. Run ``generateDS.py`` with the "--user-methods" (or "-u") flag.
-   
+
 4. Inspect the user methods in the generated classes.
-   
+
 5. Test your generated code.
-   
+
 6. Repeat as necessary.
 
 
@@ -2788,7 +2788,7 @@ Overridable methods -- generatedssuper.py
 
 ``generateDS.py`` generates calls to several methods that each have
 a default implementation in a superclass.  The default superclass
-with default implementations is included in the generated code. 
+with default implementations is included in the generated code.
 The user can replace this default superclass by implementing a
 module named ``generatedssuper.py`` containing a class named
 ``GeneratedsSuper``.
@@ -2854,7 +2854,7 @@ default methods in the following places:
   "mix-in" class and inherited that method in the generated
   subclass.  With this approach, you must put the mix-in class
   containing your methods before the regular superclass, so that
-  Python will find your custom methods before the default ones. 
+  Python will find your custom methods before the default ones.
   That is, you must use::
 
       class clientSub(MySpecialMethods, supermod.client):
@@ -3328,7 +3328,7 @@ objects.
 Thanks to Lars Ericson for this code and explanation.
 
 By default, ``generateDS.py`` treats elements declared as type
-xs:date as though they are strings.  
+xs:date as though they are strings.
 
 To get xs:dates stored as dates, in your local copy, add the
 following user method (`User Methods`_), a slight modification of
@@ -3415,7 +3415,7 @@ While ``generateDS.py`` itself does not process XML Schema
 ``generateDS.py``.  This behavior can be turned off with the
 ``--no-process-includes`` command line option.  **However**, doing
 so is not advised, because unexpected and undesirable behavior has
-been detected this is done.  Instead consider using the 
+been detected this is done.  Instead consider using the
 ``--no-collect-includes`` and ``--no-redefine-groups`` command line
 options to selectively turn of specific processing done in
 ``process_includes.py``.
