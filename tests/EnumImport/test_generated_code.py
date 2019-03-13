@@ -23,10 +23,10 @@ import unittest
 class EnumTest(unittest.TestCase):
 
     def setUp(self):
-        os.chdir('EnumImport')
+        os.chdir(os.path.join(os.path.dirname(__file__), 'EnumImport'))
 
     def tearDown(self):
-        os.chdir('..')
+        os.chdir(os.path.join(os.path.dirname(__file__), '..'))
 
     def test_enum_import(self):
 

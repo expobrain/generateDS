@@ -25,20 +25,24 @@ from lxml import etree
 #import generateDS
 
 
+TEST_DIR = os.path.dirname(__file__)
+
+
 class GenTest(unittest.TestCase):
-    def execute(self, cmd, cwd=None, env=None):
+
+    def execute(self, cmd, env=None):
         p = subprocess.Popen(
-            cmd, cwd=cwd,
+            cmd, cwd=os.path.join(TEST_DIR, '..'),
             stdout=subprocess.PIPE, stderr=subprocess.PIPE,
             shell=True,
             env=env)
         stdout, stderr = p.communicate()
         return stdout, stderr
 
-    def executeClean(self, cmd, cwd=None, env=None):
+    def executeClean(self, cmd, env=None):
         if env is None:
             env = os.environ
-        stdout, stderr = self.execute(cmd, cwd, env)
+        stdout, stderr = self.execute(cmd, env)
         self.assertEqual(
             len(stdout), 0, "stdout was not empty:\n{}".format(stdout))
         self.assertEqual(
@@ -69,7 +73,7 @@ class GenTest(unittest.TestCase):
             '--export="write literal" '
             '--super=out2_sup -u gends_user_methods tests/people.xsd'
         )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('out1_sup.py', 'out2_sup.py', ignore=())
         self.compareFiles('out1_sub.py', 'out2_sub.py')
         # cleanup generated files
@@ -85,7 +89,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'groups'
         cmd = cmdTempl % (t_, t_, t_, t_)
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         # Verify the structure
         cmdTempl = (
             'python -c "import %s_sub; print('
@@ -131,7 +135,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'valueof'
         cmd = cmdTempl % (t_, t_, t_, t_)
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         # load the XML, and verify the proper data was loaded
         # Run these commands::
         #     import valueof_sub
@@ -227,7 +231,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'anysimpletype'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             'anysimpletype1_sup.py',
             '{}2_sup.py'.format(t_),
@@ -246,7 +250,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'simpletype_memberspecs'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -265,7 +269,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'extensions'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -282,7 +286,7 @@ class GenTest(unittest.TestCase):
             '--export="write literal" '
             '--super=out2_sup -u gends_user_methods tests/people.xsd'
         )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         import out2_sup
         save_stdout = sys.stdout
         sys.stdout = open('literal2.py', 'w')
@@ -310,7 +314,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'simplecontent_restriction'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -329,7 +333,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'annotations'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -348,7 +352,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'abstract_type'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -368,7 +372,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'people_procincl'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -389,7 +393,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'ipo'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -397,7 +401,7 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_out.xml'.format(t_))
@@ -419,7 +423,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'recursive_simpletype'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -439,7 +443,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'anywildcard'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -459,7 +463,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'attr_groups'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -479,7 +483,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'simpletypes_other'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -500,7 +504,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'to_etree'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -534,7 +538,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'catalogtest'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -554,7 +558,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'anonymous_type'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -575,7 +579,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'oneper'
         cmd = cmdTempl % (t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             'OnePer{}{}Type00_1One.py'.format(os.sep, t_),
             'OnePer{}{}Type00_2One.py'.format(os.sep, t_),
@@ -608,7 +612,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'mapcleanname'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -629,7 +633,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'prefix_classname'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -637,7 +641,7 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -655,7 +659,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'validate_simpletypes'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -666,7 +670,7 @@ class GenTest(unittest.TestCase):
             '2> tests/%s2_warnings.txt'
         )
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         self.compareFiles(
@@ -685,7 +689,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'reference_simpletype'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -706,7 +710,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'cdata'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -742,7 +746,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'defaults_coverage'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -762,7 +766,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'defaults_cases'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -770,7 +774,7 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -787,7 +791,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'nested_def'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -796,7 +800,7 @@ class GenTest(unittest.TestCase):
         # Need to preserve generated files for next command, cleanup at end
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -821,7 +825,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'cleanupname'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -841,7 +845,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'rem_dup_elems'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -850,7 +854,7 @@ class GenTest(unittest.TestCase):
         # Need to preserve generated files for next command, cleanup at end
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -868,7 +872,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'disable_xml_super'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -890,7 +894,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'mixedcontent'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -899,7 +903,7 @@ class GenTest(unittest.TestCase):
         # Need to preserve generated files for next command, cleanup at end
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -917,7 +921,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'defaults_cases_always'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -925,7 +929,7 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -945,7 +949,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'no_namespace_defs'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -971,7 +975,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'derived_types'
         cmd = cmdTempl % (t_, t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             '{}1_sup.py'.format(t_),
             '{}2_sup.py'.format(t_),
@@ -979,7 +983,7 @@ class GenTest(unittest.TestCase):
         self.compareFiles('{}1_sub.py'.format(t_), '{}2_sub.py'.format(t_))
         cmdTempl = 'python tests/%s2_sup.py tests/%s.xml > tests/%s2_out.xml'
         cmd = cmdTempl % (t_, t_, t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles('{}1_out.xml'.format(t_), '{}2_out.xml'.format(t_))
         # cleanup generated files
         self.remove('{}2_sup.py'.format(t_))
@@ -997,7 +1001,7 @@ class GenTest(unittest.TestCase):
         )
         t_ = 'enum_import'
         cmd = cmdTempl % (t_, )
-        self.executeClean(cmd, cwd='..')
+        self.executeClean(cmd)
         self.compareFiles(
             'EnumImport{}{}00.py'.format(os.sep, t_),
             'EnumImport{}{}00_2.py'.format(os.sep, t_),
@@ -1018,6 +1022,9 @@ class GenTest(unittest.TestCase):
         self.remove('EnumImport{}{}Type02.py'.format(os.sep, t_))
 
     def compareFiles(self, left, right, ignore=None):
+        left = os.path.join(TEST_DIR, left)
+        right = os.path.join(TEST_DIR, right)
+
         with open(left) as left_file:
             with open(right) as right_file:
                 lf = strip_build_comments(left_file.readlines())
