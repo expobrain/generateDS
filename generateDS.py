@@ -6432,7 +6432,7 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
         try:
-            impl = requests.get(implUrl)
+            impl = requests.get(implUrl).content
         except requests.exceptions.HTTPError:
             err_msg('*** Implementation at %s not found.\n' % implUrl)
         except requests.exceptions.RequestException:
@@ -6454,7 +6454,7 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
 ##        if baseImplUrl:
 ##            implUrl = '%s%s' % (baseImplUrl, implUrl)
 ##        try:
-##            impl = requests.get(implUrl)
+##            impl = requests.get(implUrl).content
 ##        except:
 ##            trylocal = 1
 ##        if trylocal:
@@ -7307,7 +7307,7 @@ def parseAndGenerate(
         for path in rootPaths:
             if path.startswith('http:') or path.startswith('ftp:'):
                 try:
-                    content = requests.get(path)
+                    content = requests.get(path).content
                     if sys.version_info.major == 2:
                         rootFile = StringIO.StringIO()
                     else:

@@ -2082,7 +2082,7 @@ def get_impl_body(classBehavior, baseImplUrl, implUrl):
         if baseImplUrl:
             implUrl = '%s%s' % (baseImplUrl, implUrl)
         try:
-            impl = requests.get(implUrl)
+            impl = requests.get(implUrl).content
         except:
             trylocal = 1
         if trylocal:

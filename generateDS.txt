@@ -1899,7 +1899,7 @@ want to use and possibly extend it.)::
             if baseImplUrl:
                 implUrl = '%s%s' % (baseImplUrl, implUrl)
             try:
-                impl = requests.get(implUrl)
+                impl = requests.get(implUrl).content
             except:
                 trylocal = 1
             if trylocal:

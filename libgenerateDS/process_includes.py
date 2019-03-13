@@ -100,7 +100,7 @@ def resolve_ref(node, params, options):
             print '    locn  : %s' % (locn, )
             if locn.startswith('http:') or locn.startswith('ftp:'):
                 try:
-                    content = requests.get(locn)
+                    content = requests.get(locn).content
                     params.parent_url = locn
                     params.base_url = os.path.split(locn)[0]
                 except requests.exceptions.HTTPError, exp:
