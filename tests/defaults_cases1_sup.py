@@ -128,7 +128,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -511,7 +511,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -813,10 +813,10 @@ def _cast(typ, value):
 
 class DefaultTypes(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('default1', 'DefaultType1', 1, 0, {'name': 'default1', 'type': 'DefaultType1', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('default2', 'DefaultType2', 1, 0, {'name': 'default2', 'type': 'DefaultType2', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('fixed1', 'FixedType1', 1, 0, {'name': 'fixed1', 'type': 'FixedType1', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('fixed2', 'FixedType2', 1, 0, {'name': 'fixed2', 'type': 'FixedType2', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('default1', 'DefaultType1', 1, 0, {'maxOccurs': 'unbounded', 'name': 'default1', 'type': 'DefaultType1'}, None),
+        MemberSpec_('default2', 'DefaultType2', 1, 0, {'maxOccurs': 'unbounded', 'name': 'default2', 'type': 'DefaultType2'}, None),
+        MemberSpec_('fixed1', 'FixedType1', 1, 0, {'maxOccurs': 'unbounded', 'name': 'fixed1', 'type': 'FixedType1'}, None),
+        MemberSpec_('fixed2', 'FixedType2', 1, 0, {'maxOccurs': 'unbounded', 'name': 'fixed2', 'type': 'FixedType2'}, None),
     ]
     subclass = None
     superclass = None
@@ -971,14 +971,14 @@ class DefaultTypes(GeneratedsSuper):
 
 class DefaultType1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('normal01', 'xs:integer', 0, 1, {'name': 'normal01', 'type': 'xs:integer', 'minOccurs': '0'}, None),
-        MemberSpec_('normal02', 'xs:string', 0, 1, {'name': 'normal02', 'type': 'xs:string', 'minOccurs': '0'}, None),
-        MemberSpec_('default01', 'xs:integer', 0, 1, {'name': 'default01', 'type': 'xs:integer', 'default': '23', 'minOccurs': '0'}, None),
-        MemberSpec_('default02', 'xs:string', 0, 1, {'name': 'default02', 'type': 'xs:string', 'default': 'Peach', 'minOccurs': '0'}, None),
-        MemberSpec_('normal03', 'xs:float', 0, 0, {'name': 'normal03', 'type': 'xs:float', 'minOccurs': '1'}, None),
-        MemberSpec_('normal04', 'xs:double', 0, 0, {'name': 'normal04', 'type': 'xs:double', 'minOccurs': '1'}, None),
-        MemberSpec_('default03', 'xs:float', 0, 0, {'name': 'default03', 'type': 'xs:float', 'default': '23.45', 'minOccurs': '1'}, None),
-        MemberSpec_('default04', 'xs:double', 0, 0, {'name': 'default04', 'type': 'xs:double', 'default': '54.32', 'minOccurs': '1'}, None),
+        MemberSpec_('normal01', 'xs:integer', 0, 1, {'minOccurs': '0', 'name': 'normal01', 'type': 'xs:integer'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 1, {'minOccurs': '0', 'name': 'normal02', 'type': 'xs:string'}, None),
+        MemberSpec_('default01', 'xs:integer', 0, 1, {'default': '23', 'minOccurs': '0', 'name': 'default01', 'type': 'xs:integer'}, None),
+        MemberSpec_('default02', 'xs:string', 0, 1, {'default': 'Peach', 'minOccurs': '0', 'name': 'default02', 'type': 'xs:string'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 0, {'minOccurs': '1', 'name': 'normal03', 'type': 'xs:float'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 0, {'minOccurs': '1', 'name': 'normal04', 'type': 'xs:double'}, None),
+        MemberSpec_('default03', 'xs:float', 0, 0, {'default': '23.45', 'minOccurs': '1', 'name': 'default03', 'type': 'xs:float'}, None),
+        MemberSpec_('default04', 'xs:double', 0, 0, {'default': '54.32', 'minOccurs': '1', 'name': 'default04', 'type': 'xs:double'}, None),
     ]
     subclass = None
     superclass = None
@@ -1277,14 +1277,14 @@ class DefaultType2(GeneratedsSuper):
 
 class FixedType1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('normal01', 'xs:integer', 0, 1, {'name': 'normal01', 'type': 'xs:integer', 'minOccurs': '0'}, None),
-        MemberSpec_('normal02', 'xs:string', 0, 1, {'name': 'normal02', 'type': 'xs:string', 'minOccurs': '0'}, None),
-        MemberSpec_('fixed01', 'xs:integer', 0, 1, {'name': 'fixed01', 'type': 'xs:integer', 'fixed': '23', 'minOccurs': '0'}, None),
-        MemberSpec_('fixed02', 'xs:string', 0, 1, {'name': 'fixed02', 'type': 'xs:string', 'fixed': 'Peach', 'minOccurs': '0'}, None),
-        MemberSpec_('normal03', 'xs:float', 0, 0, {'name': 'normal03', 'type': 'xs:float', 'minOccurs': '1'}, None),
-        MemberSpec_('normal04', 'xs:double', 0, 0, {'name': 'normal04', 'type': 'xs:double', 'minOccurs': '1'}, None),
-        MemberSpec_('fixed03', 'xs:float', 0, 0, {'name': 'fixed03', 'type': 'xs:float', 'fixed': '23.45', 'minOccurs': '1'}, None),
-        MemberSpec_('fixed04', 'xs:double', 0, 0, {'name': 'fixed04', 'type': 'xs:double', 'fixed': '54.32', 'minOccurs': '1'}, None),
+        MemberSpec_('normal01', 'xs:integer', 0, 1, {'minOccurs': '0', 'name': 'normal01', 'type': 'xs:integer'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 1, {'minOccurs': '0', 'name': 'normal02', 'type': 'xs:string'}, None),
+        MemberSpec_('fixed01', 'xs:integer', 0, 1, {'fixed': '23', 'minOccurs': '0', 'name': 'fixed01', 'type': 'xs:integer'}, None),
+        MemberSpec_('fixed02', 'xs:string', 0, 1, {'fixed': 'Peach', 'minOccurs': '0', 'name': 'fixed02', 'type': 'xs:string'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 0, {'minOccurs': '1', 'name': 'normal03', 'type': 'xs:float'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 0, {'minOccurs': '1', 'name': 'normal04', 'type': 'xs:double'}, None),
+        MemberSpec_('fixed03', 'xs:float', 0, 0, {'fixed': '23.45', 'minOccurs': '1', 'name': 'fixed03', 'type': 'xs:float'}, None),
+        MemberSpec_('fixed04', 'xs:double', 0, 0, {'fixed': '54.32', 'minOccurs': '1', 'name': 'fixed04', 'type': 'xs:double'}, None),
     ]
     subclass = None
     superclass = None

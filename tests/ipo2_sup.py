@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+# Python 2.7.16 (default, Mar  5 2019, 06:45:30)  [GCC 6.3.0 20170516]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/ipo2_sup.py" -s "tests/ipo2_sub.py" --super="ipo2_sup" tests/ipo.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   mnt
 #
 
 import os
@@ -823,7 +823,7 @@ class PurchaseOrderType(GeneratedsSuper):
         MemberSpec_('orderDate', 'date', 0, 1, {'use': 'optional'}),
         MemberSpec_('shipTo', 'Address', 0, 0, {'name': 'shipTo', 'type': 'Address'}, None),
         MemberSpec_('billTo', 'Address', 0, 0, {'name': 'billTo', 'type': 'Address'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
+        MemberSpec_('comment', 'string', 0, 1, {'minOccurs': '0', 'name': 'comment', 'ref': 'comment', 'type': 'string'}, None),
         MemberSpec_('items', 'Items', 0, 0, {'name': 'items', 'type': 'Items'}, None),
     ]
     subclass = None
@@ -963,7 +963,7 @@ class PurchaseOrderType(GeneratedsSuper):
 
 class Items(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('item', 'item', 1, 1, {'name': 'item', 'minOccurs': '0', 'maxOccurs': 'unbounded', 'type': 'item'}, None),
+        MemberSpec_('item', 'item', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'item', 'type': 'item'}, None),
     ]
     subclass = None
     superclass = None
@@ -1056,8 +1056,8 @@ class item(GeneratedsSuper):
         MemberSpec_('productName', 'string', 0, 0, {'name': 'productName', 'type': 'string'}, None),
         MemberSpec_('quantity', ['quantity', 'positiveInteger'], 0, 0, {'name': 'quantity', 'type': 'positiveInteger'}, None),
         MemberSpec_('USPrice', 'decimal', 0, 0, {'name': 'USPrice', 'type': 'decimal'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
-        MemberSpec_('shipDate', 'date', 0, 1, {'name': 'shipDate', 'type': 'date', 'minOccurs': '0'}, None),
+        MemberSpec_('comment', 'string', 0, 1, {'minOccurs': '0', 'name': 'comment', 'ref': 'comment', 'type': 'string'}, None),
+        MemberSpec_('shipDate', 'date', 0, 1, {'minOccurs': '0', 'name': 'shipDate', 'type': 'date'}, None),
     ]
     subclass = None
     superclass = None

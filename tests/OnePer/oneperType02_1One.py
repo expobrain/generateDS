@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+# Python 2.7.16 (default, Mar  5 2019, 06:45:30)  [GCC 6.3.0 20170516]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -23,7 +23,7 @@
 #   generateDS.py --no-dates --no-versions --silence --member-specs="list" -f --one-file-per-xsd --output-directory="tests/OnePer" --module-suffix="One" --super="oneper2_sup" tests/oneper00.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   mnt
 #
 
 import os

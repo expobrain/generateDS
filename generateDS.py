@@ -4984,14 +4984,15 @@ def generateMemberSpec(wrt, element):
         item2 = attrDef.getType()
         item3 = 0
         item4 = 1 if attrDef.getUse() == 'optional' else 0
+
+        # Renders attr def as a dict without 'u' prefix
+        attrDef = "{'use': " + repr(unicode(attrDef.getUse()).encode('utf8')) + "}"
         if generateDict:
             item = "        '%s': MemberSpec_('%s', '%s', %d, %d, %s)," % (
-                item1, item1, item2, item3, item4, repr(
-                    {'use': attrDef.getUse()}))
+                item1, item1, item2, item3, item4, attrDef)
         else:
             item = "        MemberSpec_('%s', '%s', %d, %d, %s)," % (
-                item1, item2, item3, item4, repr(
-                    {'use': attrDef.getUse()}))
+                item1, item2, item3, item4, attrDef)
         add(item)
     for child in element.getChildren():
         name = cleanupName(child.getCleanName())
@@ -5018,14 +5019,19 @@ def generateMemberSpec(wrt, element):
         else:
             item3 = 0
         item4 = 1 if child.getOptional() else 0
+
+        # Renders child attrs as a sorted dict without 'u' prefix
+        child_attrs = [repr(k.encode('utf8')) + ": " + repr(v.encode('utf8')) for k, v in child.getAttrs().items()]
+        child_attrs = sorted(child_attrs)
+        child_attrs = "{" + ', '.join(child_attrs) + '}'
+
         if generateDict:
             item = "        '%s': MemberSpec_('%s', %s, %d, %d, %s, %s)," % (
-                item1, item1, item2, item3, item4, repr(child.getAttrs()),
+                item1, item1, item2, item3, item4, child_attrs,
                 child.choice.getChoiceGroup() if child.choice else None)
         else:
-            #item = "        ('%s', '%s', %d)," % (item1, item2, item3, )
             item = "        MemberSpec_('%s', %s, %d, %d, %s, %s)," % (
-                item1, item2, item3, item4, repr(child.getAttrs()),
+                item1, item2, item3, item4, child_attrs,
                 child.choice.getChoiceGroup() if child.choice else None)
         add(item)
     simplebase = element.getSimpleBase()

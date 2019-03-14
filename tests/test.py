@@ -1044,6 +1044,10 @@ def strip_build_comments(lines):
     Remove lines in Python file which may vary on different systems.
     """
     assert isinstance(lines, list), type(lines)
+
+    # Rstrip all the whitespace characters
+    lines = [l.rstrip() + '\n' for l in lines]
+
     if '#!/usr/bin/env python' in lines[0]:
 
         # This line contains sometimes package version

@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+# Python 2.7.16 (default, Mar  5 2019, 06:45:30)  [GCC 6.3.0 20170516]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -22,7 +22,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/defaults_cases_always2_sup.py" -s "tests/defaults_cases_always2_sub.py" --super="defaults_cases_always2_sup" --always-export-default tests/defaults_cases_always.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   mnt
 #
 
 import os
@@ -814,8 +814,8 @@ def _cast(typ, value):
 
 class DefaultTypes(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('default1', 'DefaultType1', 1, 0, {'name': 'default1', 'type': 'DefaultType1', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('default2', 'DefaultType2', 1, 0, {'name': 'default2', 'type': 'DefaultType2', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('default1', 'DefaultType1', 1, 0, {'maxOccurs': 'unbounded', 'name': 'default1', 'type': 'DefaultType1'}, None),
+        MemberSpec_('default2', 'DefaultType2', 1, 0, {'maxOccurs': 'unbounded', 'name': 'default2', 'type': 'DefaultType2'}, None),
     ]
     subclass = None
     superclass = None
@@ -926,14 +926,14 @@ class DefaultTypes(GeneratedsSuper):
 
 class DefaultType1(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('normal01', 'xs:integer', 0, 1, {'name': 'normal01', 'type': 'xs:integer', 'minOccurs': '0'}, None),
-        MemberSpec_('normal02', 'xs:string', 0, 1, {'name': 'normal02', 'type': 'xs:string', 'minOccurs': '0'}, None),
-        MemberSpec_('default01', 'xs:integer', 0, 1, {'name': 'default01', 'type': 'xs:integer', 'default': '23', 'minOccurs': '0'}, None),
-        MemberSpec_('default02', 'xs:string', 0, 1, {'name': 'default02', 'type': 'xs:string', 'default': 'Peach', 'minOccurs': '0'}, None),
-        MemberSpec_('normal03', 'xs:float', 0, 0, {'name': 'normal03', 'type': 'xs:float', 'minOccurs': '1'}, None),
-        MemberSpec_('normal04', 'xs:double', 0, 0, {'name': 'normal04', 'type': 'xs:double', 'minOccurs': '1'}, None),
-        MemberSpec_('default03', 'xs:float', 0, 0, {'name': 'default03', 'type': 'xs:float', 'default': '23.45', 'minOccurs': '1'}, None),
-        MemberSpec_('default04', 'xs:double', 0, 0, {'name': 'default04', 'type': 'xs:double', 'default': '54.32', 'minOccurs': '1'}, None),
+        MemberSpec_('normal01', 'xs:integer', 0, 1, {'minOccurs': '0', 'name': 'normal01', 'type': 'xs:integer'}, None),
+        MemberSpec_('normal02', 'xs:string', 0, 1, {'minOccurs': '0', 'name': 'normal02', 'type': 'xs:string'}, None),
+        MemberSpec_('default01', 'xs:integer', 0, 1, {'default': '23', 'minOccurs': '0', 'name': 'default01', 'type': 'xs:integer'}, None),
+        MemberSpec_('default02', 'xs:string', 0, 1, {'default': 'Peach', 'minOccurs': '0', 'name': 'default02', 'type': 'xs:string'}, None),
+        MemberSpec_('normal03', 'xs:float', 0, 0, {'minOccurs': '1', 'name': 'normal03', 'type': 'xs:float'}, None),
+        MemberSpec_('normal04', 'xs:double', 0, 0, {'minOccurs': '1', 'name': 'normal04', 'type': 'xs:double'}, None),
+        MemberSpec_('default03', 'xs:float', 0, 0, {'default': '23.45', 'minOccurs': '1', 'name': 'default03', 'type': 'xs:float'}, None),
+        MemberSpec_('default04', 'xs:double', 0, 0, {'default': '54.32', 'minOccurs': '1', 'name': 'default04', 'type': 'xs:double'}, None),
     ]
     subclass = None
     superclass = None

@@ -3,7 +3,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+# Python 2.7.16 (default, Mar  5 2019, 06:45:30)  [GCC 6.3.0 20170516]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/mixedcontent2_sup.py" -s "tests/mixedcontent2_sub.py" --super="mixedcontent2_sup" tests/mixedcontent.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   mnt
 #
 
 import os
@@ -813,7 +813,7 @@ def _cast(typ, value):
 
 class rootType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('markup', 'markupType', 1, 0, {'name': 'markup', 'type': 'markupType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('markup', 'markupType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'markup', 'type': 'markupType'}, None),
     ]
     subclass = None
     superclass = None
@@ -902,8 +902,8 @@ class rootType(GeneratedsSuper):
 
 class markupType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('embedded', 'xs:string', 1, 1, {'name': 'embedded', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('nested', 'nestedType', 1, 1, {'name': 'nested', 'type': 'nestedType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('embedded', 'xs:string', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'embedded', 'type': 'xs:string'}, None),
+        MemberSpec_('nested', 'nestedType', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nested', 'type': 'nestedType'}, None),
         MemberSpec_('valueOf_', [], 0),
     ]
     subclass = None
@@ -1048,9 +1048,9 @@ class markupType(GeneratedsSuper):
 
 class nestedType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nested1', 'nested1Type', 1, 1, {'name': 'nested1', 'type': 'nested1Type', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('nested2', 'xs:string', 1, 1, {'name': 'nested2', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('nested3', 'xs:integer', 1, 1, {'name': 'nested3', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nested1', 'nested1Type', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nested1', 'type': 'nested1Type'}, None),
+        MemberSpec_('nested2', 'xs:string', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nested2', 'type': 'xs:string'}, None),
+        MemberSpec_('nested3', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nested3', 'type': 'xs:integer'}, None),
     ]
     subclass = None
     superclass = None
@@ -1185,8 +1185,8 @@ class nestedType(GeneratedsSuper):
 
 class nested1Type(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nestedA1', 'nested1AType', 1, 1, {'name': 'nestedA1', 'type': 'nested1AType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('nestedA2', 'nested1AType', 1, 1, {'name': 'nestedA2', 'type': 'nested1AType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nestedA1', 'nested1AType', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nestedA1', 'type': 'nested1AType'}, None),
+        MemberSpec_('nestedA2', 'nested1AType', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'nestedA2', 'type': 'nested1AType'}, None),
     ]
     subclass = None
     superclass = None
@@ -1297,8 +1297,8 @@ class nested1Type(GeneratedsSuper):
 
 class nested1AType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('nestedB1', 'xs:string', 1, 0, {'name': 'nestedB1', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('nestedB2', 'xs:string', 1, 0, {'name': 'nestedB2', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('nestedB1', 'xs:string', 1, 0, {'maxOccurs': 'unbounded', 'name': 'nestedB1', 'type': 'xs:string'}, None),
+        MemberSpec_('nestedB2', 'xs:string', 1, 0, {'maxOccurs': 'unbounded', 'name': 'nestedB2', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None

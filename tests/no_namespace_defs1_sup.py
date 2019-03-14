@@ -814,8 +814,8 @@ def _cast(typ, value):
 
 class peopleType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('person', 'personType', 1, 0, {'name': 'person', 'maxOccurs': 'unbounded', 'type': 'personType'}, None),
-        MemberSpec_('specialperson', 'xs:string', 1, 0, {'name': 'specialperson', 'maxOccurs': 'unbounded', 'type': 'xs:string'}, None),
+        MemberSpec_('person', 'personType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'person', 'type': 'personType'}, None),
+        MemberSpec_('specialperson', 'xs:string', 1, 0, {'maxOccurs': 'unbounded', 'name': 'specialperson', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
@@ -878,8 +878,8 @@ class personType(GeneratedsSuper):
         MemberSpec_('id', 'xs:integer', 0, 1, {'use': 'optional'}),
         MemberSpec_('ratio', 'xs:float', 0, 1, {'use': 'optional'}),
         MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
-        MemberSpec_('interest', 'xs:string', 1, 0, {'name': 'interest', 'type': 'xs:string', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('category', 'xs:integer', 0, 1, {'name': 'category', 'type': 'xs:integer', 'minOccurs': '0'}, None),
+        MemberSpec_('interest', 'xs:string', 1, 0, {'maxOccurs': 'unbounded', 'name': 'interest', 'type': 'xs:string'}, None),
+        MemberSpec_('category', 'xs:integer', 0, 1, {'minOccurs': '0', 'name': 'category', 'type': 'xs:integer'}, None),
         MemberSpec_('description', 'xs:string', 0, 0, {'name': 'description', 'type': 'xs:string'}, None),
     ]
     subclass = None

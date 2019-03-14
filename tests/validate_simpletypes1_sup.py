@@ -129,7 +129,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -512,7 +512,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -821,11 +821,11 @@ class token_enum_st(object):
 
 class containerType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('sample1', 'simpleOneType', 1, 0, {'name': 'sample1', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('sample2_bad', 'simpleOneType', 1, 0, {'name': 'sample2_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('sample3_bad', 'simpleOneType', 1, 0, {'name': 'sample3_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('sample4_bad', 'simpleOneType', 1, 0, {'name': 'sample4_bad', 'type': 'simpleOneType', 'maxOccurs': 'unbounded'}, None),
-        MemberSpec_('sample2', 'simpleTwoType', 1, 0, {'name': 'sample2', 'type': 'simpleTwoType', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('sample1', 'simpleOneType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'sample1', 'type': 'simpleOneType'}, None),
+        MemberSpec_('sample2_bad', 'simpleOneType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'sample2_bad', 'type': 'simpleOneType'}, None),
+        MemberSpec_('sample3_bad', 'simpleOneType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'sample3_bad', 'type': 'simpleOneType'}, None),
+        MemberSpec_('sample4_bad', 'simpleOneType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'sample4_bad', 'type': 'simpleOneType'}, None),
+        MemberSpec_('sample2', 'simpleTwoType', 1, 0, {'maxOccurs': 'unbounded', 'name': 'sample2', 'type': 'simpleTwoType'}, None),
     ]
     subclass = None
     superclass = None
@@ -1003,7 +1003,7 @@ class containerType(GeneratedsSuper):
 class simpleOneType(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('integer_range_1_value_with_default', 'integer_range_1_st', 0, 1, {'use': 'optional'}),
-        MemberSpec_('integer_range_1_value', ['integer_range_1_st', 'integer_range_2_st', 'xs:integer'], 0, 0, {'name': 'integer_range_1_value', 'type': 'xs:integer', 'default': '5'}, None),
+        MemberSpec_('integer_range_1_value', ['integer_range_1_st', 'integer_range_2_st', 'xs:integer'], 0, 0, {'default': '5', 'name': 'integer_range_1_value', 'type': 'xs:integer'}, None),
         MemberSpec_('pattern_value', ['pattern_st', 'pattern_1_st', 'min_length_st', 'xs:string'], 0, 0, {'name': 'pattern_value', 'type': 'xs:string'}, None),
         MemberSpec_('token_enum_value', ['token_enum_st', 'xs:NMTOKEN'], 0, 0, {'name': 'token_enum_value', 'type': 'xs:NMTOKEN'}, None),
         MemberSpec_('integer_range_incl_value', ['integer_range_incl_st', 'xs:integer'], 0, 0, {'name': 'integer_range_incl_value', 'type': 'xs:integer'}, None),
@@ -1249,7 +1249,7 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_pattern_st_patterns_, ))
-    validate_pattern_st_patterns_ = [['^aaa.*zzz$', '^bbb.*xxx$'], ['^.*123.*$', '^.*456.*$']]
+    validate_pattern_st_patterns_ = [[u'^aaa.*zzz$', u'^bbb.*xxx$'], [u'^.*123.*$', u'^.*456.*$']]
     def validate_token_enum_st(self, value):
         # Validate type token_enum_st, a restriction on xs:NMTOKEN.
         if value is not None and Validate_simpletypes_:
@@ -1359,14 +1359,14 @@ class simpleOneType(GeneratedsSuper):
             if not self.gds_validate_simple_patterns(
                     self.validate_vbar_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_vbar_pattern_st_patterns_, ))
-    validate_vbar_pattern_st_patterns_ = [['^abcd|ef\\|gh$']]
+    validate_vbar_pattern_st_patterns_ = [[u'^abcd|ef\\|gh$']]
     def validate_unicode_pattern_st(self, value):
         # Validate type unicode_pattern_st, a restriction on xs:string.
         if value is not None and Validate_simpletypes_:
             if not self.gds_validate_simple_patterns(
                     self.validate_unicode_pattern_st_patterns_, value):
                 warnings_.warn('Value "%s" does not match xsd pattern restrictions: %s' % (value.encode('utf-8'), self.validate_unicode_pattern_st_patterns_, ))
-    validate_unicode_pattern_st_patterns_ = [['^abçd|ef\\|gh$']]
+    validate_unicode_pattern_st_patterns_ = [[u'^ab\xe7d|ef\\|gh$']]
     def validate_anonymous_float_valueType(self, value):
         # Validate type anonymous_float_valueType, a restriction on xs:float.
         if value is not None and Validate_simpletypes_:

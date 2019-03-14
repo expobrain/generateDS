@@ -130,7 +130,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -513,7 +513,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -815,7 +815,7 @@ def _cast(typ, value):
 
 class authorsType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('author', 'author', 1, 1, {'ref': 'author', 'name': 'author', 'type': 'author'}, 1),
+        MemberSpec_('author', 'author', 1, 1, {'name': 'author', 'ref': 'author', 'type': 'author'}, 1),
         MemberSpec_('cooperation', 'xsd:string', 1, 1, {'name': 'cooperation', 'type': 'xsd:string'}, 1),
     ]
     subclass = None

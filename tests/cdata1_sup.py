@@ -815,7 +815,7 @@ def _cast(typ, value):
 
 class cdataListType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('cdatalist', 'cdataType', 1, 1, {'name': 'cdatalist', 'type': 'cdataType', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('cdatalist', 'cdataType', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'cdatalist', 'type': 'cdataType'}, None),
     ]
     subclass = None
     superclass = None

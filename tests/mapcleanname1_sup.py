@@ -129,7 +129,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -512,7 +512,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -815,7 +815,7 @@ def _cast(typ, value):
 class complex_type01(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('string_value01', 'xs:string', 0, 0, {'name': 'string_value01', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value01', 'xs:integer', 1, 1, {'name': 'integer_value01', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value01', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value01', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value01', 'xs:float', 0, 0, {'name': 'float_value01', 'type': 'xs:float'}, None),
         MemberSpec_('field01', 'complex-type02', 0, 0, {'name': 'field01', 'type': 'complex-type02'}, None),
     ]
@@ -949,7 +949,7 @@ class complex_type01(GeneratedsSuper):
 class complex_type02(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('string_value02', 'xs:string', 0, 0, {'name': 'string_value02', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'name': 'integer_value02', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value02', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value02', 'xs:float', 0, 0, {'name': 'float_value02', 'type': 'xs:float'}, None),
     ]
     subclass = None
@@ -1083,7 +1083,7 @@ class complex_type02(GeneratedsSuper):
 class complex_type03(complex_type02):
     member_data_items_ = [
         MemberSpec_('string_value03', 'xs:string', 0, 0, {'name': 'string_value03', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'name': 'integer_value03', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value03', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value03', 'xs:float', 0, 0, {'name': 'float_value03', 'type': 'xs:float'}, None),
     ]
     subclass = None
@@ -1207,7 +1207,7 @@ class complex_type03(complex_type02):
 class type_(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('string_value02', 'xs:string', 0, 0, {'name': 'string_value02', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'name': 'integer_value02', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value02', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value02', 'xs:float', 0, 0, {'name': 'float_value02', 'type': 'xs:float'}, None),
     ]
     subclass = None
@@ -1341,7 +1341,7 @@ class type_(GeneratedsSuper):
 class complex_type04(type_):
     member_data_items_ = [
         MemberSpec_('string_value03', 'xs:string', 0, 0, {'name': 'string_value03', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'name': 'integer_value03', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value03', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value03', 'xs:float', 0, 0, {'name': 'float_value03', 'type': 'xs:float'}, None),
     ]
     subclass = None
@@ -1465,7 +1465,7 @@ class complex_type04(type_):
 class build_(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('string_value02', 'xs:string', 0, 0, {'name': 'string_value02', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'name': 'integer_value02', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value02', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value02', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value02', 'xs:float', 0, 0, {'name': 'float_value02', 'type': 'xs:float'}, None),
     ]
     subclass = None
@@ -1599,7 +1599,7 @@ class build_(GeneratedsSuper):
 class complex_type05(build_):
     member_data_items_ = [
         MemberSpec_('string_value03', 'xs:string', 0, 0, {'name': 'string_value03', 'type': 'xs:string'}, None),
-        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'name': 'integer_value03', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integer_value03', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integer_value03', 'type': 'xs:integer'}, None),
         MemberSpec_('float_value03', 'xs:float', 0, 0, {'name': 'float_value03', 'type': 'xs:float'}, None),
     ]
     subclass = None

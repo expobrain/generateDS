@@ -129,7 +129,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -512,7 +512,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -814,7 +814,7 @@ def _cast(typ, value):
 
 class simpleTypeTestsType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('simpleTypeTest', 'simpleTypeTestDefs', 1, 0, {'name': 'simpleTypeTest', 'maxOccurs': 'unbounded', 'type': 'simpleTypeTestDefs'}, None),
+        MemberSpec_('simpleTypeTest', 'simpleTypeTestDefs', 1, 0, {'maxOccurs': 'unbounded', 'name': 'simpleTypeTest', 'type': 'simpleTypeTestDefs'}, None),
     ]
     subclass = None
     superclass = None
@@ -909,21 +909,21 @@ class simpleTypeTestDefs(GeneratedsSuper):
         MemberSpec_('datetime4', 'xs:gMonthDay', 0, 0, {'name': 'datetime4', 'type': 'xs:gMonthDay'}, None),
         MemberSpec_('datetime5', 'xs:gDay', 0, 0, {'name': 'datetime5', 'type': 'xs:gDay'}, None),
         MemberSpec_('integerVal1', 'xs:integer', 0, 0, {'name': 'integerVal1', 'type': 'xs:integer'}, None),
-        MemberSpec_('integerVal2', 'xs:integer', 1, 1, {'name': 'integerVal2', 'type': 'xs:integer', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('integerVal2', 'xs:integer', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'integerVal2', 'type': 'xs:integer'}, None),
         MemberSpec_('stringVal1', 'xs:string', 0, 0, {'name': 'stringVal1', 'type': 'xs:string'}, None),
-        MemberSpec_('stringVal2', 'xs:string', 1, 1, {'name': 'stringVal2', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('stringVal2', 'xs:string', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'stringVal2', 'type': 'xs:string'}, None),
         MemberSpec_('booleanVal1', 'xs:boolean', 0, 0, {'name': 'booleanVal1', 'type': 'xs:boolean'}, None),
-        MemberSpec_('booleanVal2', 'xs:boolean', 1, 1, {'name': 'booleanVal2', 'type': 'xs:boolean', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('booleanVal2', 'xs:boolean', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'booleanVal2', 'type': 'xs:boolean'}, None),
         MemberSpec_('decimalVal1', 'xs:decimal', 0, 0, {'name': 'decimalVal1', 'type': 'xs:decimal'}, None),
-        MemberSpec_('decimalVal2', 'xs:decimal', 1, 1, {'name': 'decimalVal2', 'type': 'xs:decimal', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('decimalVal2', 'xs:decimal', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'decimalVal2', 'type': 'xs:decimal'}, None),
         MemberSpec_('doubleVal1', 'xs:double', 0, 0, {'name': 'doubleVal1', 'type': 'xs:double'}, None),
-        MemberSpec_('doubleVal2', 'xs:double', 1, 1, {'name': 'doubleVal2', 'type': 'xs:double', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('doubleVal2', 'xs:double', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'doubleVal2', 'type': 'xs:double'}, None),
         MemberSpec_('floatVal1', 'xs:float', 0, 0, {'name': 'floatVal1', 'type': 'xs:float'}, None),
-        MemberSpec_('floatVal2', 'xs:float', 1, 1, {'name': 'floatVal2', 'type': 'xs:float', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('floatVal2', 'xs:float', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'floatVal2', 'type': 'xs:float'}, None),
         MemberSpec_('dateVal1', 'xs:date', 0, 0, {'name': 'dateVal1', 'type': 'xs:date'}, None),
-        MemberSpec_('dateVal2', 'xs:date', 1, 1, {'name': 'dateVal2', 'type': 'xs:date', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('dateVal2', 'xs:date', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'dateVal2', 'type': 'xs:date'}, None),
         MemberSpec_('dateTimeVal1', 'xs:dateTime', 0, 0, {'name': 'dateTimeVal1', 'type': 'xs:dateTime'}, None),
-        MemberSpec_('dateTimeVal2', 'xs:dateTime', 1, 1, {'name': 'dateTimeVal2', 'type': 'xs:dateTime', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('dateTimeVal2', 'xs:dateTime', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'dateTimeVal2', 'type': 'xs:dateTime'}, None),
     ]
     subclass = None
     superclass = None

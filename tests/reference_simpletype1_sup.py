@@ -817,7 +817,7 @@ class dummy(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('test_ref_attr', 'xs:integer', 0, 1, {'use': 'optional'}),
         MemberSpec_('test_normal_attr', 'xs:integer', 0, 1, {'use': 'optional'}),
-        MemberSpec_('test_ref_element', 'xs:integer', 0, 0, {'ref': 'test_ref_element', 'name': 'test_ref_element', 'type': 'xs:integer'}, None),
+        MemberSpec_('test_ref_element', 'xs:integer', 0, 0, {'name': 'test_ref_element', 'ref': 'test_ref_element', 'type': 'xs:integer'}, None),
         MemberSpec_('test_normal_element', 'xs:integer', 0, 0, {'name': 'test_normal_element', 'type': 'xs:integer'}, None),
     ]
     subclass = None

@@ -2,7 +2,7 @@
 
 #
 # Generated  by generateDS.py.
-# Python 3.6.8 |Anaconda custom (64-bit)| (default, Dec 30 2018, 01:22:34)  [GCC 7.3.0]
+# Python 2.7.16 (default, Mar  5 2019, 06:45:30)  [GCC 6.3.0 20170516]
 #
 # Command line options:
 #   ('--no-dates', '')
@@ -21,7 +21,7 @@
 #   generateDS.py --no-dates --no-versions --member-specs="list" -f -o "tests/defaults_cases_always2_sup.py" -s "tests/defaults_cases_always2_sub.py" --super="defaults_cases_always2_sup" --always-export-default tests/defaults_cases_always.xsd
 #
 # Current working directory (os.getcwd()):
-#   generateds
+#   mnt
 #
 
 import os

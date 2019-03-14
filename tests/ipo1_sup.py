@@ -128,7 +128,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -511,7 +511,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -823,7 +823,7 @@ class PurchaseOrderType(GeneratedsSuper):
         MemberSpec_('orderDate', 'date', 0, 1, {'use': 'optional'}),
         MemberSpec_('shipTo', 'Address', 0, 0, {'name': 'shipTo', 'type': 'Address'}, None),
         MemberSpec_('billTo', 'Address', 0, 0, {'name': 'billTo', 'type': 'Address'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
+        MemberSpec_('comment', 'string', 0, 1, {'minOccurs': '0', 'name': 'comment', 'ref': 'comment', 'type': 'string'}, None),
         MemberSpec_('items', 'Items', 0, 0, {'name': 'items', 'type': 'Items'}, None),
     ]
     subclass = None
@@ -963,7 +963,7 @@ class PurchaseOrderType(GeneratedsSuper):
 
 class Items(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('item', 'item', 1, 1, {'name': 'item', 'minOccurs': '0', 'maxOccurs': 'unbounded', 'type': 'item'}, None),
+        MemberSpec_('item', 'item', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'item', 'type': 'item'}, None),
     ]
     subclass = None
     superclass = None
@@ -1056,8 +1056,8 @@ class item(GeneratedsSuper):
         MemberSpec_('productName', 'string', 0, 0, {'name': 'productName', 'type': 'string'}, None),
         MemberSpec_('quantity', ['quantity', 'positiveInteger'], 0, 0, {'name': 'quantity', 'type': 'positiveInteger'}, None),
         MemberSpec_('USPrice', 'decimal', 0, 0, {'name': 'USPrice', 'type': 'decimal'}, None),
-        MemberSpec_('comment', 'string', 0, 1, {'ref': 'comment', 'minOccurs': '0', 'name': 'comment', 'type': 'string'}, None),
-        MemberSpec_('shipDate', 'date', 0, 1, {'name': 'shipDate', 'type': 'date', 'minOccurs': '0'}, None),
+        MemberSpec_('comment', 'string', 0, 1, {'minOccurs': '0', 'name': 'comment', 'ref': 'comment', 'type': 'string'}, None),
+        MemberSpec_('shipDate', 'date', 0, 1, {'minOccurs': '0', 'name': 'shipDate', 'type': 'date'}, None),
     ]
     subclass = None
     superclass = None

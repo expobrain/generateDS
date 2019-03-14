@@ -129,7 +129,7 @@ except ImportError:
 try:
     from generatedssuper import GeneratedsSuper
 except ImportError as exp:
-    
+
     class GeneratedsSuper(object):
         tzoff_pattern = re_.compile(r'(\+|-)((0\d|1[0-3]):[0-5]\d|14:00)$')
         class _FixedOffsetTZ(datetime_.tzinfo):
@@ -512,7 +512,7 @@ except ImportError as exp:
             return self.__dict__ == other.__dict__
         def __ne__(self, other):
             return not self.__eq__(other)
-    
+
     def getSubclassFromModule_(module, class_):
         '''Get the subclass of a class from a specific module.'''
         name = class_.__name__ + 'Sub'
@@ -815,7 +815,7 @@ def _cast(typ, value):
 class PlantType_single(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
-        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'minOccurs': '1', 'maxOccurs': '1'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'maxOccurs': '1', 'minOccurs': '1'}, None),
         MemberSpec_('description', 'DescriptionType', 0, 0, {'name': 'description', 'type': 'DescriptionType'}, None),
     ]
     subclass = None
@@ -921,7 +921,7 @@ class PlantType_single(GeneratedsSuper):
 class PlantType_multiple(GeneratedsSuper):
     member_data_items_ = [
         MemberSpec_('name', 'xs:string', 0, 0, {'name': 'name', 'type': 'xs:string'}, None),
-        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'minOccurs': '1', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'maxOccurs': 'unbounded', 'minOccurs': '1'}, None),
         MemberSpec_('description', 'DescriptionType', 0, 0, {'name': 'description', 'type': 'DescriptionType'}, None),
     ]
     subclass = None
@@ -1225,7 +1225,7 @@ class CatalogType(GeneratedsSuper):
 
 class PlantType_single_nochild(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'minOccurs': '1', 'maxOccurs': '1'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 0, 0, {'maxOccurs': '1', 'minOccurs': '1'}, None),
     ]
     subclass = None
     superclass = None
@@ -1301,7 +1301,7 @@ class PlantType_single_nochild(GeneratedsSuper):
 
 class PlantType_multiple_nochild(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'minOccurs': '1', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('__ANY__', '__ANY__', 1, 0, {'maxOccurs': 'unbounded', 'minOccurs': '1'}, None),
     ]
     subclass = None
     superclass = None

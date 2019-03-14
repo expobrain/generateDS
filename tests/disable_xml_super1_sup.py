@@ -814,7 +814,7 @@ def _cast(typ, value):
 
 class PackageType(GeneratedsSuper):
     member_data_items_ = [
-        MemberSpec_('Address', 'xs:string', 1, 1, {'name': 'Address', 'type': 'xs:string', 'minOccurs': '0', 'maxOccurs': 'unbounded'}, None),
+        MemberSpec_('Address', 'xs:string', 1, 1, {'maxOccurs': 'unbounded', 'minOccurs': '0', 'name': 'Address', 'type': 'xs:string'}, None),
     ]
     subclass = None
     superclass = None
