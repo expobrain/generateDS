@@ -193,7 +193,6 @@ import sys
 import os.path
 import time
 import getopt
-import imp
 from xml.sax import handler, make_parser
 import logging
 import keyword
@@ -202,10 +201,12 @@ import hashlib
 import operator
 import re
 
-if sys.version_info.major == 2:
+if six.PY2:
     import StringIO
+    import imp
 else:
     import io
+    import importlib.util
     from functools import reduce
 
 _log = logging.getLogger(__name__)
@@ -7237,8 +7238,14 @@ def parseAndGenerate(
         path_list = UserMethodsPath.split('.')
         mod_name = path_list[-1]
         mod_path = os.sep.join(path_list[:-1])
-        module_spec = imp.find_module(mod_name, [mod_path, ])
-        UserMethodsModule = imp.load_module(mod_name, *module_spec)
+
+        if six.PY2:
+            module_spec = imp.find_module(mod_name, [mod_path, ])
+            UserMethodsModule = imp.load_module(mod_name, *module_spec)
+        else:
+            module_spec = importlib.util.find_spec(mod_name, path=mod_path)
+            UserMethodsModule = importlib.util.module_from_spec(module_spec)
+            module_spec.loader.exec_module(UserMethodsModule)
 ##    parser = saxexts.make_parser("xml.sax.drivers2.drv_pyexpat")
     if xschemaFileName == '-':
         infile = sys.stdin
