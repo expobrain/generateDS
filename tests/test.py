@@ -53,8 +53,8 @@ class GenTest(unittest.TestCase):
 ##             '--super=out2_sup -u gends_user_methods tests/people.xsd'
 ##         )
 ##         stdout, stderr = self.execute(cmd, cwd='..')
-##         self.failUnlessEqual(len(stdout), 0)
-##         self.failUnlessEqual(len(stderr), 0)
+##         self.assertEqual(len(stdout), 0)
+##         self.assertEqual(len(stderr), 0)
 
 ##     def tearDown(self):
 ##         for f in [ "out2_sub.py", "out2_sup.py" ]:
@@ -99,7 +99,7 @@ class GenTest(unittest.TestCase):
         result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
-        self.failUnlessEqual(result, """\
+        self.assertEqual(result, """\
 ['node1node1', 'group1', 'group2', 'node1node2']
 ['node2node1', 'group1', 'group2', 'node2node2']
 """)
@@ -116,7 +116,7 @@ class GenTest(unittest.TestCase):
         result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
-        self.failUnlessEqual(result, """\
+        self.assertEqual(result, """\
 ['value 1 1', 'group1 1', 'group2 1', 'value 1 2']
 ['value 2 1', 'group1 2', 'group2 2', 'value 2 2']
 """)
@@ -150,7 +150,7 @@ class GenTest(unittest.TestCase):
         result, err = self.execute(cmd, cwd=TEST_DIR)
         if sys.version_info.major != 2:
             result = result.decode()
-        self.failUnlessEqual(result, """\
+        self.assertEqual(result, """\
 [('child1', 'value1'), ('child1', 'value2')]
 """)
         # Now try to create a node, make sure the value of valueOf_ is passed
@@ -173,7 +173,7 @@ class GenTest(unittest.TestCase):
         #print('result: %s' % result)
         if sys.version_info.major != 2:
             result = result.decode()
-        self.failUnlessEqual(result, """\
+        self.assertEqual(result, """\
 ('child1', 'value1')
 """)
         # cleanup generated files
@@ -218,7 +218,7 @@ class GenTest(unittest.TestCase):
         result = etree.tostring(root1, pretty_print=True)
         if sys.version_info.major != 2:
             result = result.decode()
-        self.failUnlessEqual(GenTest.ns_for_import_xml_result, result)
+        self.assertEqual(GenTest.ns_for_import_xml_result, result)
 
     def test_006_anysimpletype(self):
         cmdTempl = (
@@ -297,7 +297,7 @@ class GenTest(unittest.TestCase):
         infile = open('literal2.py', 'r')
         content2 = infile.read()
         infile.close()
-        self.failUnlessEqual(content1, content2)
+        self.assertEqual(content1, content2)
         # cleanup generated files
         self.remove('literal2.py')
         self.remove('out2_sup.py')
